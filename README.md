@@ -1,75 +1,74 @@
-# 🍬 糖域 · 人生重开
+# 🍬 Sugarscape: Life Restart
 
-> **投胎是个技术活,但在普通人眼里就是随机的。**
-> 改编自社会学家在电脑里养了几十年的实验——按下播放键,没人管理,贫富差距自己长出来。
+> **Where you are born looks random — until you live it.**
+> Based on the sociology experiment that has been running in computers since 1996.
+> Press play: nobody manages this world — and the wealth gap grows all by itself.
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Language](https://img.shields.io/badge/UI-6%20languages-blue)](#-languages)
 
-**一个单 HTML 文件的社会学实验游戏**:零依赖、无需安装、双击即玩、中文界面。
+**A social experiment game in a single HTML file**: zero dependencies, no install, just open it in a browser.
 
-![游戏画面](docs/images/main.png)
+![Game screenshot](docs/images/main.jpg)
 
-🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。
-(也可以用 `python -m http.server` 起个本地服务后访问,但不是必须的)
+🎮 **Play now**: download `sugarscape.html` and open it with any modern browser.
+
+**English** | [中文](README.zh-CN.md) · Manuals: [English](docs/manual/en.md) · [中文](docs/manual/zh.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
 ---
 
-## 这是什么?
+## What is this?
 
-1996 年,Epstein & Axtell 做了一个著名的计算机实验 **Sugarscape(糖域)**:
-一片长着糖山的地图,一群只会"朝看得见的食物走过去"的小人,没有任何剧情设计——
-跑着跑着,**贫富分化、阶层定居、市场价格,全都自己涌现了出来**。
+In 1996, Epstein & Axtell ran the famous **Sugarscape** experiment:
+a map with sugar mountains, and agents that only know "walk toward the food you can see". No storyline, no designer —
+and yet **wealth gaps, class segregation and market prices all emerged on their own**.
 
-本项目把这个实验做成了**你可以亲自投胎进去玩**的游戏:
+This project turns that experiment into a game **where you get reincarnated into the world yourself**:
 
-- 🎲 **抽签出生**:出生地、天赋、寿命、干粮全是签——可能生在糖山中心,也可能生在寸草不生的荒原
-- 🚶 **亲自活一遍**:点格子走位、采集、交易、攒钱读书(视野+1,看得更远)
-- 💀 **死亡总结**:高光/局限分析、比 AI 托管多活多少回合、你在世时世界发生了什么大事
-- 📚 **生命之书**:历世账本,点任何一行重看那一世的总结
-- 👻 **死后附身**:意识跳进任何一个活人,看看富人/穷人是怎么活的
+- 🎲 **Birth is a lottery** — birthplace, talent, lifespan and starting food are all drawn. You may open your eyes on a sugar mountain, or at the starving edge of the wasteland.
+- 🚶 **Live it yourself** — click cells to walk, harvest, trade with neighbors, save up for school (+1 vision, see farther).
+- 💀 **Death report** — highlights and limits of your life, how many turns you outlived the AI autopilot, and what happened to the world while you lived.
+- 📚 **Book of Lives** — every life is recorded; click any row to replay its summary.
+- 👻 **Possession** — after death, jump into any living agent and see how the rich and the poor actually live.
 
-**出身决定的是难度,不是结局。** 你可以亲手验证这句话。
+**Birth sets the difficulty, not the ending.** Come and test that sentence yourself.
 
-## 实验能力(给想认真玩的人)
+## For serious players (experiment tools)
 
-| 功能 | 能观察什么 |
+| Tool | What you can observe |
 |---|---|
-| 📈 观察面板 | 基尼系数、贫困率、穷人翻身率、富人占比,实时大字+解读 |
-| 📊 流动性追踪 | 穷/中/富三队列描圈上地图,亲眼看谁能爬上山;翻身/保持/下跌矩阵 |
-| 🧪 对照实验 | 抽签世界 vs 人人天赋相同的世界赛跑 300 回合,自动出结论 |
-| ⚙ 世界参数 | 税收、教育价格、部落战争、拥挤天灾、地形三模式、纯糖世界……全是实验旋钮 |
-| ⏱ 定时观察 | 设定 N 回合连跑,主人公死了世界也继续 |
-| 👁 演示模式 | 自动播放+大事字幕,适合投屏给别人看 |
+| 📈 Live stats | Gini index, poverty rate, poor→middle climb rate, rich share — big live readouts with interpretation |
+| 📊 Mobility tracking | poor/middle/rich birth cohorts painted as rings on the map; watch who climbs the mountain; climb/hold/fall matrix |
+| 🧪 A/B experiment | a lottery-talent world vs an identical-talent world, racing 300 turns, verdict computed automatically |
+| ⚙ World parameters | redistribution tax, schooling price, tribal war, crowd plague, three terrain modes, pure-sugar world… every knob is an experiment |
+| ⏱ Timed run | run N turns non-stop; the world goes on even if you die |
+| 👁 Demo mode | auto-plays lives with event captions — perfect for showing an audience |
 
-## 运行环境
+## i18n
 
-- 现代浏览器(Chrome / Edge / Firefox / Safari 均可),无需任何插件或网络
-- 进度自动保存在浏览器本地(localStorage),换浏览器/清缓存会丢档
+The UI ships in **Chinese / English / 日本語 / Français / Deutsch / Italiano** — fully translated, including birth reports, death summaries, logs and panels.
+The language dropdown (🌐) switches instantly; on first open it follows your browser language, and your choice is remembered.
 
-## 文件说明
+## Running
 
-| 文件 | 说明 |
+- Any modern browser (Chrome / Edge / Firefox / Safari). No plugins, no network needed.
+- Progress is saved in your browser (localStorage); clearing it wipes your Book of Lives.
+
+## Files
+
+| File | What it is |
 |---|---|
-| `sugarscape.html` | 游戏本体(单文件,零依赖) |
-| `糖域实验说明.md` | 详细说明书:实验原理、玩法、结论解读,小学生也能看懂 |
-| `docs/manual/` | 说明书多语言版(English / 日本語 / Français / Deutsch / Italiano) |
-| `docs/images/` | 游戏截图(说明书配图) |
+| `sugarscape.html` | The game (single file, zero dependencies) |
+| `docs/manual/` | Full experiment manual in 6 languages |
+| `docs/images/` | Screenshots |
 
-## 🌐 Languages / 语言
+## Self-check
 
-游戏界面内置 **中文 / English / 日本語 / Français / Deutsch / Italiano** 六种语言:
-顶栏 🌐 下拉随时切换,首次打开按浏览器语言自动选择,选择会记住。
-(游戏内「📖 完整说明书」浮层与右栏玩法卡已完整翻译;部分叙事性长句——如死亡总结的"高光/局限"逐条点评——目前仍为中文,将逐步补齐。)
+Open `sugarscape.html?test=1` to run 30 assertions (win-win trades, NaN defense, ecological stability, inheritance, terrain constraints…).
+The chronicle's first entry should read `30/30 passed ✅`.
 
-Multilingual manuals: [English](docs/manual/en.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md) · [中文(根目录)](糖域实验说明.md)
+## Copyright
 
-## 自检
-
-打开 `sugarscape.html?test=1` 会自动跑 30 项断言(交易双赢、NaN 防御、生态稳态、生育继承、地形约束等),
-编年史第一条显示 `自检 30/30 通过 ✅` 即为健康。
-
-## 关于版权
-
-- 本项目是**独立实现**,改编自糖域实验的**思想**(思想不受版权保护);与 Epstein & Axtell 原著及任何商业实现无关联,未使用其代码。
-- 代码以 [MIT License](LICENSE) 开源:可自由使用、修改、再分发,请保留版权声明。
-- 欢迎分享给老师、学生、对社会科学好奇的人。
+- This is an **independent implementation** of the *ideas* of the Sugarscape experiment (ideas are not copyrightable); it is not affiliated with Epstein & Axtell's original work or any commercial implementation, and uses none of their code.
+- Code released under the [MIT License](LICENSE): free to use, modify and redistribute — please keep the copyright notice.
+- Share it with teachers, students, and anyone curious about social science.

@@ -24,8 +24,7 @@ L'ajout d'épices (second aliment) sur d'autres montagnes rendit les échanges v
 
 ## 2. Ce que ce programme implémente
 
-![Main UI (god view)](../images/main.png)
-
+![Main UI (god view)](../images/main.jpg)
 
 | Ce que l'expérience observe | État | Où le voir |
 |---|---|---|
@@ -41,22 +40,12 @@ L'ajout d'épices (second aliment) sur d'autres montagnes rendit les échanges v
 
 ## 3. Comment jouer (30 secondes)
 
-![Welcome card](../images/welcome.png)
-
-
 1. **Tirer une vie** — lieu, dons, durée de vie, provisions : tout est tiré au sort. Repiochez, choisissez un lieu ou une classe (pauvre / moyen / riche).
-
-![Birth report](../images/birth.png)
 
 2. **Vivre** — « ▶ Commencer cette vie », cliquez les cases pour marcher (récolte auto), étudiez (+1 vision), commercez près des voisins.
 3. **Affronter la mort** — le bilan montre points forts, limites, événements du monde, et (mode aveugle) vos cartes révélées. Chaque vie entre dans le 📚 Livre des vies (cliquez une ligne pour revoir).
 
-![Death summary](../images/death.png)
-
 4. **Trois relances** — nouvelle vie ; 👻 possession d'un vivant après la mort ; nouveau monde.
-
-![First-person view (fog of war)](../images/possess.png)
-
 
 ## 4. Expériences classiques
 
@@ -64,19 +53,12 @@ L'ajout d'épices (second aliment) sur d'autres montagnes rendit les échanges v
 - **A/B école** : même départ, un étudie, l'autre non.
 - **Expérience d'égalité** : 🧪 deux mondes, 300 tours. Verdict fréquent : *le monde à talents identiques finit PLUS inégal — l'inégalité vient surtout de la position et de la chance.*
 
-![A/B experiment](../images/exp.png)
-
 - **Mobilité** : 📊 anneaux de classe sur la carte — qui grimpe ?
-
-![Mobility tracking](../images/cohort.png)
 
 - **Interrupteurs** (⚙) : redistribution, école gratuite, guerre, peste, monde sans épices…
 - **👁 Démo** : lecture automatique sous-titrée.
 
 ## 5. Lire les chiffres
-
-![Live stats panel](../images/obs.png)
-
 
 - **Gini** : 0 = tous également pauvres, 1 = un seul propriétaire. **Normal : grimpe de 0 à 0,2–0,4 puis se stabilise.** La courbe qui monte EST la découverte.
 - **Population** : stable 100–400.

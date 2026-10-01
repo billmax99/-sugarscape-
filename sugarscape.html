@@ -145,37 +145,37 @@
 </head>
 <body>
 <header>
-  <h1>糖域 · 人生重开</h1>
+  <h1 data-i18n="糖域 · 人生重开">糖域 · 人生重开</h1>
   <span class="hstat"><span data-i18n="回合">回合</span> <b id="hTick">0</b></span>
   <span class="hstat"><span data-i18n="人口">人口</span> <b id="hPop">0</b></span>
   <span class="hstat"><span data-i18n="基尼">基尼</span> <b id="hGini">0</b></span>
   <div class="spacer"></div>
   <div class="btngrp" id="spdBtns">
-    <button data-s="0" title="空格也可暂停">▶</button>
+    <button data-s="0" data-i18n-title="空格也可暂停">▶</button>
     <input type="range" id="spdSlider" min="0" max="100" value="35" style="width:110px;accent-color:#4a8f6a;">
     <span class="hstat" id="spdVal">2步/秒</span>
-    <input type="number" id="runTicks" value="300" min="10" step="50" title="定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结"
+    <input type="number" id="runTicks" value="300" min="10" step="50" data-i18n-title="定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结"
       style="width:58px; font-size:12.5px; padding:2px 4px; border:1px solid var(--btnBd); border-radius:6px; background:var(--btn); color:var(--btnTx);">
-    <button id="btnRun" title="定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止">⏱ 跑</button>
-    <span class="hstat" title="开局人口:重开世界时生效">👥</span>
-    <input type="number" id="popNum" value="125" min="10" max="400" step="25" title="开局人口(默认125):点「↺ 重开世界」生效"
+    <button id="btnRun" data-i18n-title="定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止" data-i18n="⏱ 跑">⏱ 跑</button>
+    <span class="hstat" data-i18n-title="开局人口:重开世界时生效">👥</span>
+    <input type="number" id="popNum" value="125" min="10" max="400" step="25" data-i18n-title="开局人口(默认125):点「↺ 重开世界」生效"
       style="width:52px; font-size:12.5px; padding:2px 4px; border:1px solid var(--btnBd); border-radius:6px; background:var(--btn); color:var(--btnTx);">
   </div>
   <div class="btngrp" id="viewBtns">
     <button data-v="god" class="on" data-i18n="上帝视角">上帝视角</button><button data-v="me" data-i18n="附身视角">附身视角</button>
   </div>
-  <button id="btnDemo" title="自动运行+大事字幕,展示给别人看" data-i18n="👁 演示模式">👁 演示模式</button>
-  <button id="btnObs" title="实时读数:这个实验正在发生什么" data-i18n="📈 观察">📈 观察</button>
-  <button id="btnCohort" title="按当前财富分三个出身队列,追踪翻身/保持/下跌" data-i18n="📊 流动性">📊 流动性</button>
-  <button id="btnExp" title="同一规则跑两个世界:抽签 vs 均等" data-i18n="🧪 对照实验">🧪 对照实验</button>
+  <button id="btnDemo" data-i18n-title="自动运行+大事字幕,展示给别人看" data-i18n="👁 演示模式">👁 演示模式</button>
+  <button id="btnObs" data-i18n-title="实时读数:这个实验正在发生什么" data-i18n="📈 观察">📈 观察</button>
+  <button id="btnCohort" data-i18n-title="按当前财富分三个出身队列,追踪翻身/保持/下跌" data-i18n="📊 流动性">📊 流动性</button>
+  <button id="btnExp" data-i18n-title="同一规则跑两个世界:抽签 vs 均等" data-i18n="🧪 对照实验">🧪 对照实验</button>
   <div class="btngrp" style="gap:14px">  <!-- 香料/地形/主题/转世/重开=一组,折行时不拆散 -->
-  <button id="spiceBtn" class="hot" title="香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效">🌶 香料山：关</button>
-  <select id="terrainSel" title="地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应">
-    <option value="classic" title="原著基准:固定两座糖山+两座香料山,对角分布" data-i18n="经典双山">经典双山</option>
-    <option value="random" title="立即切换为随机位置的四座山(山形不变)" data-i18n="随机山">随机山</option>
-    <option value="scatter" title="无山体,资源逐格随机散布成碎簇(社会难定居)" data-i18n="散布">散布</option>
+  <button id="spiceBtn" class="hot" data-i18n-title="香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效" data-i18n="🌶 香料山：关">🌶 香料山：关</button>
+  <select id="terrainSel" data-i18n-title="地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应">
+    <option value="classic" data-i18n-title="原著基准:固定两座糖山+两座香料山,对角分布" data-i18n="经典双山">经典双山</option>
+    <option value="random" data-i18n-title="立即切换为随机位置的四座山(山形不变)" data-i18n="随机山">随机山</option>
+    <option value="scatter" data-i18n-title="无山体,资源逐格随机散布成碎簇(社会难定居)" data-i18n="散布">散布</option>
   </select>
-  <button id="btnTheme" title="切换明暗主题(浅色=纸面/深色=夜空)">🌙 夜空色</button>
+  <button id="btnTheme" data-i18n-title="切换明暗主题(浅色=纸面/深色=夜空)" data-i18n="🌙 夜空色">🌙 夜空色</button>
   <select id="langSel" title="Language / 语言" style="font-size:12.5px; padding:3px 4px;"></select>
   <button id="btnRebirth" class="hot" data-i18n="🎲 随机转世">🎲 随机转世</button>
   <button id="btnRestart" class="warn" data-i18n="↺ 重开世界">↺ 重开世界</button>
@@ -184,7 +184,7 @@
 <div id="manualOverlay" style="display:none; position:absolute; inset:0; z-index:9; background:var(--ovBg);
   backdrop-filter:blur(2px); align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:24px 32px; width:720px; max-width:94%; max-height:92%; overflow-y:auto;">
-    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:10px;">📖 糖域说明书:来由 · 玩法 · 怎么看数字</h3>
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:10px;" data-i18n="📖 糖域说明书:来由 · 玩法 · 怎么看数字">📖 糖域说明书:来由 · 玩法 · 怎么看数字</h3>
     <div id="manualBody" style="font-size:14px; line-height:1.9; color:var(--tx);"></div>
     <button id="manualClose" style="width:100%; margin-top:14px; padding:9px; letter-spacing:3px;" data-i18n="✓ 明白了,开始玩">✓ 明白了,开始玩</button>
   </div>
@@ -194,58 +194,58 @@
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:560px; max-width:94%; max-height:92%; overflow-y:auto;">
     <h3 id="sumTitle" style="color:var(--gold); letter-spacing:2px; margin-bottom:8px;"></h3>
     <div id="sumBody"></div>
-    <button id="sumClose" style="width:100%; margin-top:14px; padding:9px; letter-spacing:3px;">✕ 关闭</button>
+    <button id="sumClose" style="width:100%; margin-top:14px; padding:9px; letter-spacing:3px;" data-i18n="✕ 关闭">✕ 关闭</button>
   </div>
 </div>
 <div id="obsOverlay" style="display:none; position:absolute; inset:0; z-index:8; background:var(--ovBg);
   backdrop-filter:blur(2px); align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:660px; max-width:94%; max-height:92%; overflow-y:auto;">
-    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:2px;">📈 实验观察:这个世界正在发生什么</h3>
-    <div style="font-size:12.5px;color:var(--dim);margin-bottom:12px">观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。</div>
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:2px;" data-i18n="📈 实验观察:这个世界正在发生什么">📈 实验观察:这个世界正在发生什么</h3>
+    <div style="font-size:12.5px;color:var(--dim);margin-bottom:12px" data-i18n="观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。">观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。</div>
     <div id="obsGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div>
-    <button id="obsClose" style="width:100%;margin-top:14px;padding:9px;letter-spacing:3px;">✕ 关闭(世界继续跑)</button>
+    <button id="obsClose" style="width:100%;margin-top:14px;padding:9px;letter-spacing:3px;" data-i18n="✕ 关闭(世界继续跑)">✕ 关闭(世界继续跑)</button>
   </div>
 </div>
 <div id="cohOverlay" style="display:none; position:absolute; inset:0; z-index:8; background:rgba(5,8,14,.85);
   backdrop-filter:blur(2px); align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:680px; max-width:94%; max-height:92%; overflow-y:auto;">
-    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:4px;">📊 社会流动性:出身决定命运吗?<span style="font-size:12px;color:var(--cyan)">实时追踪中,世界继续跑</span></h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;">按<b style="color:#cdd2de">穷</b>(<20) / <b style="color:#eee04e">中产</b>(20~40) / <b style="color:#ff2020">富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。</div>
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:4px;"><span data-i18n="📊 社会流动性:出身决定命运吗?">📊 社会流动性:出身决定命运吗?</span><span style="font-size:12px;color:var(--cyan)" data-i18n="实时追踪中,世界继续跑">实时追踪中,世界继续跑</span></h3>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;" data-i18n-html="按<b style='color:#cdd2de'>穷</b>(<20) / <b style='color:#eee04e'>中产</b>(20~40) / <b style='color:#ff2020'>富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。">按<b style="color:#cdd2de">穷</b>(<20) / <b style="color:#eee04e">中产</b>(20~40) / <b style="color:#ff2020">富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。</div>
     <div style="display:flex; gap:16px; align-items:flex-start;">
       <div style="flex:1.2;">
-        <div style="font-size:11px;color:var(--dim);">平均财富轨迹 <span style="color:#cdd2de">■穷人</span> <span style="color:#eee04e">■中产</span> <span style="color:#ff2020">■富人</span></div>
+        <div style="font-size:11px;color:var(--dim);"><span data-i18n="平均财富轨迹 ">平均财富轨迹 </span><span style="color:#cdd2de" data-i18n="■穷人">■穷人</span> <span style="color:#eee04e" data-i18n="■中产">■中产</span> <span style="color:#ff2020" data-i18n="■富人">■富人</span></div>
         <canvas id="cohChart" width="300" height="170"></canvas>
       </div>
       <div style="flex:1;" id="cohTable"></div>
     </div>
     <div id="cohNote" style="font-size:12.5px;color:var(--cyan);text-align:center;margin:10px 0 12px;line-height:1.7;"></div>
     <div style="display:flex; gap:8px;">
-      <button id="cohBtn" class="hot" style="flex:1;">▶ 开始追踪(按此刻分层)</button>
-      <button id="cohClose" style="flex:1;">返回世界</button>
+      <button id="cohBtn" class="hot" style="flex:1;" data-i18n="▶ 开始追踪(按此刻分层)">▶ 开始追踪(按此刻分层)</button>
+      <button id="cohClose" style="flex:1;" data-i18n="返回世界">返回世界</button>
     </div>
   </div>
 </div>
 <div id="expOverlay" style="display:none; position:absolute; inset:0; z-index:8; background:rgba(5,8,14,.82);
   backdrop-filter:blur(2px); align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:640px; max-width:92%;">
-    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:4px;">🧪 对照实验:天赋重要,还是运气重要?</h3>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;">两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。</div>
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:4px;" data-i18n="🧪 对照实验:天赋重要,还是运气重要?">🧪 对照实验:天赋重要,还是运气重要?</h3>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;" data-i18n="两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。">两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。</div>
     <div style="display:flex; gap:16px;">
-      <div style="flex:1;"><div style="font-size:11px;color:var(--dim);">基尼系数 <span style="color:#ffd479">■抽签</span> <span style="color:#6fd8e8">■均等</span></div><canvas id="expGini" width="280" height="130"></canvas></div>
-      <div style="flex:1;"><div style="font-size:11px;color:var(--dim);">人口</div><canvas id="expPop" width="280" height="130"></canvas></div>
+      <div style="flex:1;"><div style="font-size:11px;color:var(--dim);"><span data-i18n="基尼系数 ">基尼系数 </span><span style="color:#ffd479" data-i18n="■抽签">■抽签</span> <span style="color:#6fd8e8" data-i18n="■均等">■均等</span></div><canvas id="expGini" width="280" height="130"></canvas></div>
+      <div style="flex:1;"><div style="font-size:11px;color:var(--dim);" data-i18n="人口">人口</div><canvas id="expPop" width="280" height="130"></canvas></div>
     </div>
     <div id="expStats" style="font-size:13px; color:var(--tx); margin:10px 0 6px; text-align:center;"></div>
     <div id="expVerdict" style="font-size:14.5px; color:var(--cyan); text-align:center; line-height:1.7; margin-bottom:12px;"></div>
     <div style="display:flex; gap:8px;">
-      <button id="expBtn" class="hot" style="flex:1;">▶ 开始实验</button>
-      <button id="expViewB" title="把左边的大地图切到「均等世界」,亲眼看它的社会">👁 地图看均等世界</button>
-      <button id="expClose" style="flex:1;">返回世界</button>
+      <button id="expBtn" class="hot" style="flex:1;" data-i18n="▶ 开始实验">▶ 开始实验</button>
+      <button id="expViewB" data-i18n-title="把左边的大地图切到「均等世界」,亲眼看它的社会" data-i18n="👁 地图看均等世界">👁 地图看均等世界</button>
+      <button id="expClose" style="flex:1;" data-i18n="返回世界">返回世界</button>
     </div>
   </div>
 </div>
 <div id="paramsBar">
-  <button id="paramsToggle">⚙ 世界参数</button>
-  <span style="font-size:11px;color:#8a6d3b;margin-left:8px;">⚠=重开世界生效</span>
+  <button id="paramsToggle" data-i18n="⚙ 世界参数">⚙ 世界参数</button>
+  <span style="font-size:11px;color:#8a6d3b;margin-left:8px;" data-i18n="⚠=重开世界生效">⚠=重开世界生效</span>
   <div id="paramsPanel"></div>
 </div>
 <main id="mainRow">
@@ -254,7 +254,7 @@
     <div id="caption"></div>
     <div id="welcome" style="display:none">
       <div class="wcard">
-        <h2>投胎模拟器</h2>
+        <h2 data-i18n="投胎模拟器">投胎模拟器</h2>
         <p style="font-size:15px" data-i18n="改编自社会学家在电脑里养了几十年的实验。">改编自社会学家在电脑里养了几十年的实验。</p>
         <p data-i18n="投胎是个技术活,但在普通人眼里就是随机的。点击按钮开始看看你这次随机到了哪里。">投胎是个技术活,但在普通人眼里就是随机的。点击按钮开始看看你这次随机到了哪里。</p>
         <p class="wdim"><span data-i18n="点左下角「开始这一生」开始。">点左下角「开始这一生」开始。</span> <span id="welManualLink" style="color:var(--cyan); cursor:pointer; text-decoration:underline dotted" data-i18n="📋 先看 30 秒说明书 →">📋 先看 30 秒说明书 →</span></p>
@@ -262,19 +262,19 @@
       </div>
     </div>
     <div id="mapLegend">
-      <span class="lg">脸色=财富:<b style="color:#7d858f">灰</b>=赤贫→<b style="color:#a89a08">黄</b>=温饱→<b style="color:#a35d0e">棕橙</b>=小康→<b style="color:#e03c0c">橙红</b>=富裕→<b style="color:#c01038">深红</b>=巨富(⚙开「文化/部落」则改按部落上色)</span>
-      <span class="lg">按财富:<b style="color:#8a8f9c">灰</b>=赤贫→<b style="color:#c9a416">黄</b>=温饱→<b style="color:#d1880f">橙</b>=小康→<b style="color:#e02222">红</b>=巨富</span>
-      <span class="lg"><b style="color:var(--gold)">🟡金圈脸=你(脸色同样按财富)</b>　🟩=糖　<span id="lgSpice">🟧=香料</span>　🎯点居民标为追踪者(开局前3个,开局后可补到6)</span>
+      <span class="lg" data-i18n-html="脸色=财富:<b style='color:#7d858f'>灰</b>=赤贫→<b style='color:#a89a08'>黄</b>=温饱→<b style='color:#a35d0e'>棕橙</b>=小康→<b style='color:#e03c0c'>橙红</b>=富裕→<b style='color:#c01038'>深红</b>=巨富(⚙开「文化/部落」则改按部落上色)">脸色=财富:<b style="color:#7d858f">灰</b>=赤贫→<b style="color:#a89a08">黄</b>=温饱→<b style="color:#a35d0e">棕橙</b>=小康→<b style="color:#e03c0c">橙红</b>=富裕→<b style="color:#c01038">深红</b>=巨富(⚙开「文化/部落」则改按部落上色)</span>
+      <span class="lg" data-i18n-html="按财富:<b style='color:#8a8f9c'>灰</b>=赤贫→<b style='color:#c9a416'>黄</b>=温饱→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>红</b>=巨富">按财富:<b style="color:#8a8f9c">灰</b>=赤贫→<b style="color:#c9a416">黄</b>=温饱→<b style="color:#d1880f">橙</b>=小康→<b style="color:#e02222">红</b>=巨富</span>
+      <span class="lg"><b style="color:var(--gold)" data-i18n="🟡金圈脸=你(脸色同样按财富)">🟡金圈脸=你(脸色同样按财富)</b><span data-i18n="　🟩=糖　">　🟩=糖　</span><span id="lgSpice" data-i18n="🟧=香料">🟧=香料</span><span data-i18n="　🎯点居民标为追踪者(开局前3个,开局后可补到6)">　🎯点居民标为追踪者(开局前3个,开局后可补到6)</span></span>
     </div>
     <div id="lifeAction"></div>
     <div id="selBar"></div>
     <div id="viewBChip" style="display:none; position:absolute; top:10px; right:10px; z-index:6;">
-      <button id="viewBBack">🗺 正在看均等世界 · 点此切回你的世界</button>
+      <button id="viewBBack" data-i18n="🗺 正在看均等世界 · 点此切回你的世界">🗺 正在看均等世界 · 点此切回你的世界</button>
     </div>
     <div id="hint"></div>
   </div>
   <div id="lifeCol">
-    <div class="card"><h3 id="lifeTitle">我的人生</h3><div id="lifeBody"></div></div>
+    <div class="card"><h3 id="lifeTitle" data-i18n="我的人生">我的人生</h3><div id="lifeBody"></div></div>
     <details class="card guide" open>
       <summary data-i18n="📖 糖与香料 · 玩法">📖 糖与香料 · 玩法</summary>
       <div class="gbody" id="guideBody"></div>
@@ -284,10 +284,10 @@
   </div>
 </main>
 <div id="chartsBar">
-  <div class="chartbox"><div class="ct"><span data-i18n="人口 ⓘ" title="世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足">人口 ⓘ</span><span id="vPop">-</span></div><canvas id="cPop" width="180" height="60"></canvas></div>
-  <div class="chartbox"><div class="ct"><span data-i18n="基尼系数 ⓘ" title="贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端">基尼系数 ⓘ</span><span id="vGini">-</span></div><canvas id="cGini" width="180" height="60"></canvas></div>
-  <div class="chartbox"><div class="ct"><span data-i18n="糖价(香料/糖) ⓘ" title="1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡">糖价(香料/糖) ⓘ</span><span id="vPrice">-</span></div><canvas id="cPrice" width="180" height="60"></canvas></div>
-  <div class="chartbox"><div class="ct"><span data-i18n="财富分布 ⓘ" title="最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)">财富分布 ⓘ</span><span id="vRich">-</span></div><canvas id="cHist" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span data-i18n="人口 ⓘ" data-i18n-title="世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足">人口 ⓘ</span><span id="vPop">-</span></div><canvas id="cPop" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span data-i18n="基尼系数 ⓘ" data-i18n-title="贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端">基尼系数 ⓘ</span><span id="vGini">-</span></div><canvas id="cGini" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span data-i18n="糖价(香料/糖) ⓘ" data-i18n-title="1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡">糖价(香料/糖) ⓘ</span><span id="vPrice">-</span></div><canvas id="cPrice" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span data-i18n="财富分布 ⓘ" data-i18n-title="最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)">财富分布 ⓘ</span><span id="vRich">-</span></div><canvas id="cHist" width="180" height="60"></canvas></div>
 </div>
 <script>
 "use strict";
@@ -343,6 +343,280 @@ en:{
 '⏱ 定时观察结束(第 {t} 回合)':'⏱ Timed run finished (turn {t})','⏹ 定时观察已中止':'⏹ Timed run aborted',
 '常夏':'Eternal summer','✕ 关闭(世界继续跑)':'✕ Close (world keeps running)','✓ 明白了,开始玩':'✓ Got it, let\'s play',
 '基尼系数':'Gini','贫困率(赤贫+温饱)':'Poverty rate','穷人翻身率(出身<15 → 现≥25)':'Poor→Middle climb rate','富人占比(财富≥40)':'Rich share (≥40)',
+"糖域 · 人生重开":"Sugarscape · Life Restart",
+"糖域 · 人生重开 Sugarscape":"Sugarscape · Life Restart",
+"投胎模拟器":"Life Roulette",
+"空格也可暂停":"Space bar also pauses",
+"定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结":"Timed run: N turns non-stop; the world goes on if you die; summary at the end",
+"定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止":"Timed run: N turns non-stop, death does not interrupt; pause again to abort",
+"开局人口:重开世界时生效":"Starting population: applies on New World",
+"开局人口(默认125):点「↺ 重开世界」生效":"Starting population (default 125): applied when you press «↺ New World»",
+"⏹ 剩":"⏹ ",
+"自动运行+大事字幕,展示给别人看":"Auto-run with event captions — for showing off",
+"实时读数:这个实验正在发生什么":"Live readouts: what is happening in this experiment",
+"按当前财富分三个出身队列,追踪翻身/保持/下跌":"Split by wealth into three origin cohorts; track climbing / holding / falling",
+"同一规则跑两个世界:抽签 vs 均等":"Run two worlds under the same rules: lottery vs equal",
+"香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效":"Spice mountains: ON = two resources + spontaneous trade; OFF = pure-sugar world, instant",
+"地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应":"Terrain — Twin Peaks: the original baseline (two sugar + two spice mountains, fixed); Random Peaks: summit positions rerolled each switch; Scattered: no mountains, resources strewn in clumps (hard to settle). Applies instantly, residents adapt in place",
+"原著基准:固定两座糖山+两座香料山,对角分布":"Original baseline: two sugar + two spice mountains, diagonal",
+"立即切换为随机位置的四座山(山形不变)":"Switch to four mountains at random positions (shapes unchanged)",
+"无山体,资源逐格随机散布成碎簇(社会难定居)":"No mountains; resources scattered cell by cell in clumps (society hard to settle)",
+"切换明暗主题(浅色=纸面/深色=夜空)":"Toggle light/dark theme (light = paper / dark = night sky)",
+"📖 糖域说明书:来由 · 玩法 · 怎么看数字":"📖 Sugarscape manual: origin · how to play · reading the numbers",
+"✕ 关闭":"✕ Close",
+"📈 实验观察:这个世界正在发生什么":"📈 Observing: what is happening in this world",
+"观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。":"What to watch: how classes grow on their own in a world with no designer — and how much birth, effort, or rules can change. Refreshes every half second.",
+"📊 社会流动性:出身决定命运吗?":"📊 Social mobility: does birth decide fate?",
+"实时追踪中,世界继续跑":"tracking live, world keeps running",
+"按<b style='color:#cdd2de'>穷</b>(<20) / <b style='color:#eee04e'>中产</b>(20~40) / <b style='color:#ff2020'>富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。":"Splits residents into origin cohorts — <b style='color:#cdd2de'>poor</b> (&lt;20) / <b style='color:#eee04e'>middle</b> (20–40) / <b style='color:#ff2020'>rich</b> (≥40) — and follows each until death or now. Curves = average wealth per cohort (thick) with individual paths (thin); table = climbs/holds/falls so far (including the dead, at final wealth). Refreshes every half second while open.",
+"平均财富轨迹 ":"Average wealth paths ",
+"■穷人":"■poor",
+"■中产":"■middle",
+"■富人":"■rich",
+"▶ 开始追踪(按此刻分层)":"▶ Start tracking (stratify now)",
+"返回世界":"Back to world",
+"🧪 对照实验:天赋重要,还是运气重要?":"🧪 A/B experiment: talent or luck?",
+"两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。":"Two worlds, same rules, 300 turns side by side — the only difference: left (yellow) draws talent by lottery, right (cyan) everyone shares identical talent. Disasters off to cut noise.",
+"基尼系数 ":"Gini index ",
+"■抽签":"■lottery",
+"■均等":"■equal",
+"▶ 开始实验":"▶ Start experiment",
+"把左边的大地图切到「均等世界」,亲眼看它的社会":"Switch the big map to the equal world and watch its society with your own eyes",
+"👁 地图看均等世界":"👁 Map: equal world",
+"🗺 地图切回你的世界":"🗺 Map: back to your world",
+"🗺 正在看均等世界 · 点此切回你的世界":"🗺 Watching the equal world · click to switch back",
+"⚠=重开世界生效":"⚠ = applies on New World",
+"脸色=财富:<b style='color:#7d858f'>灰</b>=赤贫→<b style='color:#a89a08'>黄</b>=温饱→<b style='color:#a35d0e'>棕橙</b>=小康→<b style='color:#e03c0c'>橙红</b>=富裕→<b style='color:#c01038'>深红</b>=巨富(⚙开「文化/部落」则改按部落上色)":"Face = wealth: <b style='color:#7d858f'>gray</b> = destitute → <b style='color:#a89a08'>yellow</b> = getting by → <b style='color:#a35d0e'>tan</b> = comfortable → <b style='color:#e03c0c'>orange-red</b> = wealthy → <b style='color:#c01038'>crimson</b> = super rich (⚙ Culture/tribes recolors by tribe)",
+"按财富:<b style='color:#8a8f9c'>灰</b>=赤贫→<b style='color:#c9a416'>黄</b>=温饱→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>红</b>=巨富":"By wealth: <b style='color:#8a8f9c'>gray</b> = destitute → <b style='color:#c9a416'>yellow</b> = getting by → <b style='color:#d1880f'>orange</b> = comfortable → <b style='color:#e02222'>red</b> = super rich",
+"🟡金圈脸=你(脸色同样按财富)":"🟡 gold ring = you (face still colored by wealth)",
+"　🟩=糖　":"　🟩 = sugar　",
+"🟧=香料":"🟧 = spice",
+"　🎯点居民标为追踪者(开局前3个,开局后可补到6)":"　🎯 click a resident to track them (3 before the start, up to 6 after)",
+"成长视野(阅历+教育)⚠":"Growing vision (experience + schooling) ⚠",
+"教育价格(0=免费义务教育)":"Schooling price (0 = free education for all)",
+"糖/香料再生速度":"Sugar/spice regrowth speed",
+"灾害事件":"Disaster events",
+"灾害频率(‰/回合)":"Disaster frequency (‰/turn)",
+"拥挤天灾(人群过密→瘟疫歼30%+流民散10%)":"Crowd plague (overcrowding → plague kills 30% + 10% disperse)",
+"交易(糖⇄香料)":"Trade (sugar ⇄ spice)",
+"文化/部落":"Culture / tribes",
+"部落战争":"Tribal war",
+"劫富济贫(每50回合)":"Redistribution (every 50 turns)",
+"盲牌模式(天赋死后揭晓)":"Blind cards (talent revealed at death)",
+"均等世界(无天赋抽签)⚠":"Equal world (no talent lottery) ⚠",
+"初始人口 ⚠":"Initial population ⚠",
+"糖山之心":"Heart of the Sugar Mountain",
+"糖山脚下":"Foot of the Sugar Mountain",
+"香料坡上":"On the Spice Slope",
+"荒原边缘":"Edge of the Wasteland",
+"含着金汤匙出生":"Born with a silver spoon",
+"中上之姿":"Above-average mettle",
+"平凡人生":"An ordinary hand",
+"困难模式开局":"Hard-mode start",
+"含着金汤匙降生":"Descended with a silver spoon",
+"小康之家开局":"A comfortable household start",
+"一穷二白出身":"Born with nothing",
+"散布地形":"scattered terrain",
+"糖山 {a} 格 · 香料山 {b} 格":"sugar {a} · spice {b} cells away",
+"指定出身阶层:财富按档位重签,出生地与天赋仍是命":"Pick a starting class: wealth rerolled to the tier; birthplace and talent stay as drawn",
+"手动选地":"Pick a spot",
+"取消选地":"Cancel picking",
+"糖":"sugar",
+"香料":"spice",
+"格":" cells",
+"天":"d",
+"/天":"/day",
+"岁":"yrs",
+"{n}岁":"{n} yrs",
+"{n}天":"{n}d",
+"第{n}世":"Life {n}",
+"步/秒":" steps/s",
+"饥饿(缺糖)":"starvation (sugar)",
+"饥饿(缺香料)":"starvation (spice)",
+"衰老":"old age",
+"拥挤瘟疫":"crowd plague",
+"陨石":"meteor",
+"瘟疫":"plague",
+"死因不明":"unknown cause",
+"缺糖":"sugar",
+"缺香料":"spice",
+"巨富":"super rich",
+"富裕":"wealthy",
+"小康":"comfortable",
+"温饱":"getting by",
+"赤贫":"destitute",
+"穷":"poor",
+"中产":"middle",
+"富人":"rich",
+"出身{c}":"born {c}",
+"出身↓ 现状→":"Origin↓ Now→",
+"人数":"Count",
+"已故":"Dead",
+"现为穷":"now poor",
+"现为中产":"now middle",
+"现为富":"now rich",
+"📜 同出身者({n}人)":"📜 Same origin ({n} people)",
+"平均享年{a}岁 · 最久{b}岁 · 饿死率{p}%":"avg died at {a} · longest {b} · starved {p}%",
+"但饿死率不是判决书:同乡巅峰财富到过 {m}。出身定的是难度,不是结局。":"But starving is not destiny: a same-origin peer once peaked at {m}. Birth sets the difficulty, not the ending.",
+"⚠ 糖余命仅{n}天——立刻向绿色格子移动":"⚠ Sugar runs out in {n}d — move to green cells now",
+"⚠ 香料余命仅{n}天——向橙色格子移动":"⚠ Spice runs out in {n}d — move to orange cells",
+"🎓 可读书了:花{n}财富,视野永久+1(右侧按钮)":"🎓 Schooling affordable: pay {n}, vision permanently +1 (button on the right)",
+"📚 发展方向:再攒 {n} 财富即可读书(视野+1,看得更远采集更易)":"📚 Next step: save {n} more for school (vision +1, see farther, harvest easier)",
+"⏳ 已近寿限,这一世以平稳采集为主,别冒险远行":"⏳ Near the lifespan limit: harvest steadily this life, no risky treks",
+"🤝 你缺糖而另一资源富余,靠近邻居交易可补短板":"🤝 You are short on sugar while the other resource is plentiful — trade with a neighbor to cover the gap",
+"🤝 你缺香料而另一资源富余,靠近邻居交易可补短板":"🤝 You are short on spice while the other resource is plentiful — trade with a neighbor to cover the gap",
+"均质蛮荒:分化还没开始(多跑一会儿)":"Homogeneous wilderness: divergence has not started (let it run a while)",
+"分化进行中:阶层正在自发成形":"Divergence under way: classes are forming on their own",
+"不平等已自发形成并稳定——没有设计者,格局自己长了出来":"Inequality has formed and stabilized on its own — no designer; the pattern grew itself",
+"多数人挣扎在温饱线附近:生态紧张,山装不下所有人":"Most struggle near subsistence: the ecology is tight, the mountains cannot hold everyone",
+"贫困是常态,但不是全部:山脚的穷环真实存在":"Poverty is the norm, but not the whole story: the poor ring at the foot of the mountains is real",
+"富足世界:承载力宽松,贫困只是暂时的落难":"Affluent world: carrying capacity is loose; poverty is only temporary distress",
+"样本不足:让世界再跑一会儿":"Sample too small: let the world run a bit longer",
+"赤贫出身者里 {p}% 爬到了小康以上——努力有效,但有天花板":"{p}% of the destitute-born climbed above comfort — effort works, but there is a ceiling",
+"顶层永远是少数:金字塔是自己长出来的,没人设计过":"The top is always a minority: the pyramid grew by itself, nobody designed it",
+"顶层偏大:这个世界正处在罕见的富裕期":"Unusually large top: this world is in a rare affluent phase",
+"📊 流动性追踪开始(回合{t}):穷人{p}人 中产{m}人 富人{r}人":"📊 Mobility tracking started (turn {t}): poor {p} · middle {m} · rich {r}",
+"🎓 教育归因(价格{c}):翻身的穷人{n1}人中,读过书的占 {p1};跌落的富人{n2}人中,从未上学的占 {p2}。":"🎓 Schooling effect (price {c}): of {n1} poor who climbed, {p1} had gone to school; of {n2} rich who fell, {p2} never did.",
+"{n}人({p}%)":"{n} ({p}%)",
+"以打开追踪那一刻的财富分层为「出身」:":"Wealth at the moment tracking opened counts as the origin:",
+"出身穷人 {n} 人,至今翻身到中产以上 {x};":"Born poor: {n} people; {x} have climbed to middle or above;",
+"出身中产 {n} 人,升富 {a},保持中产 {b},下跌 {c};":"Born middle: {n}; rose to rich {a}, stayed {b}, fell {c};",
+"出身富人 {n} 人,保持富有 {a},下跌 {b};":"Born rich: {n}; stayed rich {a}, fell {b};",
+"各队列已故:穷{p} 中{m} 富{r}(死时财富即终态)。":"Deceased so far: poor {p}, middle {m}, rich {r} (wealth at death = final).",
+"↻ 重置追踪(按此刻重新分层)":"↻ Reset tracking (restratify now)",
+"还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。":"Not started yet. Press the button below to stratify by wealth right now and begin tracking.",
+"t0={n}回合":"t0 = turn {n}",
+"追踪{n}回合":"tracked {n} turns",
+"均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异":"The equal-talent world ended up MORE unequal — inequality comes mainly from position and luck, not talent",
+"天赋差异主导了不平等——这一局「命」比「运」更重要":"Talent differences dominate inequality — this round nature beat luck",
+"两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来":"Both worlds have almost the same Gini — inequality grows spontaneously from the tiniest differences",
+"🧪 对照实验完成(300回合): ":"🧪 Experiment finished (300 turns): ",
+"抽签世界基尼 {a} · 均等世界基尼 {b} · 采样 {n}/30":"Lottery-world Gini {a} · equal-world Gini {b} · samples {n}/30",
+"设定好参数后点「开始实验」":"Set parameters, then press «Start experiment»",
+"⏳ 实验 {n}/300 回合":"⏳ Experiment {n}/300 turns",
+"▶ 再跑一次":"▶ Run again",
+"第 {n} 世 · 出生抽签":"Life {n} · Birth lottery",
+"📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。":"📍 Click an empty cell to place your birthplace — the right panel previews live.<br>Picking a spot only changes position; talent stays the card you drew.",
+"出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。":"Birth sets the difficulty, not the ending — moving, schooling and trade are all ways up.<br>Unhappy with your spot? Reroll or pick a place bottom-left. 🎯 Mark up to 3 residents to track before the start, up to 6 after.",
+"牌面回顾:":"Cards recap: ",
+"视野{n}":"vision {n}",
+"视野起点{a}→终点{b}":"vision {a}→{b}",
+"代谢{a}/{b} 寿限{c}":"metabolism {a}/{b} · lifespan {c}",
+"📋 {n}世命运报告(你自己就是不平等的样本)":"📋 Fate report across {n} lives (you yourself are the sample of inequality)",
+"平均寿命 {a}岁 · 最高 {b}岁":"Avg lifespan {a} · longest {b}",
+"平均巅峰财富 {a} · 最高 {b}":"Avg peak wealth {a} · max {b}",
+"死因:{list}":"Causes: {list}",
+"同时代社会基尼系数:{g}":"Society Gini in your era: {g}",
+"你亲自操盘,比AI托管多活了 {n} 回合——这就是你的本事":"You piloted it yourself and outlived the AI autopilot by {n} turns — that is your own skill",
+"比AI托管少活 {n} 回合——这次可能是你帮了倒忙":"{n} turns shorter than the AI autopilot — this time you may have made things worse",
+"与AI托管水准相当(预期{e}回合,实际{a})":"On par with the AI autopilot (expected {e}, actual {a})",
+"巅峰财富{p},跻身社会前10%":"Peak wealth {p} — made the top 10%",
+"🏆 穷乡冠军——出生地周边{n}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)":"🏆 Local champion — among {n} same-origin neighbors around your birthplace, nobody out-earned you (national rank is not the only yardstick)",
+"同乡{n}人中巅峰财富排第{r},在贫瘠之地做到了头部":"Ranked {r} of {n} same-origin peers by peak wealth — top tier in a barren land",
+"读过书(学识{e}),视野从起点{b}长到{v}":"Went to school ({e} learning): vision grew from {b} at birth to {v}",
+"享年{n},几乎用满天赋寿限":"Died at {n}, nearly used up the natural lifespan",
+"长寿,享年{n}":"Long-lived: died at {n}",
+"成交{n}笔,市场老手":"{n} trades closed — a market veteran",
+"从出生地远行{n}格,横跨半个世界":"Trekked {n} cells from the birthplace — halfway across the world",
+"亲手采集了{n}单位粮食":"Harvested {n} units of food by hand",
+"安稳走完了命运给的这一程":"Walked steadily through the stretch of fate dealt to them",
+"视野仅{n}格,觅食基本靠碰":"Vision only {n} cells — foraging was mostly luck",
+"代谢{a}+{b}/天,消耗远超常人":"Metabolism {a}+{b}/day — burns far more than average",
+"生在荒原,起步全靠双腿":"Born in the wasteland — everything had to be earned on foot",
+"终败于代谢缺口:{c}":"In the end, undone by the metabolic gap: {c}",
+"离场太早,还来不及积累":"Left too early to accumulate anything",
+"天赋与环境无明显短板,输给了时间与概率":"No obvious weakness in talent or environment — lost to time and probability",
+"第 {n} 世 · 此生总结":"Life {n} · Life summary",
+"🎴 牌面":"🎴 Cards",
+"{b}的{t}:享年{n}岁{d}。":"{t} of {b}: died at {n}{d}.",
+",成交{n}笔":", {n} trades",
+"{b}·{t}·享年{n}岁,{c}。":"{b} · {t} · died at {n}, {c}.",
+"(这一世生在此功能上线前,没有存总结——再活一世就有了)":"(this life predates the summary feature — live another life to get one)",
+"{i}号·#{id}:活着 — {cls},财{w},{age}岁,最后出现在 ({x},{y})":"#{i} · resident #{id}: alive — {cls}, wealth {w}, {age} yrs, last seen at ({x},{y})",
+"{i}号·#{id}:已死亡 — {c},享年{age}岁":"#{i} · resident #{id}: dead — {c}, died at {age}",
+"🎯 你标记的追踪者(共{n}个)":"🎯 Your tracked ones ({n} total)",
+"大旱":"Drought",
+"丰年":"Boom",
+"糖山枯萎":"Mountain withered",
+"劫富济贫":"Redistribution",
+"移民潮":"Migration wave",
+"拥挤天灾":"Crowd plague",
+"风平浪静,无大事":"calm — nothing major",
+"你活了 {n} 回合 · 大事:{e}<br>人口 {a}→{b} · 基尼 {c}→{d}":"You lived {n} turns · events: {e}<br>Population {a}→{b} · Gini {c}→{d}",
+"第 {n} 世 · 终局":"Life {n} · Final chapter",
+"{b}的{t}:享年{n},巅峰财富{p}{d}。":"{t} of {b}: died at {n}, peak wealth {p}{d}.",
+"这一世的签已经用完了。下一世的视野、代谢与坐标,重新再抽。":"This life is used up. Vision, metabolism and coordinates of the next life will be redrawn.",
+"{cls}·财{w}·{age}岁·视{v}":"{cls} · wealth {w} · {age} yrs · vision {v}",
+"👻 你的意识跳进了居民 #{id} 的身体——它的视野/天赋/财产现在归你":"👻 Your mind jumped into resident #{id} — its vision, talent and possessions are now yours",
+"👻 已附身居民 #{id}:财{w}·视野{v}·{age}岁。点格子指挥它走":"👻 Possessing resident #{id}: wealth {w} · vision {v} · {age} yrs. Click cells to steer",
+"🤝 交易 ×{n},最近一笔:{m}":"🤝 Trades ×{n}, latest: {m}",
+"我的此生":"My life",
+"上帝视角中… 点居民查看,点右上「随机转世」下场抽签。":"God view… click a resident to inspect; «🎲 New Life» top-right to draw your next life.",
+"第 {n} 世 {x}":"Life {n} {x}",
+"· 盲牌":" · blind",
+"糖余命":"Sugar left",
+"香料余命":"Spice left",
+"寿命":"Lifespan",
+"财富 糖{a}+香料{b}":"Wealth: sugar {a} + spice {b}",
+"🎯亲自走位中":"🎯 steering yourself",
+"AI托管·点地图接管":"AI autopilot · click the map to take over",
+"处境平稳,按你的节奏走。":"All steady — move at your own pace.",
+"🎓 读书(花{n},视野+1)":"🎓 School ({n}, vision +1)",
+"退出附身":"Leave body",
+"清除目标":"Clear target",
+"🚶 5名新移民散落抵达荒原":"🚶 5 new immigrants scatter into the wasteland",
+"🚶 一批新移民抵达边缘荒原":"🚶 A wave of new immigrants reaches the frontier wastes",
+"⏱ 定时观察中:还剩 {n} 回合":"⏱ Timed run: {n} turns left",
+"💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结":"💀 Your life #{n} ended ({c}) — the timed run continues, summary at the end",
+"⚖️ 再分配: {n} 财富从富人转向穷人":"⚖️ Redistribution: {n} wealth moved from rich to poor",
+"🌀 拥挤天灾!{p}%的人口挤在一起,瘟疫带走{v}人,另有{r}名流民散落四方":"🌀 Crowd plague! {p}% of the population packed together — plague takes {v}, {r} drift away in all directions",
+"☄️ 陨石坠落({x},{y})!方圆6格化为焦土":"☄️ Meteor strike at ({x},{y})! A 6-cell radius turned to ash",
+"🦠 瘟疫蔓延,{n}位居民病逝":"🦠 Plague spreads — {n} residents die of disease",
+"🌶 香料山沉入地底——纯糖世界:无香料、无交易":"🌶 Spice mountains sink — pure-sugar world: no spice, no trade",
+"🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现":"🌶 Spice mountains rise — residents now need a second staple; trade will emerge on its own",
+"地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应":"Terrain — Twin Peaks: original baseline; Random Peaks: rerolled each switch; Scattered: clumps, no mountains. Applies instantly; residents adapt in place",
+"🗺 已切换为「{t}」地形——居民原地适应新地理":"🗺 Switched to the «{t}» terrain — residents adapt to the new geography in place",
+"经典双山":"Twin Peaks",
+"随机山":"Random Peaks",
+"散布":"Scattered",
+"糖山":"Sugar Mtn",
+"香料山":"Spice Mtn",
+"那里已有人居住,选个空格":"That cell is inhabited — pick an empty one",
+"🎯 标记追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Now tracking resident #{id} ({n}/3, locked after start)",
+"🎯 取消追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Stopped tracking resident #{id} ({n}/3, locked after start)",
+"🎯 标记追踪居民 #{id}(当前{n}个,上限6)":"🎯 Now tracking resident #{id} ({n} marked, cap 6)",
+"🎯 取消追踪居民 #{id}(当前{n}个,上限6)":"🎯 Stopped tracking resident #{id} ({n} marked, cap 6)",
+"👀 居民 #{id}: {cls} 财富{w} 视野{v} 代谢{a}/{b} 岁{age}":"👀 Resident #{id}: {cls}, wealth {w}, vision {v}, metabolism {a}/{b}, {age} yrs",
+"尚未附身,先「随机转世」下场":"Not possessing anyone yet — roll a life with «🎲 New Life» first",
+"🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山":"🎯 On the map: cyan ring = born poor, yellow = middle, red = rich — close the panel and watch who climbs the mountain",
+"👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样":"👁 This sugarscape is the experiments equal world — watch what kind of society it grows",
+"👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。":"👁 Demo: the world runs itself. Gray = destitute → yellow → orange → orange-red → red = super rich; disasters and booms may strike at any time.",
+"👁 演示模式开启":"👁 Demo mode on",
+"👁 演示模式关闭":"👁 Demo mode off",
+"重开世界会清空生命之书(历世记录),确定?":"Restarting the world erases the Book of Lives (all past lives). Sure?",
+"🌍 新的世界诞生了,山脉与荒原重新随机":"🌍 A new world is born — mountains and wastelands rerolled",
+"📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认":"📍 Click an empty cell to place your birthplace · live preview on the right · confirm with ✓ bottom-left",
+"📋 先看右栏出身报告,再点左下角「▶ 开始这一生」":"📋 Read the birth report on the right, then press «▶ Start This Life» bottom-left",
+"👉 点击你旁边发亮的格子,走过去采集糖和香料":"👉 Click a glowing cell next to you to walk there and harvest",
+"点格子走位 · 空格暂停 · 顶部滑杆调速度":"Click cells to walk · Space pauses · speed slider on top",
+"上帝视角:点居民查看 · 空格暂停":"God view: click residents to inspect · Space pauses",
+"🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。":"🌍 World born: two sugar mountains (green), two spice mountains (orange). Resources are geographically split — trade becomes a necessity.",
+"提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。":"Hint: this is Epstein & Axtells sugarscape. All residents survive by the same simple rules — inequality grows by itself.",
+"📚 生命之书已从存档恢复({n}世记录)":"📚 Book of Lives restored from save ({n} lives)",
+"世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足":"People alive. Normal: oscillates between 100 and 400; below 50 = world nearly barren, immigration kicks in. Watch: an initial surge = loose ecology; a steady slide = carrying capacity too low",
+"贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端":"Wealth gap: 0 = everyone equally poor, 1 = one person owns everything. Normal: climbs from 0 to 0.2–0.4 then settles. Watch: a persistently rising curve = inequality growing on its own (the core finding); near 0 = no divergence; above 0.5 = extreme",
+"1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡":"How much spice one unit of sugar buys (only with spice mountains on). Normal: hovers around 1. Watch: nobody sets the price — residents haggle it out of each other; its mere existence is evidence of a spontaneous market; wild swings = supply-demand imbalance",
+"最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)":"Share of all wealth owned by the richest 10%. Normal: 30–60%. Watch: near 100% = extreme concentration (mountains monopolized by a few families); near 10% = near-perfect equality (world still young)",
+"📖 阅历渐长,视野 +1(现在 {n} 格)":"📖 Experience accrues — vision +1 (now {n} cells)",
+"🎓 你完成学业(花了 {c} 财富),视野 +1(现在 {n} 格)":"🎓 Schooling done (paid {c}) — vision +1 (now {n} cells)",
+"🤝 你用 {a} 糖换得 {b} 香料(价格 {r})":"🤝 Gave {a} sugar for {b} spice (price {r})",
+"点开重看这一世的总结":"Click to revisit this life summary",
+"共{n}世 · 平均{m}岁 · 点任一行重看总结":"{n} lives total · avg {m} yrs · click a row to revisit its summary",
+"⬇ 你出生在这里":"⬇ You were born here",
+"🪦 主人公长眠于此":"🪦 The protagonist rests here",
+"✨ 高光 — ":"✨ Highlights — ",
+"⚠️ 局限 — ":"⚠️ Limits — ",
+"前10%: {p}%":"Top 10% hold {p}%",
 },
 ja:{
 '回合':'ターン','人口':'人口','基尼':'ジニ','⏸ 暂停':'⏸ 一時停止','▶ 继续':'▶ 再開','上帝视角':'神視点','附身视角':'一人称視点',
@@ -372,6 +646,280 @@ ja:{
 '⏱ 定时观察结束(第 {t} 回合)':'⏱ 定時観察終了(第{t}ターン)','⏹ 定时观察已中止':'⏹ 定時観察を中止',
 '常夏':'常夏','✕ 关闭(世界继续跑)':'✕ 閉じる(世界は動き続ける)','✓ 明白了,开始玩':'✓ 了解、始めよう',
 '基尼系数':'ジニ','贫困率(赤贫+温饱)':'貧困率','穷人翻身率(出身<15 → 现≥25)':'貧困→中流の上昇率','富人占比(财富≥40)':'富裕層比率(≥40)',
+"糖域 · 人生重开":"糖域・人生リスタート",
+"糖域 · 人生重开 Sugarscape":"糖域・人生リスタート",
+"投胎模拟器":"転生シミュレータ",
+"空格也可暂停":"スペースキーでも一時停止",
+"定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结":"定時観察:Nターン連続実行,主人公が死んでも世界は続き,終わったら総括",
+"定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止":"定時観察:Nターン連続実行,死亡しても中断されない。もう一度押すと中止",
+"开局人口:重开世界时生效":"初期人口:「世界を作り直す」で有効",
+"开局人口(默认125):点「↺ 重开世界」生效":"初期人口(既定125):「↺ 世界を作り直す」で有効",
+"⏹ 剩":"⏹ 残",
+"自动运行+大事字幕,展示给别人看":"自動実行+出来事字幕,見せる用",
+"实时读数:这个实验正在发生什么":"リアルタイム読み取り:この実験で今何が起きているか",
+"按当前财富分三个出身队列,追踪翻身/保持/下跌":"現在の富で三つの出身コホートに分け,浮上/維持/転落を追跡",
+"同一规则跑两个世界:抽签 vs 均等":"同じルールで二つの世界を比較:抽選 vs 均等",
+"香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效":"香料山スイッチ:ON=資源2種+自発的取引/OFF=糖だけの世界,即時切替",
+"地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应":"地形モード——定番の双山:原作準拠で糖山2+香料山2/ランダム山:切替ごとに峰位置を抽選/散在:山なし,資源が点々(定住しづらい)。即時切替,住民はその場で適応",
+"原著基准:固定两座糖山+两座香料山,对角分布":"原作準拠:糖山2+香料山2,対角に固定",
+"立即切换为随机位置的四座山(山形不变)":"峰位置をランダムに即時切替(山形は不変)",
+"无山体,资源逐格随机散布成碎簇(社会难定居)":"山なし。資源がマスごとに点在(社会が定住しづらい)",
+"切换明暗主题(浅色=纸面/深色=夜空)":"明暗テーマ切替(明=紙/暗=夜空)",
+"📖 糖域说明书:来由 · 玩法 · 怎么看数字":"📖 糖域マニュアル:由来 · 遊び方 · 数字の読み方",
+"✕ 关闭":"✕ 閉じる",
+"📈 实验观察:这个世界正在发生什么":"📈 実験観察:この世界で何が起きているか",
+"观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。":"見どころ:設計者のいない世界で階層がどう自発的に生まれるか。出身・努力・ルールそれぞれがどれだけ変えられるか。0.5秒ごとに更新。",
+"📊 社会流动性:出身决定命运吗?":"📊 社会流動:出身が運命を決めるか?",
+"实时追踪中,世界继续跑":"リアルタイム追跡中,世界は継続",
+"按<b style='color:#cdd2de'>穷</b>(<20) / <b style='color:#eee04e'>中产</b>(20~40) / <b style='color:#ff2020'>富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。":"住民を <b style='color:#cdd2de'>貧</b>(&lt;20) / <b style='color:#eee04e'>中流</b>(20〜40) / <b style='color:#ff2020'>裕福</b>(≥40) の出身コホートに分け,死亡か現在まで追跡。曲線=各コホートの平均富(太線)と個人の軌跡(細線)。表=これまでの浮上/維持/転落(物故者の最終値も含む)。開いている間,0.5秒ごとに更新。",
+"平均财富轨迹 ":"平均富の軌跡 ",
+"■穷人":"■貧",
+"■中产":"■中流",
+"■富人":"■裕福",
+"▶ 开始追踪(按此刻分层)":"▶ 追跡を開始(今の階層で)",
+"返回世界":"世界に戻る",
+"🧪 对照实验:天赋重要,还是运气重要?":"🧪 比較実験:素質か、運か?",
+"两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。":"二つの世界,同じルール,300ターン同時走行——唯一の違い:左(黄線)は素質を抽選,右(青線)は全員同じ素質。災害を切ってノイズを排除。",
+"基尼系数 ":"ジニ係数 ",
+"■抽签":"■抽選",
+"■均等":"■均等",
+"▶ 开始实验":"▶ 実験を開始",
+"把左边的大地图切到「均等世界」,亲眼看它的社会":"左の大マップを「均等世界」に切替,その社会をこの目で見る",
+"👁 地图看均等世界":"👁 マップで均等世界を見る",
+"🗺 地图切回你的世界":"🗺 マップをあなたの世界へ",
+"🗺 正在看均等世界 · 点此切回你的世界":"🗺 均等世界を表示中 · クリックで戻る",
+"⚠=重开世界生效":"⚠=世界再生成で有効",
+"脸色=财富:<b style='color:#7d858f'>灰</b>=赤贫→<b style='color:#a89a08'>黄</b>=温饱→<b style='color:#a35d0e'>棕橙</b>=小康→<b style='color:#e03c0c'>橙红</b>=富裕→<b style='color:#c01038'>深红</b>=巨富(⚙开「文化/部落」则改按部落上色)":"顔=富:<b style='color:#7d858f'>灰</b>=赤貧→<b style='color:#a89a08'>黄</b>=温飽→<b style='color:#a35d0e'>茶橙</b>=小康→<b style='color:#e03c0c'>橙赤</b>=富裕→<b style='color:#c01038'>深紅</b>=巨富(⚙「文化/部族」ONで部族色に)",
+"按财富:<b style='color:#8a8f9c'>灰</b>=赤贫→<b style='color:#c9a416'>黄</b>=温饱→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>红</b>=巨富":"富の順で:<b style='color:#8a8f9c'>灰</b>=赤貧→<b style='color:#c9a416'>黄</b>=温飽→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>赤</b>=巨富",
+"🟡金圈脸=你(脸色同样按财富)":"🟡 金縁の顔=あなた(顔色は同じく富で)",
+"　🟩=糖　":"　🟩=糖　",
+"🟧=香料":"🟧=香料",
+"　🎯点居民标为追踪者(开局前3个,开局后可补到6)":"　🎯住民をクリックして追跡対象に(開始前3人,開始後は6人まで)",
+"成长视野(阅历+教育)⚠":"成長視界(経験+教育)⚠",
+"教育价格(0=免费义务教育)":"教育価格(0=義務教育無料)",
+"糖/香料再生速度":"糖/香料の再生速度",
+"灾害事件":"災害イベント",
+"灾害频率(‰/回合)":"災害頻度(‰/ターン)",
+"拥挤天灾(人群过密→瘟疫歼30%+流民散10%)":"過密天災(過密→疫病で30%死亡+10%拡散)",
+"交易(糖⇄香料)":"取引(糖⇄香料)",
+"文化/部落":"文化/部族",
+"部落战争":"部族戦争",
+"劫富济贫(每50回合)":"富の再配分(50ターン毎)",
+"盲牌模式(天赋死后揭晓)":"ブラインド(素質は死後に判明)",
+"均等世界(无天赋抽签)⚠":"均等世界(素質抽選なし)⚠",
+"初始人口 ⚠":"初期人口 ⚠",
+"糖山之心":"糖山の中心",
+"糖山脚下":"糖山のふもと",
+"香料坡上":"香料の坂の上",
+"荒原边缘":"荒野のへり",
+"含着金汤匙出生":"銀のスプーンをくわえて生まれた",
+"中上之姿":"中上の素質",
+"平凡人生":"平凡な一生",
+"困难模式开局":"高難易度スタート",
+"含着金汤匙降生":"銀のスプーンとともに降り立った",
+"小康之家开局":"まずまずの家にスタート",
+"一穷二白出身":"無一物の出身",
+"散布地形":"散在地形",
+"糖山 {a} 格 · 香料山 {b} 格":"糖山 {a} マス · 香料山 {b} マス",
+"指定出身阶层:财富按档位重签,出生地与天赋仍是命":"出身階層を指定:富は段階で再抽選,出生地と素質は籤のまま",
+"手动选地":"場所を選ぶ",
+"取消选地":"選択をやめる",
+"糖":"糖",
+"香料":"香料",
+"格":"マス",
+"天":"日",
+"/天":"/日",
+"岁":"歳",
+"{n}岁":"{n}歳",
+"{n}天":"{n}日",
+"第{n}世":"第{n}世",
+"步/秒":"歩/秒",
+"饥饿(缺糖)":"餓死(糖不足)",
+"饥饿(缺香料)":"餓死(香料不足)",
+"衰老":"老衰",
+"拥挤瘟疫":"過密疫病",
+"陨石":"隕石",
+"瘟疫":"疫病",
+"死因不明":"死因不明",
+"缺糖":"糖",
+"缺香料":"香料",
+"巨富":"巨富",
+"富裕":"富裕",
+"小康":"小康",
+"温饱":"温飽",
+"赤贫":"赤貧",
+"穷":"貧",
+"中产":"中流",
+"富人":"裕福",
+"出身{c}":"出身{c}",
+"出身↓ 现状→":"出身↓ 現在→",
+"人数":"人数",
+"已故":"物故",
+"现为穷":"現は貧",
+"现为中产":"現は中流",
+"现为富":"現は裕福",
+"📜 同出身者({n}人)":"📜 同じ出身({n}人)",
+"平均享年{a}岁 · 最久{b}岁 · 饿死率{p}%":"平均享年{a}歳 · 最長{b}歳 · 餓死率{p}%",
+"但饿死率不是判决书:同乡巅峰财富到过 {m}。出身定的是难度,不是结局。":"しかし餓死率は判決ではない:同郷のピーク富は {m}。出身が決めるのは難易度で,結末ではない。",
+"⚠ 糖余命仅{n}天——立刻向绿色格子移动":"⚠ 糖の余命あと{n}日——すぐ緑のマスへ",
+"⚠ 香料余命仅{n}天——向橙色格子移动":"⚠ 香料の余命あと{n}日——橙のマスへ",
+"🎓 可读书了:花{n}财富,视野永久+1(右侧按钮)":"🎓 教育可能:{n}を払えば視界が永久+1(右のボタン)",
+"📚 发展方向:再攒 {n} 财富即可读书(视野+1,看得更远采集更易)":"📚 次の一手:あと{n}貯めれば教育可(視界+1,より遠くまで見える)",
+"⏳ 已近寿限,这一世以平稳采集为主,别冒险远行":"⏳ 寿命が近い:この世は安定採集中心に,無謀な遠征は避けよう",
+"🤝 你缺糖而另一资源富余,靠近邻居交易可补短板":"🤝 糖が不足し,もう一方の資源に余裕——隣人と取引して補おう",
+"🤝 你缺香料而另一资源富余,靠近邻居交易可补短板":"🤝 香料が不足し,もう一方の資源に余裕——隣人と取引して補おう",
+"均质蛮荒:分化还没开始(多跑一会儿)":"均質な荒野:分化はまだ始まっていない(もう少し走らせよう)",
+"分化进行中:阶层正在自发成形":"分化が進行中:階層が自発的に形作られつつある",
+"不平等已自发形成并稳定——没有设计者,格局自己长了出来":"不平等が自発的に形成・安定——設計者なし,構図が自ら育った",
+"多数人挣扎在温饱线附近:生态紧张,山装不下所有人":"多くが生存線近くで苦しむ:生態がきつく,山に全員は収まらない",
+"贫困是常态,但不是全部:山脚的穷环真实存在":"貧困が常態,しかしそれだけではない:山裾の貧困リングは現実",
+"富足世界:承载力宽松,贫困只是暂时的落难":"豊穣世界:収容力に余裕があり,貧困は一時的な不運",
+"样本不足:让世界再跑一会儿":"サンプル不足:もう少し世界を走らせよう",
+"赤贫出身者里 {p}% 爬到了小康以上——努力有效,但有天花板":"赤貧出身の {p}% が小康以上へ——努力は効く,だが天井がある",
+"顶层永远是少数:金字塔是自己长出来的,没人设计过":"頂点は常に少数:ピラミッドは自ら育ち,誰も設計していない",
+"顶层偏大:这个世界正处在罕见的富裕期":"頂点が大きめ:この世界は珍しい豊穣期にある",
+"📊 流动性追踪开始(回合{t}):穷人{p}人 中产{m}人 富人{r}人":"📊 流動追跡開始(ターン{t}):貧{p}人 中流{m}人 裕福{r}人",
+"🎓 教育归因(价格{c}):翻身的穷人{n1}人中,读过书的占 {p1};跌落的富人{n2}人中,从未上学的占 {p2}。":"🎓 教育の帰因(価格{c}):浮上した貧{n1}人のうち学校あり {p1};転落した裕福{n2}人のうち無学 {p2}。",
+"{n}人({p}%)":"{n}人({p}%)",
+"以打开追踪那一刻的财富分层为「出身」:":"追跡を開始した瞬間の富の階層を「出身」とします:",
+"出身穷人 {n} 人,至今翻身到中产以上 {x};":"出身貧 {n} 人,中流以上へ浮上 {x};",
+"出身中产 {n} 人,升富 {a},保持中产 {b},下跌 {c};":"出身中流 {n} 人,裕福へ {a},中流維持 {b},転落 {c};",
+"出身富人 {n} 人,保持富有 {a},下跌 {b};":"出身裕福 {n} 人,富裕維持 {a},転落 {b};",
+"各队列已故:穷{p} 中{m} 富{r}(死时财富即终态)。":"既に物故:貧{p} 中{m} 裕福{r}(死時の富が最終値)。",
+"↻ 重置追踪(按此刻重新分层)":"↻ 追跡をリセット(今の階層で再分割)",
+"还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。":"まだ開始していません。下のボタンで現在の富の階層を出身として追跡を始めます。",
+"t0={n}回合":"t0={n}ターン",
+"追踪{n}回合":"{n}ターン追跡",
+"均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异":"均等素質世界のほうが格差が大きくなった——不平等の主因は「位置と運」であり,素質ではない",
+"天赋差异主导了不平等——这一局「命」比「运」更重要":"素質の差が不平等を支配した——この回は「命」が「運」より重い",
+"两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来":"両世界のジニはほぼ同じ——不平等はどんな微小差からも自発的に生まれる",
+"🧪 对照实验完成(300回合): ":"🧪 比較実験完了(300ターン): ",
+"抽签世界基尼 {a} · 均等世界基尼 {b} · 采样 {n}/30":"抽選世界ジニ {a} · 均等世界ジニ {b} · サンプル {n}/30",
+"设定好参数后点「开始实验」":"パラメータを設定して「実験を開始」を押してください",
+"⏳ 实验 {n}/300 回合":"⏳ 実験 {n}/300 ターン",
+"▶ 再跑一次":"▶ もう一度実行",
+"第 {n} 世 · 出生抽签":"第 {n} 世 · 出生抽選",
+"📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。":"📍 空きマスをクリックして出生地を配置,右欄にリアルタイム表示。<br>場所選びは位置だけ変え,素質はこの籤のまま。",
+"出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。":"出身が決めるのは難易度で,結末ではない——移住・教育・取引すべてが浮上の道。<br>出生地に不満?左下で引き直しや場所指定。🎯 開始前に最大3人,開始後は6人まで追跡登録。",
+"牌面回顾:":"牌面の振り返り:",
+"视野{n}":"視界{n}",
+"视野起点{a}→终点{b}":"視界 起点{a}→終点{b}",
+"代谢{a}/{b} 寿限{c}":"代謝{a}/{b} 寿限{c}",
+"📋 {n}世命运报告(你自己就是不平等的样本)":"📋 {n}世の運命レポート(あなた自身が不平等のサンプル)",
+"平均寿命 {a}岁 · 最高 {b}岁":"平均寿命 {a}歳 · 最長 {b}歳",
+"平均巅峰财富 {a} · 最高 {b}":"平均ピーク富 {a} · 最高 {b}",
+"死因:{list}":"死因:{list}",
+"同时代社会基尼系数:{g}":"同時代の社会ジニ係数:{g}",
+"你亲自操盘,比AI托管多活了 {n} 回合——这就是你的本事":"自分で操縦し,AI任せより {n} ターン長生き——これがあなたの実力",
+"比AI托管少活 {n} 回合——这次可能是你帮了倒忙":"AI任せより {n} ターン短命——今回は逆に足を引っ張ったかも",
+"与AI托管水准相当(预期{e}回合,实际{a})":"AI任せと同等(予想{e}ターン,実際{a})",
+"巅峰财富{p},跻身社会前10%":"ピーク富{p},社会の上位10%へ",
+"🏆 穷乡冠军——出生地周边{n}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)":"🏆 穷郷チャンピオン——出生地周辺の同郷{n}人,ピーク富であなたを超える者なし(全国順位だけが物差しではない)",
+"同乡{n}人中巅峰财富排第{r},在贫瘠之地做到了头部":"同郷{n}人中ピーク富は第{r}位——痩せた地でトップに",
+"读过书(学识{e}),视野从起点{b}长到{v}":"教育あり(学識{e}):視界が起点{b}から{v}へ成長",
+"享年{n},几乎用满天赋寿限":"享年{n},天寿をほぼ使い切った",
+"长寿,享年{n}":"長寿,享年{n}",
+"成交{n}笔,市场老手":"取引{n}回——市場の達人",
+"从出生地远行{n}格,横跨半个世界":"出生地から{n}マスを旅した——世界の半分を横断",
+"亲手采集了{n}单位粮食":"自ら{n}単位の食糧を収穫",
+"安稳走完了命运给的这一程":"運命がくれたこの道を穏やかに歩き切った",
+"视野仅{n}格,觅食基本靠碰":"視界はわずか{n}マス——採集はほぼ当てずっぽう",
+"代谢{a}+{b}/天,消耗远超常人":"代謝{a}+{b}/日——消耗が常人以上",
+"生在荒原,起步全靠双腿":"荒野に生まれ,後は自分の足のみ",
+"终败于代谢缺口:{c}":"最後は代謝の欠乏に敗れた:{c}不足",
+"离场太早,还来不及积累":"旅立ちが早すぎて,蓄えが間に合わなかった",
+"天赋与环境无明显短板,输给了时间与概率":"素質も環境も明確な弱点なし——敗因は時間と確率",
+"第 {n} 世 · 此生总结":"第 {n} 世 · この生の総括",
+"🎴 牌面":"🎴 手札",
+"{b}的{t}:享年{n}岁{d}。":"{b}の{t}:享年{n}歳{d}。",
+",成交{n}笔":",取引{n}回",
+"{b}·{t}·享年{n}岁,{c}。":"{b}·{t}·享年{n}歳,{c}。",
+"(这一世生在此功能上线前,没有存总结——再活一世就有了)":"(この世は総括機能の登場前で,保存されていません——次の世で記録されます)",
+"{i}号·#{id}:活着 — {cls},财{w},{age}岁,最后出现在 ({x},{y})":"{i}番·#{id}:生存 — {cls},財{w},{age}歳,最後の位置 ({x},{y})",
+"{i}号·#{id}:已死亡 — {c},享年{age}岁":"{i}番·#{id}:死亡 — {c},享年{age}歳",
+"🎯 你标记的追踪者(共{n}个)":"🎯 あなたの追跡対象(計{n}人)",
+"大旱":"干ばつ",
+"丰年":"豊作",
+"糖山枯萎":"糖山枯萎",
+"劫富济贫":"再配分",
+"移民潮":"移民の波",
+"拥挤天灾":"過密天災",
+"风平浪静,无大事":"波風なく,大きな出来事なし",
+"你活了 {n} 回合 · 大事:{e}<br>人口 {a}→{b} · 基尼 {c}→{d}":"{n}ターンを生きた · 大事:{e}<br>人口 {a}→{b} · ジニ {c}→{d}",
+"第 {n} 世 · 终局":"第 {n} 世 · 終局",
+"{b}的{t}:享年{n},巅峰财富{p}{d}。":"{b}の{t}:享年{n},ピーク富{p}{d}。",
+"这一世的签已经用完了。下一世的视野、代谢与坐标,重新再抽。":"この世の籤は使い切った。次の世の視界・代謝・座標は、また抽選。",
+"{cls}·财{w}·{age}岁·视{v}":"{cls}·財{w}·{age}歳·視界{v}",
+"👻 你的意识跳进了居民 #{id} 的身体——它的视野/天赋/财产现在归你":"👻 意識が住民 #{id} の体へ——その視界・素質・財産はあなたのもの",
+"👻 已附身居民 #{id}:财{w}·视野{v}·{age}岁。点格子指挥它走":"👻 住民 #{id} に憑依中:財{w}·視界{v}·{age}歳。マスをクリックして操縦",
+"🤝 交易 ×{n},最近一笔:{m}":"🤝 取引 ×{n},直近:{m}",
+"我的此生":"この一生",
+"上帝视角中… 点居民查看,点右上「随机转世」下场抽签。":"神視点中…住民をクリックで調査,右上「転生」で次の抽選。",
+"第 {n} 世 {x}":"第 {n} 世 {x}",
+"· 盲牌":" · ブラインド",
+"糖余命":"糖の余命",
+"香料余命":"香料の余命",
+"寿命":"寿命",
+"财富 糖{a}+香料{b}":"財富 糖{a}+香料{b}",
+"🎯亲自走位中":"🎯 自分で移動中",
+"AI托管·点地图接管":"AI自動·マップをクリックで接管",
+"处境平稳,按你的节奏走。":"安定しています。自分のペースで進みましょう。",
+"🎓 读书(花{n},视野+1)":"🎓 教育({n},視界+1)",
+"退出附身":"憑依を終える",
+"清除目标":"目標を解除",
+"🚶 5名新移民散落抵达荒原":"🚶 新移民5名が荒野に散らばって到着",
+"🚶 一批新移民抵达边缘荒原":"🚶 新移民の一団が辺境の荒野に到着",
+"⏱ 定时观察中:还剩 {n} 回合":"⏱ 定時観察中:残り {n} ターン",
+"💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结":"💀 あなたの第{n}世が終了({c})——定時観察は継続,総括は最後に",
+"⚖️ 再分配: {n} 财富从富人转向穷人":"⚖️ 再配分:{n}の富が富裕層から貧困層へ",
+"🌀 拥挤天灾!{p}%的人口挤在一起,瘟疫带走{v}人,另有{r}名流民散落四方":"🌀 過密天災!人口の{p}%が密集,疫病で{v}人死亡,{r}人が四方へ拡散",
+"☄️ 陨石坠落({x},{y})!方圆6格化为焦土":"☄️ 隕石落下({x},{y})!半径6マスが焦土に",
+"🦠 瘟疫蔓延,{n}位居民病逝":"🦠 疫病が蔓延,{n}人が病没",
+"🌶 香料山沉入地底——纯糖世界:无香料、无交易":"🌶 香料山が地中へ——糖だけの世界:香料も取引もなし",
+"🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现":"🌶 香料山が隆起——住人は第2の主食を必要とし,取引が自発的に生まれる",
+"地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应":"地形モード——定番の双山:原作準拠/ランダム山:切替ごとに抽選/散在:山なしの資源の塊。即時切替,住民はその場で適応",
+"🗺 已切换为「{t}」地形——居民原地适应新地理":"🗺 「{t}」地形に切替——住民がその場で新地理に適応",
+"经典双山":"定番の双山",
+"随机山":"ランダム山",
+"散布":"散在",
+"糖山":"糖山",
+"香料山":"香料山",
+"那里已有人居住,选个空格":"そこは既に住人がいます。空きマスを選んで",
+"🎯 标记追踪居民 #{id}({n}/3,开局后锁定)":"🎯 住民 #{id} を追跡登録({n}/3,開始後に固定)",
+"🎯 取消追踪居民 #{id}({n}/3,开局后锁定)":"🎯 住民 #{id} の追跡を解除({n}/3,開始後に固定)",
+"🎯 标记追踪居民 #{id}(当前{n}个,上限6)":"🎯 住民 #{id} を追跡登録(現在{n}人,上限6)",
+"🎯 取消追踪居民 #{id}(当前{n}个,上限6)":"🎯 住民 #{id} の追跡を解除(現在{n}人,上限6)",
+"👀 居民 #{id}: {cls} 财富{w} 视野{v} 代谢{a}/{b} 岁{age}":"👀 住民 #{id}:{cls} 財富{w} 視界{v} 代謝{a}/{b} {age}歳",
+"尚未附身,先「随机转世」下场":"まだ憑依していません。まず「転生」で一世を引こう",
+"🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山":"🎯 マップ上:青輪=貧の出身,黄=中流,赤=裕福——パネルを閉じて誰が登るか見よう",
+"👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样":"👁 今の糖域=比較実験の「均等世界」——その社会がどう育つか見よう",
+"👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。":"👁 デモ:世界が自動で走る。灰=赤貧 → 黄 → 橙 → 橙赤 → 赤=巨富。災害や豊作が随時降りかかる。",
+"👁 演示模式开启":"👁 デモモードON",
+"👁 演示模式关闭":"👁 デモモードOFF",
+"重开世界会清空生命之书(历世记录),确定?":"世界を再生成すると人生の書(歴世記録)が消えます。よろしいですか?",
+"🌍 新的世界诞生了,山脉与荒原重新随机":"🌍 新しい世界が誕生——山と荒野を再抽選",
+"📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认":"📍 空きマスをクリックして出生地を配置 · 右欄に即時プレビュー · 左下の✓で確定",
+"📋 先看右栏出身报告,再点左下角「▶ 开始这一生」":"📋 まず右欄の出身レポートを見て,左下の「▶ この人生を始める」を",
+"👉 点击你旁边发亮的格子,走过去采集糖和香料":"👉 近くの光るマスをクリックして移動・採集",
+"点格子走位 · 空格暂停 · 顶部滑杆调速度":"マスをクリックして移動 · スペースで一時停止 · 上のスライダーで速度",
+"上帝视角:点居民查看 · 空格暂停":"神視点:住民をクリックで調査 · スペースで一時停止",
+"🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。":"🌍 世界誕生:糖山2(緑),香料山2(橙)。資源が地理的に分離し,取引が必須に。",
+"提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。":"ヒント:ここは Epstein & Axtell の糖域。全住民が同じ単純ルールで生き,不平等が自ずと育つ。",
+"📚 生命之书已从存档恢复({n}世记录)":"📚 人生の書をセーブから復元({n}世分)",
+"世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足":"生きている人数。正常:100〜400で安定。50割れ=世界が荒れ果てかけ,移民が補充。見どころ:初期の急増=生態が緩い,一方的な下落=収容力不足",
+"贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端":"貧富格差。0=全員が同じ貧しさ,1=一人がすべて占有。正常:0から0.2〜0.4へ上昇し安定。曲線が上がり続ける=不平等が自生中(実験の核心的発見)。0近傍=分化なし,0.5超=極端な格差",
+"1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡":"糖1単位で買える香料の量(香料山ON時のみ)。正常:1前後で揺れる。価格は誰も決めていない——住民の駆け引きが生んだもの。市場が自発的に涌现した証拠。激しい変動=需給の不均衡",
+"最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)":"上位10%が社会の富の何%を持つか。正常:30〜60%。100%接近=極端な集中(少数家族が山を独占),10%接近=ほぼ完全な平等(世界がまだ若い)",
+"📖 阅历渐长,视野 +1(现在 {n} 格)":"📖 経験が積もり,視界 +1(現在 {n} マス)",
+"🎓 你完成学业(花了 {c} 财富),视野 +1(现在 {n} 格)":"🎓 学業を修了({c}を支払い),視界 +1(現在 {n} マス)",
+"🤝 你用 {a} 糖换得 {b} 香料(价格 {r})":"🤝 糖 {a} を香料 {b} と交換(価格 {r})",
+"点开重看这一世的总结":"クリックでこの世の総括を再表示",
+"共{n}世 · 平均{m}岁 · 点任一行重看总结":"全{n}世 · 平均{m}歳 · 行をクリックで総括を再表示",
+"⬇ 你出生在这里":"⬇ あなたはここに生まれた",
+"🪦 主人公长眠于此":"🪦 主人公がここに眠る",
+"✨ 高光 — ":"✨ ハイライト — ",
+"⚠️ 局限 — ":"⚠️ 限界 — ",
+"前10%: {p}%":"上位10%: {p}%",
 },
 fr:{
 '回合':'Tour','人口':'Pop.','基尼':'Gini','⏸ 暂停':'⏸ Pause','▶ 继续':'▶ Reprendre','上帝视角':'Vue divine','附身视角':'Vue subjective',
@@ -401,6 +949,280 @@ fr:{
 '⏱ 定时观察结束(第 {t} 回合)':'⏱ Course minutée terminée (tour {t})','⏹ 定时观察已中止':'⏹ Course minutée arrêtée',
 '常夏':'Été éternel','✕ 关闭(世界继续跑)':'✕ Fermer (le monde continue)','✓ 明白了,开始玩':'✓ Compris, jouons',
 '基尼系数':'Gini','贫困率(赤贫+温饱)':'Taux de pauvreté','穷人翻身率(出身<15 → 现≥25)':'Ascension pauvres→moyens','富人占比(财富≥40)':'Part des riches (≥40)',
+"糖域 · 人生重开":"Sugarscape · Une nouvelle vie",
+"糖域 · 人生重开 Sugarscape":"Sugarscape · Une nouvelle vie",
+"投胎模拟器":"Roulette des vies",
+"空格也可暂停":"Espace met aussi en pause",
+"定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结":"Course chronométrée : N tours sans arrêt ; le monde continue si vous mourez ; bilan à la fin",
+"定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止":"Course chronométrée : N tours sans arrêt, la mort n interrompt pas ; pause pour annuler",
+"开局人口:重开世界时生效":"Population initiale : effective au «Nouveau monde»",
+"开局人口(默认125):点「↺ 重开世界」生效":"Population initiale (125 par défaut) : appliquée via «↺ Nouveau monde»",
+"⏹ 剩":"⏹ ",
+"自动运行+大事字幕,展示给别人看":"Lecture auto avec sous-titres, pour présenter",
+"实时读数:这个实验正在发生什么":"Lectures en direct : ce qui se passe dans cette expérience",
+"按当前财富分三个出身队列,追踪翻身/保持/下跌":"Répartit par richesse en trois cohortes ; suit ascensions, maintiens, chutes",
+"同一规则跑两个世界:抽签 vs 均等":"Deux mondes, mêmes règles : loterie contre égalité",
+"香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效":"Monts d épices : ON = deux ressources + commerce spontané ; OFF = sucre pur, immédiat",
+"地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应":"Terrain — Doubles sommets : la référence (deux monts de sucre, deux d épices, fixes) ; Sommets aléatoires : positions retirées à chaque bascule ; Épars : pas de monts, ressources en touffes (colonisation difficile). Effet immédiat, les habitants s adaptent",
+"原著基准:固定两座糖山+两座香料山,对角分布":"Référence : deux monts de sucre + deux d épices, en diagonale",
+"立即切换为随机位置的四座山(山形不变)":"Quatre monts en positions aléatoires (formes inchangées)",
+"无山体,资源逐格随机散布成碎簇(社会难定居)":"Pas de monts ; ressources éparses en touffes (société difficile à installer)",
+"切换明暗主题(浅色=纸面/深色=夜空)":"Bascule thème clair/sombre (clair = papier / sombre = ciel nocturne)",
+"📖 糖域说明书:来由 · 玩法 · 怎么看数字":"📖 Manuel Sugarscape : origine · jeu · lire les chiffres",
+"✕ 关闭":"✕ Fermer",
+"📈 实验观察:这个世界正在发生什么":"📈 Observation : que se passe-t-il dans ce monde",
+"观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。":"À observer : comment les classes émergent seules dans un monde sans concepteur — et ce que peuvent changer origine, effort et règles. Actualisé toutes les demi-secondes.",
+"📊 社会流动性:出身决定命运吗?":"📊 Mobilité sociale : la naissance décide-t-elle du destin ?",
+"实时追踪中,世界继续跑":"suivi en direct, le monde continue",
+"按<b style='color:#cdd2de'>穷</b>(<20) / <b style='color:#eee04e'>中产</b>(20~40) / <b style='color:#ff2020'>富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。":"Répartit les résidents en cohortes — <b style='color:#cdd2de'>pauvres</b> (&lt;20) / <b style='color:#eee04e'>moyens</b> (20–40) / <b style='color:#ff2020'>riches</b> (≥40) — et les suit jusqu à la mort ou à maintenant. Courbes = richesse moyenne par cohorte (épaisse) et trajectoires individuelles (fines) ; tableau = ascensions/maintiens/chutes à ce jour (décédés compris, à leur richesse finale). Actualisé toutes les demi-secondes.",
+"平均财富轨迹 ":"Trajectoires de richesse moyennes ",
+"■穷人":"■pauvres",
+"■中产":"■moyens",
+"■富人":"■riches",
+"▶ 开始追踪(按此刻分层)":"▶ Lancer le suivi (stratifier maintenant)",
+"返回世界":"Retour au monde",
+"🧪 对照实验:天赋重要,还是运气重要?":"🧪 Expérience : le talent ou la chance ?",
+"两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。":"Deux mondes, mêmes règles, 300 tours côte à côte — seule différence : à gauche (jaune) le talent est tiré au sort, à droite (cyan) il est identique pour tous. Catastrophes coupées pour éviter le bruit.",
+"基尼系数 ":"Indice de Gini ",
+"■抽签":"■loterie",
+"■均等":"■égal",
+"▶ 开始实验":"▶ Lancer l expérience",
+"把左边的大地图切到「均等世界」,亲眼看它的社会":"Passe la grande carte au «monde égal» pour voir sa société",
+"👁 地图看均等世界":"👁 Carte : monde égal",
+"🗺 地图切回你的世界":"🗺 Carte : retour à votre monde",
+"🗺 正在看均等世界 · 点此切回你的世界":"🗺 Monde égal affiché · cliquer pour revenir",
+"⚠=重开世界生效":"⚠ = effectif au Nouveau monde",
+"脸色=财富:<b style='color:#7d858f'>灰</b>=赤贫→<b style='color:#a89a08'>黄</b>=温饱→<b style='color:#a35d0e'>棕橙</b>=小康→<b style='color:#e03c0c'>橙红</b>=富裕→<b style='color:#c01038'>深红</b>=巨富(⚙开「文化/部落」则改按部落上色)":"Teint = richesse : <b style='color:#7d858f'>gris</b> = démuni → <b style='color:#a89a08'>jaune</b> = subsistance → <b style='color:#a35d0e'>beige</b> = confortable → <b style='color:#e03c0c'>orangé</b> = aisé → <b style='color:#c01038'>pourpre</b> = super riche (⚙ Culture/tribes recolore par tribu)",
+"按财富:<b style='color:#8a8f9c'>灰</b>=赤贫→<b style='color:#c9a416'>黄</b>=温饱→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>红</b>=巨富":"Par richesse : <b style='color:#8a8f9c'>gris</b> = démuni → <b style='color:#c9a416'>jaune</b> = subsistance → <b style='color:#d1880f'>orange</b> = confortable → <b style='color:#e02222'>rouge</b> = super riche",
+"🟡金圈脸=你(脸色同样按财富)":"🟡 anneau doré = vous (teint selon la richesse)",
+"　🟩=糖　":"　🟩 = sucre　",
+"🟧=香料":"🟧 = épices",
+"　🎯点居民标为追踪者(开局前3个,开局后可补到6)":"　🎯 cliquez un résident pour le suivre (3 avant le départ, jusqu à 6 après)",
+"成长视野(阅历+教育)⚠":"Vision croissante (expérience + école) ⚠",
+"教育价格(0=免费义务教育)":"Prix de l école (0 = école gratuite)",
+"糖/香料再生速度":"Vitesse de repousse sucre/épices",
+"灾害事件":"Catastrophes",
+"灾害频率(‰/回合)":"Fréquence des catastrophes (‰/tour)",
+"拥挤天灾(人群过密→瘟疫歼30%+流民散10%)":"Peste de foule (trop dense → peste tue 30% + 10% dispersés)",
+"交易(糖⇄香料)":"Commerce (sucre ⇄ épices)",
+"文化/部落":"Culture / tribus",
+"部落战争":"Guerre tribale",
+"劫富济贫(每50回合)":"Redistribution (tous les 50 tours)",
+"盲牌模式(天赋死后揭晓)":"Cartes cachées (talent révélé à la mort)",
+"均等世界(无天赋抽签)⚠":"Monde égal (pas de loterie de talent) ⚠",
+"初始人口 ⚠":"Population initiale ⚠",
+"糖山之心":"Cœur de la montagne de sucre",
+"糖山脚下":"Pied de la montagne de sucre",
+"香料坡上":"Sur la pente aux épices",
+"荒原边缘":"Bord de la lande",
+"含着金汤匙出生":"Né avec une cuillère d or",
+"中上之姿":"Des dispositions au-dessus de la moyenne",
+"平凡人生":"Une main ordinaire",
+"困难模式开局":"Départ en mode difficile",
+"含着金汤匙降生":"Descendu avec une cuillère d or",
+"小康之家开局":"Départ dans un foyer aisé",
+"一穷二白出身":"Né sans rien",
+"散布地形":"terrain épars",
+"糖山 {a} 格 · 香料山 {b} 格":"sucre à {a} · épices à {b}",
+"指定出身阶层:财富按档位重签,出生地与天赋仍是命":"Choisissez une classe : richesse retirée au niveau voulu ; lieu et talent restent tirés",
+"手动选地":"Choisir un lieu",
+"取消选地":"Annuler le choix",
+"糖":"sucre",
+"香料":"épices",
+"格":" cases",
+"天":" j",
+"/天":"/jour",
+"岁":" ans",
+"{n}岁":"{n} ans",
+"{n}天":"{n} j",
+"第{n}世":"Vie {n}",
+"步/秒":" pas/s",
+"饥饿(缺糖)":"famine (sucre)",
+"饥饿(缺香料)":"famine (épices)",
+"衰老":"vieillesse",
+"拥挤瘟疫":"peste de foule",
+"陨石":"météorite",
+"瘟疫":"peste",
+"死因不明":"cause inconnue",
+"缺糖":"sucre",
+"缺香料":"épices",
+"巨富":"super riche",
+"富裕":"aisé",
+"小康":"confortable",
+"温饱":"subsistance",
+"赤贫":"démuni",
+"穷":"pauvre",
+"中产":"moyen",
+"富人":"riche",
+"出身{c}":"né {c}",
+"出身↓ 现状→":"Origine↓ Actuel→",
+"人数":"Effectif",
+"已故":"Décédés",
+"现为穷":"devenus pauvres",
+"现为中产":"devenus moyens",
+"现为富":"devenus riches",
+"📜 同出身者({n}人)":"📜 Même origine ({n})",
+"平均享年{a}岁 · 最久{b}岁 · 饿死率{p}%":"mort moyenne à {a} · record {b} · famine {p}%",
+"但饿死率不是判决书:同乡巅峰财富到过 {m}。出身定的是难度,不是结局。":"Mais la famine nest pas un destin : un compatriote a culminé à {m}. La naissance fixe la difficulté, pas la fin.",
+"⚠ 糖余命仅{n}天——立刻向绿色格子移动":"⚠ Sucre épuisé dans {n} j — allez vite aux cases vertes",
+"⚠ 香料余命仅{n}天——向橙色格子移动":"⚠ Épices épuisées dans {n} j — allez aux cases orange",
+"🎓 可读书了:花{n}财富,视野永久+1(右侧按钮)":"🎓 École abordable : {n}, vision +1 définitif (bouton à droite)",
+"📚 发展方向:再攒 {n} 财富即可读书(视野+1,看得更远采集更易)":"📚 Prochaine étape : encore {n} pour l école (vision +1, voir plus loin, récolter plus aisément)",
+"⏳ 已近寿限,这一世以平稳采集为主,别冒险远行":"⏳ Presque au bout de la vie : récoltez tranquillement, évitez les expéditions risquées",
+"🤝 你缺糖而另一资源富余,靠近邻居交易可补短板":"🤝 Vous manquez de sucre, lautre ressource abonde — commercez avec un voisin",
+"🤝 你缺香料而另一资源富余,靠近邻居交易可补短板":"🤝 Vous manquez d épices, lautre ressource abonde — commercez avec un voisin",
+"均质蛮荒:分化还没开始(多跑一会儿)":"Wilderness homogène : la différenciation na pas commencé (laissez courir)",
+"分化进行中:阶层正在自发成形":"Différenciation en cours : les classes se forment seules",
+"不平等已自发形成并稳定——没有设计者,格局自己长了出来":"Linégalité s est formée et stabilisée seule — aucun concepteur, le schéma a poussé seul",
+"多数人挣扎在温饱线附近:生态紧张,山装不下所有人":"La majorité lutte près de la subsistance : écologie tendue, les monts ne logent pas tout le monde",
+"贫困是常态,但不是全部:山脚的穷环真实存在":"La pauvreté est la norme, pas tout : l anneau pauvre au pied des monts est réel",
+"富足世界:承载力宽松,贫困只是暂时的落难":"Monde d abondance : capacité large, la pauvreté nest qu un malheur passager",
+"样本不足:让世界再跑一会儿":"Échantillon insuffisant : laissez tourner le monde",
+"赤贫出身者里 {p}% 爬到了小康以上——努力有效,但有天花板":"{p}% des nés démunis ont dépassé le confort — leffort paie, mais il y a un plafond",
+"顶层永远是少数:金字塔是自己长出来的,没人设计过":"Le sommet reste minoritaire : la pyramide a poussé seule, personne ne la conçue",
+"顶层偏大:这个世界正处在罕见的富裕期":"Sommet inhabituellement large : ce monde traverse une rare phase d abondance",
+"📊 流动性追踪开始(回合{t}):穷人{p}人 中产{m}人 富人{r}人":"📊 Suivi lancé (tour {t}) : pauvres {p} · moyens {m} · riches {r}",
+"🎓 教育归因(价格{c}):翻身的穷人{n1}人中,读过书的占 {p1};跌落的富人{n2}人中,从未上学的占 {p2}。":"🎓 Effet école (prix {c}) : parmi {n1} pauvres grimpés, {p1} scolarisés ; parmi {n2} riches tombés, {p2} jamais scolarisés.",
+"{n}人({p}%)":"{n} ({p}%)",
+"以打开追踪那一刻的财富分层为「出身」:":"La richesse au moment du lancement du suivi compte comme origine :",
+"出身穷人 {n} 人,至今翻身到中产以上 {x};":"Nés pauvres : {n} ; {x} ont grimpé au-dessus du moyen ;",
+"出身中产 {n} 人,升富 {a},保持中产 {b},下跌 {c};":"Nés moyens : {n} ; devenus riches {a}, maintenus {b}, tombés {c} ;",
+"出身富人 {n} 人,保持富有 {a},下跌 {b};":"Nés riches : {n} ; maintenus {a}, tombés {b} ;",
+"各队列已故:穷{p} 中{m} 富{r}(死时财富即终态)。":"Décédés à ce jour : pauvres {p}, moyens {m}, riches {r} (richesse finale).",
+"↻ 重置追踪(按此刻重新分层)":"↻ Réinitialiser le suivi (restratifier maintenant)",
+"还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。":"Pas encore lancé. Cliquez le bouton ci-dessous pour stratifier maintenant et suivre.",
+"t0={n}回合":"t0 = tour {n}",
+"追踪{n}回合":"suivi depuis {n} tours",
+"均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异":"Le monde aux talents égaux finit plus inégal encore — linégalité vient surtout de la position et de la chance, pas du talent",
+"天赋差异主导了不平等——这一局「命」比「运」更重要":"Les différences de talent dominent — cette fois, la destinée a pesé plus que la chance",
+"两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来":"Gini presque identique dans les deux mondes — linégalité pousse de toute petite différence",
+"🧪 对照实验完成(300回合): ":"🧪 Expérience terminée (300 tours) : ",
+"抽签世界基尼 {a} · 均等世界基尼 {b} · 采样 {n}/30":"Gini loterie {a} · Gini égal {b} · échantillons {n}/30",
+"设定好参数后点「开始实验」":"Réglez les paramètres puis lancez l expérience",
+"⏳ 实验 {n}/300 回合":"⏳ Expérience {n}/300 tours",
+"▶ 再跑一次":"▶ Relancer",
+"第 {n} 世 · 出生抽签":"Vie {n} · Loterie de naissance",
+"📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。":"📍 Cliquez une case vide pour placer votre naissance — aperçu en direct à droite.<br>Choisir un lieu ne change que la position ; le talent reste la carte tirée.",
+"出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。":"La naissance fixe la difficulté, pas la fin — migrer, étudier, commercer sont des voies de ascension.<br>Le lieu ne plaît pas ? Repiochez ou choisissez en bas à gauche. 🎯 Suivez jusqu à 3 résidents avant le départ, 6 après.",
+"牌面回顾:":"Rappel des cartes : ",
+"视野{n}":"vision {n}",
+"视野起点{a}→终点{b}":"vision {a}→{b}",
+"代谢{a}/{b} 寿限{c}":"métabolisme {a}/{b} · longévité {c}",
+"📋 {n}世命运报告(你自己就是不平等的样本)":"📋 Rapport de destin sur {n} vies (vous êtes vous-même l échantillon de inégalité)",
+"平均寿命 {a}岁 · 最高 {b}岁":"Vie moyenne {a} · record {b}",
+"平均巅峰财富 {a} · 最高 {b}":"Richesse culminante moyenne {a} · max {b}",
+"死因:{list}":"Causes : {list}",
+"同时代社会基尼系数:{g}":"Gini de la société de votre époque : {g}",
+"你亲自操盘,比AI托管多活了 {n} 回合——这就是你的本事":"Vous avez piloté vous-même : {n} tours de plus que l IA — c est votre mérite",
+"比AI托管少活 {n} 回合——这次可能是你帮了倒忙":"{n} tours de moins que l IA — cette fois, vous avez peut-être gêné",
+"与AI托管水准相当(预期{e}回合,实际{a})":"Au niveau de l IA (prévu {e}, réel {a})",
+"巅峰财富{p},跻身社会前10%":"Richesse culminante {p} — dans le top 10%",
+"🏆 穷乡冠军——出生地周边{n}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)":"🏆 Champion local — parmi {n} voisins de même origine, personne na gagné plus que vous (le classement national nest pas la seule règle)",
+"同乡{n}人中巅峰财富排第{r},在贫瘠之地做到了头部":"Classé {r} sur {n} en richesse culminante — le haut d une terre pauvre",
+"读过书(学识{e}),视野从起点{b}长到{v}":"A été à l école ({e}) : vision passée de {b} à {v}",
+"享年{n},几乎用满天赋寿限":"Mort à {n}, longévité presque épuisée",
+"长寿,享年{n}":"Longévité : mort à {n}",
+"成交{n}笔,市场老手":"{n} transactions — un vétéran du marché",
+"从出生地远行{n}格,横跨半个世界":"A voyagé sur {n} cases depuis sa naissance — la moitié du monde",
+"亲手采集了{n}单位粮食":"A récolté {n} unités de nourriture à la main",
+"安稳走完了命运给的这一程":"A parcouru sereinement le trajet que le destin lui donnait",
+"视野仅{n}格,觅食基本靠碰":"Vision de {n} cases seulement — chercher sa nourriture relevait du hasard",
+"代谢{a}+{b}/天,消耗远超常人":"Métabolisme {a}+{b}/jour — brûle bien plus que la normale",
+"生在荒原,起步全靠双腿":"Né dans la lande — tout à la force des jambes",
+"终败于代谢缺口:{c}":"À la fin, vaincu par le déficit métabolique : {c}",
+"离场太早,还来不及积累":"Parti trop tôt pour rien accumuler",
+"天赋与环境无明显短板,输给了时间与概率":"Aucune faiblesse manifeste de talent ni de milieu — battu par le temps et le hasard",
+"第 {n} 世 · 此生总结":"Vie {n} · Bilan de cette vie",
+"🎴 牌面":"🎴 Cartes",
+"{b}的{t}:享年{n}岁{d}。":"{t} de {b} : mort à {n}{d}.",
+",成交{n}笔":", {n} transactions",
+"{b}·{t}·享年{n}岁,{c}。":"{b} · {t} · mort à {n}, {c}.",
+"(这一世生在此功能上线前,没有存总结——再活一世就有了)":"(cette vie est antérieure au bilan automatique — revivez pour en avoir un)",
+"{i}号·#{id}:活着 — {cls},财{w},{age}岁,最后出现在 ({x},{y})":"{i} · résident #{id} : vivant — {cls}, richesse {w}, {age} ans, vu pour la dernière fois en ({x},{y})",
+"{i}号·#{id}:已死亡 — {c},享年{age}岁":"{i} · résident #{id} : mort — {c}, à {age} ans",
+"🎯 你标记的追踪者(共{n}个)":"🎯 Vos suivis ({n} au total)",
+"大旱":"Sécheresse",
+"丰年":"Année grasse",
+"糖山枯萎":"Mont fané",
+"劫富济贫":"Redistribution",
+"移民潮":"Vague de migration",
+"拥挤天灾":"Peste de foule",
+"风平浪静,无大事":"calme — rien de majeur",
+"你活了 {n} 回合 · 大事:{e}<br>人口 {a}→{b} · 基尼 {c}→{d}":"Vous avez vécu {n} tours · événements : {e}<br>Population {a}→{b} · Gini {c}→{d}",
+"第 {n} 世 · 终局":"Vie {n} · Dénouement",
+"{b}的{t}:享年{n},巅峰财富{p}{d}。":"{t} de {b} : mort à {n}, richesse culminante {p}{d}.",
+"这一世的签已经用完了。下一世的视野、代谢与坐标,重新再抽。":"Cette vie est épuisée. Vision, métabolisme et coordonnées de la prochaine vie seront retirés.",
+"{cls}·财{w}·{age}岁·视{v}":"{cls} · richesse {w} · {age} ans · vision {v}",
+"👻 你的意识跳进了居民 #{id} 的身体——它的视野/天赋/财产现在归你":"👻 Votre esprit saute dans le résident #{id} — sa vision, son talent et ses biens sont à vous",
+"👻 已附身居民 #{id}:财{w}·视野{v}·{age}岁。点格子指挥它走":"👻 Possession du résident #{id} : richesse {w} · vision {v} · {age} ans. Cliquez les cases pour le diriger",
+"🤝 交易 ×{n},最近一笔:{m}":"🤝 Transactions ×{n}, dernière : {m}",
+"我的此生":"Ma vie",
+"上帝视角中… 点居民查看,点右上「随机转世」下场抽签。":"Vue divine… cliquez un résident pour lexaminer ; «🎲 Nouvelle vie» en haut à droite pour tirer.",
+"第 {n} 世 {x}":"Vie {n} {x}",
+"· 盲牌":" · à l aveugle",
+"糖余命":"Sucre restant",
+"香料余命":"Épices restantes",
+"寿命":"Durée de vie",
+"财富 糖{a}+香料{b}":"Richesse : sucre {a} + épices {b}",
+"🎯亲自走位中":"🎯 vous pilotez",
+"AI托管·点地图接管":"IA aux commandes · cliquez la carte pour reprendre",
+"处境平稳,按你的节奏走。":"Tout est stable — avancez à votre rythme.",
+"🎓 读书(花{n},视野+1)":"🎓 École ({n}, vision +1)",
+"退出附身":"Quitter le corps",
+"清除目标":"Effacer la cible",
+"🚶 5名新移民散落抵达荒原":"🚶 5 nouveaux immigrants se dispersent dans la lande",
+"🚶 一批新移民抵达边缘荒原":"🚶 Une vague de nouveaux immigrants atteint la frange déserte",
+"⏱ 定时观察中:还剩 {n} 回合":"⏱ Course chronométrée : {n} tours restants",
+"💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结":"💀 Votre vie nº{n} s achève ({c}) — la course continue, bilan à la fin",
+"⚖️ 再分配: {n} 财富从富人转向穷人":"⚖️ Redistribution : {n} de richesse passés des riches aux pauvres",
+"🌀 拥挤天灾!{p}%的人口挤在一起,瘟疫带走{v}人,另有{r}名流民散落四方":"🌀 Peste de foule ! {p}% de la population entassée — la peste emporte {v} personnes, {r} se dispersent",
+"☄️ 陨石坠落({x},{y})!方圆6格化为焦土":"☄️ Météorite en ({x},{y}) ! Rayon de 6 cases réduites en cendres",
+"🦠 瘟疫蔓延,{n}位居民病逝":"🦠 La peste se répand — {n} résidents emportés",
+"🌶 香料山沉入地底——纯糖世界:无香料、无交易":"🌶 Les monts d épices senfouissent — monde de sucre pur : ni épices, ni commerce",
+"🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现":"🌶 Les monts d épices se soulèvent — un second aliment devient nécessaire ; le commerce émergera de lui-même",
+"地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应":"Terrain — Doubles sommets : référence ; Sommets aléatoires : retirés à chaque bascule ; Épars : touffes sans monts. Effet immédiat, habitants adaptés sur place",
+"🗺 已切换为「{t}」地形——居民原地适应新地理":"🗺 Passage au terrain «{t}» — les habitants sadaptent sur place à la nouvelle géographie",
+"经典双山":"Doubles sommets",
+"随机山":"Sommets aléatoires",
+"散布":"Épars",
+"糖山":"Mont de sucre",
+"香料山":"Mont d épices",
+"那里已有人居住,选个空格":"Cette case est habitée — choisissez-en une vide",
+"🎯 标记追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Suit désormais le résident #{id} ({n}/3, verrouillé au départ)",
+"🎯 取消追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Ne suit plus le résident #{id} ({n}/3, verrouillé au départ)",
+"🎯 标记追踪居民 #{id}(当前{n}个,上限6)":"🎯 Suit désormais le résident #{id} ({n} marqués, plafond 6)",
+"🎯 取消追踪居民 #{id}(当前{n}个,上限6)":"🎯 Ne suit plus le résident #{id} ({n} marqués, plafond 6)",
+"👀 居民 #{id}: {cls} 财富{w} 视野{v} 代谢{a}/{b} 岁{age}":"👀 Résident #{id} : {cls}, richesse {w}, vision {v}, métabolisme {a}/{b}, {age} ans",
+"尚未附身,先「随机转世」下场":"Aucune possession pour linstant — tirez dabord une vie avec «🎲 Nouvelle vie»",
+"🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山":"🎯 Sur la carte : anneau cyan = nés pauvres, jaune = moyens, rouge = riches — fermez le panneau et regardez qui gravit la montagne",
+"👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样":"👁 Ce sugarscape est le monde égal de lexpérience — regardez quelle société il fait pousser",
+"👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。":"👁 Démo : le monde tourne seul. Gris = démuni → jaune → orange → orangé → rouge = super riche ; catastrophes et prospérité peuvent frapper à tout moment.",
+"👁 演示模式开启":"👁 Mode démo activé",
+"👁 演示模式关闭":"👁 Mode démo désactivé",
+"重开世界会清空生命之书(历世记录),确定?":"Relancer le monde effacera le Livre des vies (toutes les vies passées). Continuer ?",
+"🌍 新的世界诞生了,山脉与荒原重新随机":"🌍 Un nouveau monde est né — monts et landes retirés au sort",
+"📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认":"📍 Cliquez une case vide pour placer votre naissance · aperçu en direct à droite · validez avec ✓ en bas à gauche",
+"📋 先看右栏出身报告,再点左下角「▶ 开始这一生」":"📋 Lisez le rapport de naissance à droite, puis «▶ Commencer cette vie» en bas à gauche",
+"👉 点击你旁边发亮的格子,走过去采集糖和香料":"👉 Cliquez une case brillante à côté pour y aller et récolter",
+"点格子走位 · 空格暂停 · 顶部滑杆调速度":"Cliquez les cases pour marcher · Espace = pause · vitesse en haut",
+"上帝视角:点居民查看 · 空格暂停":"Vue divine : cliquez un résident pour lexaminer · Espace = pause",
+"🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。":"🌍 Naissance du monde : deux monts de sucre (vert), deux d épices (orange). Ressources séparées — le commerce devient une nécessité.",
+"提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。":"Astuce : voici le sugarscape d Epstein et Axtell. Tous les résidents survivent avec les mêmes règles simples — inégalité pousse delle-même.",
+"📚 生命之书已从存档恢复({n}世记录)":"📚 Livre des vies restauré depuis la sauvegarde ({n} vies)",
+"世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足":"Personnes vivantes. Normal : oscille entre 100 et 400 ; sous 50 = monde presque désert, immigration de secours. À voir : pic initial = écologie trop lâche ; glissade continue = capacité insuffisante",
+"贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端":"Écart de richesse : 0 = tous également pauvres, 1 = une seule personne possède tout. Normal : monte de 0 à 0,2–0,4 puis se stabilise. À voir : courbe qui grimpe sans relâche = inégalité qui pousse delle-même (constat central) ; proche de 0 = pas de divergence ; au-dessus de 0,5 = extrême",
+"1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡":"Combien d épices achète une unité de sucre (monts d épices seulement). Normal : oscille autour de 1. À voir : personne ne fixe ce prix — il sort du marchandage des résidents ; preuve dun marché spontané ; forte volatilité = déséquilibre offre-demande",
+"最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)":"Part de la richesse totale détenue par les 10% les plus riches. Normal : 30–60%. À voir : proche de 100% = concentration extrême (monts monopolisés par quelques familles) ; proche de 10% = égalité presque parfaite (monde encore jeune)",
+"📖 阅历渐长,视野 +1(现在 {n} 格)":"📖 Lexérience grandit — vision +1 (désormais {n} cases)",
+"🎓 你完成学业(花了 {c} 财富),视野 +1(现在 {n} 格)":"🎓 École terminée ({c} payés) — vision +1 (désormais {n} cases)",
+"🤝 你用 {a} 糖换得 {b} 香料(价格 {r})":"🤝 {a} sucre contre {b} épices (prix {r})",
+"点开重看这一世的总结":"Cliquez pour revoir le bilan de cette vie",
+"共{n}世 · 平均{m}岁 · 点任一行重看总结":"{n} vies au total · moyenne {m} ans · cliquez une ligne pour revoir son bilan",
+"⬇ 你出生在这里":"⬇ Vous êtes né ici",
+"🪦 主人公长眠于此":"🪦 Le héros repose ici",
+"✨ 高光 — ":"✨ Points forts — ",
+"⚠️ 局限 — ":"⚠️ Limites — ",
+"前10%: {p}%":"Top 10 % : {p}%",
 },
 de:{
 '回合':'Runde','人口':'Bev.','基尼':'Gini','⏸ 暂停':'⏸ Pause','▶ 继续':'▶ Weiter','上帝视角':'Gottesblick','附身视角':'Ich-Blick',
@@ -430,6 +1252,280 @@ de:{
 '⏱ 定时观察结束(第 {t} 回合)':'⏱ Zeitlauf beendet (Runde {t})','⏹ 定时观察已中止':'⏹ Zeitlauf abgebrochen',
 '常夏':'Ewiger Sommer','✕ 关闭(世界继续跑)':'✕ Schließen (Welt läuft weiter)','✓ 明白了,开始玩':'✓ Verstanden, los!',
 '基尼系数':'Gini','贫困率(赤贫+温饱)':'Armutsquote','穷人翻身率(出身<15 → 现≥25)':'Aufstieg Arm→Mittel','富人占比(财富≥40)':'Reichs-Anteil (≥40)',
+"糖域 · 人生重开":"Sugarscape · Lebens-Neustart",
+"糖域 · 人生重开 Sugarscape":"Sugarscape · Lebens-Neustart",
+"投胎模拟器":"Reinkarnations-Roulette",
+"空格也可暂停":"Leertaste pausiert auch",
+"定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结":"Zeitlauf: N Runden am Stück; die Welt läuft weiter, wenn du stirbst; Bilanz am Ende",
+"定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止":"Zeitlauf: N Runden non-stop, Tod unterbricht nicht; Pause zum Abbrechen",
+"开局人口:重开世界时生效":"Startbevölkerung: gilt bei Neuer Welt",
+"开局人口(默认125):点「↺ 重开世界」生效":"Startbevölkerung (Standard 125): gilt nach Klick auf «↺ Neue Welt»",
+"⏹ 剩":"⏹ ",
+"自动运行+大事字幕,展示给别人看":"Autolauf mit Ereignistexten, zum Vorführen",
+"实时读数:这个实验正在发生什么":"Live-Werte: was in diesem Experiment passiert",
+"按当前财富分三个出身队列,追踪翻身/保持/下跌":"Teilt nach Reichtum in drei Herkunftskohorten; verfolgt Aufstieg, Halten, Abstieg",
+"同一规则跑两个世界:抽签 vs 均等":"Zwei Welten, gleiche Regeln: Los gegen gleich",
+"香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效":"Gewürzberge: AN = zwei Ressourcen + spontaner Tausch; AUS = reine Zuckerwelt, sofort",
+"地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应":"Terrain — Zwillingsgipfel: Originalbasis (zwei Zucker-, zwei Gewürzberge, fix); Zufallsgipfel: Lagen jedes Mal neu gezogen; Verstreut: keine Berge, Ressourcen in Flecken (schwer zu besiedeln). Sofort wirksam, Bewohner passen sich an",
+"原著基准:固定两座糖山+两座香料山,对角分布":"Original: zwei Zucker- + zwei Gewürzberge, diagonal",
+"立即切换为随机位置的四座山(山形不变)":"Vier Berge an Zufallspositionen (Formen gleich)",
+"无山体,资源逐格随机散布成碎簇(社会难定居)":"Keine Berge; Ressourcen zufällig verstreut (schwer zu besiedeln)",
+"切换明暗主题(浅色=纸面/深色=夜空)":"Hell/Dunkel umschalten (hell = Papier / dunkel = Nachthimmel)",
+"📖 糖域说明书:来由 · 玩法 · 怎么看数字":"📖 Sugarscape-Handbuch: Ursprung · Spiel · Zahlen lesen",
+"✕ 关闭":"✕ Schließen",
+"📈 实验观察:这个世界正在发生什么":"📈 Beobachtung: was in dieser Welt passiert",
+"观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。":"Was zu beobachten ist: wie Klassen in einer Welt ohne Designer von selbst entstehen — und wie viel Herkunft, Mühe und Regeln verändern. Alle halbe Sekunde aktualisiert.",
+"📊 社会流动性:出身决定命运吗?":"📊 Soziale Mobilität: bestimmt die Herkunft das Schicksal?",
+"实时追踪中,世界继续跑":"Live-Verfolgung, Welt läuft weiter",
+"按<b style='color:#cdd2de'>穷</b>(<20) / <b style='color:#eee04e'>中产</b>(20~40) / <b style='color:#ff2020'>富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。":"Teilt die Bewohner in Herkunftskohorten — <b style='color:#cdd2de'>arm</b> (&lt;20) / <b style='color:#eee04e'>mittel</b> (20–40) / <b style='color:#ff2020'>reich</b> (≥40) — und verfolgt sie bis zum Tod oder jetzt. Kurven = mittleres Vermögen je Kohorte (dick) und Einzelwege (dünn); Tabelle = Aufstiege/Halten/Abstürze bisher (inkl. Verstorbener, zum Endstand). Alle halbe Sekunde aktualisiert.",
+"平均财富轨迹 ":"Mittlerer Reichtumsverlauf ",
+"■穷人":"■arm",
+"■中产":"■mittel",
+"■富人":"■reich",
+"▶ 开始追踪(按此刻分层)":"▶ Verfolgung starten (jetzt schichten)",
+"返回世界":"Zurück zur Welt",
+"🧪 对照实验:天赋重要,还是运气重要?":"🧪 Vergleichsexperiment: Talent oder Zufall?",
+"两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。":"Zwei Welten, gleiche Regeln, 300 Runden parallel — einziger Unterschied: links (gelb) wird das Talent gelost, rechts (cyan) ist es für alle gleich. Katastrophen aus, um Rauschen zu vermeiden.",
+"基尼系数 ":"Gini-Index ",
+"■抽签":"■Los",
+"■均等":"■gleich",
+"▶ 开始实验":"▶ Experiment starten",
+"把左边的大地图切到「均等世界」,亲眼看它的社会":"Schaltet die große Karte auf die gleiche Welt, um ihre Gesellschaft zu sehen",
+"👁 地图看均等世界":"👁 Karte: gleiche Welt",
+"🗺 地图切回你的世界":"🗺 Karte: zurück zu deiner Welt",
+"🗺 正在看均等世界 · 点此切回你的世界":"🗺 Gleiche Welt wird gezeigt · Klicken zum Zurück",
+"⚠=重开世界生效":"⚠ = gilt bei Neuer Welt",
+"脸色=财富:<b style='color:#7d858f'>灰</b>=赤贫→<b style='color:#a89a08'>黄</b>=温饱→<b style='color:#a35d0e'>棕橙</b>=小康→<b style='color:#e03c0c'>橙红</b>=富裕→<b style='color:#c01038'>深红</b>=巨富(⚙开「文化/部落」则改按部落上色)":"Gesicht = Reichtum: <b style='color:#7d858f'>grau</b> = bettelarm → <b style='color:#a89a08'>gelb</b> = über Wasser → <b style='color:#a35d0e'>beige</b> = komfortabel → <b style='color:#e03c0c'>orange-rot</b> = wohlhabend → <b style='color:#c01038'>purpur</b> = superreich (⚙ Kultur/Stämme färbt nach Stamm)",
+"按财富:<b style='color:#8a8f9c'>灰</b>=赤贫→<b style='color:#c9a416'>黄</b>=温饱→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>红</b>=巨富":"Nach Reichtum: <b style='color:#8a8f9c'>grau</b> = bettelarm → <b style='color:#c9a416'>gelb</b> = über Wasser → <b style='color:#d1880f'>orange</b> = komfortabel → <b style='color:#e02222'>rot</b> = superreich",
+"🟡金圈脸=你(脸色同样按财富)":"🟡 goldener Ring = du (Farbe nach Reichtum)",
+"　🟩=糖　":"　🟩 = Zucker　",
+"🟧=香料":"🟧 = Gewürz",
+"　🎯点居民标为追踪者(开局前3个,开局后可补到6)":"　🎯 Bewohner anklicken zum Verfolgen (3 vor dem Start, bis 6 danach)",
+"成长视野(阅历+教育)⚠":"Wachsende Sicht (Erfahrung + Bildung) ⚠",
+"教育价格(0=免费义务教育)":"Bildungspreis (0 = kostenlose Schulpflicht)",
+"糖/香料再生速度":"Zucker/Gewürz-Nachwachstempo",
+"灾害事件":"Katastrophen",
+"灾害频率(‰/回合)":"Katastrophenfrequenz (‰/Runde)",
+"拥挤天灾(人群过密→瘟疫歼30%+流民散10%)":"Drangpest (Überdichtung → Pest tötet 30% + 10% zerstreuen sich)",
+"交易(糖⇄香料)":"Tausch (Zucker ⇄ Gewürz)",
+"文化/部落":"Kultur / Stämme",
+"部落战争":"Stammeskrieg",
+"劫富济贫(每50回合)":"Umverteilung (alle 50 Runden)",
+"盲牌模式(天赋死后揭晓)":"Blinde Karten (Talent nach dem Tod)",
+"均等世界(无天赋抽签)⚠":"Gleiche Welt (keine Talentlosung) ⚠",
+"初始人口 ⚠":"Anfangsbevölkerung ⚠",
+"糖山之心":"Herz des Zuckerbergs",
+"糖山脚下":"Fuß des Zuckerbergs",
+"香料坡上":"Auf dem Gewürzhang",
+"荒原边缘":"Rand der Einöde",
+"含着金汤匙出生":"Mit goldenem Löffel geboren",
+"中上之姿":"Überdurchschnittliche Anlagen",
+"平凡人生":"Ein gewöhnliches Los",
+"困难模式开局":"Start im Schwermodus",
+"含着金汤匙降生":"Mit goldenem Löffel gekommen",
+"小康之家开局":"Start in gesichertem Haushalt",
+"一穷二白出身":"Mit nichts geboren",
+"散布地形":"verstreutes Terrain",
+"糖山 {a} 格 · 香料山 {b} 格":"Zucker {a} · Gewürz {b} Felder",
+"指定出身阶层:财富按档位重签,出生地与天赋仍是命":"Startklasse wählen: Vermögen neu nach Stufe; Ort und Talent bleiben gezogen",
+"手动选地":"Ort wählen",
+"取消选地":"Auswahl abbrechen",
+"糖":"Zucker",
+"香料":"Gewürz",
+"格":" Felder",
+"天":" T",
+"/天":"/Tag",
+"岁":" J.",
+"{n}岁":"{n} J.",
+"{n}天":"{n} T",
+"第{n}世":"Leben {n}",
+"步/秒":" Schritte/s",
+"饥饿(缺糖)":"verhungert (Zucker)",
+"饥饿(缺香料)":"verhungert (Gewürz)",
+"衰老":"Alter",
+"拥挤瘟疫":"Drangpest",
+"陨石":"Meteorit",
+"瘟疫":"Pest",
+"死因不明":"unbekannte Ursache",
+"缺糖":"Zucker",
+"缺香料":"Gewürz",
+"巨富":"Superreich",
+"富裕":"wohlhabend",
+"小康":"komfortabel",
+"温饱":"über Wasser",
+"赤贫":"bettelarm",
+"穷":"arm",
+"中产":"mittel",
+"富人":"reich",
+"出身{c}":"geboren {c}",
+"出身↓ 现状→":"Herkunft↓ Jetzt→",
+"人数":"Anzahl",
+"已故":"Verstorben",
+"现为穷":"jetzt arm",
+"现为中产":"jetzt mittel",
+"现为富":"jetzt reich",
+"📜 同出身者({n}人)":"📜 Gleiche Herkunft ({n})",
+"平均享年{a}岁 · 最久{b}岁 · 饿死率{p}%":"Ø gestorben mit {a} · längste {b} · verhungert {p}%",
+"但饿死率不是判决书:同乡巅峰财富到过 {m}。出身定的是难度,不是结局。":"Doch Verhungern ist kein Urteil: Ein Landsmann kam einmal auf {m}. Die Herkunft setzt die Schwierigkeit, nicht das Ende.",
+"⚠ 糖余命仅{n}天——立刻向绿色格子移动":"⚠ Zucker reicht {n} T — sofort zu grünen Feldern",
+"⚠ 香料余命仅{n}天——向橙色格子移动":"⚠ Gewürz reicht {n} T — zu orangen Feldern",
+"🎓 可读书了:花{n}财富,视野永久+1(右侧按钮)":"🎓 Schule leistbar: {n} zahlen, Sicht dauerhaft +1 (Knopf rechts)",
+"📚 发展方向:再攒 {n} 财富即可读书(视野+1,看得更远采集更易)":"📚 Nächster Schritt: noch {n} für die Schule (Sicht +1, weiter sehen, leichter ernten)",
+"⏳ 已近寿限,这一世以平稳采集为主,别冒险远行":"⏳ Lebensende naht: in diesem Leben sicher ernten, keine riskanten Märsche",
+"🤝 你缺糖而另一资源富余,靠近邻居交易可补短板":"🤝 Dir fehlt Zucker, das andere ist reichlich — tausche mit einem Nachbarn",
+"🤝 你缺香料而另一资源富余,靠近邻居交易可补短板":"🤝 Dir fehlt Gewürz, das andere ist reichlich — tausche mit einem Nachbarn",
+"均质蛮荒:分化还没开始(多跑一会儿)":"Homogene Einöde: Differenzierung hat nicht begonnen (laufen lassen)",
+"分化进行中:阶层正在自发成形":"Differenzierung läuft: Klassen bilden sich von selbst",
+"不平等已自发形成并稳定——没有设计者,格局自己长了出来":"Ungleichheit entstand und stabilisierte sich von selbst — kein Designer, das Muster wuchs allein",
+"多数人挣扎在温饱线附近:生态紧张,山装不下所有人":"Die meisten ringen am Existenzminimum: das Ökosystem ist angespannt, die Berge fassen nicht alle",
+"贫困是常态,但不是全部:山脚的穷环真实存在":"Armut ist die Norm, aber nicht alles: der arme Ring am Bergfuß ist real",
+"富足世界:承载力宽松,贫困只是暂时的落难":"Wohlstandswelt: Tragfähigkeit locker; Armut nur vorübergehendes Missgeschick",
+"样本不足:让世界再跑一会儿":"Stichprobe zu klein: Welt noch etwas laufen lassen",
+"赤贫出身者里 {p}% 爬到了小康以上——努力有效,但有天花板":"{p}% der Bettelarmgeborenen stiegen über Komfort — Mühe wirkt, doch es gibt eine Decke",
+"顶层永远是少数:金字塔是自己长出来的,没人设计过":"Die Spitze bleibt Minderheit: die Pyramide wuchs allein, niemand entwarf sie",
+"顶层偏大:这个世界正处在罕见的富裕期":"Ungewöhnlich große Spitze: diese Welt in einer seltenen Wohlstandsphase",
+"📊 流动性追踪开始(回合{t}):穷人{p}人 中产{m}人 富人{r}人":"📊 Verfolgung gestartet (Runde {t}): arm {p} · mittel {m} · reich {r}",
+"🎓 教育归因(价格{c}):翻身的穷人{n1}人中,读过书的占 {p1};跌落的富人{n2}人中,从未上学的占 {p2}。":"🎓 Bildungseffekt (Preis {c}): von {n1} aufgestiegenen Armen hatten {p1} Schule; von {n2} gefallenen Reichen waren {p2} nie.",
+"{n}人({p}%)":"{n} ({p}%)",
+"以打开追踪那一刻的财富分层为「出身」:":"Der Reichtum beim Start der Verfolgung gilt als Herkunft:",
+"出身穷人 {n} 人,至今翻身到中产以上 {x};":"Arm geboren: {n}; {x} stiegen ins Mittelfeld oder höher;",
+"出身中产 {n} 人,升富 {a},保持中产 {b},下跌 {c};":"Mittel geboren: {n}; reich {a}, geblieben {b}, gefallen {c};",
+"出身富人 {n} 人,保持富有 {a},下跌 {b};":"Reich geboren: {n}; geblieben {a}, gefallen {b};",
+"各队列已故:穷{p} 中{m} 富{r}(死时财富即终态)。":"Verstorben bisher: arm {p}, mittel {m}, reich {r} (Vermögen beim Tod = Endstand).",
+"↻ 重置追踪(按此刻重新分层)":"↻ Verfolgung zurücksetzen (jetzt neu schichten)",
+"还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。":"Noch nicht gestartet. Unten klicken, um jetzt nach Reichtum zu schichten und zu verfolgen.",
+"t0={n}回合":"t0 = Runde {n}",
+"追踪{n}回合":"{n} Runden verfolgt",
+"均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异":"Die Gleichtalent-Welt wurde UNGLEICHER — Ungleichheit kommt vor allem von Position und Glück, nicht von Talent",
+"天赋差异主导了不平等——这一局「命」比「运」更重要":"Talentunterschiede dominieren die Ungleichheit — diesmal schlug das Schicksal das Glück",
+"两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来":"Beide Welten haben fast denselben Gini — Ungleichheit wächst aus den kleinsten Unterschieden von selbst",
+"🧪 对照实验完成(300回合): ":"🧪 Experiment beendet (300 Runden): ",
+"抽签世界基尼 {a} · 均等世界基尼 {b} · 采样 {n}/30":"Gini Los-Welt {a} · Gini gleiche Welt {b} · Stichproben {n}/30",
+"设定好参数后点「开始实验」":"Parameter setzen, dann «Experiment starten»",
+"⏳ 实验 {n}/300 回合":"⏳ Experiment {n}/300 Runden",
+"▶ 再跑一次":"▶ Nochmal laufen",
+"第 {n} 世 · 出生抽签":"Leben {n} · Geburtslos",
+"📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。":"📍 Leeres Feld anklicken für den Geburtsort — rechts Live-Vorschau.<br>Der Ort ändert nur die Position; das Talent bleibt die gezogene Karte.",
+"出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。":"Die Herkunft setzt die Schwierigkeit, nicht das Ende — Wandern, Schule und Tausch sind Wege nach oben.<br>Ort nicht gefällig? Unten links neu ziehen oder wählen. 🎯 Vor dem Start bis 3 verfolgen, danach bis 6.",
+"牌面回顾:":"Kartenrückblick: ",
+"视野{n}":"Sicht {n}",
+"视野起点{a}→终点{b}":"Sicht {a}→{b}",
+"代谢{a}/{b} 寿限{c}":"Stoffwechsel {a}/{b} · Lebensdauer {c}",
+"📋 {n}世命运报告(你自己就是不平等的样本)":"📋 Schicksalsbericht über {n} Leben (du selbst bist die Stichprobe der Ungleichheit)",
+"平均寿命 {a}岁 · 最高 {b}岁":"Ø Lebensdauer {a} · längste {b}",
+"平均巅峰财富 {a} · 最高 {b}":"Ø Spitzenvermögen {a} · max {b}",
+"死因:{list}":"Todesursachen: {list}",
+"同时代社会基尼系数:{g}":"Gini der Gesellschaft deiner Zeit: {g}",
+"你亲自操盘,比AI托管多活了 {n} 回合——这就是你的本事":"Selbst gesteuert und {n} Runden länger gelebt als der KI-Autopilot — das ist dein Können",
+"比AI托管少活 {n} 回合——这次可能是你帮了倒忙":"{n} Runden kürzer als der KI-Autopilot — diesmal eher kontraproduktiv",
+"与AI托管水准相当(预期{e}回合,实际{a})":"Auf KI-Niveau (erwartet {e}, tatsächlich {a})",
+"巅峰财富{p},跻身社会前10%":"Spitzenvermögen {p} — Top-10%",
+"🏆 穷乡冠军——出生地周边{n}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)":"🏆 Lokaler Champion — unter {n} Nachbarn aus deiner Gegend übertraf niemand Ihr Spitzenvermögen (der Landesrang ist nicht das einzige Maß)",
+"同乡{n}人中巅峰财富排第{r},在贫瘠之地做到了头部":"Rang {r} von {n} nach Spitzenvermögen — Spitze im kargen Land",
+"读过书(学识{e}),视野从起点{b}长到{v}":"Zur Schule gegangen ({e}): Sicht von {b} auf {v} gewachsen",
+"享年{n},几乎用满天赋寿限":"Mit {n} gestorben, Lebenszeit fast voll ausgereizt",
+"长寿,享年{n}":"Langes Leben: gestorben mit {n}",
+"成交{n}笔,市场老手":"{n} Tauschgeschäfte — ein Marktveteran",
+"从出生地远行{n}格,横跨半个世界":"{n} Felder vom Geburtsort gereist — halbe Welt",
+"亲手采集了{n}单位粮食":"{n} Einheiten Nahrung von Hand geerntet",
+"安稳走完了命运给的这一程":"Ist stabil durch den Abschnitt gegangen, den das Los zugeteilt hat",
+"视野仅{n}格,觅食基本靠碰":"Sicht nur {n} Felder — die Nahrungssuche war Glückssache",
+"代谢{a}+{b}/天,消耗远超常人":"Stoffwechsel {a}+{b}/Tag — verbraucht weit überdurchschnittlich",
+"生在荒原,起步全靠双腿":"In der Einöde geboren — alles selbst erlaufen",
+"终败于代谢缺口:{c}":"Am Ende besiegt von der Stoffwechsellücke: {c}",
+"离场太早,还来不及积累":"Zu früh gegangen, um etwas anzusammeln",
+"天赋与环境无明显短板,输给了时间与概率":"Keine erkennbare Schwäche bei Talent oder Umfeld — verlor gegen Zeit und Wahrscheinlichkeit",
+"第 {n} 世 · 此生总结":"Leben {n} · Bilanz dieses Lebens",
+"🎴 牌面":"🎴 Karten",
+"{b}的{t}:享年{n}岁{d}。":"{t} aus {b}: gestorben mit {n}{d}.",
+",成交{n}笔":", {n} Tauschgeschäfte",
+"{b}·{t}·享年{n}岁,{c}。":"{b} · {t} · mit {n} gestorben, {c}.",
+"(这一世生在此功能上线前,没有存总结——再活一世就有了)":"(Dieses Leben entstand vor der Bilanzfunktion — lebe noch einmal!)",
+"{i}号·#{id}:活着 — {cls},财{w},{age}岁,最后出现在 ({x},{y})":"{i} · Bewohner #{id}: lebendig — {cls}, Vermögen {w}, {age} J., zuletzt bei ({x},{y})",
+"{i}号·#{id}:已死亡 — {c},享年{age}岁":"{i} · Bewohner #{id}: tot — {c}, mit {age}",
+"🎯 你标记的追踪者(共{n}个)":"🎯 Deine Verfolgten ({n} insgesamt)",
+"大旱":"Dürre",
+"丰年":"Boomjahr",
+"糖山枯萎":"Berg verdorrt",
+"劫富济贫":"Umverteilung",
+"移民潮":"Einwanderungswelle",
+"拥挤天灾":"Drangpest",
+"风平浪静,无大事":"ruhig — nichts Großes",
+"你活了 {n} 回合 · 大事:{e}<br>人口 {a}→{b} · 基尼 {c}→{d}":"Du lebtest {n} Runden · Ereignisse: {e}<br>Bevölkerung {a}→{b} · Gini {c}→{d}",
+"第 {n} 世 · 终局":"Leben {n} · Finale",
+"{b}的{t}:享年{n},巅峰财富{p}{d}。":"{t} aus {b}: gestorben mit {n}, Spitzenvermögen {p}{d}.",
+"这一世的签已经用完了。下一世的视野、代谢与坐标,重新再抽。":"Dieses Leben ist verbraucht. Sicht, Stoffwechsel und Koordinaten des nächsten Lebens werden neu gezogen.",
+"{cls}·财{w}·{age}岁·视{v}":"{cls} · Vermögen {w} · {age} J. · Sicht {v}",
+"👻 你的意识跳进了居民 #{id} 的身体——它的视野/天赋/财产现在归你":"👻 Dein Bewusstsein springt in Bewohner #{id} — dessen Sicht, Talent und Besitz sind jetzt deine",
+"👻 已附身居民 #{id}:财{w}·视野{v}·{age}岁。点格子指挥它走":"👻 Bewohner #{id} besetzt: Vermögen {w} · Sicht {v} · {age} J. Felder anklicken zum Steuern",
+"🤝 交易 ×{n},最近一笔:{m}":"🤝 Tausch ×{n}, zuletzt: {m}",
+"我的此生":"Mein Leben",
+"上帝视角中… 点居民查看,点右上「随机转世」下场抽签。":"Gottesblick… Bewohner anklicken zum Untersuchen; oben rechts «🎲 Neues Leben» für die nächste Ziehung.",
+"第 {n} 世 {x}":"Leben {n} {x}",
+"· 盲牌":" · blind",
+"糖余命":"Zucker übrig",
+"香料余命":"Gewürz übrig",
+"寿命":"Lebenszeit",
+"财富 糖{a}+香料{b}":"Vermögen: Zucker {a} + Gewürz {b}",
+"🎯亲自走位中":"🎯 eigene Steuerung",
+"AI托管·点地图接管":"KI-Autopilot · Karte anklicken zum Übernehmen",
+"处境平稳,按你的节奏走。":"Alles stabil — gehe in deinem Tempo.",
+"🎓 读书(花{n},视野+1)":"🎓 Schule ({n}, Sicht +1)",
+"退出附身":"Körper verlassen",
+"清除目标":"Ziel löschen",
+"🚶 5名新移民散落抵达荒原":"🚶 5 neue Einwanderer verstreuen sich in der Einöde",
+"🚶 一批新移民抵达边缘荒原":"🚶 Eine Welle neuer Einwanderer erreicht den Rand der Einöde",
+"⏱ 定时观察中:还剩 {n} 回合":"⏱ Zeitlauf: noch {n} Runden",
+"💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结":"💀 Dein Leben Nr.{n} endete ({c}) — der Zeitlauf läuft weiter, Bilanz am Ende",
+"⚖️ 再分配: {n} 财富从富人转向穷人":"⚖️ Umverteilung: {n} Vermögen von reich zu arm",
+"🌀 拥挤天灾!{p}%的人口挤在一起,瘟疫带走{v}人,另有{r}名流民散落四方":"🌀 Drangpest! {p}% der Bevölkerung zusammengedrängt — die Pest nimmt {v}, {r} zerstreuen sich in alle Richtungen",
+"☄️ 陨石坠落({x},{y})!方圆6格化为焦土":"☄️ Meteoriteneinschlag ({x},{y})! Umkreis von 6 Feldern zu Asche",
+"🦠 瘟疫蔓延,{n}位居民病逝":"🦠 Die Pest breitet sich aus — {n} Bewohner sterben",
+"🌶 香料山沉入地底——纯糖世界:无香料、无交易":"🌶 Gewürzberge versinken — reine Zuckerwelt: kein Gewürz, kein Tausch",
+"🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现":"🌶 Gewürzberge heben sich — ein zweites Grundnahrungsmittel wird nötig; Tausch entsteht von selbst",
+"地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应":"Terrain — Zwillingsgipfel: Original; Zufallsgipfel: jedes Mal neu gezogen; Verstreut: Flecken ohne Berge. Sofort wirksam, Bewohner passen sich vor Ort an",
+"🗺 已切换为「{t}」地形——居民原地适应新地理":"🗺 Zu «{t}»-Terrain gewechselt — Bewohner passen sich vor Ort an",
+"经典双山":"Zwillingsgipfel",
+"随机山":"Zufallsgipfel",
+"散布":"Verstreut",
+"糖山":"Zuckerberg",
+"香料山":"Gewürzberg",
+"那里已有人居住,选个空格":"Dieses Feld ist bewohnt — wähle ein freies",
+"🎯 标记追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Verfolge nun Bewohner #{id} ({n}/3, nach Start gesperrt)",
+"🎯 取消追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Verfolgung von Bewohner #{id} beendet ({n}/3, nach Start gesperrt)",
+"🎯 标记追踪居民 #{id}(当前{n}个,上限6)":"🎯 Verfolge nun Bewohner #{id} ({n} aktiv, Limit 6)",
+"🎯 取消追踪居民 #{id}(当前{n}个,上限6)":"🎯 Verfolgung von Bewohner #{id} beendet ({n} aktiv, Limit 6)",
+"👀 居民 #{id}: {cls} 财富{w} 视野{v} 代谢{a}/{b} 岁{age}":"👀 Bewohner #{id}: {cls}, Vermögen {w}, Sicht {v}, Stoffwechsel {a}/{b}, {age} J.",
+"尚未附身,先「随机转世」下场":"Noch niemand besetzt — ziehe erst ein Leben mit «🎲 Neues Leben»",
+"🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山":"🎯 Auf der Karte: cyan = arm geboren, gelb = mittel, rot = reich — Panel schließen und zusehen, wer den Berg erklimmt",
+"👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样":"👁 Dieses Sugarscape ist die gleiche Welt des Experiments — sehen Sie zu, welche Gesellschaft es wächst",
+"👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。":"👁 Demo: die Welt läuft von selbst. Grau = bettelarm → gelb → orange → orange-rot → rot = superreich; Katastrophen und Boomjahre können jederzeit treffen.",
+"👁 演示模式开启":"👁 Demomodus an",
+"👁 演示模式关闭":"👁 Demomodus aus",
+"重开世界会清空生命之书(历世记录),确定?":"Neustart der Welt löscht das Buch der Leben (alle vergangenen Leben). Sicher?",
+"🌍 新的世界诞生了,山脉与荒原重新随机":"🌍 Eine neue Welt ist geboren — Berge und Einöde neu gewürfelt",
+"📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认":"📍 Leeres Feld anklicken für den Geburtsort · Live-Vorschau rechts · bestätige mit ✓ unten links",
+"📋 先看右栏出身报告,再点左下角「▶ 开始这一生」":"📋 Lies rechts den Geburtsbericht, dann unten links «▶ Dieses Leben starten»",
+"👉 点击你旁边发亮的格子,走过去采集糖和香料":"👉 Klicke ein leuchtendes Nachbarfeld, um hinzugehen und zu ernten",
+"点格子走位 · 空格暂停 · 顶部滑杆调速度":"Felder anklicken zum Laufen · Leertaste = Pause · Tempo oben",
+"上帝视角:点居民查看 · 空格暂停":"Gottesblick: Bewohner anklicken zum Untersuchen · Leertaste = Pause",
+"🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。":"🌍 Welt geboren: zwei Zuckerberge (grün), zwei Gewürzberge (orange). Ressourcen geografisch getrennt — Tausch wird zur Notwendigkeit.",
+"提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。":"Hinweis: das ist das Sugarscape von Epstein & Axtell. Alle Bewohner überleben mit denselben simplen Regeln — Ungleichheit wächst von selbst.",
+"📚 生命之书已从存档恢复({n}世记录)":"📚 Buch der Leben aus der Sicherung wiederhergestellt ({n} Leben)",
+"世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足":"Lebende Personen. Normal: schwankt zwischen 100 und 400; unter 50 = Welt fast öde, Einwanderung hilft. Beobachten: Startschub = lockere Ökologie; Dauerabfall = zu wenig Tragfähigkeit",
+"贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端":"Vermögenskluft: 0 = alle gleich arm, 1 = eine Person besitzt alles. Normal: steigt von 0 auf 0,2–0,4 und ruht sich dann ein. Beobachten: Daueranstieg = Ungleichheit wächst von selbst (Kernbefund); nahe 0 = keine Differenzierung; über 0,5 = extrem",
+"1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡":"Wie viel Gewürz eine Zuckereinheit bringt (nur mit Gewürzbergen). Normal: pendelt um 1. Beobachten: niemand setzt diesen Preis — er entsteht aus dem Feilschen der Bewohner; Beleg für einen spontanen Markt; heftige Schwankungen = Angebots-Nachfragen-Gefälle",
+"最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)":"Anteil des Gesamtvermögens in der Hand der reichsten 10%. Normal: 30–60%. Beobachten: nahe 100% = extreme Konzentration (Berge von wenigen Familien monopolisiert); nahe 10% = fast volle Gleichheit (junge Welt)",
+"📖 阅历渐长,视野 +1(现在 {n} 格)":"📖 Erfahrung wächst — Sicht +1 (jetzt {n} Felder)",
+"🎓 你完成学业(花了 {c} 财富),视野 +1(现在 {n} 格)":"🎓 Schulabschluss ({c} gezahlt) — Sicht +1 (jetzt {n} Felder)",
+"🤝 你用 {a} 糖换得 {b} 香料(价格 {r})":"🤝 {a} Zucker für {b} Gewürz (Preis {r})",
+"点开重看这一世的总结":"Klicken, um die Bilanz dieses Lebens erneut zu sehen",
+"共{n}世 · 平均{m}岁 · 点任一行重看总结":"{n} Leben insgesamt · Ø {m} J. · Zeile anklicken für die Bilanz",
+"⬇ 你出生在这里":"⬇ Hier bist du geboren",
+"🪦 主人公长眠于此":"🪦 Der Protagonist ruht hier",
+"✨ 高光 — ":"✨ Höhepunkte — ",
+"⚠️ 局限 — ":"⚠️ Grenzen — ",
+"前10%: {p}%":"Top-10-%: {p}%",
 },
 it:{
 '回合':'Turno','人口':'Pop.','基尼':'Gini','⏸ 暂停':'⏸ Pausa','▶ 继续':'▶ Riprendi','上帝视角':'Vista di Dio','附身视角':'Vista in prima persona',
@@ -459,15 +1555,302 @@ it:{
 '⏱ 定时观察结束(第 {t} 回合)':'⏱ Corsa a tempo finita (turno {t})','⏹ 定时观察已中止':'⏹ Corsa a tempo interrotta',
 '常夏':'Estate eterna','✕ 关闭(世界继续跑)':'✕ Chiudi (il mondo continua)','✓ 明白了,开始玩':'✓ Chiaro, si gioca!',
 '基尼系数':'Gini','贫困率(赤贫+温饱)':'Tasso di povertà','穷人翻身率(出身<15 → 现≥25)':'Ascesa poveri→medi','富人占比(财富≥40)':'Quota ricchi (≥40)',
-}};
+
+'🪦 主人公长眠于此':"🪦 Il protagonista riposa qui",
+"糖域 · 人生重开":"Sugarscape · Nuova vita",
+"糖域 · 人生重开 Sugarscape":"Sugarscape · Nuova vita",
+"投胎模拟器":"Roulette della rinascita",
+"空格也可暂停":"Anche Spazio mette in pausa",
+"定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结":"Corsa a tempo: N turni di fila; il mondo continua se muori; bilancio alla fine",
+"定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止":"Corsa a tempo: N turni di fila, la morte non interrompe; pausa per annullare",
+"开局人口:重开世界时生效":"Popolazione iniziale: vale al Nuovo mondo",
+"开局人口(默认125):点「↺ 重开世界」生效":"Popolazione iniziale (predefinita 125): vale premendo «↺ Nuovo mondo»",
+"⏹ 剩":"⏹ ",
+"自动运行+大事字幕,展示给别人看":"Esecuzione automatica con sottotitoli, per dimostrare",
+"实时读数:这个实验正在发生什么":"Letture live: cosa succede in questo esperimento",
+"按当前财富分三个出身队列,追踪翻身/保持/下跌":"Divide per ricchezza in tre coorti; traccia ascese, mantenimenti, cadute",
+"同一规则跑两个世界:抽签 vs 均等":"Due mondi, stesse regole: lotteria contro uguaglianza",
+"香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效":"Monti di spezie: ON = due risorse + scambi spontanei; OFF = solo zucchero, immediato",
+"地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应":"Territorio — Gemelli: la referenza originale (due monti di zucchero e due di spezie, fissi); Casuali: posizioni riestrate a ogni cambio; Sparso: niente monti, risorse a chiazze (difficile insediarsi). Immediato, gli abitanti si adattano",
+"原著基准:固定两座糖山+两座香料山,对角分布":"Originale: due monti di zucchero + due di spezie, in diagonale",
+"立即切换为随机位置的四座山(山形不变)":"Quattro monti in posizioni casuali (forme invariate)",
+"无山体,资源逐格随机散布成碎簇(社会难定居)":"Niente monti; risorse sparse a chiazze (società difficile da insediare)",
+"切换明暗主题(浅色=纸面/深色=夜空)":"Cambia tema chiaro/scuro (chiaro = carta / scuro = cielo notturno)",
+"📖 糖域说明书:来由 · 玩法 · 怎么看数字":"📖 Manuale Sugarscape: origine · gioco · leggere i numeri",
+"✕ 关闭":"✕ Chiudi",
+"📈 实验观察:这个世界正在发生什么":"📈 Osservazione: cosa succede in questo mondo",
+"观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。":"Cosa osservare: come le classi nascono da sole in un mondo senza progettista — e quanto contano origine, impegno e regole. Aggiornato ogni mezzo secondo.",
+"📊 社会流动性:出身决定命运吗?":"📊 Mobilità sociale: la nascita decide il destino?",
+"实时追踪中,世界继续跑":"tracciamento live, il mondo continua",
+"按<b style='color:#cdd2de'>穷</b>(<20) / <b style='color:#eee04e'>中产</b>(20~40) / <b style='color:#ff2020'>富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。":"Divide gli abitanti in coorti — <b style='color:#cdd2de'>poveri</b> (&lt;20) / <b style='color:#eee04e'>medi</b> (20–40) / <b style='color:#ff2020'>ricchi</b> (≥40) — e li segue fino alla morte o ad ora. Curve = ricchezza media per coorte (spessa) e percorsi individuali (sottili); tabella = ascese/mantenimenti/cadute finora (defunti compresi, alla ricchezza finale). Aggiornato ogni mezzo secondo.",
+"平均财富轨迹 ":"Percorsi medi di ricchezza ",
+"■穷人":"■poveri",
+"■中产":"■medi",
+"■富人":"■ricchi",
+"▶ 开始追踪(按此刻分层)":"▶ Avvia tracciamento (stratifica ora)",
+"返回世界":"Torna al mondo",
+"🧪 对照实验:天赋重要,还是运气重要?":"🧪 Esperimento: talento o fortuna?",
+"两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。":"Due mondi, stesse regole, 300 turni in parallelo — unica differenza: a sinistra (giallo) il talento è sorteggiato, a destra (ciano) identico per tutti. Disastri spenti per togliere rumore.",
+"基尼系数 ":"Indice di Gini ",
+"■抽签":"■lotteria",
+"■均等":"■uguale",
+"▶ 开始实验":"▶ Avvia esperimento",
+"把左边的大地图切到「均等世界」,亲眼看它的社会":"Passa la grande mappa al mondo uguale e guarda la sua società",
+"👁 地图看均等世界":"👁 Mappa: mondo uguale",
+"🗺 地图切回你的世界":"🗺 Mappa: torna al tuo mondo",
+"🗺 正在看均等世界 · 点此切回你的世界":"🗺 Mostro il mondo uguale · clicca per tornare",
+"⚠=重开世界生效":"⚠ = vale al Nuovo mondo",
+"脸色=财富:<b style='color:#7d858f'>灰</b>=赤贫→<b style='color:#a89a08'>黄</b>=温饱→<b style='color:#a35d0e'>棕橙</b>=小康→<b style='color:#e03c0c'>橙红</b>=富裕→<b style='color:#c01038'>深红</b>=巨富(⚙开「文化/部落」则改按部落上色)":"Faccia = ricchezza: <b style='color:#7d858f'>grigio</b> = indigente → <b style='color:#a89a08'>giallo</b> = sopravvivenza → <b style='color:#a35d0e'>beige</b> = comodo → <b style='color:#e03c0c'>arancio-rosso</b> = abbiente → <b style='color:#c01038'>porpora</b> = super ricco (⚙ Cultura/tribù ricolora per tribù)",
+"按财富:<b style='color:#8a8f9c'>灰</b>=赤贫→<b style='color:#c9a416'>黄</b>=温饱→<b style='color:#d1880f'>橙</b>=小康→<b style='color:#e02222'>红</b>=巨富":"Per ricchezza: <b style='color:#8a8f9c'>grigio</b> = indigente → <b style='color:#c9a416'>giallo</b> = sopravvivenza → <b style='color:#d1880f'>arancione</b> = comodo → <b style='color:#e02222'>rosso</b> = super ricco",
+"🟡金圈脸=你(脸色同样按财富)":"🟡 anello dorato = tu (tinta secondo ricchezza)",
+"　🟩=糖　":"　🟩 = zucchero　",
+"🟧=香料":"🟧 = spezie",
+"　🎯点居民标为追踪者(开局前3个,开局后可补到6)":"　🎯 clicca un abitante per seguirlo (3 prima dell avvio, fino a 6 dopo)",
+"成长视野(阅历+教育)⚠":"Visione crescente (esperienza + studio) ⚠",
+"教育价格(0=免费义务教育)":"Costo dello studio (0 = scuola gratuita)",
+"糖/香料再生速度":"Ricrescita zucchero/spezie",
+"灾害事件":"Disastri",
+"灾害频率(‰/回合)":"Frequenza disastri (‰/turno)",
+"拥挤天灾(人群过密→瘟疫歼30%+流民散10%)":"Peste da folla (affollamento → uccide 30% + 10% disperditi)",
+"交易(糖⇄香料)":"Scambio (zucchero ⇄ spezie)",
+"文化/部落":"Cultura / tribù",
+"部落战争":"Guerra tribale",
+"劫富济贫(每50回合)":"Ridistribuzione (ogni 50 turni)",
+"盲牌模式(天赋死后揭晓)":"Carte coperte (talento rivelato alla morte)",
+"均等世界(无天赋抽签)⚠":"Mondo uguale (niente lotteria di talento) ⚠",
+"初始人口 ⚠":"Popolazione iniziale ⚠",
+"糖山之心":"Cuore del monte di zucchero",
+"糖山脚下":"Piede del monte di zucchero",
+"香料坡上":"Sul pendio delle spezie",
+"荒原边缘":"Orlo della brughiera",
+"含着金汤匙出生":"Nato col cucchiaio d oro",
+"中上之姿":"Qualità sopra la media",
+"平凡人生":"Una mano qualunque",
+"困难模式开局":"Partenza in modalità difficile",
+"含着金汤匙降生":"Disceso col cucchiaio d oro",
+"小康之家开局":"Partenza da una famiglia agiata",
+"一穷二白出身":"Nato senza nulla",
+"散布地形":"territorio sparso",
+"糖山 {a} 格 · 香料山 {b} 格":"zucchero a {a} · spezie a {b}",
+"指定出身阶层:财富按档位重签,出生地与天赋仍是命":"Scegli la classe di partenza: ricchezza riestrata per livello; luogo e talento restano",
+"手动选地":"Scegli il posto",
+"取消选地":"Annulla scelta",
+"糖":"zucchero",
+"香料":"spezie",
+"格":" caselle",
+"天":" g",
+"/天":"/giorno",
+"岁":" anni",
+"{n}岁":"{n} anni",
+"{n}天":"{n} g",
+"第{n}世":"Vita {n}",
+"步/秒":" passi/s",
+"饥饿(缺糖)":"fame (zucchero)",
+"饥饿(缺香料)":"fame (spezie)",
+"衰老":"vecchiaia",
+"拥挤瘟疫":"peste da folla",
+"陨石":"meteorite",
+"瘟疫":"peste",
+"死因不明":"causa ignota",
+"缺糖":"zucchero",
+"缺香料":"spezie",
+"巨富":"super ricco",
+"富裕":"abbiente",
+"小康":"comodo",
+"温饱":"sopravvivenza",
+"赤贫":"indigente",
+"穷":"povero",
+"中产":"medio",
+"富人":"rico",
+"出身{c}":"nato {c}",
+"出身↓ 现状→":"Origine↓ Ora→",
+"人数":"Numero",
+"已故":"Deceduti",
+"现为穷":"ora poveri",
+"现为中产":"ora medi",
+"现为富":"ora ricchi",
+"📜 同出身者({n}人)":"📜 Stessa origine ({n})",
+"平均享年{a}岁 · 最久{b}岁 · 饿死率{p}%":"morti a {a} in media · max {b} · fame {p}%",
+"但饿死率不是判决书:同乡巅峰财富到过 {m}。出身定的是难度,不是结局。":"Ma il tasso di fame non è un verdetto: un connazionale è arrivato a {m}. La nascita stabilisce la difficoltà, non il finale.",
+"⚠ 糖余命仅{n}天——立刻向绿色格子移动":"⚠ Zucchero per {n} g — vai subito sulle caselle verdi",
+"⚠ 香料余命仅{n}天——向橙色格子移动":"⚠ Spezie per {n} g — vai sulle caselle arancioni",
+"🎓 可读书了:花{n}财富,视野永久+1(右侧按钮)":"🎓 Scuola accessibile: paga {n}, vista +1 permanente (pulsante a destra)",
+"📚 发展方向:再攒 {n} 财富即可读书(视野+1,看得更远采集更易)":"📚 Prossimo passo: ancora {n} per la scuola (vista +1, vedi più lontano, raccolti più facilmente)",
+"⏳ 已近寿限,这一世以平稳采集为主,别冒险远行":"⏳ Vicini al limite di vita: raccogli con calma, evita spedizioni rischiose",
+"🤝 你缺糖而另一资源富余,靠近邻居交易可补短板":"🤝 Ti manca zucchero e l altra risorsa avanza — scambia con un vicino",
+"🤝 你缺香料而另一资源富余,靠近邻居交易可补短板":"🤝 Ti mancano spezie e l altra risorsa avanza — scambia con un vicino",
+"均质蛮荒:分化还没开始(多跑一会儿)":"Selvaggia omogenea: la divergenza non è iniziata (fai andare ancora)",
+"分化进行中:阶层正在自发成形":"Divergenza in corso: le classi si formano da sole",
+"不平等已自发形成并稳定——没有设计者,格局自己长了出来":"La disuguaglianza si è formata e stabilizzata da sola — nessun progettista, il quadro è cresciuto da sé",
+"多数人挣扎在温饱线附近:生态紧张,山装不下所有人":"Molti faticano vicino alla sussistenza: ecologia tesa, i monti non contengono tutti",
+"贫困是常态,但不是全部:山脚的穷环真实存在":"La povertà è la norma, ma non tutto: l anello povero ai piedi dei monti è reale",
+"富足世界:承载力宽松,贫困只是暂时的落难":"Mondo abbiente: capacità ampia, la povertà è solo una disgrazia temporanea",
+"样本不足:让世界再跑一会儿":"Campione insufficiente: lascia girare ancora il mondo",
+"赤贫出身者里 {p}% 爬到了小康以上——努力有效,但有天花板":"Il {p}% dei nati indigenti è salito oltre il benessere — l impegno paga, ma c è un soffitto",
+"顶层永远是少数:金字塔是自己长出来的,没人设计过":"I vertici sono sempre una minoranza: la piramide è cresciuta da sola, nessuno l ha progettata",
+"顶层偏大:这个世界正处在罕见的富裕期":"Vertici insolitamente larghi: questo mondo è in una rara fase di abbondanza",
+"📊 流动性追踪开始(回合{t}):穷人{p}人 中产{m}人 富人{r}人":"📊 Tracciamento avviato (turno {t}): poveri {p} · medi {m} · ricchi {r}",
+"🎓 教育归因(价格{c}):翻身的穷人{n1}人中,读过书的占 {p1};跌落的富人{n2}人中,从未上学的占 {p2}。":"🎓 Effetto scuola (prezzo {c}): su {n1} poveri saliti, {p1} scolarizzati; su {n2} ricchi caduti, {p2} mai.",
+"{n}人({p}%)":"{n} ({p}%)",
+"以打开追踪那一刻的财富分层为「出身」:":"La ricchezza all avvio del tracciamento vale come origine:",
+"出身穷人 {n} 人,至今翻身到中产以上 {x};":"Nati poveri: {n}; {x} saliti oltre il medio;",
+"出身中产 {n} 人,升富 {a},保持中产 {b},下跌 {c};":"Nati medi: {n}; diventati ricchi {a}, rimasti {b}, caduti {c};",
+"出身富人 {n} 人,保持富有 {a},下跌 {b};":"Nati ricchi: {n}; rimasti {a}, caduti {b};",
+"各队列已故:穷{p} 中{m} 富{r}(死时财富即终态)。":"Deceduti finora: poveri {p}, medi {m}, ricchi {r} (ricchezza finale).",
+"↻ 重置追踪(按此刻重新分层)":"↻ Reset tracciamento (ristratifica ora)",
+"还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。":"Non ancora avviato. Premi il pulsante qui sotto per stratificare ora e tracciare.",
+"t0={n}回合":"t0 = turno {n}",
+"追踪{n}回合":"tracciato per {n} turni",
+"均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异":"Il mondo a talenti uguali è risultato PIÙ disuguale — la disuguaglianza viene da posizione e fortuna, non dal talento",
+"天赋差异主导了不平等——这一局「命」比「运」更重要":"Le differenze di talento dominano — questa volta il destino conta più della fortuna",
+"两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来":"Gini quasi identici — la disuguaglianza nasce spontanea dalle differenze minime",
+"🧪 对照实验完成(300回合): ":"🧪 Esperimento completato (300 turni): ",
+"抽签世界基尼 {a} · 均等世界基尼 {b} · 采样 {n}/30":"Gini mondo lotteria {a} · Gini mondo uguale {b} · campioni {n}/30",
+"设定好参数后点「开始实验」":"Imposta i parametri e premi «Avvia esperimento»",
+"⏳ 实验 {n}/300 回合":"⏳ Esperimento {n}/300 turni",
+"▶ 再跑一次":"▶ Riesegui",
+"第 {n} 世 · 出生抽签":"Vita {n} · Lotteria di nascita",
+"📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。":"📍 Clicca una casella vuota per il luogo di nascita — anteprima live a destra.<br>Scegliere il posto cambia solo la posizione; il talento resta la carta pescata.",
+"出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。":"La nascita stabilisce la difficoltà, non il finale — migrare, studiare, scambiare sono vie di ascesa.<br>Il posto non piace? Ripésca o scelta in basso a sinistra. 🎯 Segna fino a 3 abitanti prima dell avvio, 6 dopo.",
+"牌面回顾:":"Riepilogo carte: ",
+"视野{n}":"vista {n}",
+"视野起点{a}→终点{b}":"vista {a}→{b}",
+"代谢{a}/{b} 寿限{c}":"metabolismo {a}/{b} · longevità {c}",
+"📋 {n}世命运报告(你自己就是不平等的样本)":"📋 Rapporto di destino su {n} vite (tu stesso sei il campione della disuguaglianza)",
+"平均寿命 {a}岁 · 最高 {b}岁":"Vita media {a} · più lunga {b}",
+"平均巅峰财富 {a} · 最高 {b}":"Picco medio di ricchezza {a} · max {b}",
+"死因:{list}":"Cause: {list}",
+"同时代社会基尼系数:{g}":"Gini della società della tua epoca: {g}",
+"你亲自操盘,比AI托管多活了 {n} 回合——这就是你的本事":"Hai pilotato tu e vissuto {n} turni più dell IA — questo è il tuo merito",
+"比AI托管少活 {n} 回合——这次可能是你帮了倒忙":"{n} turni in meno dell IA — stavolta forse hai peggiorato le cose",
+"与AI托管水准相当(预期{e}回合,实际{a})":"Al pari dell IA (previsto {e}, reale {a})",
+"巅峰财富{p},跻身社会前10%":"Picco di ricchezza {p} — nel top 10%",
+"🏆 穷乡冠军——出生地周边{n}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)":"🏆 Campione locale — tra i {n} connazionali attorno al tuo luogo natale, nessuno ha guadagnato più di te (la classifica nazionale non è l unica misura)",
+"同乡{n}人中巅峰财富排第{r},在贫瘠之地做到了头部":"{r}° su {n} per picco di ricchezza — vertice in terra povera",
+"读过书(学识{e}),视野从起点{b}长到{v}":"Ha studiato ({e}): vista cresciuta da {b} a {v}",
+"享年{n},几乎用满天赋寿限":"Morto a {n}, longevità quasi esaurita",
+"长寿,享年{n}":"Lunga vita: morto a {n}",
+"成交{n}笔,市场老手":"{n} scambi conclusi — un veterano del mercato",
+"从出生地远行{n}格,横跨半个世界":"Viaggiato per {n} caselle dalla nascita — mezzo mondo",
+"亲手采集了{n}单位粮食":"Raccolto {n} unità di cibo con le proprie mani",
+"安稳走完了命运给的这一程":"Ha percorso con serenità il tratto che il destino assegnava",
+"视野仅{n}格,觅食基本靠碰":"Vista solo {n} caselle — cercare cibo era questione di fortuna",
+"代谢{a}+{b}/天,消耗远超常人":"Metabolismo {a}+{b}/giorno — consuma più della media",
+"生在荒原,起步全靠双腿":"Nato nella brughiera — tutto a piedi",
+"终败于代谢缺口:{c}":"Alla fine, sconfitto dal deficit metabolico: {c}",
+"离场太早,还来不及积累":"Uscito troppo presto per accumulare qualcosa",
+"天赋与环境无明显短板,输给了时间与概率":"Nessun punto debole di talento o ambiente — battuto dal tempo e dalla probabilità",
+"第 {n} 世 · 此生总结":"Vita {n} · Bilancio di questa vita",
+"🎴 牌面":"🎴 Carte",
+"{b}的{t}:享年{n}岁{d}。":"{t} di {b}: morto a {n}{d}.",
+",成交{n}笔":", {n} scambi",
+"{b}·{t}·享年{n}岁,{c}。":"{b} · {t} · morto a {n}, {c}.",
+"(这一世生在此功能上线前,没有存总结——再活一世就有了)":"(questa vita è anteriore al bilancio automatico — vivine un altra per averlo)",
+"{i}号·#{id}:活着 — {cls},财{w},{age}岁,最后出现在 ({x},{y})":"{i} · abitante #{id}: vivo — {cls}, ricchezza {w}, {age} anni, visto l ultima volta a ({x},{y})",
+"{i}号·#{id}:已死亡 — {c},享年{age}岁":"{i} · abitante #{id}: morto — {c}, a {age} anni",
+"🎯 你标记的追踪者(共{n}个)":"🎯 I tuoi seguiti ({n} in totale)",
+"大旱":"Siccità",
+"丰年":"Annata prospera",
+"糖山枯萎":"Monte appassito",
+"劫富济贫":"Ridistribuzione",
+"移民潮":"Onda di migrazione",
+"拥挤天灾":"Peste da folla",
+"风平浪静,无大事":"calma — niente di grave",
+"你活了 {n} 回合 · 大事:{e}<br>人口 {a}→{b} · 基尼 {c}→{d}":"Hai vissuto {n} turni · eventi: {e}<br>Popolazione {a}→{b} · Gini {c}→{d}",
+"第 {n} 世 · 终局":"Vita {n} · Finale",
+"{b}的{t}:享年{n},巅峰财富{p}{d}。":"{t} di {b}: morto a {n}, picco di ricchezza {p}{d}.",
+"这一世的签已经用完了。下一世的视野、代谢与坐标,重新再抽。":"Questa vita è esaurita. Vista, metabolismo e coordinate della prossima vita verranno riestratti.",
+"{cls}·财{w}·{age}岁·视{v}":"{cls} · ricchezza {w} · {age} anni · vista {v}",
+"👻 你的意识跳进了居民 #{id} 的身体——它的视野/天赋/财产现在归你":"👻 La tua mente salta nell abitante #{id} — la sua vista, il talento e i beni ora sono tuoi",
+"👻 已附身居民 #{id}:财{w}·视野{v}·{age}岁。点格子指挥它走":"👻 In corpo nell abitante #{id}: ricchezza {w} · vista {v} · {age} anni. Clicca le caselle per guidarlo",
+"🤝 交易 ×{n},最近一笔:{m}":"🤝 Scambi ×{n}, ultimo: {m}",
+"我的此生":"La mia vita",
+"上帝视角中… 点居民查看,点右上「随机转世」下场抽签。":"Vista Dio… clicca un abitante per esaminarlo; «🎲 Nuova vita» in alto a destra per ritirare.",
+"第 {n} 世 {x}":"Vita {n} {x}",
+"· 盲牌":" · alla cieca",
+"糖余命":"Zucchero residuo",
+"香料余命":"Spezie residue",
+"寿命":"Durata di vita",
+"财富 糖{a}+香料{b}":"Ricchezza: zucchero {a} + spezie {b}",
+"🎯亲自走位中":"🎯 guidi di persona",
+"AI托管·点地图接管":"IA in automatico · clicca la mappa per prendere il controllo",
+"处境平稳,按你的节奏走。":"Tutto stabile — procedi col tuo ritmo.",
+"🎓 读书(花{n},视野+1)":"🎓 Scuola ({n}, vista +1)",
+"退出附身":"Lascia il corpo",
+"清除目标":"Cancella obiettivo",
+"🚶 5名新移民散落抵达荒原":"🚶 5 nuovi immigrati si disperdono nella brughiera",
+"🚶 一批新移民抵达边缘荒原":"🚶 Un gruppo di nuovi immigrati raggiunge la frontiera deserta",
+"⏱ 定时观察中:还剩 {n} 回合":"⏱ Corsa a tempo: {n} turni rimasti",
+"💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结":"💀 La tua vita nº{n} è finita ({c}) — la corsa continua, bilancio alla fine",
+"⚖️ 再分配: {n} 财富从富人转向穷人":"⚖️ Ridistribuzione: {n} di ricchezza dai ricchi ai poveri",
+"🌀 拥挤天灾!{p}%的人口挤在一起,瘟疫带走{v}人,另有{r}名流民散落四方":"🌀 Peste da folla! Il {p}% della popolazione ammucchiato — la peste porta via {v}, {r} si disperdono",
+"☄️ 陨石坠落({x},{y})!方圆6格化为焦土":"☄️ Meteorite a ({x},{y})! Raggio di 6 caselle ridotte in cenere",
+"🦠 瘟疫蔓延,{n}位居民病逝":"🦠 La peste si diffonde — {n} abitanti muoiono di malattia",
+"🌶 香料山沉入地底——纯糖世界:无香料、无交易":"🌶 I monti di spezie affondano — mondo di solo zucchero: niente spezie, niente scambi",
+"🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现":"🌶 I monti di spezie si innalzano — serve un secondo alimento; gli scambi nasceranno da soli",
+"地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应":"Territorio — Gemelli: riferimento; Casuali: riestratti a ogni cambio; Sparso: chiazze senza monti. Immediato, gli abitanti si adattano sul posto",
+"🗺 已切换为「{t}」地形——居民原地适应新地理":"🗺 Passato al territorio «{t}» — gli abitanti si adattano sul posto",
+"经典双山":"Gemelli",
+"随机山":"Casuali",
+"散布":"Sparso",
+"糖山":"Monte di zucchero",
+"香料山":"Monte di spezie",
+"那里已有人居住,选个空格":"Quella casella è abitata — scegline una vuota",
+"🎯 标记追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Ora segui labitante #{id} ({n}/3, bloccato dopo l avvio)",
+"🎯 取消追踪居民 #{id}({n}/3,开局后锁定)":"🎯 Non segui più labitante #{id} ({n}/3, bloccato dopo l avvio)",
+"🎯 标记追踪居民 #{id}(当前{n}个,上限6)":"🎯 Ora segui labitante #{id} ({n} attivi, max 6)",
+"🎯 取消追踪居民 #{id}(当前{n}个,上限6)":"🎯 Non segui più labitante #{id} ({n} attivi, max 6)",
+"👀 居民 #{id}: {cls} 财富{w} 视野{v} 代谢{a}/{b} 岁{age}":"👀 Abitante #{id}: {cls}, ricchezza {w}, vista {v}, metabolismo {a}/{b}, {age} anni",
+"尚未附身,先「随机转世」下场":"Nessuna possessione — pesca prima una vita con «🎲 Nuova vita»",
+"🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山":"🎯 Sulla mappa: anello ciano = nati poveri, giallo = medi, rosso = ricchi — chiudi il pannello e guarda chi sale sulla montagna",
+"👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样":"👁 Questo sugarscape è il mondo uguale dellesperimento — guarda che società fa crescere",
+"👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。":"👁 Demo: il mondo gira da sé. Grigio = indigente → giallo → arancione → arancio-rosso → rosso = super ricco; disastri e annate prosperose possono colpire in ogni momento.",
+"👁 演示模式开启":"👁 Modalità demo attiva",
+"👁 演示模式关闭":"👁 Modalità demo spenta",
+"重开世界会清空生命之书(历世记录),确定?":"Riavviare il mondo cancella il Libro delle vite (tutte le vite passate). Sicuro?",
+"🌍 新的世界诞生了,山脉与荒原重新随机":"🌍 È nato un nuovo mondo — monti e brughiere riestratti",
+"📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认":"📍 Clicca una casella vuota per il luogo di nascita · anteprima live a destra · conferma con ✓ in basso",
+"📋 先看右栏出身报告,再点左下角「▶ 开始这一生」":"📋 Leggi il rapporto di nascita a destra, poi «▶ Inizia questa vita» in basso",
+"👉 点击你旁边发亮的格子,走过去采集糖和香料":"👉 Clicca una casella luminosa accanto per andarci e raccogliere",
+"点格子走位 · 空格暂停 · 顶部滑杆调速度":"Clicca le caselle per camminare · Spazio = pausa · velocità in alto",
+"上帝视角:点居民查看 · 空格暂停":"Vista Dio: clicca un abitante · Spazio = pausa",
+"🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。":"🌍 Mondo nato: due monti di zucchero (verde), due di spezie (arancione). Risorse separate geograficamente — lo scambio diventa necessario.",
+"提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。":"Suggerimento: questo è il sugarscape di Epstein & Axtell. Tutti gli abitanti sopravvivono con le stesse regole semplici — la disuguaglianza cresce da sola.",
+"📚 生命之书已从存档恢复({n}世记录)":"📚 Libro delle vite ripristinato dal salvataggio ({n} vite)",
+"世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足":"Persone vive. Normale: oscilla tra 100 e 400; sotto 50 = mondo quasi deserto, immigrati di soccorso. Da vedere: picco iniziale = ecologia lasca; discesa continua = capacità insufficiente",
+"贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端":"Divario di ricchezza: 0 = tutti ugualmente poveri, 1 = una persona possiede tutto. Normale: sale da 0 a 0,2–0,4 poi si assesta. Da vedere: curva in continua salita = disuguaglianza che cresce da sola (risultato chiave); vicino a 0 = nessuna divergenza; sopra 0,5 = estremo",
+"1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡":"Quante spezie compra un unità di zucchero (solo coi monti di spezie). Normale: oscilla attorno a 1. Da vedere: nessuno fissa il prezzo — nasce dalle contrattazioni degli abitanti; prova di un mercato spontaneo; forti oscillazioni = squilibrio domanda-offerta",
+"最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)":"Quota della ricchezza totale in mano al 10% più ricco. Normale: 30–60%. Da vedere: vicino a 100% = concentrazione estrema (monti monopolizzati da poche famiglie); vicino a 10% = uguaglianza quasi perfetta (mondo giovane)",
+"📖 阅历渐长,视野 +1(现在 {n} 格)":"📖 Lexperience cresce — vista +1 (ora {n} caselle)",
+"🎓 你完成学业(花了 {c} 财富),视野 +1(现在 {n} 格)":"🎓 Studi completati ({c} pagati) — vista +1 (ora {n} caselle)",
+"🤝 你用 {a} 糖换得 {b} 香料(价格 {r})":"🤝 {a} zucchero per {b} spezie (prezzo {r})",
+"点开重看这一世的总结":"Clicca per rivedere il bilancio di questa vita",
+"共{n}世 · 平均{m}岁 · 点任一行重看总结":"{n} vite in totale · media {m} anni · clicca una riga per rivedere il bilancio",
+"⬇ 你出生在这里":"⬇ Sei nato qui",
+"🪦 主人公长眠于此":"🪦 Il protagonista riposa qui",
+"✨ 高光 — ":"✨ Momenti top — ",
+"⚠️ 局限 — ":"⚠️ Limiti — ",
+
+"前10%: {p}%":"Top 10%: {p}%",}};
 function tr(s){return (LANG!=='zh'&&I18N[LANG]&&I18N[LANG][s])||s;}
 function tf(s,vals){let r=tr(s);for(const k in vals)r=r.split('{'+k+'}').join(vals[k]);return r;}
 function applyLang(){
   document.documentElement.lang=LANG;
+  document.title=tr('糖域 · 人生重开 Sugarscape');
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=tr(el.dataset.i18n);});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{el.innerHTML=tr(el.dataset.i18nHtml);});
   document.querySelectorAll('[data-i18n-title]').forEach(el=>{el.title=tr(el.dataset.i18nTitle);});
   if(document.getElementById('manualOverlay').style.display==='flex')openManual();
-  updateHeader(); updateMeCard(); renderLivesBook(); renderGuideBody();
+  buildParams();
+  const sb=document.getElementById('spiceBtn'); if(sb)sb.textContent=tr(P.spice?'🌶 香料山：开':'🌶 香料山：关');
+  const tb=document.getElementById('btnTheme'); if(tb)tb.textContent=document.body.classList.contains('light')?tr('☀️ 纸面色'):tr('🌙 夜空色');
+  if(typeof syncTerrainSel==='function')syncTerrainSel();
+  if(world&&typeof updateRunBtn==='function')updateRunBtn();
+  updateHeader(); updateMeCard(); renderLivesBook(); renderGuideBody(); updateHint();
+  if(player&&player.phase==='born'&&player.agent)showBirthCard(player.agent);
+  if(player&&player.phase==='dead'&&player.lastDead)showDeathCard(player.lastDead);   // 死亡卡也跟随语言
+  if(document.getElementById('expOverlay').style.display==='flex')renderExpOverlay();
+  if(document.getElementById('cohOverlay').style.display==='flex')renderCohort();
 }
 function setLang(l){LANG=l;try{localStorage.setItem('sugarscape-lang',l);}catch(e){}applyLang();}
 (function initLang(){
@@ -602,7 +1985,7 @@ function spawnAgent(px,py,ptag){
 function gainXp(a){                            // 每25回合阅历+1,封顶+2
   if(!P.grow||a.xp>=2||a.age===0||a.age%25!==0)return;
   a.xp++; a.vision=a.bv+a.edu+a.xp;
-  if(a.player)log(`📖 阅历渐长,视野 +1(现在 ${a.vision} 格)`,'me');
+  if(a.player)log(tf('📖 阅历渐长,视野 +1(现在 {n} 格)',{n:a.vision}),'me');
 }
 function tryEducate(a){                        // 财富富余(50+价格)才读书,买1学识=视野+1,封顶+3
   if(!P.grow||a.edu>=3)return false;
@@ -611,7 +1994,7 @@ function tryEducate(a){                        // 财富富余(50+价格)才读�
   let pay=P.eduCost;
   const f=Math.min(a.sugar,pay); a.sugar-=f; pay-=f; a.spice-=pay;
   a.edu++; a.vision=a.bv+a.edu+a.xp;
-  if(a.player)log(`🎓 你完成学业(花了 ${P.eduCost} 财富),视野 +1(现在 ${a.vision} 格)`,'me');
+  if(a.player)log(tf('🎓 你完成学业(花了 {c} 财富),视野 +1(现在 {n} 格)',{c:P.eduCost,n:a.vision}),'me');
   return true;
 }
 
@@ -713,7 +2096,7 @@ function tick(){
       const t=tryTrade(a,b);
       if(t){if(a.player)a.trades++; if(b.player)b.trades++;
         if(a.player||b.player)
-          log(`🤝 你用 ${t.dS.toFixed(1)} 糖换得 ${t.dP.toFixed(1)} 香料(价格 ${t.r.toFixed(2)})`,'me');}
+          log(tf('🤝 你用 {a} 糖换得 {b} 香料(价格 {r})',{a:t.dS.toFixed(1),b:t.dP.toFixed(1),r:t.r.toFixed(2)}),'me');}
     }
     if(P.culture&&Math.random()<0.1){       // 原著Rule K: 邻居文化传染
       const nb=[[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>{const x=a.x+dx,y=a.y+dy;
@@ -744,18 +2127,18 @@ function tick(){
   if(world.tick%10===0)reproduce();          // 生育继承:阶层从这里"长"出来
   if(world.tick%100===0&&aliveCount()<P.maxPop){   // 移民常态化:底层持续输血
     for(let k=0;k<5&&aliveCount()<P.maxPop;k++)spawnAgent();
-    log('🚶 5名新移民散落抵达荒原','ev-good');
+    log(tr('🚶 5名新移民散落抵达荒原'),'ev-good');
   }
   if(world.tick%10===0){recordStats();recordCohort();}
   if(world.tick%10===0&&aliveCount()<50){    // ponytail: 人口崩塌托底,不模拟真正的灭绝
     let n=Math.min(20,50-aliveCount());
     for(let k=0;k<n;k++)spawnAgent();
-    log('🚶 一批新移民抵达边缘荒原','ev-good');
+    log(tr('🚶 一批新移民抵达边缘荒原'),'ev-good');
   }
   world.agents=world.agents.filter(a=>a.alive);
   if(world.runUntil>world.tick){
     if(world.tick%5===0)updateRunBtn();                     // 按钮上实时显示剩余回合
-    if(world.tick%25===0)caption(`⏱ 定时观察中:还剩 ${world.runUntil-world.tick} 回合`);
+    if(world.tick%25===0)caption(tf('⏱ 定时观察中:还剩 {n} 回合',{n:world.runUntil-world.tick}));
   }
   // 追踪标记不剔除:死亡者保留在名单里,终局总结要报告它的结局(绘制时只画活着的)
   if(selected&&!selected.alive){selected=null;trace=[];updateSelBar();}   // 研究对象死了,轨迹收尾
@@ -776,19 +2159,19 @@ function die(a,cause){
     player.lastDead=a;
     if(world.runUntil>world.tick&&!demo){      // 定时观察中:先不弹总结卡,世界继续跑(演示模式不挂起,靠死亡卡4秒推进循环)
       player.pendingCard=true;
-      log(`💀 你的第${player.life}世结束了(${cause})——定时观察继续,跑完再总结`,'ev-bad');
+      log(tf('💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结',{n:player.life,c:tr(cause)}),'ev-bad');
     }else showDeathCard(a);}
 }
 function renderLivesBook(){                  // 生命之书:逐世一行账
   const el=document.getElementById('livesBook');
   const L=player.lives;
-  if(!L.length){el.textContent='还未活过任何一世。';return;}
+  if(!L.length){el.textContent=tr('还未活过任何一世。');return;}
   el.innerHTML=L.map((l,i)=>{
     const cls=l.age>=60?'var(--good)':l.age<20?'var(--bad)':'var(--tx)';
-    return `<div style="border-bottom:1px dashed var(--line);padding:2px 0;cursor:pointer" title="点开重看这一世的总结" onclick="showLifeSummary(${i})">
-      <b style="color:var(--tx)">第${i+1}世</b> ${l.born}·${l.talent} · <b style="color:${cls}">${l.age}岁</b> ${l.cause}${l.trades?` · 🤝${l.trades}`:''}</div>`;
+    return `<div style="border-bottom:1px dashed var(--line);padding:2px 0;cursor:pointer" title="${tr('点开重看这一世的总结')}" onclick="showLifeSummary(${i})">
+      <b style="color:var(--tx)">${tf('第{n}世',{n:i+1})}</b> ${tr(l.born)}·${tr(l.talent)} · <b style="color:${cls}">${tf('{n}岁',{n:l.age})}</b> ${tr(l.cause)}${l.trades?` · 🤝${l.trades}`:''}</div>`;
   }).join('')+
-  `<div style="margin-top:4px;color:var(--cyan)">共${L.length}世 · 平均${(L.reduce((s,l)=>s+l.age,0)/L.length).toFixed(0)}岁 · 点任一行重看总结</div>`;
+  `<div style="margin-top:4px;color:var(--cyan)">${tf('共{n}世 · 平均{m}岁 · 点任一行重看总结',{n:L.length,m:(L.reduce((s,l)=>s+l.age,0)/L.length).toFixed(0)})}</div>`;
 }
 function regrow(){
   const g=fx.regrowUntil>world.tick?fx.regrowMult:1;
@@ -815,7 +2198,7 @@ function redistribute(){                     // 对中位数以上财富征20%,�
   const poor=sorted.slice(0,(sorted.length/2)|0);
   const each=pool/poor.length;
   for(const a of poor){a.sugar+=each/2;a.spice+=each/2;}
-  if(pool>0)log(`⚖️ 再分配: ${pool.toFixed(0)} 财富从富人转向穷人`,'');
+  if(pool>0)log(tf('⚖️ 再分配: {n} 财富从富人转向穷人',{n:pool.toFixed(0)}),'');
 }
 function reproduce(){                        // 原著精神:成年+温饱者在旁生子;子承位置/文化/¼财富
   if(aliveCount()>=P.maxPop)return;
@@ -859,7 +2242,7 @@ function crowdCheck(){                       // 拥挤天灾:25%以上人口挤�
   const refs=Math.round(alive.length*0.1);
   for(let k=0;k<refs;k++)spawnAgent();       // 随机空地落点=散落四方
   world._cullCd=world.tick+150;
-  log(`🌀 拥挤天灾!${(crowded/alive.length*100)|0}%的人口挤在一起,瘟疫带走${victims.length}人,另有${refs}名流民散落四方`,'ev-bad');
+  log(tf('🌀 拥挤天灾!{p}%的人口挤在一起,瘟疫带走{v}人,另有{r}名流民散落四方',{p:(crowded/alive.length*100)|0,v:victims.length,r:refs}),'ev-bad');
 }
 function disaster(){
   const t=choice(['drought','golden','wither','meteor','plague']);
@@ -874,10 +2257,10 @@ function disaster(){
     for(let y=cy-r;y<=cy+r;y++)for(let x=cx-r;x<=cx+r;x++)
       if(x>=0&&y>=0&&x<N&&y<N&&(x-cx)**2+(y-cy)**2<=r*r){world.sugar[y*N+x]=0;world.spice[y*N+x]=0;}
     for(const a of world.agents)if(a.alive&&(a.x-cx)**2+(a.y-cy)**2<=r*r)die(a,'陨石');
-    log(`☄️ 陨石坠落(${cx},${cy})!方圆6格化为焦土`,'ev-bad');}
+    log(tf('☄️ 陨石坠落({x},{y})!方圆6格化为焦土',{x:cx,y:cy}),'ev-bad');}
   else if(t==='plague'){let n=0;
     for(const a of world.agents)if(a.alive&&Math.random()<0.2){die(a,'瘟疫');n++;}
-    if(n)log(`🦠 瘟疫蔓延,${n}位居民病逝`,'ev-bad');}
+    if(n)log(tf('🦠 瘟疫蔓延,{n}位居民病逝',{n}),'ev-bad');}
 }
 function gini(w){const n=w.length; if(n<2)return 0;
   const s=[...w].sort((a,b)=>a-b); let cs=0,sw=0;
@@ -894,7 +2277,7 @@ function startCohort(){
   for(const a of alive){const t=tier3(a.sugar+a.spice);a.cohort=t;cohort.marks[t].push(a);}
   for(const t of['poor','mid','rich'])       // 每档抽3个个体画细线轨迹
     cohort.sample.push(...shuffle(cohort.marks[t].slice()).slice(0,3).map(a=>({ref:a,t})));
-  log(`📊 流动性追踪开始(回合${world.tick}):穷人${cohort.marks.poor.length}人 中产${cohort.marks.mid.length}人 富人${cohort.marks.rich.length}人`,'ev-good');
+  log(tf('📊 流动性追踪开始(回合{t}):穷人{p}人 中产{m}人 富人{r}人',{t:world.tick,p:cohort.marks.poor.length,m:cohort.marks.mid.length,r:cohort.marks.rich.length}),'ev-good');
   recordCohort();
 }
 function recordCohort(){
@@ -924,17 +2307,17 @@ function eduAttribution(){                   // 教育归因:翻身者读过书�
     if(tier3(a.sugar+a.spice)!=='rich'){fallen++; if(a.edu===0)fallenNo++;}
   if(!risen&&!fallen)return '';
   const pc=(x,n)=>n?`${Math.round(100*x/n)}%`:'—';
-  return `🎓 教育归因(价格${P.eduCost}):翻身的穷人${risen}人中,读过书的占 ${pc(risenEdu,risen)};跌落的富人${fallen}人中,从未上学的占 ${pc(fallenNo,fallen)}。`;
+  return tf('🎓 教育归因(价格{c}):翻身的穷人{n1}人中,读过书的占 {p1};跌落的富人{n2}人中,从未上学的占 {p2}。',{c:P.eduCost,n1:risen,p1:pc(risenEdu,risen),n2:fallen,p2:pc(fallenNo,fallen)});
 }
 function cohortNote(S){
   const p=S.poor,m=S.mid,r=S.rich;
-  const pc=(x,n)=>n?`${x}人(${Math.round(100*x/n)}%)`:'—';
+  const pc=(x,n)=>n?tf('{n}人({p}%)',{n:x,p:Math.round(100*x/n)+'%'}):'—';
   const upPoor=p.now.mid+p.now.rich, downRich=r.now.poor+r.now.mid;
-  return `以打开追踪那一刻的财富分层为「出身」:`+
-    `出身穷人 ${p.n} 人,至今翻身到中产以上 ${pc(upPoor,p.n)};`+
-    `出身中产 ${m.n} 人,升富 ${pc(m.now.rich,m.n)},保持中产 ${pc(m.now.mid,m.n)},下跌 ${pc(m.now.poor,m.n)};`+
-    `出身富人 ${r.n} 人,保持富有 ${pc(r.now.rich,r.n)},下跌 ${pc(downRich,r.n)}。`+
-    `各队列已故:穷${p.deadN} 中${m.deadN} 富${r.deadN}(死时财富即终态)。`+
+  return tr('以打开追踪那一刻的财富分层为「出身」:')+
+    tf('出身穷人 {n} 人,至今翻身到中产以上 {x};',{n:p.n,x:pc(upPoor,p.n)})+
+    tf('出身中产 {n} 人,升富 {a},保持中产 {b},下跌 {c};',{n:m.n,a:pc(m.now.rich,m.n),b:pc(m.now.mid,m.n),c:pc(m.now.poor,m.n)})+
+    tf('出身富人 {n} 人,保持富有 {a},下跌 {b};',{n:r.n,a:pc(r.now.rich,r.n),b:pc(downRich,r.n)})+
+    tf('各队列已故:穷{p} 中{m} 富{r}(死时财富即终态)。',{p:p.deadN,m:m.deadN,r:r.deadN})+
     (eduAttribution()?`<br>${eduAttribution()}`:'');
 }
 function renderCohort(){
@@ -946,20 +2329,20 @@ function renderCohort(){
     document.getElementById('cohNote').innerHTML=cohortNote(S);
     const row=(label,T)=>{
       const n=T.n||1;
-      const zh={poor:'穷',mid:'中产',rich:'富人'}[label];
-      return `<tr><td style="color:${T3[label]}">出身${zh}</td><td>${T.n}</td><td>${T.deadN}</td>`+
+      const zh=tr({poor:'穷',mid:'中产',rich:'富人'}[label]);
+      return `<tr><td style="color:${T3[label]}">${tf('出身{c}',{c:zh})}</td><td>${T.n}</td><td>${T.deadN}</td>`+
         ['poor','mid','rich'].map(k=>`<td style="${k===label?'font-weight:700':''}">${T.now[k]}<span style="font-size:10px;color:#71809a"> ${Math.round(100*T.now[k]/n)}%</span></td>`).join('')+
         `</tr>`;
     };
     document.getElementById('cohTable').innerHTML=
       `<table style="width:100%;font-size:11.5px;border-collapse:collapse;color:var(--tx)">`+
-      `<tr style="color:#71809a"><td>出身↓ 现状→</td><td>人数</td><td>已故</td><td style="color:#cdd2de">现为穷</td><td style="color:#eee04e">现为中产</td><td style="color:#ff2020">现为富</td></tr>`+
+      `<tr style="color:#71809a"><td>${tr('出身↓ 现状→')}</td><td>${tr('人数')}</td><td>${tr('已故')}</td><td style="color:#cdd2de">${tr('现为穷')}</td><td style="color:#eee04e">${tr('现为中产')}</td><td style="color:#ff2020">${tr('现为富')}</td></tr>`+
       row('poor',S.poor)+row('mid',S.mid)+row('rich',S.rich)+
       `</table>`;
     drawCohortChart();
-    btn.textContent='↻ 重置追踪(按此刻重新分层)';
+    btn.textContent=tr('↻ 重置追踪(按此刻重新分层)');
   }else{
-    document.getElementById('cohNote').textContent='还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。';
+    document.getElementById('cohNote').textContent=tr('还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。');
     document.getElementById('cohTable').innerHTML='';
     const c=document.getElementById('cohChart'),g=c.getContext('2d');
     g.clearRect(0,0,c.width,c.height);
@@ -995,8 +2378,8 @@ function drawCohortChart(){
   line(S.mid,T3.mid,2.2,1);
   line(S.rich,T3.rich,2.2,1);
   g.fillStyle='#71809a';g.font='10px sans-serif';
-  g.fillText(`t0=${cohort.t0}回合`,4,c.height-4);
-  g.fillText(`追踪${(world.tick-cohort.t0)}回合`,c.width-80,c.height-4);
+  g.fillText(tf('t0={n}回合',{n:cohort.t0}),4,c.height-4);
+  g.fillText(tf('追踪{n}回合',{n:world.tick-cohort.t0}),c.width-80,c.height-4);
 }
 
 /* ================= 对照实验:均等 vs 抽签,并排300回合 ================= */
@@ -1035,19 +2418,19 @@ function finishExperiment(){
   P.disasters=exp.d0;                        // 恢复用户的灾害设置
   const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
   const dA=avg(exp.giniA.slice(-15)), dB=avg(exp.giniB.slice(-15));
-  const verdict=dB>dA*1.15?'均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异'
-    :dA>dB*1.15?'天赋差异主导了不平等——这一局「命」比「运」更重要'
-    :'两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来';
+  const verdict=dB>dA*1.15?tr('均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异')
+    :dA>dB*1.15?tr('天赋差异主导了不平等——这一局「命」比「运」更重要')
+    :tr('两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来');
   exp.verdict=verdict;
-  log('🧪 对照实验完成(300回合): '+verdict,'ev-good');
+  log(tr('🧪 对照实验完成(300回合): ')+verdict,'ev-good');
 }
 function renderExpOverlay(){
   const ov=document.getElementById('expOverlay');
   ov.style.display='flex';
   document.getElementById('expVerdict').textContent=exp?exp.verdict:'';
   const s=document.getElementById('expStats');
-  if(exp)s.textContent=`抽签世界基尼 ${(exp.giniA.at(-1)||0).toFixed(3)} · 均等世界基尼 ${(exp.giniB.at(-1)||0).toFixed(3)} · 采样 ${exp.giniA.length}/30`;
-  else s.textContent='设定好参数后点「开始实验」';
+  if(exp)s.textContent=tf('抽签世界基尼 {a} · 均等世界基尼 {b} · 采样 {n}/30',{a:(exp.giniA.at(-1)||0).toFixed(3),b:(exp.giniB.at(-1)||0).toFixed(3),n:exp.giniA.length});
+  else s.textContent=tr('设定好参数后点「开始实验」');
   if(exp)drawExpCharts();
 }
 function closeExp(){document.getElementById('expOverlay').style.display='none';}
@@ -1102,23 +2485,23 @@ function birthHistory(a){                    // 同出身者的历史结局:弊�
   if(!s||!s.n)return `<div class="brow"><span>${tr('📜 同出身者命运')}</span><b>${tr('你是第一位')}</b></div>`;
   const avg=(s.ageSum/s.n).toFixed(0);
   const starvePct=Math.round(100*s.starve/s.n);
-  return `<div class="brow"><span>📜 同出身者(${s.n}人)</span><b>平均享年${avg}岁 · 最久${s.max||'?'}岁 · 饿死率${starvePct}%</b></div>`+
-    (starvePct>=50?`<div style="font-size:12.5px;color:var(--good);padding:2px 0">但饿死率不是判决书:同乡巅峰财富到过 ${s.peakMax?s.peakMax.toFixed(0):'?'}。出身定的是难度,不是结局。</div>`:'');
+  return `<div class="brow"><span>${tf('📜 同出身者({n}人)',{n:s.n})}</span><b>${tf('平均享年{a}岁 · 最久{b}岁 · 饿死率{p}%',{a:avg,b:s.max||'?',p:starvePct})}</b></div>`+
+    (starvePct>=50?`<div style="font-size:12.5px;color:var(--good);padding:2px 0">${tf('但饿死率不是判决书:同乡巅峰财富到过 {m}。出身定的是难度,不是结局。',{m:s.peakMax?s.peakMax.toFixed(0):'?'})}</div>`:'');
 }
 function advice(a){                          // 当前处境→最多2条建议(发展方向)
   const tips=[];
   const ts=a.sugar/a.sm, tp=a.pm>0?a.spice/a.pm:1e9;
-  if(ts<5)tips.push(`⚠ 糖余命仅${ts.toFixed(1)}天——立刻向绿色格子移动`);
-  else if(P.spice&&tp<5)tips.push(`⚠ 香料余命仅${tp.toFixed(1)}天——向橙色格子移动`);
+  if(ts<5)tips.push(tf('⚠ 糖余命仅{n}天——立刻向绿色格子移动',{n:ts.toFixed(1)}));
+  else if(P.spice&&tp<5)tips.push(tf('⚠ 香料余命仅{n}天——向橙色格子移动',{n:tp.toFixed(1)}));
   if(tips.length<2&&P.grow&&a.edu<3){
     const need=50+P.eduCost, gap=need-a.sugar-a.spice;
-    if(gap<=0)tips.push(`🎓 可读书了:花${P.eduCost}财富,视野永久+1(右侧按钮)`);
-    else tips.push(`📚 发展方向:再攒 ${gap.toFixed(0)} 财富即可读书(视野+1,看得更远采集更易)`);
+    if(gap<=0)tips.push(tf('🎓 可读书了:花{n}财富,视野永久+1(右侧按钮)',{n:P.eduCost}));
+    else tips.push(tf('📚 发展方向:再攒 {n} 财富即可读书(视野+1,看得更远采集更易)',{n:gap.toFixed(0)}));
   }
-  if(tips.length<2&&a.age>a.maxAge*0.8)tips.push(`⏳ 已近寿限,这一世以平稳采集为主,别冒险远行`);
+  if(tips.length<2&&a.age>a.maxAge*0.8)tips.push(tr('⏳ 已近寿限,这一世以平稳采集为主,别冒险远行'));
   if(tips.length<2&&P.spice){
     const lackS=a.sugar/a.sm<a.spice/a.pm;
-    if(Math.abs(a.sugar/a.sm-a.spice/a.pm)>6)tips.push(`🤝 你${lackS?'缺糖':'缺香料'}而另一资源富余,靠近邻居交易可补短板`);
+    if(Math.abs(a.sugar/a.sm-a.spice/a.pm)>6)tips.push(tr(lackS?'🤝 你缺糖而另一资源富余,靠近邻居交易可补短板':'🤝 你缺香料而另一资源富余,靠近邻居交易可补短板'));
   }
   return tips.slice(0,2);
 }
@@ -1131,12 +2514,12 @@ function toggleSpice(on){
   if(!on){
     for(let i=0;i<N*N;i++){world.spiceCap[i]=0;world.spice[i]=0;}
     for(const a of world.agents){if(!a.alive)continue;a.pm=0;a.spice=0;}
-    log('🌶 香料山沉入地底——纯糖世界:无香料、无交易','ev-good');
+    log(tr('🌶 香料山沉入地底——纯糖世界:无香料、无交易'),'ev-good');
   }else{
     genSpiceTerrain();
     for(const a of world.agents){if(!a.alive)continue;a.pm=ri(1,2);}
     for(let i=0;i<N*N;i++)world.spice[i]=world.spiceCap[i];   // 隆起即成山,画面立即可见
-    log('🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现','ev-good');
+    log(tr('🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现'),'ev-good');
   }
   document.querySelectorAll('.sp').forEach(el=>el.style.display=on?'':'none');
   const lg=document.getElementById('lgSpice'); if(lg)lg.style.display=on?'':'none';
@@ -1148,7 +2531,7 @@ const TERRAIN_NAMES={classic:'经典双山',random:'随机山',scatter:'散布'}
 const terrainSel=document.getElementById('terrainSel');
 terrainSel.value=P.terrain;
 function syncTerrainSel(){
-  terrainSel.title='地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应';
+  terrainSel.title=tr('地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应');
 }
 terrainSel.addEventListener('change',()=>{
   P.terrain=terrainSel.value;                // 即时切换:地形重建,居民原地适应
@@ -1158,7 +2541,7 @@ terrainSel.addEventListener('change',()=>{
   }
   genSugarTerrain(); genSpiceTerrain();
   for(let i=0;i<N*N;i++){world.sugar[i]=world.sugarCap[i];world.spice[i]=world.spiceCap[i];}  // 即点即变:新地貌直接铺满,不等再生
-  caption(`🗺 已切换为「${TERRAIN_NAMES[P.terrain]}」地形——居民原地适应新地理`);
+  caption(tf('🗺 已切换为「{t}」地形——居民原地适应新地理',{t:tr(TERRAIN_NAMES[P.terrain])}));
 });
 /* ---- 明暗主题 ---- */
 function setTheme(light){
@@ -1228,18 +2611,18 @@ function showBirthCard(a){
    ?`<div class="brow"><span>${tr('🎲 你的牌面')}</span><b>${tr('未揭晓(死后翻开)')}</b></div>`
    :`<div class="brow"><span>${tr('👁 起点视野')}${P.grow?'':''}</span><b>${a.bv} ${tr('格')}</b></div>
      <div class="brow"><span>${tr('🔥 代谢(糖/香料)')}</span><b>${a.sm} / ${a.pm} /${tr('天')}</b></div>
-     <div class="brow"><span>${tr('🎲 天赋总评')}</span><b>${talentDesc(a)}</b></div>
+     <div class="brow"><span>${tr('🎲 天赋总评')}</span><b>${tr(talentDesc(a))}</b></div>
      <div class="brow"><span>${tr('⏳ 寿命上限')}</span><b>${a.maxAge}</b></div>`;
-  lifeTitle.textContent=`第 ${player.life} 世 · 出生抽签`;
+  lifeTitle.textContent=tf('第 {n} 世 · 出生抽签',{n:player.life});
   lifeBody.innerHTML=`
-    <div class="brow"><span>${tr('🗺 出生地')}</span><b>${birthPlaceDesc(a,a.x,a.y)} · ${env.tier}</b></div>
+    <div class="brow"><span>${tr('🗺 出生地')}</span><b>${tr(birthPlaceDesc(a,a.x,a.y))} · ${tr(env.tier)}</b></div>
     ${birthHistory(a)}
     <div class="brow"><span>${tr('💰 随身干粮')}</span><b>${(a.sugar+a.spice).toFixed(0)}</b></div>
     <div class="brow"><span>${tr('🌱 家门口(3格)产能')}</span><b>${tr('糖')} ${env.s3} · ${tr('香料')} ${env.p3}</b></div>
-    <div class="brow"><span>${tr('⛰ 距两山')}</span><b>${env.farTxt}</b></div>
+    <div class="brow"><span>${tr('⛰ 距两山')}</span><b>${P.terrain==='scatter'?tr('散布地形'):tf('糖山 {a} 格 · 香料山 {b} 格',{a:env.ds,b:env.dp})}</b></div>
     <div class="brow"><span>${tr('👥 出生时身边')}</span><b>${env.nb}</b></div>
     ${blindRows}
-    <div class="poem">${player.choosing?'📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。':'出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。'}</div>`;
+    <div class="poem">${player.choosing?tr('📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。'):tr('出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。')}</div>`;
   setLifeAction(
     (player.choosing
       ?`<button class="actionbtn hot">${tr('✓ 定居此处,开始这一生')}</button>`
@@ -1247,7 +2630,7 @@ function showBirthCard(a){
     `<div style="display:flex;gap:6px;margin-top:6px">
       <button style="flex:1" id="actReroll">${tr('🎲 重抽出身')}</button>
       <button style="flex:1" id="actPick">📍 ${player.choosing?tr('取消选地'):tr('手动选地')}</button></div>
-    <div style="display:flex;gap:6px;margin-top:6px" title="指定出身阶层:财富按档位重签,出生地与天赋仍是命">
+    <div style="display:flex;gap:6px;margin-top:6px" title="${tr('指定出身阶层:财富按档位重签,出生地与天赋仍是命')}">
       <span style="font-size:12px;color:var(--dim);align-self:center">${tr('出身:')}</span>
       <button style="flex:1" id="actPoor">${tr('🌱 穷')}</button>
       <button style="flex:1" id="actMid">${tr('🏠 中产')}</button>
@@ -1276,12 +2659,12 @@ function livesReport(){
   const L=player.lives;
   const avg=(arr)=>(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1);
   const causes={}; for(const l of L)causes[l.cause]=(causes[l.cause]||0)+1;
-  const vs=P.blind?`<div>牌面回顾:${L.map(l=>`视野${l.vision}`).join(' · ')}</div>`:'';
-  return `<div class="rpt"><h4>📋 ${L.length}世命运报告(你自己就是不平等的样本)</h4>
-    <div>平均寿命 ${avg(L.map(l=>l.age))} 岁 · 最高 ${Math.max(...L.map(l=>l.age))} 岁</div>
-    <div>平均巅峰财富 ${avg(L.map(l=>l.peak))} · 最高 ${Math.max(...L.map(l=>l.peak)).toFixed(1)}</div>
-    <div>死因:${Object.entries(causes).map(([k,v])=>`${k}×${v}`).join('、')}</div>
-    <div>同时代社会基尼系数:${(stats.gini.at(-1)||0).toFixed(3)}</div>${vs}</div>`;
+  const vs=P.blind?`<div>${tr('牌面回顾:')}${L.map(l=>tf('视野{n}',{n:l.vision})).join(' · ')}</div>`:'';
+  return `<div class="rpt"><h4>${tf('📋 {n}世命运报告(你自己就是不平等的样本)',{n:L.length})}</h4>
+    <div>${tf('平均寿命 {a}岁 · 最高 {b}岁',{a:avg(L.map(l=>l.age)),b:Math.max(...L.map(l=>l.age))})}</div>
+    <div>${tf('平均巅峰财富 {a} · 最高 {b}',{a:avg(L.map(l=>l.peak)),b:Math.max(...L.map(l=>l.peak)).toFixed(1)})}</div>
+    <div>${tf('死因:{list}',{list:Object.entries(causes).map(([k,v])=>`${tr(k)}×${v}`).join('、')})}</div>
+    <div>${tf('同时代社会基尼系数:{g}',{g:(stats.gini.at(-1)||0).toFixed(3)})}</div>${vs}</div>`;
 }
 function aiBaseline(a){                      // 能动性基准:同天赋同出身,AI能活多久(4次蒙特卡洛)
   let sum=0,n=0;
@@ -1312,32 +2695,32 @@ function lifeAnalysis(a){                    // 此生高光与局限(数据说�
   if(typeof aiBaseline==='function'){try{aiExp=aiBaseline(a);}catch(e){}}
   if(aiExp!==null){
     const d=a.age-aiExp;
-    if(d>8)hl.push(`你亲自操盘,比AI托管多活了 ${d} 回合——这就是你的本事`);
-    else if(d<-8)lim.push(`比AI托管少活 ${-d} 回合——这次可能是你帮了倒忙`);
-    else hl.push(`与AI托管水准相当(预期${aiExp}回合,实际${a.age})`);
+    if(d>8)hl.push(tf('你亲自操盘,比AI托管多活了 {n} 回合——这就是你的本事',{n:d}));
+    else if(d<-8)lim.push(tf('比AI托管少活 {n} 回合——这次可能是你帮了倒忙',{n:-d}));
+    else hl.push(tf('与AI托管水准相当(预期{e}回合,实际{a})',{e:aiExp,a:a.age}));
   }
-  if(pctTop<=10&&a.peak>=25)hl.push(`巅峰财富${a.peak.toFixed(0)},跻身社会前10%`);
+  if(pctTop<=10&&a.peak>=25)hl.push(tf('巅峰财富{p},跻身社会前10%',{p:a.peak.toFixed(0)}));
   { // 本地冠军:出身地周边10格同乡里比巅峰财富——穷区做最大,也是成就
     const near=alive.filter(x=>x!==a&&Math.abs(x.bornX-a.bornX)<=10&&Math.abs(x.bornY-a.bornY)<=10);
     if(near.length>=3){
       const richer=near.filter(x=>(x.sugar+x.spice)>a.peak).length;
-      if(richer===0)hl.push(`🏆 穷乡冠军——出生地周边${near.length}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)`);
-      else if(richer<=2)hl.push(`同乡${near.length}人中巅峰财富排第${richer+1},在贫瘠之地做到了头部`);
+      if(richer===0)hl.push(tf('🏆 穷乡冠军——出生地周边{n}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)',{n:near.length}));
+      else if(richer<=2)hl.push(tf('同乡{n}人中巅峰财富排第{r},在贫瘠之地做到了头部',{n:near.length,r:richer+1}));
     }
   }
-  if(P.grow&&a.edu>0)hl.push(`读过书(学识${a.edu}),视野从起点${a.bv}长到${a.vision}`);
-  if(a.age>=a.maxAge-3)hl.push(`享年${a.age},几乎用满天赋寿限`);
-  else if(a.age>=60)hl.push(`长寿,享年${a.age}`);
-  if(a.trades>=8)hl.push(`成交${a.trades}笔,市场老手`);
-  if(a.far>=15)hl.push(`从出生地远行${a.far}格,横跨半个世界`);
-  else if(a.gS+a.gP>=100)hl.push(`亲手采集了${(a.gS+a.gP).toFixed(0)}单位粮食`);
-  if(!hl.length)hl.push('安稳走完了命运给的这一程');
-  if(a.vision<=2)lim.push(`视野仅${a.vision}格,觅食基本靠碰`);
-  if(a.sm+a.pm>=4)lim.push(`代谢${a.sm}+${a.pm}/天,消耗远超常人`);
-  if(birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘')lim.push('生在荒原,起步全靠双腿');
-  if(a.cause&&a.cause.startsWith('饥饿'))lim.push(`终败于代谢缺口:${a.cause.slice(3,-1)}`);
-  if(a.age<20)lim.push('离场太早,还来不及积累');
-  if(!lim.length)lim.push('天赋与环境无明显短板,输给了时间与概率');
+  if(P.grow&&a.edu>0)hl.push(tf('读过书(学识{e}),视野从起点{b}长到{v}',{e:a.edu,b:a.bv,v:a.vision}));
+  if(a.age>=a.maxAge-3)hl.push(tf('享年{n},几乎用满天赋寿限',{n:a.age}));
+  else if(a.age>=60)hl.push(tf('长寿,享年{n}',{n:a.age}));
+  if(a.trades>=8)hl.push(tf('成交{n}笔,市场老手',{n:a.trades}));
+  if(a.far>=15)hl.push(tf('从出生地远行{n}格,横跨半个世界',{n:a.far}));
+  else if(a.gS+a.gP>=100)hl.push(tf('亲手采集了{n}单位粮食',{n:(a.gS+a.gP).toFixed(0)}));
+  if(!hl.length)hl.push(tr('安稳走完了命运给的这一程'));
+  if(a.vision<=2)lim.push(tf('视野仅{n}格,觅食基本靠碰',{n:a.vision}));
+  if(a.sm+a.pm>=4)lim.push(tf('代谢{a}+{b}/天,消耗远超常人',{a:a.sm,b:a.pm}));
+  if(birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘')lim.push(tr('生在荒原,起步全靠双腿'));
+  if(a.cause&&a.cause.startsWith('饥饿'))lim.push(tf('终败于代谢缺口:{c}',{c:tr(a.cause.slice(3,-1))}));
+  if(a.age<20)lim.push(tr('离场太早,还来不及积累'));
+  if(!lim.length)lim.push(tr('天赋与环境无明显短板,输给了时间与概率'));
   return {hl,lim};
 }
 const MANUAL_HTML={
@@ -1436,27 +2819,27 @@ function renderGuideBody(){                  // 右栏玩法速览(整块多语�
 renderGuideBody();
 function showLifeSummary(i){                  // 生命之书回放:重看某一世的总结
   const l=player.lives[i]; if(!l)return;
-  document.getElementById('sumTitle').textContent=`第 ${i+1} 世 · 此生总结`;
+  document.getElementById('sumTitle').textContent=tf('第 {n} 世 · 此生总结',{n:i+1});
   const s=l.sum;
   document.getElementById('sumBody').innerHTML= s? `
-    <div class="brow"><span>死因</span><b>${s.cause||l.cause}</b></div>
-    <div class="brow"><span>享年</span><b>${l.age} 岁</b></div>
-    <div class="brow"><span>巅峰财富</span><b>${(l.peak??0).toFixed(0)}</b></div>
-    ${s.reveal?`<div class="brow"><span>🎴 牌面</span><b>${s.reveal}</b></div>`:''}
-    <div class="rpt"><h4>🪦 总结</h4>${l.born}的${l.talent}:享年${l.age}岁${l.trades?`,成交${l.trades}笔`:''}。<br>
+    <div class="brow"><span>${tr('死因')}</span><b>${tr(s.cause||l.cause)}</b></div>
+    <div class="brow"><span>${tr('享年')}</span><b>${tf('{n}岁',{n:l.age})}</b></div>
+    <div class="brow"><span>${tr('巅峰财富')}</span><b>${(l.peak??0).toFixed(0)}</b></div>
+    ${s.reveal?`<div class="brow"><span>${tr('🎴 牌面')}</span><b>${s.reveal}</b></div>`:''}
+    <div class="rpt"><h4>${tr('🪦 此生总结').replace('🪦 ','')}</h4>${tf('{b}的{t}:享年{n}岁{d}。',{b:tr(l.born),t:tr(l.talent),n:l.age,d:l.trades?tf(',成交{n}笔',{n:l.trades}):''})}<br>
       <span style="color:var(--good)">✨ ${s.hl.join(';')}</span><br>
       <span style="color:var(--bad)">⚠️ ${s.lim.join(';')}</span></div>
-    <div class="rpt"><h4>🌍 那时的世界</h4>${s.world}</div>`
-   :`<div style="color:var(--dim);line-height:2">${l.born}·${l.talent}·享年${l.age}岁,${l.cause}。<br>(这一世生在此功能上线前,没有存总结——再活一世就有了)</div>`;
+    <div class="rpt"><h4>${tr('🌍 那时的世界').replace('🌍 ','')}</h4>${s.world}</div>`
+   :`<div style="color:var(--dim);line-height:2">${tf('{b}·{t}·享年{n}岁,{c}。',{b:tr(l.born),t:tr(l.talent),n:l.age,c:tr(l.cause)})}<br>${tr('(这一世生在此功能上线前,没有存总结——再活一世就有了)')}</div>`;
   document.getElementById('sumOverlay').style.display='flex';
 }
 function marksReport(){                       // 终局:开局前标记的1/2/3号追踪者结局与位置
   if(!player.marks.length)return '';
   const lines=player.marks.map((m,i)=>{
-    if(m.alive)return `${i+1}号·#${m.id}:活着 — ${wealthClass(m).name},财${(m.sugar+m.spice).toFixed(0)},${m.age}岁,最后出现在 (${m.x},${m.y})`;
-    return `${i+1}号·#${m.id}:已死亡 — ${m.cause||'死因不明'},享年${m.age}岁`;
+    if(m.alive)return tf('{i}号·#{id}:活着 — {cls},财{w},{age}岁,最后出现在 ({x},{y})',{i:i+1,id:m.id,cls:tr(wealthClass(m).name),w:(m.sugar+m.spice).toFixed(0),age:m.age,x:m.x,y:m.y});
+    return tf('{i}号·#{id}:已死亡 — {c},享年{age}岁',{i:i+1,id:m.id,c:tr(m.cause||'死因不明'),age:m.age});
   });
-  return `<div class="rpt"><h4>🎯 你标记的追踪者(共${player.marks.length}个)</h4>${lines.join('<br>')}</div>`;
+  return `<div class="rpt"><h4>${tf('🎯 你标记的追踪者(共{n}个)',{n:player.marks.length})}</h4>${lines.join('<br>')}</div>`;
 }
 function worldSummaryText(a){                 // 你在世期间:世界大事+宏观变化
   const NAMES={'🌫️':'大旱','🌞':'丰年','🍂':'糖山枯萎','☄️':'陨石','🦠':'瘟疫','⚖️':'劫富济贫','🚶':'移民潮','🌀':'拥挤天灾'};
@@ -1466,8 +2849,8 @@ function worldSummaryText(a){                 // 你在世期间:世界大事+�
   const bi=Math.min(stats.pop.length-1,Math.floor(a.birthTick/10));
   const pf=stats.pop[Math.max(0,bi)]??aliveCount(), pt=stats.pop.at(-1)??aliveCount();
   const gf=stats.gini[Math.max(0,bi)]??0, gt=stats.gini.at(-1)??0;
-  const evTxt=n?Object.entries(cnt).map(([k,v])=>k+(v>1?`×${v}`:'')).join('、'):'风平浪静,无大事';
-  return `你活了 ${world.tick-a.birthTick} 回合 · 大事:${evTxt}<br>人口 ${pf}→${pt} · 基尼 ${(gf||0).toFixed(3)}→${(gt||0).toFixed(3)}`;
+  const evTxt=n?Object.entries(cnt).map(([k,v])=>tr(k)+(v>1?`×${v}`:'')).join('、'):tr('风平浪静,无大事');
+  return tf('你活了 {n} 回合 · 大事:{e}<br>人口 {a}→{b} · 基尼 {c}→{d}',{n:world.tick-a.birthTick,e:evTxt,a:pf,b:pt,c:(gf||0).toFixed(3),d:(gt||0).toFixed(3)});
 }
 function showDeathCard(a){
   if(a.age>player.best.age)player.best.age=a.age;
@@ -1476,16 +2859,16 @@ function showDeathCard(a){
   const rpt=(P.blind||player.life%10===0)?livesReport():'';
   const {hl,lim}=lifeAnalysis(a);
   const worldTxt=worldSummaryText(a);
-  const revealTxt=P.blind?`视野${P.grow?`起点${a.bv}→终点${a.vision}`:a.vision} 代谢${a.sm}/${a.pm} 寿限${a.maxAge} · ${talentDesc(a)}`:'';
-  lifeTitle.textContent=`第 ${player.life} 世 · 终局`;
+  const revealTxt=P.blind?`${P.grow?tf('视野起点{a}→终点{b}',{a:a.bv,b:a.vision}):tf('视野{n}',{n:a.vision})} ${tf('代谢{a}/{b} 寿限{c}',{a:a.sm,b:a.pm,c:a.maxAge})} · ${tr(talentDesc(a))}`:'';
+  lifeTitle.textContent=tf('第 {n} 世 · 终局',{n:player.life});
   lifeBody.innerHTML=`
-    <div class="brow"><span>${tr('死因')}</span><b>${a.cause}</b></div>
+    <div class="brow"><span>${tr('死因')}</span><b>${tr(a.cause)}</b></div>
     <div class="brow"><span>${tr('享年')}</span><b>${a.age}</b></div>
     <div class="brow"><span>${tr('巅峰财富')}</span><b>${a.peak.toFixed(0)}</b></div>
     <div class="brow"><span>${tr('历世最佳')}</span><b>${player.best.age} / ${player.best.peak.toFixed(0)}</b></div>
     ${revealTxt?`<div class="brow"><span>${tr('🎴 牌面揭晓')}</span><b>${revealTxt}</b></div>`:''}
     <div class="rpt"><h4>🪦 ${tr('🪦 此生总结').replace('🪦 ','')}</h4>
-      ${birthPlaceDesc(a,a.bornX,a.bornY)}的${talentDesc(a)}:${tr('享年')}${a.age},${tr('巅峰财富')}${a.peak.toFixed(0)}${a.trades?`,${tr('成交')}${a.trades}`:''}。<br>
+      ${tf('{b}的{t}:享年{n},巅峰财富{p}{d}。',{b:tr(birthPlaceDesc(a,a.bornX,a.bornY)),t:tr(talentDesc(a)),n:a.age,p:a.peak.toFixed(0),d:a.trades?tf(',成交{m}笔',{m:a.trades}):''})}<br>
       <span style="color:var(--good)">${tr('✨ 高光 — ')}${hl.join(';')}</span><br>
       <span style="color:var(--bad)">${tr('⚠️ 局限 — ')}${lim.join(';')}</span></div>
     ${marksReport()}
@@ -1509,7 +2892,7 @@ function updateSelBar(){                      // 选中居民的操作条:看属
   const w=wealthClass(selected);
   bar.style.display='flex';
   bar.innerHTML=`<b style="color:var(--cyan)">#${selected.id}</b>
-    <span style="color:var(--capTx)">${w.name}·财${(selected.sugar+selected.spice).toFixed(0)}·${selected.age}岁·视${selected.vision}</span>
+    <span style="color:var(--capTx)">${tf('{cls}·财{w}·{age}岁·视{v}',{cls:tr(w.name),w:(selected.sugar+selected.spice).toFixed(0),age:selected.age,v:selected.vision})}</span>
     ${selected!==player.agent?`<button id="selPossess" class="hot">${tr('👻 附身它')}</button>`:''}
     <button id="selClose">✕</button>`;
   document.getElementById('selClose').onclick=()=>{selected=null;trace=[];updateSelBar();updateMeCard();};
@@ -1523,8 +2906,8 @@ function possess(a){                          // 上帝神力:意识跳进该居
   if(player.phase!=='live'){player.phase='live';setLifeAction('',null);}
   view='me'; setViewBtns();                  // 附身即切视角:点格子立刻能走,不掉坑
   selected=null; trace=[]; updateSelBar();
-  log(`👻 你的意识跳进了居民 #${a.id} 的身体——它的视野/天赋/财产现在归你`,'ev-good');
-  caption(`👻 已附身居民 #${a.id}:财${(a.sugar+a.spice).toFixed(0)}·视野${a.vision}·${a.age}岁。点格子指挥它走`);
+  log(tf('👻 你的意识跳进了居民 #{id} 的身体——它的视野/天赋/财产现在归你',{id:a.id}),'ev-good');
+  caption(tf('👻 已附身居民 #{id}:财{w}·视野{v}·{age}岁。点格子指挥它走',{id:a.id,w:(a.sugar+a.spice).toFixed(0),v:a.vision,age:a.age}));
   updateMeCard(); updateHint();
 }
 const lifeTitle=document.getElementById('lifeTitle'),
@@ -1535,7 +2918,7 @@ function log(msg,cls){
     const first=document.querySelector('#log li');
     if(first&&first.dataset.me){const n=+first.dataset.n+1;
       first.dataset.n=n;
-      first.innerHTML=`<b>[${world.tick}]</b> 🤝 交易 ×${n},最近一笔:${msg.replace('🤝 ','')}`;
+      first.innerHTML=`<b>[${world.tick}]</b> ${tf('🤝 交易 ×{n},最近一笔:{m}',{n,m:msg.replace('🤝 ','')})}`;
       return;}
   }
   const li=document.createElement('li'); li.className=cls||'';
@@ -1555,24 +2938,24 @@ function updateHeader(){
 function updateMeCard(){
   if(player.phase==='born'||player.phase==='dead')return;   // 出生卡/死亡卡内容不被覆盖
   const a=player.agent;
-  lifeTitle.textContent='我的此生';
-  if(!a){lifeBody.innerHTML='<span style="color:var(--dim)">上帝视角中… 点居民查看,点右上「随机转世」下场抽签。</span>';return;}
+  lifeTitle.textContent=tr('我的此生');
+  if(!a){lifeBody.innerHTML=`<span style="color:var(--dim)">${tr('上帝视角中… 点居民查看,点右上「随机转世」下场抽签。')}</span>`;return;}
   const ts=a.sugar/a.sm, tp=a.pm>0?a.spice/a.pm:Infinity;
   const gift=P.blind?'🎴?':`👁${a.vision} 🔥${a.sm}${P.spice?'/'+a.pm:''}`;
   lifeBody.innerHTML=`
-   <div class="row"><span class="lab">第 ${player.life} 世 ${P.blind?'· 盲牌':''}</span><span>${gift}</span></div>
-   <div class="row"><span class="lab">糖余命</span><div class="bar"><i style="width:${clamp(ts/30*100,0,100)}%;background:var(--sugar)"></i></div><span>${ts.toFixed(1)}天</span></div>
-   ${P.spice?`<div class="row"><span class="lab">香料余命</span><div class="bar"><i style="width:${clamp(tp/30*100,0,100)}%;background:var(--spice)"></i></div><span>${tp.toFixed(1)}天</span></div>`:''}
-   <div class="row"><span class="lab">寿命</span><div class="bar"><i style="width:${clamp(a.age/(P.blind?100:a.maxAge)*100,0,100)}%;background:#7a9bd4"></i></div><span>${a.age}${P.blind?'':'/'+a.maxAge}</span></div>
-   <div class="row"><span class="lab">财富 糖${a.sugar.toFixed(0)}+香料${a.spice.toFixed(0)}</span><span class="me-tag">${a.target?'🎯亲自走位中':'AI托管·点地图接管'}</span></div>
+   <div class="row"><span class="lab">${tf('第 {n} 世 {x}',{n:player.life,x:P.blind?tr('· 盲牌'):''})}</span><span>${gift}</span></div>
+   <div class="row"><span class="lab">${tr('糖余命')}</span><div class="bar"><i style="width:${clamp(ts/30*100,0,100)}%;background:var(--sugar)"></i></div><span>${tf('{n}天',{n:ts.toFixed(1)})}</span></div>
+   ${P.spice?`<div class="row"><span class="lab">${tr('香料余命')}</span><div class="bar"><i style="width:${clamp(tp/30*100,0,100)}%;background:var(--spice)"></i></div><span>${tf('{n}天',{n:tp.toFixed(1)})}</span></div>`:''}
+   <div class="row"><span class="lab">${tr('寿命')}</span><div class="bar"><i style="width:${clamp(a.age/(P.blind?100:a.maxAge)*100,0,100)}%;background:#7a9bd4"></i></div><span>${a.age}${P.blind?'':'/'+a.maxAge}</span></div>
+   <div class="row"><span class="lab">${tf('财富 糖{a}+香料{b}',{a:a.sugar.toFixed(0),b:a.spice.toFixed(0)})}</span><span class="me-tag">${a.target?tr('🎯亲自走位中'):tr('AI托管·点地图接管')}</span></div>
    <div style="margin-top:6px;padding:6px 8px;background:var(--inset);border-radius:6px;font-size:12px;line-height:1.8;color:var(--capTx)">
-     ${advice(a).map(t=>`<div>${t}</div>`).join('')||'<div style="color:var(--dim)">处境平稳,按你的节奏走。</div>'}
+     ${advice(a).map(t=>`<div>${t}</div>`).join('')||`<div style="color:var(--dim)">${tr('处境平稳,按你的节奏走。')}</div>`}
    </div>
    ${P.grow&&a.edu<3?`<div style="display:flex;gap:6px;margin-top:6px">
-     <button id="btnEdu" style="flex:1" ${a.sugar+a.spice>=50+P.eduCost?'':'disabled style="flex:1;opacity:.45"'}>🎓 读书(花${P.eduCost},视野+1)</button>
+     <button id="btnEdu" style="flex:1" ${a.sugar+a.spice>=50+P.eduCost?'':'disabled style="flex:1;opacity:.45"'}>${tf('🎓 读书(花{n},视野+1)',{n:P.eduCost})}</button>
    </div>`:''}
    <div style="display:flex;gap:6px;margin-top:6px">
-     <button id="btnQuit">退出附身</button><button id="btnClearT">清除目标</button></div>`;
+     <button id="btnQuit">${tr('退出附身')}</button><button id="btnClearT">${tr('清除目标')}</button></div>`;
   const eduBtn=document.getElementById('btnEdu');
   if(eduBtn)eduBtn.onclick=()=>{if(tryEducate(a)){updateMeCard();updateHeader();}};
   document.getElementById('btnQuit').onclick=()=>{a.player=false;a.target=null;player.agent=null;player.phase='none';view='god';setViewBtns();updateMeCard();updateHint();};
@@ -1585,15 +2968,17 @@ paramsToggle.onclick=e=>{e.stopPropagation();paramsEl.classList.toggle('open');}
 document.addEventListener('click',e=>{
   if(!paramsEl.contains(e.target)&&e.target!==paramsToggle)paramsEl.classList.remove('open');
 });
+function buildParams(){
+  paramsEl.innerHTML='';
 for(const d of PARAM_DEFS){
   const row=document.createElement('label');row.className='pitem';
   if(d.type==='check'){
-    row.innerHTML=`${d.label}`;
+    row.innerHTML=tr(d.label);
     const cb=document.createElement('input');cb.type='checkbox';cb.checked=P[d.k];
     cb.onchange=()=>{P[d.k]=cb.checked;};
     row.appendChild(cb);
   }else if(d.type==='select'){
-    row.append(d.label);
+    row.append(tr(d.label));
     const sel=document.createElement('select');
     sel.style.cssText='background:var(--inset);color:var(--tx);border:1px solid var(--line);border-radius:4px;padding:1px 4px;font-size:12px';
     for(const[val,txt]of d.options){
@@ -1603,7 +2988,7 @@ for(const d of PARAM_DEFS){
     sel.onchange=()=>{P[d.k]=sel.value;};
     row.appendChild(sel);
   }else{
-    row.append(d.label);
+    row.append(tr(d.label));
     const r=document.createElement('input');r.type='range';r.min=d.min;r.max=d.max;r.step=d.step;r.value=P[d.k];
     const v=document.createElement('span');v.className='val';v.textContent=P[d.k];
     r.id='p_'+d.k;                              // 顶栏人口框联动要找它
@@ -1612,6 +2997,8 @@ for(const d of PARAM_DEFS){
   }
   paramsEl.appendChild(row);
 }
+}
+buildParams();
 /* ---- 图表 ---- */
 function lineChart(id,data,color,maxHint){
   const c=document.getElementById(id),g=c.getContext('2d');
@@ -1635,16 +3022,16 @@ function updateObsPanel(){                    // 实验观察:四个关键读数
   const upN=poorBorn.filter(a=>w(a)>=25).length;
   const upPct=poorBorn.length?Math.round(100*upN/poorBorn.length):null;
   const richPct=Math.round(100*alive.filter(a=>w(a)>=40).length/n);
-  const gTxt=g<0.15?'均质蛮荒:分化还没开始(多跑一会儿)'
-            :g<0.3?'分化进行中:阶层正在自发成形'
-            :'不平等已自发形成并稳定——没有设计者,格局自己长了出来';
-  const pTxt=poorPct>50?'多数人挣扎在温饱线附近:生态紧张,山装不下所有人'
-            :poorPct>25?'贫困是常态,但不是全部:山脚的穷环真实存在'
-            :'富足世界:承载力宽松,贫困只是暂时的落难';
-  const uTxt=upPct===null?'样本不足:让世界再跑一会儿'
-            :`赤贫出身者里 ${upPct}% 爬到了小康以上——努力有效,但有天花板`;
-  const rTxt=richPct<=25?'顶层永远是少数:金字塔是自己长出来的,没人设计过'
-            :'顶层偏大:这个世界正处在罕见的富裕期';
+  const gTxt=g<0.15?tr('均质蛮荒:分化还没开始(多跑一会儿)')
+            :g<0.3?tr('分化进行中:阶层正在自发成形')
+            :tr('不平等已自发形成并稳定——没有设计者,格局自己长了出来');
+  const pTxt=poorPct>50?tr('多数人挣扎在温饱线附近:生态紧张,山装不下所有人')
+            :poorPct>25?tr('贫困是常态,但不是全部:山脚的穷环真实存在')
+            :tr('富足世界:承载力宽松,贫困只是暂时的落难');
+  const uTxt=upPct===null?tr('样本不足:让世界再跑一会儿')
+            :tf('赤贫出身者里 {p}% 爬到了小康以上——努力有效,但有天花板',{p:upPct});
+  const rTxt=richPct<=25?tr('顶层永远是少数:金字塔是自己长出来的,没人设计过')
+            :tr('顶层偏大:这个世界正处在罕见的富裕期');
   document.getElementById('obsGrid').innerHTML=[
     [tr('基尼系数'),g.toFixed(3),gTxt],
     [tr('贫困率(赤贫+温饱)'),poorPct+'%',pTxt],
@@ -1664,7 +3051,7 @@ function drawCharts(){
   document.getElementById('vGini').textContent=(stats.gini.at(-1)||0).toFixed(3);
   document.getElementById('vPrice').textContent=(stats.price.at(-1)||0).toFixed(2);
   if(alive.length){const sorted=[...alive].sort((a,b)=>a-b);
-    document.getElementById('vRich').textContent=`前10%: ${(sorted.slice(-Math.max(1,sorted.length/10|0)).reduce((a,b)=>a+b,0)/alive.reduce((a,b)=>a+b,0)*100).toFixed(0)}%`;}
+    document.getElementById('vRich').textContent=tf('前10%: {p}%',{p:(sorted.slice(-Math.max(1,sorted.length/10|0)).reduce((a,b)=>a+b,0)/alive.reduce((a,b)=>a+b,0)*100).toFixed(0)});}
   updateObsPanel();
   if(document.getElementById('cohOverlay').style.display==='flex')renderCohort();   // 流动性面板开着=实时刷新
   const hc=document.getElementById('cHist'),g=hc.getContext('2d');
@@ -1770,10 +3157,10 @@ function drawWorld(){
     ctx.font='12px "Microsoft YaHei",sans-serif';
     ctx.textAlign='center'; ctx.textBaseline='middle';
     ctx.fillStyle=TH.tagSugar;
-    for(const[px,py]of SUGAR_PEAKS)ctx.fillText('糖山',(px+0.5)*CELL,(py+0.5)*CELL);
+    for(const[px,py]of SUGAR_PEAKS)ctx.fillText(tr('糖山'),(px+0.5)*CELL,(py+0.5)*CELL);
     if(P.spice){
       ctx.fillStyle=TH.tagSpice;
-      for(const[px,py]of SPICE_PEAKS)ctx.fillText('香料山',(px+0.5)*CELL,(py+0.5)*CELL);
+      for(const[px,py]of SPICE_PEAKS)ctx.fillText(tr('香料山'),(px+0.5)*CELL,(py+0.5)*CELL);
     }
   }
   if(!viewB&&selected&&selected.alive&&trace.length>1){   // 研究模式:被选中者的运动轨迹
@@ -1846,7 +3233,7 @@ function drawWorld(){
       ctx.beginPath();ctx.arc((bx+0.5)*CELL,(by+0.5)*CELL,CELL*0.7+pulse,0,7);ctx.stroke();
       ctx.fillStyle=TH.bornTx;
       ctx.font=`bold ${Math.max(13,CELL*0.9)|0}px "Microsoft YaHei",sans-serif`;
-      ctx.fillText('⬇ 你出生在这里',(bx+0.5)*CELL,(by+0.5)*CELL-CELL*1.7);
+      ctx.fillText(tr('⬇ 你出生在这里'),(bx+0.5)*CELL,(by+0.5)*CELL-CELL*1.7);
     }
     if(pa.target){ctx.strokeStyle=TH.target;ctx.lineWidth=1.5;
       ctx.strokeRect(pa.target.x*CELL+CELL*0.2,pa.target.y*CELL+CELL*0.2,CELL*0.6,CELL*0.6);}
@@ -1870,7 +3257,7 @@ function drawWorld(){
     ctx.strokeStyle=TH.bornHi;ctx.lineWidth=3;ctx.stroke();
     ctx.fillStyle=TH.bornTx;
     ctx.font=`bold ${Math.max(13,CELL*0.9)|0}px "Microsoft YaHei",sans-serif`;
-    ctx.fillText('🪦 主人公长眠于此',cx,cy-CELL*1.7);
+    ctx.fillText(tr('🪦 主人公长眠于此'),cx,cy-CELL*1.7);
   }
   ctx.setTransform(1,0,0,1,0,0);
 }
@@ -1882,7 +3269,7 @@ cv.addEventListener('click',e=>{
   if(x<0||y<0||x>=N||y>=N)return;
   const grid=occupancy(), hit=grid[y*N+x];
   if(player.phase==='born'&&player.choosing&&player.agent){   // 手动选地
-    if(hit){log('那里已有人居住,选个空格','');return;}
+    if(hit){log(tr('那里已有人居住,选个空格'),'');return;}
     const a=player.agent;
     a.x=x; a.y=y; a.bornX=x; a.bornY=y;
     showBirthCard(a);                          // 右栏实时刷新出身报告
@@ -1896,15 +3283,15 @@ cv.addEventListener('click',e=>{
   }else{
     if(player.phase==='born'&&!player.choosing&&hit){    // 开局前:点居民=设定追踪标记(最多3)
       toggleMark(hit);
-      log(`🎯 ${player.marks.includes(hit)?'标记':'取消'}追踪居民 #${hit.id}(${player.marks.length}/3,开局后锁定)`,'');
+      log(tf(player.marks.includes(hit)?'🎯 标记追踪居民 #{id}({n}/3,开局后锁定)':'🎯 取消追踪居民 #{id}({n}/3,开局后锁定)',{id:hit.id,n:player.marks.length}),'');
     }
     if(hit&&player.phase==='live'){                      // 开局后:点居民=补标记(至多6)+查看
       const had=player.marks.includes(hit);
       toggleMark(hit);
-      if(player.marks.includes(hit)!==had)log(`🎯 ${player.marks.includes(hit)?'标记':'取消'}追踪居民 #${hit.id}(当前${player.marks.length}个,上限6)`,'');
+      if(player.marks.includes(hit)!==had)log(tf(player.marks.includes(hit)?'🎯 标记追踪居民 #{id}(当前{n}个,上限6)':'🎯 取消追踪居民 #{id}(当前{n}个,上限6)',{id:hit.id,n:player.marks.length}),'');
     }
     selected=hit||null; trace=[]; updateMeCard(); updateSelBar();
-    if(hit&&player.phase!=='born')log(`👀 居民 #${hit.id}: ${wealthClass(hit).name} 财富${(hit.sugar+hit.spice).toFixed(0)} 视野${hit.vision} 代谢${hit.sm}/${hit.pm} 岁${hit.age}`,'');
+    if(hit&&player.phase!=='born')log(tf('👀 居民 #{id}: {cls} 财富{w} 视野{v} 代谢{a}/{b} 岁{age}',{id:hit.id,cls:tr(wealthClass(hit).name),w:(hit.sugar+hit.spice).toFixed(0),v:hit.vision,a:hit.sm,b:hit.pm,age:hit.age}),'');
   }
 });
 /* ---- 视角/速度按钮 ---- */
@@ -1912,7 +3299,7 @@ function setViewBtns(){[...document.getElementById('viewBtns').children]
   .forEach(b=>b.classList.toggle('on',b.dataset.v===view));}
 document.getElementById('viewBtns').onclick=e=>{
   const b=e.target.closest('button');if(!b)return;
-  if(b.dataset.v==='me'&&!player.agent){log('尚未附身,先「随机转世」下场','');return;}
+  if(b.dataset.v==='me'&&!player.agent){log(tr('尚未附身,先「随机转世」下场'),'');return;}
   view=b.dataset.v; setViewBtns(); updateHint();
 };
 /* ---- 演示(观察者)模式:自动运行+大事字幕 ---- */
@@ -1924,7 +3311,7 @@ function caption(msg){
 }
 document.getElementById('btnCohort').onclick=()=>{
   if(!cohort)startCohort();                  // 没追踪就开始追踪
-  caption('🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山');
+  caption(tr('🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山'));
   renderCohort();                            // 不暂停世界:面板随世界实时刷新(drawCharts 驱动)
 };
 document.getElementById('cohBtn').onclick=()=>{
@@ -1936,8 +3323,8 @@ function setViewB(on){                        // 地图在「你的世界⇄均�
   const chip=document.getElementById('viewBChip');
   if(chip)chip.style.display=viewB?'block':'none';
   const b=document.getElementById('expViewB');
-  if(b)b.textContent=viewB?'🗺 地图切回你的世界':'👁 地图看均等世界';
-  if(viewB)caption('👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样');
+  if(b)b.textContent=viewB?tr('🗺 地图切回你的世界'):tr('👁 地图看均等世界');
+  if(viewB)caption(tr('👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样'));
 }
 document.getElementById('expViewB').onclick=()=>setViewB(!viewB);
 document.getElementById('viewBBack').onclick=()=>setViewB(false);
@@ -1958,11 +3345,11 @@ document.getElementById('btnDemo').onclick=()=>{
     setPaused(false);
     const sl=document.getElementById('spdSlider');
     sl.value=55; sl.dispatchEvent(new Event('input'));
-    caption('👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。');
-    log('👁 演示模式开启','ev-good');
+    caption(tr('👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。'));
+    log(tr('👁 演示模式开启'),'ev-good');
   }else{
     setPaused(true);
-    log('👁 演示模式关闭','ev-good');
+    log(tr('👁 演示模式关闭'),'ev-good');
   }
   updateHint();
 };
@@ -1977,9 +3364,9 @@ function setPaused(v){
 }
 document.getElementById('spdSlider').addEventListener('input',e=>{
   stepIntervalMs=Math.round(2000*Math.pow(25/2000,e.target.value/100));
-  document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1).replace(/\.0$/,'')+'步/秒';
+  document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1).replace(/\.0$/,'')+tr('步/秒');
 });
-document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1)+'步/秒';
+document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1)+tr('步/秒');
 document.getElementById('spdBtns').onclick=e=>{
   const b=e.target.closest('button');if(!b||b.id==='btnRun')return;   // ⏱跑有自己的逻辑,不走暂停切换
   if(demo){document.getElementById('btnDemo').click();return;}        // 演示中点⏸=退出演示(否则世界停着、演示灯还亮,像卡死)
@@ -1988,7 +3375,7 @@ document.getElementById('spdBtns').onclick=e=>{
 document.getElementById('btnExp').onclick=()=>{
   setPaused(true);
   exp=null;                                  // 每次打开都重置
-  document.getElementById('expBtn').textContent='▶ 开始实验';
+  document.getElementById('expBtn').textContent=tr('▶ 开始实验');
   document.getElementById('expBtn').disabled=false;
   renderExpOverlay();
 };
@@ -2002,11 +3389,11 @@ document.getElementById('expBtn').onclick=()=>{
       for(let i=0;i<5;i++){tick();stepExperiment();}
       n+=5;
     }
-    document.getElementById('expBtn').textContent='⏳ 实验 '+Math.min(n,300)+'/300 回合';
+    document.getElementById('expBtn').textContent=tf('⏳ 实验 {n}/300 回合',{n:Math.min(n,300)});
     renderExpOverlay();
     if(n<300&&!exp.done)setTimeout(step,60);   // 慢速放映:约5秒跑完,曲线生长可见
     else{
-      document.getElementById('expBtn').textContent='▶ 再跑一次';
+      document.getElementById('expBtn').textContent=tr('▶ 再跑一次');
       document.getElementById('expBtn').disabled=false;
     }
   };
@@ -2026,7 +3413,7 @@ document.getElementById('popNum').addEventListener('change',e=>{   // 顶栏人�
 });
 document.getElementById('btnRun').onclick=()=>{         // 定时观察:连跑N回合,主人公死亡不打断
   if(world.runUntil>world.tick){                        // 运行中再点=中止
-    setPaused(true); caption('⏹ 定时观察已中止'); return;
+    setPaused(true); caption(tr('⏹ 定时观察已中止')); return;
   }
   const n=Math.max(10,parseInt(document.getElementById('runTicks').value)||300);
   world.runUntil=world.tick+n;
@@ -2034,14 +3421,14 @@ document.getElementById('btnRun').onclick=()=>{         // 定时观察:连跑N�
   caption(tf('⏱ 定时观察:连跑 {n} 回合(主人公死了也继续),再点一次可中止',{n}));
 };
 document.getElementById('btnRestart').onclick=()=>{
-  if(player.lives.length&&!confirm('重开世界会清空生命之书(历世记录),确定?'))return;
+  if(player.lives.length&&!confirm(tr('重开世界会清空生命之书(历世记录),确定?')))return;
   cohort=null; exp=null;
   genWorld(); stats.pop=[];stats.gini=[];stats.price=[]; selected=null; trace=[]; updateSelBar();
   player.life=0;player.best={age:0,peak:0};player.lives=[]; player.agent=null;
   player.phase='none';
   try{localStorage.removeItem(SKEY);}catch(e){}
   view='god'; setViewBtns(); resetLog(); renderLivesBook();
-  log('🌍 新的世界诞生了,山脉与荒原重新随机','ev-good');
+  log(tr('🌍 新的世界诞生了,山脉与荒原重新随机'),'ev-good');
   rebirth();                                 // 新世界直接发第一签,别让用户卡在空屏
   updateHeader(); updateMeCard(); updateHint();
 };
@@ -2052,16 +3439,16 @@ function updateHint(){
   const el=document.getElementById('hint');
   if(player.phase==='born'){
     el.textContent=player.choosing
-      ?'📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认'
-      :'📋 先看右栏出身报告,再点左下角「▶ 开始这一生」';
+      ?tr('📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认')
+      :tr('📋 先看右栏出身报告,再点左下角「▶ 开始这一生」');
     return;
   }
   if(view==='me'&&player.agent){
     el.textContent=!player.firstMove
-      ?'👉 点击你旁边发亮的格子,走过去采集糖和香料'
-      :'点格子走位 · 空格暂停 · 顶部滑杆调速度';
+      ?tr('👉 点击你旁边发亮的格子,走过去采集糖和香料')
+      :tr('点格子走位 · 空格暂停 · 顶部滑杆调速度');
     return;}
-  el.textContent='上帝视角:点居民查看 · 空格暂停';
+  el.textContent=tr('上帝视角:点居民查看 · 空格暂停');
 }
 
 /* ================= 主循环 ================= */
@@ -2072,7 +3459,7 @@ function frame(now){
     if(world.runUntil&&world.tick>=world.runUntil){   // 定时观察到点:收摊
       world.runUntil=0; paused=true; setPaused(true);
       if(player.phase==='dead'&&player.pendingCard){player.pendingCard=false;showDeathCard(player.lastDead);}
-      else caption(`⏱ 定时观察结束(第 ${world.tick} 回合)`);
+      else caption(tf('⏱ 定时观察结束(第 {t} 回合)',{t:world.tick}));
     }
   }else acc=0;
   lastT=now;
@@ -2083,7 +3470,7 @@ function frame(now){
 }
 
 /* ================= 自检 (?test=1) ================= */
-function selfTest(){
+function selfTest(){                            // ponytail: 自检是开发诊断,断言名不翻译
   const A=[];const ok=(name,cond)=>A.push([name,!!cond]);
   ok('基尼:完全均等=0', gini([1,1,1,1])===0);
   ok('基尼:已知值0.75', Math.abs(gini([0,0,0,4])-0.75)<1e-9);
@@ -2214,11 +3601,11 @@ function selfTest(){
 
 /* ================= 启动 ================= */
 genWorld();
-log('🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。','ev-good');
-log('提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。','');
+log(tr('🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。'),'ev-good');
+log(tr('提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。'),'');
 if(new URLSearchParams(location.search).get('test'))selfTest();
 renderLivesBook();
-if(player.lives.length)log(`📚 生命之书已从存档恢复(${player.lives.length}世记录)`,'ev-good');
+if(player.lives.length)log(tf('📚 生命之书已从存档恢复({n}世记录)',{n:player.lives.length}),'ev-good');
 // 新手态:没玩过的新人只见"三步主路",研究型控件首次死亡后才解锁(不吓跑)
 let seen=false; try{seen=!!localStorage.getItem('sugarscape-onboard-v2');}catch(e){}
 if(!seen||!player.lives.length){

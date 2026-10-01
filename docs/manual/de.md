@@ -24,8 +24,7 @@ Gewürze als zweites Nahrungsmittel auf anderen Bergen zwangen zum Tausch — un
 
 ## 2. Was dieses Programm umsetzt
 
-![Main UI (god view)](../images/main.png)
-
+![Main UI (god view)](../images/main.jpg)
 
 | Was das Experiment beobachtet | Status | Wo sehen |
 |---|---|---|
@@ -41,22 +40,12 @@ Gewürze als zweites Nahrungsmittel auf anderen Bergen zwangen zum Tausch — un
 
 ## 3. Spielanleitung (30 Sekunden)
 
-![Welcome card](../images/welcome.png)
-
-
 1. **Leben ziehen** — Geburtsort, Talente, Lebensdauer, Proviant: alles Verlust. Neu ziehen, Ort oder Klasse (arm/mittel/reich) wählen geht auch.
-
-![Birth report](../images/birth.png)
 
 2. **Leben** — „▶ Dieses Leben starten", Felder anklicken zum Laufen (Auto-Ernte), studieren (+1 Sichtweite), neben Nachbarn tauschen.
 3. **Dem Tod ins Gesicht sehen** — der Bericht zeigt Höhepunkte, Grenzen, Weltereignisse und (Blindmodus) deine Karten. Jedes Leben kommt ins 📚 Buch der Leben (Zeile anklicken).
 
-![Death summary](../images/death.png)
-
 4. **Drei Neuanfänge** — neues Leben; 👻 nach dem Tod einen Lebenden besetzen; neue Welt.
-
-![First-person view (fog of war)](../images/possess.png)
-
 
 ## 4. Klassische Experimente
 
@@ -64,19 +53,12 @@ Gewürze als zweites Nahrungsmittel auf anderen Bergen zwangen zum Tausch — un
 - **Bildungs-A/B**: gleicher Start, einer studiert.
 - **Gleichheits-Experiment**: 🧪 zwei Welten, 300 Runden. Häufiges Urteil: *die Welt mit identischen Talenten wird MEHR ungleich — Ungleichheit kommt vor allem von Position und Glück.*
 
-![A/B experiment](../images/exp.png)
-
 - **Mobilität**: 📊 Klassenringe auf der Karte — wer klettert?
-
-![Mobility tracking](../images/cohort.png)
 
 - **Schalter** (⚙): Umverteilung, Gratis-Bildung, Krieg, Seuche, reine Zuckerwelt…
 - **👁 Demo**: automatische Vorführung mit Untertiteln.
 
 ## 5. Zahlen lesen
-
-![Live stats panel](../images/obs.png)
-
 
 - **Gini**: 0 = alle gleich arm, 1 = ein Besitzer von allem. **Normal: Anstieg von 0 auf 0,2–0,4, dann stabil.** Die steigende Kurke IST der Befund.
 - **Bevölkerung**: stabil 100–400.

@@ -27,8 +27,7 @@ Later researchers added spice (a second food) growing on separate mountains; age
 
 ## 2. What this program implements
 
-![Main UI (god view)](../images/main.png)
-
+![Main UI (god view)](../images/main.jpg)
 
 | What the experiment observes | Status | Where to see it |
 |---|---|---|
@@ -46,22 +45,12 @@ Three layers: **world simulator** (map, resources, agents), **your life** (rebir
 
 ## 3. How to play (30 seconds)
 
-![Welcome card](../images/welcome.png)
-
-
 1. **Roll a life** — birthplace, talents, lifespan, starting food are all drawn. Dislike it? Reroll, pick a spot, or choose poor/middle/rich class.
-
-![Birth report](../images/birth.png)
 
 2. **Live** — press "▶ Start This Life", click cells to walk (auto-harvest), study when you can afford it (+1 vision), trade happens next to neighbors.
 3. **Face death** — the report shows highlights, limits, world events during your life, and (blind mode) your revealed talent cards. Every life enters the 📚 Book of Lives — click any row to replay the summary.
 
-![Death summary](../images/death.png)
-
 4. **Three ways to go again** — roll a new life; 👻 possess any living agent after death; or restart the whole world.
-
-![First-person view (fog of war)](../images/possess.png)
-
 
 ## 4. Classic experiments (play like a researcher)
 
@@ -69,19 +58,12 @@ Three layers: **world simulator** (map, resources, agents), **your life** (rebir
 - **Schooling A/B**: same start, one studies, one doesn't.
 - **Equality experiment**: 🧪 runs two worlds for 300 turns — random talents vs identical talents. Frequent verdict: *the equal-talent world can end up MORE unequal — inequality comes mostly from position and luck.*
 
-![A/B experiment](../images/exp.png)
-
 - **Mobility tracking**: 📊 paints birth-class rings on the map — watch who climbs the mountain.
-
-![Mobility tracking](../images/cohort.png)
 
 - **Rule switches** (⚙): redistribution tax, free education, tribal war, overcrowding plague, pure-sugar world (no trade)…
 - **👁 Demo mode**: auto-plays lives with captions — perfect for showing someone.
 
 ## 5. Reading the numbers
-
-![Live stats panel](../images/obs.png)
-
 
 - **Gini index**: 0 = everyone equally poor, 1 = one owner of everything. **Normal here: climbs from 0 to 0.2–0.4 and stabilizes.** A climbing curve *is* the core finding — inequality emerging without a designer.
 - **Population**: stable 100–400; below 50 triggers migration.
