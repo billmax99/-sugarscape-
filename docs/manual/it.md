@@ -24,6 +24,9 @@ Le spezie come secondo alimento su altri monti resero vitali gli scambi — e **
 
 ## 2. Cosa implementa questo programma
 
+![Main UI (god view)](../images/main.png)
+
+
 | Cosa osserva l'esperimento | Stato | Dove vederlo |
 |---|---|---|
 | Il divario cresce da solo | ✅ completo | Curva di Gini (in basso), 📈 Statistiche |
@@ -38,21 +41,42 @@ Le spezie come secondo alimento su altri monti resero vitali gli scambi — e **
 
 ## 3. Come si gioca (30 secondi)
 
+![Welcome card](../images/welcome.png)
+
+
 1. **Pesca una vita** — luogo, talenti, durata, scorte: tutto estratto a sorte. Ripesca, scegli luogo o ceto (povero/medio/ricco).
+
+![Birth report](../images/birth.png)
+
 2. **Vivere** — «▶ Inizia questa vita», clicca le celle per camminare (raccolta automatica), studia (+1 vista), scambia vicino ai vicini.
 3. **Affrontare la morte** — il bilancio mostra punti forti, limiti, eventi del mondo e (modalità cieca) le carte rivelate. Ogni vita entra nel 📚 Libro delle vite (clicca una riga per rivedere).
+
+![Death summary](../images/death.png)
+
 4. **Tre ripartenze** — nuova vita; 👻 possesso di un vivente dopo la morte; nuovo mondo.
+
+![First-person view (fog of war)](../images/possess.png)
+
 
 ## 4. Esperimenti classici
 
 - **A/B luogo di nascita**: 5 vite sul monte, 5 nella landa.
 - **A/B studio**: stessa partenza, uno studia.
 - **Esperimento di uguaglianza**: 🧪 due mondi, 300 turni. Verdetto frequente: *il mondo a talenti identici finisce PIÙ disuguale — la disuguaglianza viene soprattutto da posizione e fortuna.*
+
+![A/B experiment](../images/exp.png)
+
 - **Mobilità**: 📊 anelli di classe sulla mappa — chi sale?
+
+![Mobility tracking](../images/cohort.png)
+
 - **Interruttori** (⚙): redistribuzione, istruzione gratuita, guerra, peste, mondo di solo zucchero…
 - **👁 Demo**: riproduzione automatica con sottotitoli.
 
 ## 5. Leggere i numeri
+
+![Live stats panel](../images/obs.png)
+
 
 - **Gini**: 0 = tutti ugualmente poveri, 1 = un solo proprietario. **Normale: sale da 0 a 0,2–0,4 e si stabilizza.** La curva che sale È la scoperta.
 - **Popolazione**: stabile 100–400.

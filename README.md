@@ -7,6 +7,8 @@
 
 **一个单 HTML 文件的社会学实验游戏**:零依赖、无需安装、双击即玩、中文界面。
 
+![游戏画面](docs/images/main.png)
+
 🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。
 (也可以用 `python -m http.server` 起个本地服务后访问,但不是必须的)
 
@@ -51,7 +53,7 @@
 | `sugarscape.html` | 游戏本体(单文件,零依赖) |
 | `糖域实验说明.md` | 详细说明书:实验原理、玩法、结论解读,小学生也能看懂 |
 | `docs/manual/` | 说明书多语言版(English / 日本語 / Français / Deutsch / Italiano) |
-| `docs/sponsor/` | 赞赏码图片 |
+| `docs/images/` | 游戏截图(说明书配图) |
 
 ## 🌐 Languages / 语言
 
@@ -71,14 +73,3 @@ Multilingual manuals: [English](docs/manual/en.md) · [日本語](docs/manual/ja
 - 本项目是**独立实现**,改编自糖域实验的**思想**(思想不受版权保护);与 Epstein & Axtell 原著及任何商业实现无关联,未使用其代码。
 - 代码以 [MIT License](LICENSE) 开源:可自由使用、修改、再分发,请保留版权声明。
 - 欢迎分享给老师、学生、对社会科学好奇的人。
-
-## 请开发者喝一口咖啡 ☕
-
-如果这个小游戏帮到了你(比如上课演示、写作业、或者只是陪你度过一个下午),
-欢迎扫码赞赏——**只要 1 元,完全自愿**。不为收钱,只是想知道它对多少人有用 😊
-
-| 请喝一口咖啡 ☕ | 请喝一口奶 🍼 |
-|:---:|:---:|
-| ![](docs/sponsor/wechat_luckin.png) | ![](docs/sponsor/wechat_bottle.png) |
-
-两张都是同一个微信赞赏码,金额 1 元,扫哪个都行。
