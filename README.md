@@ -50,7 +50,16 @@
 |---|---|
 | `sugarscape.html` | 游戏本体(单文件,零依赖) |
 | `糖域实验说明.md` | 详细说明书:实验原理、玩法、结论解读,小学生也能看懂 |
+| `docs/manual/` | 说明书多语言版(English / 日本語 / Français / Deutsch / Italiano) |
 | `docs/sponsor/` | 赞赏码图片 |
+
+## 🌐 Languages / 语言
+
+游戏界面内置 **中文 / English / 日本語 / Français / Deutsch / Italiano** 六种语言:
+顶栏 🌐 下拉随时切换,首次打开按浏览器语言自动选择,选择会记住。
+(游戏内「📖 完整说明书」浮层与右栏玩法卡已完整翻译;部分叙事性长句——如死亡总结的"高光/局限"逐条点评——目前仍为中文,将逐步补齐。)
+
+Multilingual manuals: [English](docs/manual/en.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md) · [中文(根目录)](糖域实验说明.md)
 
 ## 自检
 
