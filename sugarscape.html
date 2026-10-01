@@ -180,6 +180,14 @@
   <button id="btnRestart" class="warn">↺ 重开世界</button>
   </div>
 </header>
+<div id="manualOverlay" style="display:none; position:absolute; inset:0; z-index:9; background:var(--ovBg);
+  backdrop-filter:blur(2px); align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:24px 32px; width:720px; max-width:94%; max-height:92%; overflow-y:auto;">
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:10px;">📖 糖域说明书:来由 · 玩法 · 怎么看数字</h3>
+    <div id="manualBody" style="font-size:14px; line-height:1.9; color:var(--tx);"></div>
+    <button id="manualClose" style="width:100%; margin-top:14px; padding:9px; letter-spacing:3px;">✓ 明白了,开始玩</button>
+  </div>
+</div>
 <div id="sumOverlay" style="display:none; position:absolute; inset:0; z-index:9; background:var(--ovBg);
   backdrop-filter:blur(2px); align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:560px; max-width:94%; max-height:92%; overflow-y:auto;">
@@ -248,7 +256,7 @@
         <h2>投胎模拟器</h2>
         <p style="font-size:15px">改编自社会学家在电脑里养了几十年的实验。</p>
         <p>投胎是个技术活,但在普通人眼里就是随机的。点击按钮开始看看你这次随机到了哪里。</p>
-        <p class="wdim">点左下角「开始这一生」开始。</p>
+        <p class="wdim">点左下角「开始这一生」开始。<span id="welManualLink" style="color:var(--cyan); cursor:pointer; text-decoration:underline dotted">第一次来?先看 30 秒说明书 →</span></p>
         <button class="hot" id="welBtn">🎲 开始投胎</button>
       </div>
     </div>
@@ -276,6 +284,7 @@
         <p>③ <b>死后</b>看总结,再抽下一条命。📚 每一世都记进生命之书。</p>
         <p class="grow-tip">📖 阅历与教育能让<b>视野变大</b>——人越活看得越远。</p>
         <p>👁 上帝视角=看全图;附身视角=只见你的视野。空格=暂停。</p>
+        <p style="margin-top:6px"><span id="guideManualLink" style="color:var(--cyan);cursor:pointer;text-decoration:underline dotted">📖 完整说明书:实验来由 · 玩法 · 怎么看数字 →</span></p>
       </div>
     </details>
     <div class="card"><h3>📚 生命之书</h3><div id="livesBook" style="font-size:12.5px;line-height:1.9;color:var(--tx);">还未活过任何一世。</div></div>
@@ -1168,6 +1177,37 @@ function lifeAnalysis(a){                    // 此生高光与局限(数据说�
   if(!lim.length)lim.push('天赋与环境无明显短板,输给了时间与概率');
   return {hl,lim};
 }
+function openManual(){                       // 游戏内完整说明书(精编自《糖域实验说明.md》)
+  const H=(t)=>`<h4 style="color:var(--gold);margin:14px 0 6px;letter-spacing:1px">${t}</h4>`;
+  const P=(t)=>`<p style="margin:5px 0">${t}</p>`;
+  document.getElementById('manualBody').innerHTML=
+    H('🌍 这是什么?一个真实的社会学实验')+
+    P('1996 年,社会学家 <b>Epstein 和 Axtell</b> 在电脑里做实验:一片长着糖山的地图,一群只会"朝看得见的食物走过去"的小人,<b>没有任何人管理</b>。')+
+    P('跑着跑着,惊人的事自己冒了出来:<b>贫富差距、富人扎堆好地方、穷人被挤到边缘</b>——没有坏人,没有阴谋,只有"资源不均+各自觅食"两条笨规则。')+
+    P('这就是<b>糖域实验</b>最深的发现:<b>不平等不需要设计,它自己会长出来。</b>这个游戏让你亲自投胎进去验证。')+
+    H('🎲 怎么玩(30 秒)')+
+    P('① <b>投胎</b>:点「🎲 开始投胎」抽一条命——出生地/天赋/寿命/干粮全是签,可能生在糖山中心,也可能在荒原。')+
+    P('② <b>活着</b>:点左下角「▶ 开始这一生」,再<b>点地图格子走位</b>,踩到糖自动采集;攒够钱读书(视野+1);走到邻居边自动交易。')+
+    P('③ <b>死了</b>:看总结卡(高光/局限/世界大事),点「🎲 再抽一条命」重来。每一世都记进右栏 📚 生命之书。')+
+    P('④ <b>换个活法</b>:死后可以「👻 附身」任何一个活人,看看富人/穷人各自怎么活。')+
+    P('<b>记住:出身决定的是难度,不是结局。</b>荒原也能出"🏆穷乡冠军"。')+
+    H('👀 怎么看数字(脸色与图表)')+
+    P('<b>脸色=贫富</b>:灰=赤贫 → 黄=温饱 → 棕橙=小康 → 橙红=富裕 → 深红=巨富(你自己=金圈脸)。')+
+    P('<b>基尼系数</b>(底部图):0=人人一样,1=一人占有一切。<b>从 0 爬到 0.2~0.4 后稳定=正常</b>,这正是"不平等自发形成"的证据。')+
+    P('<b>人口</b>:稳态 100~400;<b>糖价</b>:1 附近波动,它不是谁定的,是居民讨价还价交易出来的;<b>财富分布</b>:最富 10% 占 30%~60% 为常态。')+
+    H('🧪 像研究者一样玩(进阶)')+
+    P('📈 <b>观察</b>:四个关键读数实时刷新,带一句话解读。')+
+    P('📊 <b>流动性</b>:地图上给所有人描出身圈(青=穷/黄=中/红=富),亲眼看谁能爬上山;面板统计翻身/保持/下跌。')+
+    P('🧪 <b>对照实验</b>:两个世界赛跑 300 回合——天赋抽签 vs 人人相同,常出的结论是:<b>均等天赋的世界差距反而更大,不平等主要来自位置与运气。</b>')+
+    P('⚙ <b>世界参数</b>:劫富济贫/教育免费/部落战争/拥挤天灾/纯糖世界……每个开关都是一次社会实验。')+
+    H('💡 一句话带走')+
+    P('<b>没人设计贫富差距,它自己长出来;出身决定你从哪出发,教育和迁徙决定你能走多远;规则的小改动会改变整个社会的形状。</b>')+
+    P('<span style="color:var(--dim);font-size:12.5px">更详细的版本(含界面速查表和拓展实验)在仓库的《糖域实验说明.md》。</span>');
+  document.getElementById('manualOverlay').style.display='flex';
+}
+document.getElementById('manualClose').onclick=()=>{document.getElementById('manualOverlay').style.display='none';};
+document.getElementById('guideManualLink').onclick=openManual;
+document.getElementById('welManualLink').onclick=openManual;
 function showLifeSummary(i){                  // 生命之书回放:重看某一世的总结
   const l=player.lives[i]; if(!l)return;
   document.getElementById('sumTitle').textContent=`第 ${i+1} 世 · 此生总结`;
