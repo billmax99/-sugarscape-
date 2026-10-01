@@ -1,0 +1,1973 @@
+<!doctype html>
+<!--
+  糖域 · 人生重开 (Sugarscape: Life Restart)
+  改编自 Epstein & Axtell (1996) 的糖域社会实验思想,独立实现。
+  单文件零依赖,双击即玩。详见仓库 README 与《糖域实验说明.md》。
+  Copyright (c) 2026 bill_zzx · MIT License
+  https://gitee.com/bill_zzx/sugarscape
+-->
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>糖域 · 人生重开 Sugarscape</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#121722; --panel2:#0e131d; --line:#1e2735;
+    --tx:#c9d6e8; --dim:#71809a; --sugar:#7be383; --spice:#ff9a5c;
+    --gold:#ffd479; --cyan:#6fd8e8;
+    --btn:#1a2333; --btnTx:#c9d6e8; --btnHv:#243049; --btnBd:#33456b;
+    --btnOnBg:#2c3b58; --btnOnTx:#6fd8e8; --btnOnBd:#3a5c8f;
+    --hotBg:#2b3a24; --hotBd:#3f5a35; --hotTx:#b8e8a8;
+    --warnBg:#3a2424; --warnBd:#5a3535; --warnTx:#e8a8a8;
+    --inset:#0a0f18; --mapBg:#05070b;
+    --ovBg:rgba(5,8,14,.82); --capBg:rgba(8,12,20,.82); --capTx:#cfe3ff; --capSh:0 1px 4px #000;
+    --good:#b8e8a8; --bad:#e8a8a8;
+  }
+  body.light{
+    --bg:#e9e5da; --panel:#f3f0e8; --panel2:#e5e0d2; --line:#d0c9b6;
+    --tx:#3a382f; --dim:#8a8470; --sugar:#2e8f40; --spice:#d86a28;
+    --gold:#9a6b1f; --cyan:#1f7a8c;
+    --btn:#ece7d9; --btnTx:#3a382f; --btnHv:#ddd6c2; --btnBd:#c4bcA6;
+    --btnOnBg:#cfe3ea; --btnOnTx:#175f6e; --btnOnBd:#7aa8b8;
+    --hotBg:#dcecc8; --hotBd:#8ab060; --hotTx:#3f6a1e;
+    --warnBg:#f0d8d0; --warnBd:#c08a7a; --warnTx:#8a3a2a;
+    --inset:#faf8f1; --mapBg:#dfdac9;
+    --ovBg:rgba(233,229,218,.88); --capBg:rgba(250,248,240,.92); --capTx:#3a382f; --capSh:none;
+    --good:#3f6a1e; --bad:#8a3a2a;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--tx); font:14px/1.6 "Microsoft YaHei",system-ui,sans-serif;
+       overflow:hidden; display:flex; flex-direction:column; height:100vh;}
+  header{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:8px 14px; border-bottom:1px solid var(--line); background:var(--panel2);
+  }
+  header h1{font-size:16px; color:var(--gold); letter-spacing:2px;}
+  .hstat{color:var(--dim); font-size:13px;}
+  .hstat b{color:var(--tx); font-weight:600;}
+  .spacer{flex:1;}
+  button{
+    background:var(--btn); color:var(--btnTx); border:1px solid var(--btnBd);
+    border-radius:6px; padding:4px 12px; cursor:pointer; font-size:13px; font-family:inherit;
+  }
+  button:hover{background:var(--btnHv); border-color:var(--btnBd);}
+  button.hot{background:var(--hotBg); border-color:var(--hotBd); color:var(--hotTx);}
+  #spiceBtn.on{outline:2px solid var(--sugar); outline-offset:-1px;}
+  button.warn{background:var(--warnBg); border-color:var(--warnBd); color:var(--warnTx);}
+  .btngrp{display:flex; gap:4px;}
+  .btngrp button.on{background:var(--btnOnBg); color:var(--btnOnTx); border-color:var(--btnOnBd);}
+  button.on{background:var(--btnOnBg); color:var(--btnOnTx); border-color:var(--btnOnBd);}
+  main{display:flex; flex:1; min-height:0;}
+  #paramsBar{display:flex; align-items:center; padding:3px 14px;
+    border-bottom:1px solid var(--line); background:var(--panel2); position:relative;}
+  #paramsToggle{font-size:12px; padding:2px 10px;}
+  #paramsPanel{display:none; position:absolute; top:100%; left:10px; z-index:20;
+    background:var(--panel); border:1px solid var(--btnBd); border-radius:10px;
+    box-shadow:0 10px 40px rgba(0,0,0,.6); padding:12px 16px;
+    grid-template-columns:1fr 1fr; gap:6px 26px; width:560px; max-height:60vh; overflow-y:auto;}
+  #paramsPanel.open{display:grid;}
+  .pitem{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--dim); white-space:nowrap;}
+  .pitem input[type=range]{width:86px; accent-color:#4a8f6a; height:4px;}
+  .pitem input[type=checkbox]{accent-color:#4a8f6a;}
+  .pitem .val{color:var(--tx); min-width:24px; font-variant-numeric:tabular-nums;}
+  #mainRow{flex:1; display:flex; min-height:0;}
+  #mapwrap{position:relative; flex:1; display:flex; align-items:center; justify-content:center; background:var(--mapBg); overflow:hidden;}
+  canvas#map{cursor:crosshair; max-width:100%; max-height:100%;}
+  #lifeCol{width:272px; border-left:1px solid var(--line); background:var(--panel);
+    display:flex; flex-direction:column; gap:8px; padding:8px; overflow-y:auto;}
+  #lifeCol::-webkit-scrollbar{width:6px;} #lifeCol::-webkit-scrollbar-thumb{background:#22304a; border-radius:3px;}
+  .guide summary{font-size:13.5px; color:var(--gold); letter-spacing:1px; cursor:pointer; user-select:none;}
+  .guide .gbody{font-size:13.5px; line-height:1.8; color:var(--tx); margin-top:6px;}
+  .guide p{margin:4px 0;}
+  .guide b{color:var(--gold); font-weight:600;}
+  .guide .gs{color:var(--sugar);} .guide .gp{color:var(--spice);}
+  .guide .ghow{margin-top:8px; color:var(--cyan); border-top:1px dashed var(--line); padding-top:6px;}
+  #chartsBar{display:flex; gap:8px; padding:7px 10px; border-top:1px solid var(--line); background:var(--panel2);}
+  #chartsBar .chartbox{flex:1; min-width:0;}
+  #mapLegend{position:absolute; left:10px; top:8px; font-size:14.5px; line-height:1.7; color:var(--tx);
+    background:var(--capBg); padding:8px 14px; border-radius:10px; cursor:default;
+    display:flex; flex-direction:column; gap:2px; width:max-content; max-width:440px;
+    opacity:.15; transition:opacity .25s;}
+  #mapLegend:hover{opacity:1;}
+  #mapLegend .lg{white-space:normal;}
+  #mapLegend i{display:inline-block; width:9px; height:9px; border-radius:50%;}
+  .card{background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:10px;}
+  .card h3{font-size:13px; color:var(--gold); margin-bottom:6px; letter-spacing:1px;}
+  .row{display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:13px; padding:2px 0;}
+  .row .lab{color:var(--dim);}
+  .bar{height:8px; background:var(--inset); border-radius:4px; overflow:hidden; flex:1; border:1px solid var(--line);}
+  .bar>i{display:block; height:100%; border-radius:4px;}
+  .chartbox .ct{font-size:11px; color:var(--dim); margin-bottom:2px; display:flex; justify-content:space-between;}
+  .chartbox .ct span:first-child{cursor:help; text-decoration:underline dotted;}  /* 悬停图表名看"正常范围+用途" */
+  .chartbox canvas{width:100%; height:60px; background:var(--inset); border:1px solid var(--line); border-radius:4px;}
+  #log{list-style:none; font-size:12px; display:flex; flex-direction:column-reverse; gap:3px; max-height:200px; overflow-y:auto;}
+  #log li{border-bottom:1px dashed var(--line); padding:2px 0; color:var(--dim);}
+  #log li b{color:var(--tx); font-weight:500;}
+  #log li.ev-bad{color:var(--bad);} #log li.ev-good{color:var(--good);} #log li.me{color:var(--cyan);}
+  .brow{display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px dashed var(--line); font-size:13.5px;}
+  .brow b{color:var(--cyan); font-weight:600;}
+  .brow .good{color:var(--good);} .brow .bad{color:var(--bad);}
+  .poem{margin:12px 0 4px; color:var(--dim); font-size:12px; text-align:center; line-height:1.8;}
+  .lifebtn{width:100%; margin-top:8px; padding:9px; font-size:15px; letter-spacing:4px;}
+  .rpt{margin:10px 0 0; padding:8px; background:var(--inset); border-radius:6px; font-size:12px; line-height:1.8;}
+  .rpt h4{color:var(--cyan); font-size:12px; margin-bottom:4px;}
+  #hint{position:absolute; right:10px; bottom:8px; color:var(--dim); font-size:12px; pointer-events:none; text-shadow:0 1px 4px #000;}
+  #welcome{position:absolute; inset:0; z-index:9; background:var(--ovBg);
+    display:flex; align-items:center; justify-content:center;}
+  #welcome .wcard{background:var(--panel); border:1px solid var(--btnBd); border-radius:16px;
+    padding:34px 42px; width:700px; max-width:92%; box-shadow:0 0 60px rgba(60,120,255,.2);}
+  #welcome h2{color:var(--gold); letter-spacing:3px; margin-bottom:14px; font-size:30px;}
+  #welcome p{font-size:17px; line-height:1.9; color:var(--tx); margin:10px 0;}
+  #welcome .wdim{color:var(--dim); font-size:15px;}
+  #welcome button{width:100%; margin-top:20px; padding:14px; font-size:19px; letter-spacing:5px;}
+  #lifeAction{position:absolute; left:14px; bottom:14px; z-index:6;}
+  /* 按钮浮在地图上:暂停/待开始/终局时完整显现,世界跑起来才淡化;悬停随时显形 */
+  #lifeAction,#selBar{opacity:1; transition:opacity .25s;}
+  body.running #lifeAction, body.running #selBar{opacity:.15;}
+  #lifeAction:hover,#selBar:hover{opacity:1;}
+  #selBar{position:absolute; right:12px; bottom:12px; z-index:6; display:none; gap:8px; align-items:center;
+    background:var(--capBg); border:1px solid var(--btnBd); border-radius:10px; padding:6px 12px;
+    font-size:13px; color:var(--capTx); box-shadow:0 2px 10px rgba(0,0,0,.25);}
+  #selBar button{padding:3px 12px; font-size:12.5px;}
+  #caption{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:7;
+    max-width:88%; background:var(--capBg); border:1px solid var(--btnBd); border-radius:26px;
+    padding:18px 42px; font-size:42px; line-height:1.55; font-weight:600; color:var(--capTx); text-align:center;
+    pointer-events:none; opacity:0; transition:opacity .8s; text-shadow:var(--capSh);}
+  #caption.show{opacity:1;}
+  /* 新手态:研究型控件先藏起来,首次死亡/转世/重开后解锁 */
+  body.novice #btnDemo, body.novice #btnCohort, body.novice #btnExp, body.novice #btnObs,
+  body.novice #spiceBtn, body.novice #terrainSel, body.novice #paramsBar{display:none;}
+  .actionbtn{font-size:17px; letter-spacing:6px; padding:12px 34px; border-radius:10px;
+    box-shadow:0 4px 24px rgba(120,220,140,.25);}
+  .me-tag{color:var(--cyan);}
+</style>
+</head>
+<body>
+<header>
+  <h1>糖域 · 人生重开</h1>
+  <span class="hstat">回合 <b id="hTick">0</b></span>
+  <span class="hstat">人口 <b id="hPop">0</b></span>
+  <span class="hstat">基尼 <b id="hGini">0</b></span>
+  <div class="spacer"></div>
+  <div class="btngrp" id="spdBtns">
+    <button data-s="0" title="空格也可暂停">▶</button>
+    <input type="range" id="spdSlider" min="0" max="100" value="35" style="width:110px;accent-color:#4a8f6a;">
+    <span class="hstat" id="spdVal">2步/秒</span>
+    <input type="number" id="runTicks" value="300" min="10" step="50" title="定时观察:连跑N回合,主人公死了世界也继续,跑完再出总结"
+      style="width:58px; font-size:12.5px; padding:2px 4px; border:1px solid var(--btnBd); border-radius:6px; background:var(--btn); color:var(--btnTx);">
+    <button id="btnRun" title="定时观察:连跑N回合,主人公死亡不打断;手动暂停可中止">⏱ 跑</button>
+    <span class="hstat" title="开局人口:重开世界时生效">👥</span>
+    <input type="number" id="popNum" value="125" min="10" max="400" step="25" title="开局人口(默认125):点「↺ 重开世界」生效"
+      style="width:52px; font-size:12.5px; padding:2px 4px; border:1px solid var(--btnBd); border-radius:6px; background:var(--btn); color:var(--btnTx);">
+  </div>
+  <div class="btngrp" id="viewBtns">
+    <button data-v="god" class="on">上帝视角</button><button data-v="me">附身视角</button>
+  </div>
+  <button id="btnDemo" title="自动运行+大事字幕,展示给别人看">👁 演示模式</button>
+  <button id="btnObs" title="实时读数:这个实验正在发生什么">📈 观察</button>
+  <button id="btnCohort" title="按当前财富分三个出身队列,追踪翻身/保持/下跌">📊 流动性</button>
+  <button id="btnExp" title="同一规则跑两个世界:抽签 vs 均等">🧪 对照实验</button>
+  <div class="btngrp" style="gap:14px">  <!-- 香料/地形/主题/转世/重开=一组,折行时不拆散 -->
+  <button id="spiceBtn" class="hot" title="香料山开关:开=双资源+自发交易;关=纯糖世界,立即生效">🌶 香料山：关</button>
+  <select id="terrainSel" title="地形模式——经典双山:原著基准,固定两座糖山两座香料山;随机山:每次切换峰位随机;散布:无山体,资源碎簇遍布。即点即变,居民原地适应">
+    <option value="classic" title="原著基准:固定两座糖山+两座香料山,对角分布">经典双山</option>
+    <option value="random" title="立即切换为随机位置的四座山(山形不变)">随机山</option>
+    <option value="scatter" title="无山体,资源逐格随机散布成碎簇(社会难定居)">散布</option>
+  </select>
+  <button id="btnTheme" title="切换明暗主题(浅色=纸面/深色=夜空)">🌙 夜空色</button>
+  <button id="btnRebirth" class="hot">🎲 随机转世</button>
+  <button id="btnRestart" class="warn">↺ 重开世界</button>
+  </div>
+</header>
+<div id="sumOverlay" style="display:none; position:absolute; inset:0; z-index:9; background:var(--ovBg);
+  backdrop-filter:blur(2px); align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:560px; max-width:94%; max-height:92%; overflow-y:auto;">
+    <h3 id="sumTitle" style="color:var(--gold); letter-spacing:2px; margin-bottom:8px;"></h3>
+    <div id="sumBody"></div>
+    <button id="sumClose" style="width:100%; margin-top:14px; padding:9px; letter-spacing:3px;">✕ 关闭</button>
+  </div>
+</div>
+<div id="obsOverlay" style="display:none; position:absolute; inset:0; z-index:8; background:var(--ovBg);
+  backdrop-filter:blur(2px); align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:660px; max-width:94%; max-height:92%; overflow-y:auto;">
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:2px;">📈 实验观察:这个世界正在发生什么</h3>
+    <div style="font-size:12.5px;color:var(--dim);margin-bottom:12px">观察对象:没有设计者的世界里,阶层如何自发长出来,以及出身、努力、规则各自能改变多少。数据每半秒刷新。</div>
+    <div id="obsGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div>
+    <button id="obsClose" style="width:100%;margin-top:14px;padding:9px;letter-spacing:3px;">✕ 关闭(世界继续跑)</button>
+  </div>
+</div>
+<div id="cohOverlay" style="display:none; position:absolute; inset:0; z-index:8; background:rgba(5,8,14,.85);
+  backdrop-filter:blur(2px); align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:680px; max-width:94%; max-height:92%; overflow-y:auto;">
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:4px;">📊 社会流动性:出身决定命运吗?<span style="font-size:12px;color:var(--cyan)">实时追踪中,世界继续跑</span></h3>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;">按<b style="color:#cdd2de">穷</b>(<20) / <b style="color:#eee04e">中产</b>(20~40) / <b style="color:#ff2020">富</b>(≥40)三档把居民分成出身队列,持续追踪到死亡或当下。曲线=各队列平均财富(粗线)与个体轨迹(细线);表格=至今的翻身/保持/下跌统计(含已故者的终态)。面板开着也会随世界每半秒刷新。</div>
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="flex:1.2;">
+        <div style="font-size:11px;color:var(--dim);">平均财富轨迹 <span style="color:#cdd2de">■穷人</span> <span style="color:#eee04e">■中产</span> <span style="color:#ff2020">■富人</span></div>
+        <canvas id="cohChart" width="300" height="170"></canvas>
+      </div>
+      <div style="flex:1;" id="cohTable"></div>
+    </div>
+    <div id="cohNote" style="font-size:12.5px;color:var(--cyan);text-align:center;margin:10px 0 12px;line-height:1.7;"></div>
+    <div style="display:flex; gap:8px;">
+      <button id="cohBtn" class="hot" style="flex:1;">▶ 开始追踪(按此刻分层)</button>
+      <button id="cohClose" style="flex:1;">返回世界</button>
+    </div>
+  </div>
+</div>
+<div id="expOverlay" style="display:none; position:absolute; inset:0; z-index:8; background:rgba(5,8,14,.82);
+  backdrop-filter:blur(2px); align-items:center; justify-content:center;">
+  <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:22px 28px; width:640px; max-width:92%;">
+    <h3 style="color:var(--gold); letter-spacing:2px; margin-bottom:4px;">🧪 对照实验:天赋重要,还是运气重要?</h3>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:10px;">两个世界,同一套规则,同时跑300回合——唯一区别:左(黄线)居民天赋随机抽签,右(青线)所有居民天赋完全相同。灾害关闭以排除噪声。</div>
+    <div style="display:flex; gap:16px;">
+      <div style="flex:1;"><div style="font-size:11px;color:var(--dim);">基尼系数 <span style="color:#ffd479">■抽签</span> <span style="color:#6fd8e8">■均等</span></div><canvas id="expGini" width="280" height="130"></canvas></div>
+      <div style="flex:1;"><div style="font-size:11px;color:var(--dim);">人口</div><canvas id="expPop" width="280" height="130"></canvas></div>
+    </div>
+    <div id="expStats" style="font-size:13px; color:var(--tx); margin:10px 0 6px; text-align:center;"></div>
+    <div id="expVerdict" style="font-size:14.5px; color:var(--cyan); text-align:center; line-height:1.7; margin-bottom:12px;"></div>
+    <div style="display:flex; gap:8px;">
+      <button id="expBtn" class="hot" style="flex:1;">▶ 开始实验</button>
+      <button id="expViewB" title="把左边的大地图切到「均等世界」,亲眼看它的社会">👁 地图看均等世界</button>
+      <button id="expClose" style="flex:1;">返回世界</button>
+    </div>
+  </div>
+</div>
+<div id="paramsBar">
+  <button id="paramsToggle">⚙ 世界参数</button>
+  <span style="font-size:11px;color:#8a6d3b;margin-left:8px;">⚠=重开世界生效</span>
+  <div id="paramsPanel"></div>
+</div>
+<main id="mainRow">
+  <div id="mapwrap">
+    <canvas id="map" width="700" height="700"></canvas>
+    <div id="caption"></div>
+    <div id="welcome" style="display:none">
+      <div class="wcard">
+        <h2>投胎模拟器</h2>
+        <p style="font-size:15px">改编自社会学家在电脑里养了几十年的实验。</p>
+        <p>投胎是个技术活,但在普通人眼里就是随机的。点击按钮开始看看你这次随机到了哪里。</p>
+        <p class="wdim">点左下角「开始这一生」开始。</p>
+        <button class="hot" id="welBtn">🎲 开始投胎</button>
+      </div>
+    </div>
+    <div id="mapLegend">
+      <span class="lg">脸色=财富:<b style="color:#7d858f">灰</b>=赤贫→<b style="color:#a89a08">黄</b>=温饱→<b style="color:#a35d0e">棕橙</b>=小康→<b style="color:#e03c0c">橙红</b>=富裕→<b style="color:#c01038">深红</b>=巨富(⚙开「文化/部落」则改按部落上色)</span>
+      <span class="lg">按财富:<b style="color:#8a8f9c">灰</b>=赤贫→<b style="color:#c9a416">黄</b>=温饱→<b style="color:#d1880f">橙</b>=小康→<b style="color:#e02222">红</b>=巨富</span>
+      <span class="lg"><b style="color:var(--gold)">🟡金圈脸=你(脸色同样按财富)</b>　🟩=糖　<span id="lgSpice">🟧=香料</span>　🎯点居民标为追踪者(开局前3个,开局后可补到6)</span>
+    </div>
+    <div id="lifeAction"></div>
+    <div id="selBar"></div>
+    <div id="viewBChip" style="display:none; position:absolute; top:10px; right:10px; z-index:6;">
+      <button id="viewBBack">🗺 正在看均等世界 · 点此切回你的世界</button>
+    </div>
+    <div id="hint"></div>
+  </div>
+  <div id="lifeCol">
+    <div class="card"><h3 id="lifeTitle">我的人生</h3><div id="lifeBody"></div></div>
+    <details class="card guide" open>
+      <summary>📖 糖与香料 · 玩法</summary>
+      <div class="gbody">
+        <p><b class="gs">🍬 糖</b>(绿格)和<b class="gp">🌶 香料</b>(橙格)是两种口粮,缺一即死,分居两山——居民之间因此自发<b>交易</b>(见底部"糖价"曲线)。</p>
+        <p class="ghow">怎么玩</p>
+        <p>① <b>出生</b>=抽签:出生地/视野/代谢/寿限全随机;不满意可重抽或手动选地。</p>
+        <p>② <b>活着</b>=点格子走位,踩上自动采集;余命耗尽这一世就结束。</p>
+        <p>③ <b>死后</b>看总结,再抽下一条命。📚 每一世都记进生命之书。</p>
+        <p class="grow-tip">📖 阅历与教育能让<b>视野变大</b>——人越活看得越远。</p>
+        <p>👁 上帝视角=看全图;附身视角=只见你的视野。空格=暂停。</p>
+      </div>
+    </details>
+    <div class="card"><h3>📚 生命之书</h3><div id="livesBook" style="font-size:12.5px;line-height:1.9;color:var(--tx);">还未活过任何一世。</div></div>
+    <div class="card"><h3>编年史</h3><ul id="log"></ul></div>
+  </div>
+</main>
+<div id="chartsBar">
+  <div class="chartbox"><div class="ct"><span title="世界活着的人数。正常:稳态在100~400间波动;跌破50=世界快荒了,会触发移民补充。看什么:开局暴涨=生态太松,一路下滑=承载力不足">人口 ⓘ</span><span id="vPop">-</span></div><canvas id="cPop" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span title="贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端">基尼系数 ⓘ</span><span id="vGini">-</span></div><canvas id="cGini" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span title="1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡">糖价(香料/糖) ⓘ</span><span id="vPrice">-</span></div><canvas id="cPrice" width="180" height="60"></canvas></div>
+  <div class="chartbox"><div class="ct"><span title="最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)">财富分布 ⓘ</span><span id="vRich">-</span></div><canvas id="cHist" width="180" height="60"></canvas></div>
+</div>
+<script>
+"use strict";
+/* ================= 基础 ================= */
+const N=50; let CELL=14;                     // CELL 由 fitMap() 按容器尺寸自适应
+function fitMap(){                           // 地图吃满可用空间,窗口缩放跟随
+  const wrap=document.getElementById('mapwrap');
+  CELL=Math.max(8,Math.floor(Math.min(wrap.clientWidth,wrap.clientHeight)/N));
+  const cv=document.getElementById('map');
+  cv.width=N*CELL; cv.height=N*CELL;
+}
+window.addEventListener('resize',fitMap); fitMap();
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const choice=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ================= 参数 ================= */
+const P={regrow:1, disasters:true, disasterRate:4,
+         trade:true, culture:false, war:false, tax:false, blind:true, spice:false,
+         grow:true, eduCost:15, terrain:'classic',
+         equalWorld:false, initPop:125, maxPop:400};
+const PARAM_DEFS=[
+ {k:'grow',         label:'成长视野(阅历+教育)⚠', type:'check'},
+ {k:'eduCost',      label:'教育价格(0=免费义务教育)', type:'range', min:0, max:30, step:5},
+ {k:'regrow',       label:'糖/香料再生速度', type:'range', min:0, max:3, step:0.5},
+ {k:'disasters',    label:'灾害事件', type:'check'},
+ {k:'disasterRate', label:'灾害频率(‰/回合)', type:'range', min:0, max:10, step:1},
+ {k:'crowdCull',    label:'拥挤天灾(人群过密→瘟疫歼30%+流民散10%)', type:'check'},
+ {k:'trade',        label:'交易(糖⇄香料)', type:'check'},
+ {k:'culture',      label:'文化/部落', type:'check'},
+ {k:'war',          label:'部落战争', type:'check'},
+ {k:'tax',          label:'劫富济贫(每50回合)', type:'check'},
+ {k:'blind',        label:'盲牌模式(天赋死后揭晓)', type:'check'},
+ {k:'equalWorld',   label:'均等世界(无天赋抽签)⚠', type:'check'},
+ {k:'initPop',      label:'初始人口 ⚠', type:'range', min:50, max:400, step:25},
+];
+
+/* ================= 世界(纯模拟,不碰DOM渲染) ================= */
+let SUGAR_PEAKS=[[16,16],[34,34]], SPICE_PEAKS=[[34,16],[16,34]];   // classic固定;random模式重开时重抽
+const SIGMA=7.5;
+function randPeaks(minSame,minDiff){         // 全域随机四峰:同类峰拉开,异类峰不重叠
+  for(let t=0;t<300;t++){
+    const s=[],p=[];
+    for(let k=0;k<2;k++)s.push([ri(8,41),ri(8,41)]);
+    for(let k=0;k<2;k++)p.push([ri(8,41),ri(8,41)]);
+    const d=(A,B)=>Math.max(Math.abs(A[0]-B[0]),Math.abs(A[1]-B[1]));
+    const all=[...s,...p];
+    let ok2=true;
+    for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){
+      const same=(i<2)===(j<2);
+      if(d(all[i],all[j])<(same?minSame:minDiff)){ok2=false;break;}
+    }
+    if(ok2)return{s,p};
+  }
+  return{s:[[12,12],[37,37]],p:[[37,12],[12,37]]};   // 兜底
+}
+function genSugarTerrain(){                  // 糖地形:经典/随机=高斯山,散布=逐格随机簇
+  if(P.terrain==='scatter'){
+    for(let i=0;i<N*N;i++)world.sugarCap[i]=choice([0,0,0,1,1,1,2,2,3,4]);
+    smooth(world.sugarCap);
+  }else{
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+      const i=y*N+x;
+      world.sugarCap[i]=Math.min(4,Math.round(4*Math.exp(-dist2(x,y,SUGAR_PEAKS)/(2*SIGMA*SIGMA))));
+    }
+  }
+}
+function genSpiceTerrain(){
+  if(!P.spice){world.spiceCap.fill(0);world.spice.fill(0);return;}
+  if(P.terrain==='scatter'){
+    for(let i=0;i<N*N;i++)world.spiceCap[i]=choice([0,0,0,1,1,1,2,2,3,4]);
+    smooth(world.spiceCap);
+  }else{
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+      const i=y*N+x;
+      world.spiceCap[i]=Math.min(4,Math.round(4*Math.exp(-dist2(x,y,SPICE_PEAKS)/(2*SIGMA*SIGMA))));
+    }
+  }
+}
+function smooth(cap){                        // 两次3×3均值,让散布连成小簇
+  for(let pass=0;pass<2;pass++){
+    const src=cap.slice();
+    for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+      let sum=0,n=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+        const xx=wrap(x+dx),yy=wrap(y+dy);
+        sum+=src[yy*N+xx];n++;
+      }
+      cap[y*N+x]=Math.min(4,Math.round(sum/n));
+    }
+  }
+}
+let world=null, fx=null, priceHist=[];
+function genWorld(){
+  const n2=N*N;
+  world={tick:0, sugarCap:new Float32Array(n2), spiceCap:new Float32Array(n2),
+         sugar:new Float32Array(n2), spice:new Float32Array(n2), agents:[], nextId:1,
+         events:[], runUntil:0, births:0};     // 世界大事簿+定时观察终点+新生儿计数
+  fx={regrowMult:1, regrowUntil:0, wither:[]};
+  priceHist=[];
+  if(P.terrain==='random'){                  // 每次重开重抽峰位,山形不变
+    const pk=randPeaks(20,12);
+    SUGAR_PEAKS=pk.s; SPICE_PEAKS=pk.p;
+  }
+  genSugarTerrain();
+  genSpiceTerrain();
+  for(let i=0;i<n2;i++){world.sugar[i]=world.sugarCap[i];world.spice[i]=world.spiceCap[i];}
+  for(let k=0;k<P.initPop;k++)spawnAgent();
+  // 纯糖模式:隐藏香料相关说明与图例
+  document.querySelectorAll('.sp').forEach(el=>el.style.display=P.spice?'':'none');
+  const lg=document.getElementById('lgSpice'); if(lg)lg.style.display=P.spice?'':'none';
+}
+function dist2(x,y,peaks){let d=1e9;for(const[px,py]of peaks)d=Math.min(d,(x-px)**2+(y-py)**2);return d;}
+function occupancy(){const g=new Array(N*N).fill(null);for(const a of world.agents)if(a.alive)g[a.y*N+a.x]=a;return g;}
+function freeCells(){const r=[];const occ=occupancy();for(let i=0;i<N*N;i++)if(!occ[i])r.push(i);return r;}
+
+/* ---- 居民:出生即抽签 ---- */
+function rollStats(){
+  const bv=P.equalWorld?(P.grow?2:3):(P.grow?ri(1,3):ri(1,6));   // 起点视野,vision与bv必须同源
+  return P.equalWorld
+   ? {vision:bv, bv, sm:2, pm:P.spice?2:0, sugar:15,
+      spice:P.spice?15:0, maxAge:ri(70,85)}
+   : {vision:bv, bv,
+      sm:ri(1,2), pm:P.spice?ri(1,2):0, sugar:ri(5,25),
+      spice:P.spice?ri(5,25):0, maxAge:ri(60,100)};
+}
+function spawnAgent(px,py,ptag){
+  const s=rollStats();
+  let x,y;
+  if(px===undefined){const c=choice(freeCells()); x=c%N; y=(c/N)|0;}
+  else {x=px; y=py;}
+  const tag=ptag? ptag.slice():Array.from({length:8},()=>ri(0,1));
+  if(ptag&&Math.random()<0.3) tag[ri(0,7)]^=1;      // 子代文化小变异
+  const a={id:world.nextId++, x,y, ...s, bv:s.bv, edu:0, xp:0, age:0, alive:true, player:false,
+           target:null, tTick:-1, peak:s.sugar+s.spice, tag,
+           bornX:x, bornY:y, trades:0, gS:0, gP:0, far:0, birthTick:world.tick, w0:s.sugar+s.spice};
+  world.agents.push(a); return a;
+}
+/* ---- 成长视野:阅历(年龄)+教育(投资) ---- */
+function gainXp(a){                            // 每25回合阅历+1,封顶+2
+  if(!P.grow||a.xp>=2||a.age===0||a.age%25!==0)return;
+  a.xp++; a.vision=a.bv+a.edu+a.xp;
+  if(a.player)log(`📖 阅历渐长,视野 +1(现在 ${a.vision} 格)`,'me');
+}
+function tryEducate(a){                        // 财富富余(50+价格)才读书,买1学识=视野+1,封顶+3
+  if(!P.grow||a.edu>=3)return false;
+  const need=50+P.eduCost;                     // ponytail: 门槛50防止教育消费拖垮生育(曾致人口钉死50),升级路径为学费代际转移
+  if(a.sugar+a.spice<need)return false;
+  let pay=P.eduCost;
+  const f=Math.min(a.sugar,pay); a.sugar-=f; pay-=f; a.spice-=pay;
+  a.edu++; a.vision=a.bv+a.edu+a.xp;
+  if(a.player)log(`🎓 你完成学业(花了 ${P.eduCost} 财富),视野 +1(现在 ${a.vision} 格)`,'me');
+  return true;
+}
+
+/* ================= 规则 ================= */
+const wrap=d=>((d%N)+N)%N;                 // 环形世界:左右相连,上下相连(原著torus)
+function raysCells(a,grid){                 // 原著: 沿上下左右四条视线可达格子
+  const out=[{x:a.x,y:a.y}];
+  for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])
+    for(let d=1;d<=a.vision;d++){
+      const x=wrap(a.x+dx*d), y=wrap(a.y+dy*d);
+      if(grid[y*N+x])break;
+      out.push({x,y});
+    }
+  return out;
+}
+function survivalTime(a,hs,hp){
+  const t1=(a.sugar+hs)/a.sm;
+  const t2=a.pm>0?(a.spice+hp)/a.pm:Infinity;   // 纯糖世界无香料代谢
+  return Math.min(t1,t2);
+}
+function tagDist(a,b){let d=0;for(let i=0;i<8;i++)d+=a.tag[i]!==b.tag[i];return d;}
+function pickMove(a,grid){
+  let best=null,bestScore=-1;
+  for(const c of raysCells(a,grid)){
+    const i=c.y*N+c.x;
+    const score=survivalTime(a,world.sugar[i],world.spice[i])+Math.random()*0.01;
+    if(score>bestScore){bestScore=score;best=c;}
+  }
+  if(P.war){                                // 原著Rule C: 异部落占着好格子→杀死并掠夺
+    for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])
+      for(let d=1;d<=a.vision;d++){
+        const x=wrap(a.x+dx*d),y=wrap(a.y+dy*d);
+        const e=grid[y*N+x]; if(!e)continue;
+        if(tagDist(a,e)>4&&e!==player.agent){
+          const s=survivalTime(a,world.sugar[y*N+x],world.spice[y*N+x])+(e.sugar+e.spice)*0.02;
+          if(s>bestScore){bestScore=s;best={x,y,kill:e};}
+        }
+        break;                              // ponytail: 视线被第一个占位者挡住,不穿透
+      }
+  }
+  return best;
+}
+function mrs(a){return (a.sugar/a.sm)/(a.spice/a.pm);}
+function tryTrade(a,b){
+  if(!P.spice)return null;                   // 纯糖世界:单一商品无交易
+  if(a.tTick===world.tick||b.tTick===world.tick)return null;
+  const ma=mrs(a),mb=mrs(b);
+  if(Math.abs(ma-mb)<0.15)return null;
+  const seller=ma>mb?a:b, buyer=ma>mb?b:a;   // mrs高=糖相对富裕→卖糖换香料
+  const r=Math.sqrt(ma*mb);
+  if(!(r>0))return null;                     // NaN/0/负价不成交
+  const dS=Math.min(seller.sugar*0.25, buyer.spice/r);
+  if(!(dS>=0.5))return null;                 // ponytail: 反向比较,NaN在这里必被挡下
+  seller.sugar-=dS; seller.spice+=dS*r; buyer.sugar+=dS;
+  buyer.spice=Math.max(0,buyer.spice-dS*r);  // 浮点残留钳零,防止负余额跨回合存活
+  a.tTick=b.tTick=world.tick;
+  if(!world._isB){priceHist.push(r); if(priceHist.length>300)priceHist.shift();}
+  return {dS,dP:dS*r,r,seller,buyer};
+}
+function metabolize(a){a.sugar-=a.sm; if(a.pm>0)a.spice-=a.pm; a.age++;
+  if(!(a.sugar>0))return'饥饿(缺糖)';
+  if(a.pm>0&&!(a.spice>0))return'饥饿(缺香料)';
+  if(a.age>a.maxAge)return '衰老'; return null;}
+
+function tick(){
+  world.tick++;
+  const grid=occupancy();
+  for(const a of shuffle(world.agents.slice())){
+    if(!a.alive)continue;
+    // --- 移动 ---
+    if(a.player&&a.target){                 // 玩家亲自走位:朝目标贪心走
+      if(a.target.x===a.x&&a.target.y===a.y)a.target=null;
+      else{
+        let best=null,bd=1e9;
+        for(const c of raysCells(a,grid)){
+          const d=Math.abs(c.x-a.target.x)+Math.abs(c.y-a.target.y);
+          if(d<bd){bd=d;best=c;}
+        }
+        if(best&&bd<Math.abs(a.x-a.target.x)+Math.abs(a.y-a.target.y)){a.x=best.x;a.y=best.y;}
+      }
+    }
+    if(!a.player||!a.target){               // AI托管(或普通居民)
+      const m=pickMove(a,grid);
+      if(m){ if(m.kill)die(m.kill,'部落战争');
+             if(!m.kill||!m.kill.alive){grid[a.y*N+a.x]=null;a.x=m.x;a.y=m.y;grid[m.y*N+m.x]=a;} }
+    }
+    // --- 采集/交易/文化/代谢 ---
+    const i=a.y*N+a.x;
+    a.sugar+=world.sugar[i]; a.spice+=world.spice[i];
+    if(a.player){a.gS+=world.sugar[i]; a.gP+=world.spice[i];
+      const dx=Math.min(Math.abs(a.x-a.bornX),N-Math.abs(a.x-a.bornX)),
+            dy=Math.min(Math.abs(a.y-a.bornY),N-Math.abs(a.y-a.bornY));
+      a.far=Math.max(a.far,Math.max(dx,dy));}
+    world.sugar[i]=0; world.spice[i]=0;
+    if(!a.player)tryEducate(a);                // AI居民攒够自动读书;玩家手动决策(右侧按钮)
+    if(P.trade)for(const[dx,dy]of shuffle([[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]])){
+      const x=a.x+dx,y=a.y+dy; if(x<0||y<0||x>=N||y>=N)continue;
+      const b=grid[y*N+x]; if(!b||!b.alive)continue;
+      const t=tryTrade(a,b);
+      if(t){if(a.player)a.trades++; if(b.player)b.trades++;
+        if(a.player||b.player)
+          log(`🤝 你用 ${t.dS.toFixed(1)} 糖换得 ${t.dP.toFixed(1)} 香料(价格 ${t.r.toFixed(2)})`,'me');}
+    }
+    if(P.culture&&Math.random()<0.1){       // 原著Rule K: 邻居文化传染
+      const nb=[[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>{const x=a.x+dx,y=a.y+dy;
+        return(x>=0&&y>=0&&x<N&&y<N)?grid[y*N+x]:null;}).filter(Boolean);
+      if(nb.length){const b=choice(nb);a.tag[ri(0,7)]=b.tag[ri(0,7)];}
+    }
+    const peak=a.sugar+a.spice; if(peak>a.peak)a.peak=peak;
+    const cause=metabolize(a);
+    if(a.alive)gainXp(a);                      // 活过一岁,阅历+1的检查点
+    if(cause)die(a,cause);
+    // --- 生育(天赋重新抽签) ---
+    if(a.alive&&world.agents.length<P.maxPop
+       &&a.age>=12&&a.age<=60&&a.sugar+a.spice>30&&Math.random()<0.06){
+      const spot=[[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>({x:a.x+dx,y:a.y+dy}))
+        .filter(c=>c.x>=0&&c.y>=0&&c.x<N&&c.y<N&&!grid[c.y*N+c.x]);
+      if(spot.length){const c=choice(spot);
+        const takeS=Math.min(a.sugar,12),takeP=Math.min(a.spice,8);
+        a.sugar-=takeS;a.spice-=takeP;
+        const ch=spawnAgent(c.x,c.y,a.tag); ch.sugar=takeS+5;
+        if(P.spice)ch.spice=takeP+5;         // 纯糖世界新生儿不带香料
+        grid[c.y*N+c.x]=ch;}
+    }
+  }
+  regrow();
+  if(P.tax&&world.tick%50===0)redistribute();
+  if(P.disasters&&Math.random()<P.disasterRate/1000)disaster();
+  if(P.crowdCull&&world.tick%5===0)crowdCheck();
+  if(world.tick%10===0)reproduce();          // 生育继承:阶层从这里"长"出来
+  if(world.tick%100===0&&aliveCount()<P.maxPop){   // 移民常态化:底层持续输血
+    for(let k=0;k<5&&aliveCount()<P.maxPop;k++)spawnAgent();
+    log('🚶 5名新移民散落抵达荒原','ev-good');
+  }
+  if(world.tick%10===0){recordStats();recordCohort();}
+  if(world.tick%10===0&&aliveCount()<50){    // ponytail: 人口崩塌托底,不模拟真正的灭绝
+    let n=Math.min(20,50-aliveCount());
+    for(let k=0;k<n;k++)spawnAgent();
+    log('🚶 一批新移民抵达边缘荒原','ev-good');
+  }
+  world.agents=world.agents.filter(a=>a.alive);
+  if(world.runUntil>world.tick){
+    if(world.tick%5===0)updateRunBtn();                     // 按钮上实时显示剩余回合
+    if(world.tick%25===0)caption(`⏱ 定时观察中:还剩 ${world.runUntil-world.tick} 回合`);
+  }
+  // 追踪标记不剔除:死亡者保留在名单里,终局总结要报告它的结局(绘制时只画活着的)
+  if(selected&&!selected.alive){selected=null;trace=[];updateSelBar();}   // 研究对象死了,轨迹收尾
+  else if(selected)trace.push([selected.x,selected.y]),trace.length>90&&trace.shift();
+  if(world._isB)updateHeader(); else {updateHeader(); updateMeCard();}
+}
+function aliveCount(){return world.agents.reduce((s,a)=>s+a.alive,0);}
+function die(a,cause){
+  a.alive=false; a.cause=cause;
+  noteDeath(a);
+  if(cohort&&a.cohort)cohort.dead.push(a);   // 流动性追踪:记录队列成员死亡(死时财富=终态)
+  if(a.player){player.lives.push({age:a.age,peak:a.peak,cause,
+    vision:a.vision,sm:a.sm,pm:a.pm,maxAge:a.maxAge,
+    born:birthPlaceDesc(a,a.bornX,a.bornY),talent:talentDesc(a),trades:a.trades,far:a.far});
+    saveLives(); renderLivesBook();
+    graduateNovice();                          // 首世已死:新手期结束,研究型控件解锁
+    a.player=false;player.agent=null;player.phase='dead';
+    player.lastDead=a;
+    if(world.runUntil>world.tick&&!demo){      // 定时观察中:先不弹总结卡,世界继续跑(演示模式不挂起,靠死亡卡4秒推进循环)
+      player.pendingCard=true;
+      log(`💀 你的第${player.life}世结束了(${cause})——定时观察继续,跑完再总结`,'ev-bad');
+    }else showDeathCard(a);}
+}
+function renderLivesBook(){                  // 生命之书:逐世一行账
+  const el=document.getElementById('livesBook');
+  const L=player.lives;
+  if(!L.length){el.textContent='还未活过任何一世。';return;}
+  el.innerHTML=L.map((l,i)=>{
+    const cls=l.age>=60?'var(--good)':l.age<20?'var(--bad)':'var(--tx)';
+    return `<div style="border-bottom:1px dashed var(--line);padding:2px 0;cursor:pointer" title="点开重看这一世的总结" onclick="showLifeSummary(${i})">
+      <b style="color:var(--tx)">第${i+1}世</b> ${l.born}·${l.talent} · <b style="color:${cls}">${l.age}岁</b> ${l.cause}${l.trades?` · 🤝${l.trades}`:''}</div>`;
+  }).join('')+
+  `<div style="margin-top:4px;color:var(--cyan)">共${L.length}世 · 平均${(L.reduce((s,l)=>s+l.age,0)/L.length).toFixed(0)}岁 · 点任一行重看总结</div>`;
+}
+function regrow(){
+  const g=fx.regrowUntil>world.tick?fx.regrowMult:1;
+  for(let y=0;y<N;y++){
+    for(let x=0;x<N;x++){
+      const i=y*N+x;
+      let f=P.regrow*g;
+      for(const w of fx.wither)if(world.tick<w.until&&(x-w.cx)**2+(y-w.cy)**2<w.r*w.r){f=0;break;}
+      if(f>0){
+        if(world.sugar[i]<world.sugarCap[i])world.sugar[i]=Math.min(world.sugarCap[i],world.sugar[i]+f);
+        if(world.spice[i]<world.spiceCap[i])world.spice[i]=Math.min(world.spiceCap[i],world.spice[i]+f);
+      }
+    }
+  }
+}
+function redistribute(){                     // 对中位数以上财富征20%,平分给较穷的一半
+  const alive=world.agents.filter(a=>a.alive); if(alive.length<4)return;
+  const sorted=[...alive].sort((a,b)=>(a.sugar+a.spice)-(b.sugar+b.spice));
+  const med=sorted[(sorted.length/2)|0].sugar+sorted[(sorted.length/2)|0].spice;
+  let pool=0;
+  for(const a of alive){const w=a.sugar+a.spice;
+    if(w>med){const t=0.2*(w-med);const f=Math.min(a.sugar,t/2),fp=Math.max(0,Math.min(a.spice,t-f));  // ponytail:近似按财富构成扣税
+      a.sugar-=f;a.spice-=fp;pool+=f+fp;}}
+  const poor=sorted.slice(0,(sorted.length/2)|0);
+  const each=pool/poor.length;
+  for(const a of poor){a.sugar+=each/2;a.spice+=each/2;}
+  if(pool>0)log(`⚖️ 再分配: ${pool.toFixed(0)} 财富从富人转向穷人`,'');
+}
+function reproduce(){                        // 原著精神:成年+温饱者在旁生子;子承位置/文化/¼财富
+  if(aliveCount()>=P.maxPop)return;
+  const occ=occupancy();
+  for(const a of world.agents){
+    if(!a.alive||a.player||a.age<18)continue;          // ponytail: 投胎者不参与生育,避免死亡卡叙事混乱
+    if(a.sugar+a.spice<25||Math.random()>=0.02)continue;
+    const spots=[];
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+      const x=a.x+dx,y=a.y+dy;
+      if(x>=0&&y>=0&&x<N&&y<N&&!occ[y*N+x])spots.push([x,y]);
+    }
+    if(!spots.length)continue;
+    const[cx,cy]=choice(spots);
+    const c=spawnAgent(cx,cy,a.tag);                   // 文化遗传(带小变异)
+    c.sugar=Math.floor(a.sugar/4); c.spice=P.spice?Math.floor(a.spice/4):0;
+    a.sugar-=c.sugar; a.spice-=c.spice;
+    c.peak=c.sugar+c.spice; c.birthTick=world.tick; c.w0=c.sugar+c.spice;
+    world.births++;
+    occ[cy*N+cx]=c;
+    if(aliveCount()>=P.maxPop)break;
+  }
+}
+function crowdCheck(){                       // 拥挤天灾:25%以上人口挤作一团→瘟疫歼30%,10%流民散落四方
+  const alive=world.agents.filter(a=>a.alive);
+  if(alive.length<40)return;
+  if(world.tick<(world._cullCd||0))return;   // ponytail: 固定冷却150回合防振荡,升级=按密度动态恢复
+  const occ=occupancy();
+  let crowded=0;
+  for(const a of alive){
+    let nb=0;
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+      if(!dx&&!dy)continue;
+      if(occ[wrap(a.y+dy)*N+wrap(a.x+dx)])nb++;
+    }
+    if(nb>=5)crowded++;
+  }
+  if(crowded/alive.length<0.25)return;
+  const victims=alive.filter(()=>Math.random()<0.3);
+  for(const v of victims)die(v,'拥挤瘟疫');
+  const refs=Math.round(alive.length*0.1);
+  for(let k=0;k<refs;k++)spawnAgent();       // 随机空地落点=散落四方
+  world._cullCd=world.tick+150;
+  log(`🌀 拥挤天灾!${(crowded/alive.length*100)|0}%的人口挤在一起,瘟疫带走${victims.length}人,另有${refs}名流民散落四方`,'ev-bad');
+}
+function disaster(){
+  const t=choice(['drought','golden','wither','meteor','plague']);
+  if(t==='drought'){fx.regrowMult=0.3;fx.regrowUntil=world.tick+30;
+    log('🌫️ 大旱!全域再生降低七成,持续30回合','ev-bad');}
+  else if(t==='golden'){fx.regrowMult=2;fx.regrowUntil=world.tick+40;
+    log('🌞 丰年!资源再生翻倍,持续40回合','ev-good');}
+  else if(t==='wither'){const p=choice(SUGAR_PEAKS);
+    fx.wither.push({cx:p[0],cy:p[1],r:10,until:world.tick+40});
+    log('🍂 一座糖山枯萎了,40回合寸草不生','ev-bad');}
+  else if(t==='meteor'){const cx=ri(5,44),cy=ri(5,44),r=6;
+    for(let y=cy-r;y<=cy+r;y++)for(let x=cx-r;x<=cx+r;x++)
+      if(x>=0&&y>=0&&x<N&&y<N&&(x-cx)**2+(y-cy)**2<=r*r){world.sugar[y*N+x]=0;world.spice[y*N+x]=0;}
+    for(const a of world.agents)if(a.alive&&(a.x-cx)**2+(a.y-cy)**2<=r*r)die(a,'陨石');
+    log(`☄️ 陨石坠落(${cx},${cy})!方圆6格化为焦土`,'ev-bad');}
+  else if(t==='plague'){let n=0;
+    for(const a of world.agents)if(a.alive&&Math.random()<0.2){die(a,'瘟疫');n++;}
+    if(n)log(`🦠 瘟疫蔓延,${n}位居民病逝`,'ev-bad');}
+}
+function gini(w){const n=w.length; if(n<2)return 0;
+  const s=[...w].sort((a,b)=>a-b); let cs=0,sw=0;
+  for(let i=0;i<n;i++){cs+=(2*(i+1)-n-1)*s[i];sw+=s[i];}
+  return sw<=0?0:cs/(n*sw);}
+
+/* ================= 流动性追踪:出身队列的翻身/保持/下跌 ================= */
+let cohort=null;                             // {marks,dead,series,sample,t0}
+function tier3(w){return w>=40?'rich':w>=20?'mid':'poor';}
+const T3={poor:'#cdd2de',mid:'#eee04e',rich:'#ff2020'};
+function startCohort(){
+  const alive=world.agents.filter(a=>a.alive);
+  cohort={marks:{poor:[],mid:[],rich:[]},dead:[],series:{poor:[],mid:[],rich:[]},t0:world.tick,sample:[]};
+  for(const a of alive){const t=tier3(a.sugar+a.spice);a.cohort=t;cohort.marks[t].push(a);}
+  for(const t of['poor','mid','rich'])       // 每档抽3个个体画细线轨迹
+    cohort.sample.push(...shuffle(cohort.marks[t].slice()).slice(0,3).map(a=>({ref:a,t})));
+  log(`📊 流动性追踪开始(回合${world.tick}):穷人${cohort.marks.poor.length}人 中产${cohort.marks.mid.length}人 富人${cohort.marks.rich.length}人`,'ev-good');
+  recordCohort();
+}
+function recordCohort(){
+  if(!cohort)return;
+  for(const t of['poor','mid','rich']){
+    const alive=cohort.marks[t].filter(a=>a.alive);
+    cohort.series[t].push(alive.length?alive.reduce((s,a)=>s+a.sugar+a.spice,0)/alive.length:null);
+  }
+}
+function cohortStats(){
+  const out={};
+  for(const t of['poor','mid','rich']){
+    const members=cohort.marks[t], n=members.length;
+    const now={poor:0,mid:0,rich:0};
+    for(const a of members)now[tier3(a.sugar+a.spice)]++;
+    const deadN=members.filter(a=>!a.alive).length;
+    out[t]={n,now,deadN};
+  }
+  return out;
+}
+function eduAttribution(){                   // 教育归因:翻身者读过书占比/跌落者没读过书占比
+  if(!cohort||!P.grow)return '';
+  let risen=0,risenEdu=0,fallen=0,fallenNo=0;
+  for(const a of cohort.marks.poor)
+    if(tier3(a.sugar+a.spice)!=='poor'){risen++; if(a.edu>0)risenEdu++;}
+  for(const a of cohort.marks.rich)
+    if(tier3(a.sugar+a.spice)!=='rich'){fallen++; if(a.edu===0)fallenNo++;}
+  if(!risen&&!fallen)return '';
+  const pc=(x,n)=>n?`${Math.round(100*x/n)}%`:'—';
+  return `🎓 教育归因(价格${P.eduCost}):翻身的穷人${risen}人中,读过书的占 ${pc(risenEdu,risen)};跌落的富人${fallen}人中,从未上学的占 ${pc(fallenNo,fallen)}。`;
+}
+function cohortNote(S){
+  const p=S.poor,m=S.mid,r=S.rich;
+  const pc=(x,n)=>n?`${x}人(${Math.round(100*x/n)}%)`:'—';
+  const upPoor=p.now.mid+p.now.rich, downRich=r.now.poor+r.now.mid;
+  return `以打开追踪那一刻的财富分层为「出身」:`+
+    `出身穷人 ${p.n} 人,至今翻身到中产以上 ${pc(upPoor,p.n)};`+
+    `出身中产 ${m.n} 人,升富 ${pc(m.now.rich,m.n)},保持中产 ${pc(m.now.mid,m.n)},下跌 ${pc(m.now.poor,m.n)};`+
+    `出身富人 ${r.n} 人,保持富有 ${pc(r.now.rich,r.n)},下跌 ${pc(downRich,r.n)}。`+
+    `各队列已故:穷${p.deadN} 中${m.deadN} 富${r.deadN}(死时财富即终态)。`+
+    (eduAttribution()?`<br>${eduAttribution()}`:'');
+}
+function renderCohort(){
+  const ov=document.getElementById('cohOverlay');
+  ov.style.display='flex';
+  const btn=document.getElementById('cohBtn');
+  if(cohort){
+    const S=cohortStats();
+    document.getElementById('cohNote').innerHTML=cohortNote(S);
+    const row=(label,T)=>{
+      const n=T.n||1;
+      const zh={poor:'穷',mid:'中产',rich:'富人'}[label];
+      return `<tr><td style="color:${T3[label]}">出身${zh}</td><td>${T.n}</td><td>${T.deadN}</td>`+
+        ['poor','mid','rich'].map(k=>`<td style="${k===label?'font-weight:700':''}">${T.now[k]}<span style="font-size:10px;color:#71809a"> ${Math.round(100*T.now[k]/n)}%</span></td>`).join('')+
+        `</tr>`;
+    };
+    document.getElementById('cohTable').innerHTML=
+      `<table style="width:100%;font-size:11.5px;border-collapse:collapse;color:var(--tx)">`+
+      `<tr style="color:#71809a"><td>出身↓ 现状→</td><td>人数</td><td>已故</td><td style="color:#cdd2de">现为穷</td><td style="color:#eee04e">现为中产</td><td style="color:#ff2020">现为富</td></tr>`+
+      row('poor',S.poor)+row('mid',S.mid)+row('rich',S.rich)+
+      `</table>`;
+    drawCohortChart();
+    btn.textContent='↻ 重置追踪(按此刻重新分层)';
+  }else{
+    document.getElementById('cohNote').textContent='还没开始。点下方按钮,以当前时刻的财富分层为出身起点,开始追踪。';
+    document.getElementById('cohTable').innerHTML='';
+    const c=document.getElementById('cohChart'),g=c.getContext('2d');
+    g.clearRect(0,0,c.width,c.height);
+  }
+}
+function drawCohortChart(){
+  const c=document.getElementById('cohChart'),g=c.getContext('2d');
+  g.clearRect(0,0,c.width,c.height);
+  g.strokeStyle=TH.grid;g.strokeRect(0.5,0.5,c.width-1,c.height-1);
+  const S=cohort.series;
+  const mx=Math.max(20,...S.poor,...S.mid,...S.rich)*1.1;
+  const N2=Math.max(2,S.poor.length,S.mid.length,S.rich.length);
+  const line=(data,color,w2,alpha)=>{
+    if(data.length<2)return;
+    g.globalAlpha=alpha; g.strokeStyle=color; g.lineWidth=w2;
+    let pen=false;
+    g.beginPath();
+    data.forEach((v,i)=>{                       // null=队列已无活人,断线
+      const x=i/(N2-1)*c.width;
+      if(v===null||!isFinite(v)){pen=false;return;}
+      const y=c.height-4-(v/mx)*(c.height-8);
+      pen?g.lineTo(x,y):g.moveTo(x,y); pen=true;
+    });
+    g.stroke(); g.globalAlpha=1;
+  };
+  for(const s of cohort.sample){              // 个体细线:当前值示意平线
+    const a=s.ref;
+    const cur=a.alive?a.sugar+a.spice:0;
+    line(S[s.t].map(()=>cur),T3[s.t],1,0.25);
+    // ponytail: 个体历史未逐tick存快照,细线为当前值示意,升级路径=存个体逐tick轨迹
+  }
+  line(S.poor,T3.poor,2.2,1);
+  line(S.mid,T3.mid,2.2,1);
+  line(S.rich,T3.rich,2.2,1);
+  g.fillStyle='#71809a';g.font='10px sans-serif';
+  g.fillText(`t0=${cohort.t0}回合`,4,c.height-4);
+  g.fillText(`追踪${(world.tick-cohort.t0)}回合`,c.width-80,c.height-4);
+}
+
+/* ================= 对照实验:均等 vs 抽签,并排300回合 ================= */
+let exp=null;                                // {worldB,fxB,giniA,giniB,popA,popB,tick,done,verdict,d0}
+function runExperiment(){
+  exp={worldB:null,fxB:null,giniA:[],giniB:[],popA:[],popB:[],tick:0,done:false,verdict:'',d0:P.disasters};
+  const real=world, realFx=fx;
+  const eq0=P.equalWorld;
+  P.equalWorld=true; P.disasters=false;      // 对照实验关灾害,排除噪声
+  genWorld();                                // 此时全局world=均等世界B
+  exp.worldB=world; exp.fxB=fx;
+  world._isB=true;
+  P.equalWorld=eq0;
+  world=real; fx=realFx;                     // 现实世界继续当主世界
+  recordExp();
+}
+function recordExp(){
+  const B=exp.worldB.agents.filter(a=>a.alive);
+  exp.giniB.push(gini(B.map(a=>a.sugar+a.spice)));
+  exp.popB.push(B.length);
+}
+function stepExperiment(){                   // 主世界每10个tick调用一次,B同步走10步
+  if(!exp||exp.done)return;
+  const alive=world.agents.filter(a=>a.alive);
+  exp.giniA.push(gini(alive.map(a=>a.sugar+a.spice)));
+  exp.popA.push(alive.length);
+  const sw=world, sf=fx;
+  world=exp.worldB; fx=exp.fxB;
+  try{ for(let i=0;i<10;i++)tick(); }finally{ world=sw; fx=sf; }
+  exp.tick=exp.worldB.tick;
+  recordExp();
+  if(exp.tick>=300)finishExperiment();
+}
+function finishExperiment(){
+  exp.done=true;
+  P.disasters=exp.d0;                        // 恢复用户的灾害设置
+  const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const dA=avg(exp.giniA.slice(-15)), dB=avg(exp.giniB.slice(-15));
+  const verdict=dB>dA*1.15?'均等天赋世界的贫富差距反而更大——不平等主要来自「位置与运气」,而非天赋差异'
+    :dA>dB*1.15?'天赋差异主导了不平等——这一局「命」比「运」更重要'
+    :'两个世界的基尼几乎一样——不平等会从任何微小差异中自发长出来';
+  exp.verdict=verdict;
+  log('🧪 对照实验完成(300回合): '+verdict,'ev-good');
+}
+function renderExpOverlay(){
+  const ov=document.getElementById('expOverlay');
+  ov.style.display='flex';
+  document.getElementById('expVerdict').textContent=exp?exp.verdict:'';
+  const s=document.getElementById('expStats');
+  if(exp)s.textContent=`抽签世界基尼 ${(exp.giniA.at(-1)||0).toFixed(3)} · 均等世界基尼 ${(exp.giniB.at(-1)||0).toFixed(3)} · 采样 ${exp.giniA.length}/30`;
+  else s.textContent='设定好参数后点「开始实验」';
+  if(exp)drawExpCharts();
+}
+function closeExp(){document.getElementById('expOverlay').style.display='none';}
+function drawExpCharts(){
+  const c1=document.getElementById('expGini'), g1=c1.getContext('2d');
+  g1.clearRect(0,0,c1.width,c1.height);
+  const draw=(g,data,color)=>{if(data.length<2)return;
+    const mx=Math.max(0.3,...data)*1.15;
+    g.strokeStyle=color;g.lineWidth=2;g.beginPath();
+    data.forEach((v,i)=>{const x=i/(data.length-1)*g.canvas.width,y=g.canvas.height-4-(v/mx)*(g.canvas.height-8);
+      i?g.lineTo(x,y):g.moveTo(x,y);});
+    g.stroke();};
+  draw(g1,exp.giniA,'#ffd479');
+  draw(g1,exp.giniB,'#6fd8e8');
+  g1.strokeStyle=TH.grid;g1.strokeRect(0.5,0.5,c1.width-1,c1.height-1);
+  const c2=document.getElementById('expPop'), g2=c2.getContext('2d');
+  g2.clearRect(0,0,c2.width,c2.height);
+  const m2=Math.max(60,...exp.popA,...exp.popB)*1.15;
+  const draw2=(g,data,color)=>{if(data.length<2)return;
+    g.strokeStyle=color;g.lineWidth=2;g.beginPath();
+    data.forEach((v,i)=>{const x=i/(data.length-1)*g.canvas.width,y=g.canvas.height-4-(v/m2)*(g.canvas.height-8);
+      i?g.lineTo(x,y):g.moveTo(x,y);});
+    g.stroke();};
+  draw2(g2,exp.popA,'#ffd479');
+  draw2(g2,exp.popB,'#6fd8e8');
+  g2.strokeStyle=TH.grid;g2.strokeRect(0.5,0.5,c2.width-1,c2.height-1);
+}
+const stats={pop:[],gini:[],price:[]};
+function recordStats(){
+  if(world._isB)return;                      // 对照世界不进主图表
+  const alive=world.agents.filter(a=>a.alive);
+  stats.pop.push(alive.length);
+  stats.gini.push(gini(alive.map(a=>a.sugar+a.spice)));
+  const ph=priceHist.slice(-50);
+  stats.price.push(ph.length?ph.reduce((a,b)=>a+b)/ph.length:0);
+  for(const k in stats)if(stats[k].length>720)stats[k].shift();
+}
+
+/* ---- 个人处境与发展建议(每次状态刷新时生成,最多2条) ---- */
+const birthStats={};                         // 出身地 → {n,ageSum,starve}
+function noteDeath(a){
+  const k=birthPlaceDesc(a,a.bornX,a.bornY);
+  const s=birthStats[k]||(birthStats[k]={n:0,ageSum:0,starve:0});
+  s.n++; s.ageSum+=a.age;
+  if(!s.max||a.age>s.max)s.max=a.age;              // 活最久的同乡:翻身可能性的活证据
+  if(!s.peakMax||a.peak>s.peakMax)s.peakMax=a.peak;// 同乡巅峰财富纪录
+  if(a.cause&&a.cause.startsWith('饥饿'))s.starve++;
+}
+function birthHistory(a){                    // 同出身者的历史结局:弊端要量化,但不是判决书
+  const k=birthPlaceDesc(a,a.bornX,a.bornY);
+  const s=birthStats[k];
+  if(!s||!s.n)return `<div class="brow"><span>📜 同出身者命运</span><b>你是第一位</b></div>`;
+  const avg=(s.ageSum/s.n).toFixed(0);
+  const starvePct=Math.round(100*s.starve/s.n);
+  return `<div class="brow"><span>📜 同出身者(${s.n}人)</span><b>平均享年${avg}岁 · 最久${s.max||'?'}岁 · 饿死率${starvePct}%</b></div>`+
+    (starvePct>=50?`<div style="font-size:12.5px;color:var(--good);padding:2px 0">但饿死率不是判决书:同乡巅峰财富到过 ${s.peakMax?s.peakMax.toFixed(0):'?'}。出身定的是难度,不是结局。</div>`:'');
+}
+function advice(a){                          // 当前处境→最多2条建议(发展方向)
+  const tips=[];
+  const ts=a.sugar/a.sm, tp=a.pm>0?a.spice/a.pm:1e9;
+  if(ts<5)tips.push(`⚠ 糖余命仅${ts.toFixed(1)}天——立刻向绿色格子移动`);
+  else if(P.spice&&tp<5)tips.push(`⚠ 香料余命仅${tp.toFixed(1)}天——向橙色格子移动`);
+  if(tips.length<2&&P.grow&&a.edu<3){
+    const need=50+P.eduCost, gap=need-a.sugar-a.spice;
+    if(gap<=0)tips.push(`🎓 可读书了:花${P.eduCost}财富,视野永久+1(右侧按钮)`);
+    else tips.push(`📚 发展方向:再攒 ${gap.toFixed(0)} 财富即可读书(视野+1,看得更远采集更易)`);
+  }
+  if(tips.length<2&&a.age>a.maxAge*0.8)tips.push(`⏳ 已近寿限,这一世以平稳采集为主,别冒险远行`);
+  if(tips.length<2&&P.spice){
+    const lackS=a.sugar/a.sm<a.spice/a.pm;
+    if(Math.abs(a.sugar/a.sm-a.spice/a.pm)>6)tips.push(`🤝 你${lackS?'缺糖':'缺香料'}而另一资源富余,靠近邻居交易可补短板`);
+  }
+  return tips.slice(0,2);
+}
+/* ---- 香料山独立开关:即点即变,活人生理同步适应 ---- */
+function toggleSpice(on){
+  P.spice=on;
+  const b=document.getElementById('spiceBtn');
+  b.textContent=on?'🌶 香料山：开':'🌶 香料山：关';
+  b.classList.toggle('on',on);
+  if(!on){
+    for(let i=0;i<N*N;i++){world.spiceCap[i]=0;world.spice[i]=0;}
+    for(const a of world.agents){if(!a.alive)continue;a.pm=0;a.spice=0;}
+    log('🌶 香料山沉入地底——纯糖世界:无香料、无交易','ev-good');
+  }else{
+    genSpiceTerrain();
+    for(const a of world.agents){if(!a.alive)continue;a.pm=ri(1,2);}
+    for(let i=0;i<N*N;i++)world.spice[i]=world.spiceCap[i];   // 隆起即成山,画面立即可见
+    log('🌶 香料山隆起——居民开始需要第二种口粮,交易将自发涌现','ev-good');
+  }
+  document.querySelectorAll('.sp').forEach(el=>el.style.display=on?'':'none');
+  const lg=document.getElementById('lgSpice'); if(lg)lg.style.display=on?'':'none';
+  updateHeader(); updateMeCard();
+}
+document.getElementById('spiceBtn').onclick=()=>toggleSpice(!P.spice);
+/* ---- 地形模式:选择后提示需重开生效,未生效时下拉橙框警示 ---- */
+const TERRAIN_NAMES={classic:'经典双山',random:'随机山',scatter:'散布'};
+const terrainSel=document.getElementById('terrainSel');
+terrainSel.value=P.terrain;
+function syncTerrainSel(){
+  terrainSel.title='地形模式——经典双山:原著基准;随机山:每次切换峰位随机;散布:资源碎簇无山。即点即变,居民原地适应';
+}
+terrainSel.addEventListener('change',()=>{
+  P.terrain=terrainSel.value;                // 即时切换:地形重建,居民原地适应
+  if(P.terrain==='random'){
+    const pk=randPeaks(20,12);
+    SUGAR_PEAKS=pk.s; SPICE_PEAKS=pk.p;
+  }
+  genSugarTerrain(); genSpiceTerrain();
+  for(let i=0;i<N*N;i++){world.sugar[i]=world.sugarCap[i];world.spice[i]=world.spiceCap[i];}  // 即点即变:新地貌直接铺满,不等再生
+  caption(`🗺 已切换为「${TERRAIN_NAMES[P.terrain]}」地形——居民原地适应新地理`);
+});
+/* ---- 明暗主题 ---- */
+function setTheme(light){
+  document.body.classList.toggle('light',light);
+  TH=CANVAS_THEMES[light?'light':'dark'];
+  document.getElementById('btnTheme').textContent=light?'☀️ 纸面色':'🌙 夜空色';
+  try{localStorage.setItem('sugarscape-theme',light?'light':'dark');}catch(e){}
+}
+document.getElementById('btnTheme').onclick=()=>setTheme(!document.body.classList.contains('light'));
+const SKEY='sugarscape-lives-v1';
+function loadLives(){try{const v=JSON.parse(localStorage.getItem(SKEY)||'[]');return Array.isArray(v)?v:[];}catch(e){return [];}}
+function saveLives(){try{localStorage.setItem(SKEY,JSON.stringify(player.lives.slice(-60)));}catch(e){}}
+const player={agent:null,life:0,best:{age:0,peak:0},lives:loadLives(),phase:'none',firstMove:false,marks:[]};
+                                           // phase: none上帝 / born出生待开始 / live存活 / dead终局
+                                           // marks: 开局前点选的追踪对象(最多3,编号1/2/3,开局后锁定)
+function toggleMark(a){
+  if(!a||!a.alive)return;
+  const i=player.marks.indexOf(a);
+  if(i>=0){player.marks.splice(i,1);return;}       // 再点同一人=取消
+  const cap=player.phase==='born'?3:6;             // 开局前最多3个,开局后可补到6个
+  if(player.marks.length<cap)player.marks.push(a);
+}
+function birthPlaceDesc(a,px=a.x,py=a.y){
+  const i=py*N+px, s=world.sugarCap[i], p=world.spiceCap[i];
+  if(s>=3)return'糖山之心'; if(s>=1.5)return'糖山脚下'; if(p>=1.5)return'香料坡上'; return'荒原边缘';
+}
+function talentDesc(a){const v=a.vision*2-a.sm-a.pm;
+  return v>=6?'含着金汤匙出生':v>=2?'中上之姿':v>=-2?'平凡人生':'困难模式开局';}
+function tdist(a,b){const d=Math.abs(a-b);return Math.min(d,N-d);}
+function peakDist(x,y,peaks){let m=1e9;for(const[px,py]of peaks)m=Math.min(m,Math.max(tdist(x,px),tdist(y,py)));return m;}
+function envReport(a){                       // 出生环境评估(环形世界距离)
+  let s3=0,p3=0;
+  for(let dy=-3;dy<=3;dy++)for(let dx=-3;dx<=3;dx++){
+    const i=wrap(a.y+dy)*N+wrap(a.x+dx); s3+=world.sugarCap[i]; p3+=world.spiceCap[i];
+  }
+  const nb=world.agents.filter(b=>b.alive&&b!==a&&
+    Math.max(tdist(a.x,b.x),tdist(a.y,b.y))<=2).length;
+  const ds=peakDist(a.x,a.y,SUGAR_PEAKS), dp=peakDist(a.x,a.y,SPICE_PEAKS);
+  const tier=(s3+p3)>=16?'含着金汤匙降生':(s3+p3)>=9?'小康之家开局':'一穷二白出身';
+  const farTxt=P.terrain==='scatter'?'散布地形':`糖山 ${ds} 格 · 香料山 ${dp} 格`;
+  return {s3,p3,nb,ds,dp,tier,farTxt};
+}
+const TIER_WEALTH={poor:[5,13],mid:[22,34],rich:[45,65]};   // 出身阶层=起点财富签(巨富70+留给奋斗)
+function rebirth(tier){
+  world.runUntil=0; updateRunBtn();          // 转世打断定时观察,避免"暂停了却显示剩N"
+  if(player.agent){player.agent.player=false;player.agent.target=null;}
+  const a=spawnAgent();
+  if(tier&&TIER_WEALTH[tier]){                 // 指定出身:财富按档位重签,天赋/出生地仍是命
+    const[lo,hi]=TIER_WEALTH[tier], total=ri(lo,hi);
+    a.sugar=Math.max(1,Math.round(total/2)+ri(-2,2)); a.spice=Math.max(1,total-a.sugar);
+    a.peak=a.sugar+a.spice; a.w0=a.sugar+a.spice;
+  }
+  player.agent=a; a.player=true; player.life++;
+  player.phase='born'; player.firstMove=false; paused=true;
+  view='god'; setViewBtns(); showBirthCard(player.agent);   // 出生待开始:先看世界全貌
+  player.marks=[];                                          // 新一世:追踪标记清空重选
+}
+function setLifeAction(html,onclick){
+  const el=document.getElementById('lifeAction');
+  el.innerHTML=html;
+  const b=el.querySelector('button');
+  if(b)b.onclick=onclick;
+}
+function showBirthCard(a){
+  const env=envReport(a);
+  const blindRows=P.blind
+   ?`<div class="brow"><span>🎲 你的牌面</span><b>未揭晓(死后翻开)</b></div>`
+   :`<div class="brow"><span>👁 起点${P.grow?'视野':''}</span><b>${a.bv} 格${P.grow?'(可成长至 8)':''}</b></div>
+     <div class="brow"><span>🔥 代谢(糖/香料)</span><b>${a.sm} / ${a.pm} 每天</b></div>
+     <div class="brow"><span>🎲 天赋总评</span><b>${talentDesc(a)}</b></div>
+     <div class="brow"><span>⏳ 寿命上限</span><b>${a.maxAge} 岁</b></div>`;
+  lifeTitle.textContent=`第 ${player.life} 世 · 出生抽签`;
+  lifeBody.innerHTML=`
+    <div class="brow"><span>🗺 出生地</span><b>${birthPlaceDesc(a,a.x,a.y)} · ${env.tier}</b></div>
+    ${birthHistory(a)}
+    <div class="brow"><span>💰 随身干粮</span><b>${(a.sugar+a.spice).toFixed(0)}</b></div>
+    <div class="brow"><span>🌱 家门口(3格)产能</span><b>糖 ${env.s3} · 香料 ${env.p3}</b></div>
+    <div class="brow"><span>⛰ 距两山</span><b>${env.farTxt}</b></div>
+    <div class="brow"><span>👥 出生时身边</span><b>${env.nb} 个邻居</b></div>
+    ${blindRows}
+    <div class="poem">${player.choosing?'📍 点击地图空格放置出生地,右栏实时预览。<br>选地只换位置,天赋仍是这一签。':'出身定的是难度,不是结局——迁徙、读书、交易都是翻身之路。<br>对出生地不满意?左下角可重抽或手动选地。🎯 开局前最多标3个追踪者,开局后还能补到6个。'}</div>`;
+  setLifeAction(
+    (player.choosing
+      ?`<button class="actionbtn hot">✓ 定居此处,开始这一生</button>`
+      :`<button class="actionbtn hot">▶ 开始这一生</button>`)+
+    `<div style="display:flex;gap:6px;margin-top:6px">
+      <button style="flex:1" id="actReroll">🎲 重抽出身</button>
+      <button style="flex:1" id="actPick">📍 ${player.choosing?'取消选地':'手动选地'}</button></div>
+    <div style="display:flex;gap:6px;margin-top:6px" title="指定出身阶层:财富按档位重签,出生地与天赋仍是命">
+      <span style="font-size:12px;color:var(--dim);align-self:center">出身:</span>
+      <button style="flex:1" id="actPoor">🌱 穷</button>
+      <button style="flex:1" id="actMid">🏠 中产</button>
+      <button style="flex:1" id="actRich">💎 富翁</button></div>`,
+    player.choosing?startLife:beginLife);
+  function beginLife(){
+    player.phase='live'; paused=false; setPaused(false);
+    view='god'; setViewBtns();                 // 默认上帝视角看全局,想代入再切附身
+    setLifeAction('',null);
+    updateMeCard(); updateHint();
+  }
+  function startLife(){player.choosing=false;beginLife();}
+  document.getElementById('actReroll').onclick=()=>{player.choosing=false;rebirth();};
+  document.getElementById('actPoor').onclick=()=>{player.choosing=false;rebirth('poor');};
+  document.getElementById('actMid').onclick=()=>{player.choosing=false;rebirth('mid');};
+  document.getElementById('actRich').onclick=()=>{player.choosing=false;rebirth('rich');};
+  document.getElementById('actPick').onclick=()=>{
+    player.choosing=!player.choosing;
+    showBirthCard(a); updateHint();
+  };
+  if(demo)setTimeout(()=>{                      // 演示模式:出生报告停4秒自动开始
+    if(demo&&player.phase==='born')document.querySelector('#lifeAction button')?.click();
+  },4000);
+}
+function livesReport(){
+  const L=player.lives;
+  const avg=(arr)=>(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1);
+  const causes={}; for(const l of L)causes[l.cause]=(causes[l.cause]||0)+1;
+  const vs=P.blind?`<div>牌面回顾:${L.map(l=>`视野${l.vision}`).join(' · ')}</div>`:'';
+  return `<div class="rpt"><h4>📋 ${L.length}世命运报告(你自己就是不平等的样本)</h4>
+    <div>平均寿命 ${avg(L.map(l=>l.age))} 岁 · 最高 ${Math.max(...L.map(l=>l.age))} 岁</div>
+    <div>平均巅峰财富 ${avg(L.map(l=>l.peak))} · 最高 ${Math.max(...L.map(l=>l.peak)).toFixed(1)}</div>
+    <div>死因:${Object.entries(causes).map(([k,v])=>`${k}×${v}`).join('、')}</div>
+    <div>同时代社会基尼系数:${(stats.gini.at(-1)||0).toFixed(3)}</div>${vs}</div>`;
+}
+function aiBaseline(a){                      // 能动性基准:同天赋同出身,AI能活多久(4次蒙特卡洛)
+  let sum=0,n=0;
+  for(let k=0;k<4;k++){
+    const s={sugar:a.sugar,spice:a.spice,sm:a.sm,pm:a.pm,vision:a.vision,maxAge:a.maxAge,
+      x:a.bornX,y:a.bornY,age:0,alive:true,player:false,target:null,tTick:-1,
+      peak:0,tag:a.tag,bornX:a.bornX,bornY:a.bornY,trades:0,gS:0,gP:0,far:0,id:-1};
+    while(s.alive&&s.age<300){
+      const grid=occupancy();
+      const m=pickMove(s,grid);
+      if(m&&!m.kill){s.x=m.x;s.y=m.y;}
+      const i=s.y*N+s.x;
+      s.sugar+=world.sugar[i]; s.spice+=world.spice[i];   // 只读采样,不真吃格子
+      const c=metabolize(s);
+      if(c)s.alive=false;
+    }
+    sum+=s.age; n++;
+  }
+  return n?Math.round(sum/n):null;           // ponytail: 占用真实世界格子资源采样,天花板是四样本方差大,升级路径为影子世界采样
+}
+function lifeAnalysis(a){                    // 此生高光与局限(数据说话)
+  const alive=world.agents.filter(x=>x.alive);
+  const richer=alive.reduce((n,x)=>n+((x.sugar+x.spice)>(a.sugar+a.spice)?1:0),0);
+  const pctTop=alive.length?Math.round(100*richer/alive.length):0;  // 有百分之几的人比你富
+  const hl=[],lim=[];
+  // 能动性量化:同样天赋/出生地,AI平均能活多少回合(蒙特卡洛小样本)
+  let aiExp=null;
+  if(typeof aiBaseline==='function'){try{aiExp=aiBaseline(a);}catch(e){}}
+  if(aiExp!==null){
+    const d=a.age-aiExp;
+    if(d>8)hl.push(`你亲自操盘,比AI托管多活了 ${d} 回合——这就是你的本事`);
+    else if(d<-8)lim.push(`比AI托管少活 ${-d} 回合——这次可能是你帮了倒忙`);
+    else hl.push(`与AI托管水准相当(预期${aiExp}回合,实际${a.age})`);
+  }
+  if(pctTop<=10&&a.peak>=25)hl.push(`巅峰财富${a.peak.toFixed(0)},跻身社会前10%`);
+  { // 本地冠军:出身地周边10格同乡里比巅峰财富——穷区做最大,也是成就
+    const near=alive.filter(x=>x!==a&&Math.abs(x.bornX-a.bornX)<=10&&Math.abs(x.bornY-a.bornY)<=10);
+    if(near.length>=3){
+      const richer=near.filter(x=>(x.sugar+x.spice)>a.peak).length;
+      if(richer===0)hl.push(`🏆 穷乡冠军——出生地周边${near.length}位同乡,巅峰财富无人比你高(全国排名不是唯一标尺)`);
+      else if(richer<=2)hl.push(`同乡${near.length}人中巅峰财富排第${richer+1},在贫瘠之地做到了头部`);
+    }
+  }
+  if(P.grow&&a.edu>0)hl.push(`读过书(学识${a.edu}),视野从起点${a.bv}长到${a.vision}`);
+  if(a.age>=a.maxAge-3)hl.push(`享年${a.age},几乎用满天赋寿限`);
+  else if(a.age>=60)hl.push(`长寿,享年${a.age}`);
+  if(a.trades>=8)hl.push(`成交${a.trades}笔,市场老手`);
+  if(a.far>=15)hl.push(`从出生地远行${a.far}格,横跨半个世界`);
+  else if(a.gS+a.gP>=100)hl.push(`亲手采集了${(a.gS+a.gP).toFixed(0)}单位粮食`);
+  if(!hl.length)hl.push('安稳走完了命运给的这一程');
+  if(a.vision<=2)lim.push(`视野仅${a.vision}格,觅食基本靠碰`);
+  if(a.sm+a.pm>=4)lim.push(`代谢${a.sm}+${a.pm}/天,消耗远超常人`);
+  if(birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘')lim.push('生在荒原,起步全靠双腿');
+  if(a.cause&&a.cause.startsWith('饥饿'))lim.push(`终败于代谢缺口:${a.cause.slice(3,-1)}`);
+  if(a.age<20)lim.push('离场太早,还来不及积累');
+  if(!lim.length)lim.push('天赋与环境无明显短板,输给了时间与概率');
+  return {hl,lim};
+}
+function showLifeSummary(i){                  // 生命之书回放:重看某一世的总结
+  const l=player.lives[i]; if(!l)return;
+  document.getElementById('sumTitle').textContent=`第 ${i+1} 世 · 此生总结`;
+  const s=l.sum;
+  document.getElementById('sumBody').innerHTML= s? `
+    <div class="brow"><span>死因</span><b>${s.cause||l.cause}</b></div>
+    <div class="brow"><span>享年</span><b>${l.age} 岁</b></div>
+    <div class="brow"><span>巅峰财富</span><b>${(l.peak??0).toFixed(0)}</b></div>
+    ${s.reveal?`<div class="brow"><span>🎴 牌面</span><b>${s.reveal}</b></div>`:''}
+    <div class="rpt"><h4>🪦 总结</h4>${l.born}的${l.talent}:享年${l.age}岁${l.trades?`,成交${l.trades}笔`:''}。<br>
+      <span style="color:var(--good)">✨ ${s.hl.join(';')}</span><br>
+      <span style="color:var(--bad)">⚠️ ${s.lim.join(';')}</span></div>
+    <div class="rpt"><h4>🌍 那时的世界</h4>${s.world}</div>`
+   :`<div style="color:var(--dim);line-height:2">${l.born}·${l.talent}·享年${l.age}岁,${l.cause}。<br>(这一世生在此功能上线前,没有存总结——再活一世就有了)</div>`;
+  document.getElementById('sumOverlay').style.display='flex';
+}
+function marksReport(){                       // 终局:开局前标记的1/2/3号追踪者结局与位置
+  if(!player.marks.length)return '';
+  const lines=player.marks.map((m,i)=>{
+    if(m.alive)return `${i+1}号·#${m.id}:活着 — ${wealthClass(m).name},财${(m.sugar+m.spice).toFixed(0)},${m.age}岁,最后出现在 (${m.x},${m.y})`;
+    return `${i+1}号·#${m.id}:已死亡 — ${m.cause||'死因不明'},享年${m.age}岁`;
+  });
+  return `<div class="rpt"><h4>🎯 你标记的追踪者(共${player.marks.length}个)</h4>${lines.join('<br>')}</div>`;
+}
+function worldSummaryText(a){                 // 你在世期间:世界大事+宏观变化
+  const NAMES={'🌫️':'大旱','🌞':'丰年','🍂':'糖山枯萎','☄️':'陨石','🦠':'瘟疫','⚖️':'劫富济贫','🚶':'移民潮','🌀':'拥挤天灾'};
+  const cnt={}; let n=0;
+  for(const e of world.events){ if(e.t<a.birthTick)continue;
+    const k=NAMES[e.msg.slice(0,2)]; if(!k)continue; cnt[k]=(cnt[k]||0)+1; n++;}
+  const bi=Math.min(stats.pop.length-1,Math.floor(a.birthTick/10));
+  const pf=stats.pop[Math.max(0,bi)]??aliveCount(), pt=stats.pop.at(-1)??aliveCount();
+  const gf=stats.gini[Math.max(0,bi)]??0, gt=stats.gini.at(-1)??0;
+  const evTxt=n?Object.entries(cnt).map(([k,v])=>k+(v>1?`×${v}`:'')).join('、'):'风平浪静,无大事';
+  return `你活了 ${world.tick-a.birthTick} 回合 · 大事:${evTxt}<br>人口 ${pf}→${pt} · 基尼 ${(gf||0).toFixed(3)}→${(gt||0).toFixed(3)}`;
+}
+function showDeathCard(a){
+  if(a.age>player.best.age)player.best.age=a.age;
+  if(a.peak>player.best.peak)player.best.peak=a.peak;
+  paused=true;
+  const rpt=(P.blind||player.life%10===0)?livesReport():'';
+  const {hl,lim}=lifeAnalysis(a);
+  const worldTxt=worldSummaryText(a);
+  const revealTxt=P.blind?`视野${P.grow?`起点${a.bv}→终点${a.vision}`:a.vision} 代谢${a.sm}/${a.pm} 寿限${a.maxAge} · ${talentDesc(a)}`:'';
+  lifeTitle.textContent=`第 ${player.life} 世 · 终局`;
+  lifeBody.innerHTML=`
+    <div class="brow"><span>死因</span><b>${a.cause}</b></div>
+    <div class="brow"><span>享年</span><b>${a.age} 岁</b></div>
+    <div class="brow"><span>巅峰财富</span><b>${a.peak.toFixed(0)}</b></div>
+    <div class="brow"><span>历世最佳</span><b>${player.best.age} 岁 / ${player.best.peak.toFixed(0)}</b></div>
+    ${revealTxt?`<div class="brow"><span>🎴 牌面揭晓</span><b>${revealTxt}</b></div>`:''}
+    <div class="rpt"><h4>🪦 此生总结</h4>
+      ${birthPlaceDesc(a,a.bornX,a.bornY)}的${talentDesc(a)}:享年${a.age}岁,巅峰财富${a.peak.toFixed(0)}${a.trades?`,成交${a.trades}笔`:''}。<br>
+      <span style="color:var(--good)">✨ 高光 — ${hl.join(';')}</span><br>
+      <span style="color:var(--bad)">⚠️ 局限 — ${lim.join(';')}</span></div>
+    ${marksReport()}
+    <div class="rpt"><h4>🌍 那时的世界</h4>${worldTxt}</div>
+    ${rpt}
+    <div class="poem">这一世的签已经用完了。<br>下一世的视野、代谢与坐标,重新再抽。</div>`;
+  const L=player.lives.at(-1);                 // 总结存档:生命之书点行可回看
+  if(L&&L.age===a.age){L.sum={cause:a.cause,hl,lim,world:worldTxt,reveal:revealTxt};saveLives();}
+  setLifeAction(`<button class="actionbtn hot">🎲 再抽一条命</button>`,()=>{setLifeAction('',null);rebirth();});
+  if(demo)setTimeout(()=>{                      // 演示模式:终局总结停4秒自动转世
+    if(demo&&player.phase==='dead')document.querySelector('#lifeAction button')?.click();
+  },4000);
+}
+
+/* ================= UI(DOM) ================= */
+let selected=null;
+let trace=[];                                 // 被选中居民的运动轨迹(研究模式)
+function updateSelBar(){                      // 选中居民的操作条:看属性/附身/取消
+  const bar=document.getElementById('selBar');
+  if(!selected||!selected.alive||player.phase==='born'||player.choosing){bar.style.display='none';return;}
+  const w=wealthClass(selected);
+  bar.style.display='flex';
+  bar.innerHTML=`<b style="color:var(--cyan)">#${selected.id}</b>
+    <span style="color:var(--capTx)">${w.name}·财${(selected.sugar+selected.spice).toFixed(0)}·${selected.age}岁·视${selected.vision}</span>
+    ${selected!==player.agent?`<button id="selPossess" class="hot">👻 附身它</button>`:''}
+    <button id="selClose">✕</button>`;
+  document.getElementById('selClose').onclick=()=>{selected=null;trace=[];updateSelBar();updateMeCard();};
+  const pb=document.getElementById('selPossess');
+  if(pb)pb.onclick=()=>possess(selected);
+}
+function possess(a){                          // 上帝神力:意识跳进该居民,原躯壳交还AI
+  if(!a||!a.alive||a===player.agent)return;
+  if(player.agent){player.agent.player=false;player.agent.target=null;}
+  a.player=true; player.agent=a;
+  if(player.phase!=='live'){player.phase='live';setLifeAction('',null);}
+  view='me'; setViewBtns();                  // 附身即切视角:点格子立刻能走,不掉坑
+  selected=null; trace=[]; updateSelBar();
+  log(`👻 你的意识跳进了居民 #${a.id} 的身体——它的视野/天赋/财产现在归你`,'ev-good');
+  caption(`👻 已附身居民 #${a.id}:财${(a.sugar+a.spice).toFixed(0)}·视野${a.vision}·${a.age}岁。点格子指挥它走`);
+  updateMeCard(); updateHint();
+}
+const lifeTitle=document.getElementById('lifeTitle'),
+      lifeBody=document.getElementById('lifeBody');
+function log(msg,cls){
+  if(world&&world._isB)return;               // 对照世界的事件不进编年史
+  if(cls==='me'){                            // 交易降噪:同类消息合并计数
+    const first=document.querySelector('#log li');
+    if(first&&first.dataset.me){const n=+first.dataset.n+1;
+      first.dataset.n=n;
+      first.innerHTML=`<b>[${world.tick}]</b> 🤝 交易 ×${n},最近一笔:${msg.replace('🤝 ','')}`;
+      return;}
+  }
+  const li=document.createElement('li'); li.className=cls||'';
+  if(cls==='me')li.dataset.me='1',li.dataset.n=1;
+  if(cls==='ev-bad'||cls==='ev-good'){caption(msg);  // 大事上字幕+记入世界大事簿
+    world.events.push({t:world.tick,msg}); if(world.events.length>400)world.events.shift();}
+  li.innerHTML=`<b>[${world.tick}]</b> ${msg}`;
+  const el=document.getElementById('log');
+  el.prepend(li); while(el.children.length>30)el.lastChild.remove();
+}
+function resetLog(){document.getElementById('log').innerHTML='';}
+function updateHeader(){
+  document.getElementById('hTick').textContent=world.tick;
+  document.getElementById('hPop').textContent=aliveCount();
+  document.getElementById('hGini').textContent=(stats.gini.at(-1)||0).toFixed(3);
+}
+function updateMeCard(){
+  if(player.phase==='born'||player.phase==='dead')return;   // 出生卡/死亡卡内容不被覆盖
+  const a=player.agent;
+  lifeTitle.textContent='我的此生';
+  if(!a){lifeBody.innerHTML='<span style="color:var(--dim)">上帝视角中… 点居民查看,点右上「随机转世」下场抽签。</span>';return;}
+  const ts=a.sugar/a.sm, tp=a.pm>0?a.spice/a.pm:Infinity;
+  const gift=P.blind?'🎴?':`👁${a.vision} 🔥${a.sm}${P.spice?'/'+a.pm:''}`;
+  lifeBody.innerHTML=`
+   <div class="row"><span class="lab">第 ${player.life} 世 ${P.blind?'· 盲牌':''}</span><span>${gift}</span></div>
+   <div class="row"><span class="lab">糖余命</span><div class="bar"><i style="width:${clamp(ts/30*100,0,100)}%;background:var(--sugar)"></i></div><span>${ts.toFixed(1)}天</span></div>
+   ${P.spice?`<div class="row"><span class="lab">香料余命</span><div class="bar"><i style="width:${clamp(tp/30*100,0,100)}%;background:var(--spice)"></i></div><span>${tp.toFixed(1)}天</span></div>`:''}
+   <div class="row"><span class="lab">寿命</span><div class="bar"><i style="width:${clamp(a.age/(P.blind?100:a.maxAge)*100,0,100)}%;background:#7a9bd4"></i></div><span>${a.age}${P.blind?'':'/'+a.maxAge}</span></div>
+   <div class="row"><span class="lab">财富 糖${a.sugar.toFixed(0)}+香料${a.spice.toFixed(0)}</span><span class="me-tag">${a.target?'🎯亲自走位中':'AI托管·点地图接管'}</span></div>
+   <div style="margin-top:6px;padding:6px 8px;background:var(--inset);border-radius:6px;font-size:12px;line-height:1.8;color:var(--capTx)">
+     ${advice(a).map(t=>`<div>${t}</div>`).join('')||'<div style="color:var(--dim)">处境平稳,按你的节奏走。</div>'}
+   </div>
+   ${P.grow&&a.edu<3?`<div style="display:flex;gap:6px;margin-top:6px">
+     <button id="btnEdu" style="flex:1" ${a.sugar+a.spice>=50+P.eduCost?'':'disabled style="flex:1;opacity:.45"'}>🎓 读书(花${P.eduCost},视野+1)</button>
+   </div>`:''}
+   <div style="display:flex;gap:6px;margin-top:6px">
+     <button id="btnQuit">退出附身</button><button id="btnClearT">清除目标</button></div>`;
+  const eduBtn=document.getElementById('btnEdu');
+  if(eduBtn)eduBtn.onclick=()=>{if(tryEducate(a)){updateMeCard();updateHeader();}};
+  document.getElementById('btnQuit').onclick=()=>{a.player=false;a.target=null;player.agent=null;player.phase='none';view='god';setViewBtns();updateMeCard();updateHint();};
+  document.getElementById('btnClearT').onclick=()=>{a.target=null;updateMeCard();};
+}
+/* ---- 参数面板(⚙下拉,两列宽松排布) ---- */
+const paramsEl=document.getElementById('paramsPanel');
+const paramsToggle=document.getElementById('paramsToggle');
+paramsToggle.onclick=e=>{e.stopPropagation();paramsEl.classList.toggle('open');};
+document.addEventListener('click',e=>{
+  if(!paramsEl.contains(e.target)&&e.target!==paramsToggle)paramsEl.classList.remove('open');
+});
+for(const d of PARAM_DEFS){
+  const row=document.createElement('label');row.className='pitem';
+  if(d.type==='check'){
+    row.innerHTML=`${d.label}`;
+    const cb=document.createElement('input');cb.type='checkbox';cb.checked=P[d.k];
+    cb.onchange=()=>{P[d.k]=cb.checked;};
+    row.appendChild(cb);
+  }else if(d.type==='select'){
+    row.append(d.label);
+    const sel=document.createElement('select');
+    sel.style.cssText='background:var(--inset);color:var(--tx);border:1px solid var(--line);border-radius:4px;padding:1px 4px;font-size:12px';
+    for(const[val,txt]of d.options){
+      const op=document.createElement('option');op.value=val;op.textContent=txt;
+      if(P[d.k]===val)op.selected=true; sel.appendChild(op);
+    }
+    sel.onchange=()=>{P[d.k]=sel.value;};
+    row.appendChild(sel);
+  }else{
+    row.append(d.label);
+    const r=document.createElement('input');r.type='range';r.min=d.min;r.max=d.max;r.step=d.step;r.value=P[d.k];
+    const v=document.createElement('span');v.className='val';v.textContent=P[d.k];
+    r.id='p_'+d.k;                              // 顶栏人口框联动要找它
+    r.oninput=()=>{P[d.k]=+r.value;v.textContent=r.value;};
+    row.appendChild(r);row.appendChild(v);
+  }
+  paramsEl.appendChild(row);
+}
+/* ---- 图表 ---- */
+function lineChart(id,data,color,maxHint){
+  const c=document.getElementById(id),g=c.getContext('2d');
+  g.clearRect(0,0,c.width,c.height);
+  g.strokeStyle=TH.grid;g.beginPath();g.moveTo(0,c.height/2);g.lineTo(c.width,c.height/2);g.stroke();
+  if(data.length<2)return;
+  const mx=Math.max(maxHint||1,...data)*1.05, mn=Math.min(0,...data);
+  g.strokeStyle=color;g.lineWidth=1.5;g.beginPath();
+  data.forEach((v,i)=>{const x=i/(data.length-1)*c.width, y=c.height-2-((v-mn)/(mx-mn))*(c.height-4);
+    i?g.lineTo(x,y):g.moveTo(x,y);});
+  g.stroke();
+}
+function updateObsPanel(){                    // 实验观察:四个关键读数+一句话解读,实时刷新
+  const ov=document.getElementById('obsOverlay');
+  if(!ov||ov.style.display!=='flex')return;
+  const alive=world.agents.filter(a=>a.alive), n=alive.length||1;
+  const g=stats.gini.at(-1)||0;
+  const w=a=>a.sugar+a.spice;
+  const poorPct=Math.round(100*alive.filter(a=>w(a)<20).length/n);
+  const poorBorn=alive.filter(a=>a.w0<15);
+  const upN=poorBorn.filter(a=>w(a)>=25).length;
+  const upPct=poorBorn.length?Math.round(100*upN/poorBorn.length):null;
+  const richPct=Math.round(100*alive.filter(a=>w(a)>=40).length/n);
+  const gTxt=g<0.15?'均质蛮荒:分化还没开始(多跑一会儿)'
+            :g<0.3?'分化进行中:阶层正在自发成形'
+            :'不平等已自发形成并稳定——没有设计者,格局自己长了出来';
+  const pTxt=poorPct>50?'多数人挣扎在温饱线附近:生态紧张,山装不下所有人'
+            :poorPct>25?'贫困是常态,但不是全部:山脚的穷环真实存在'
+            :'富足世界:承载力宽松,贫困只是暂时的落难';
+  const uTxt=upPct===null?'样本不足:让世界再跑一会儿'
+            :`赤贫出身者里 ${upPct}% 爬到了小康以上——努力有效,但有天花板`;
+  const rTxt=richPct<=25?'顶层永远是少数:金字塔是自己长出来的,没人设计过'
+            :'顶层偏大:这个世界正处在罕见的富裕期';
+  document.getElementById('obsGrid').innerHTML=[
+    ['基尼系数',g.toFixed(3),gTxt],
+    ['贫困率(赤贫+温饱)',poorPct+'%',pTxt],
+    ['穷人翻身率(出身<15 → 现≥25)',upPct===null?'—':upPct+'%',uTxt],
+    ['富人占比(财富≥40)',richPct+'%',rTxt],
+  ].map(([t,v,d])=>`<div style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px">
+    <div style="font-size:12.5px;color:var(--dim)">${t}</div>
+    <div style="font-size:34px;font-weight:700;color:var(--gold);line-height:1.3">${v}</div>
+    <div style="font-size:12.5px;line-height:1.7;color:var(--tx)">${d}</div></div>`).join('');
+}
+function drawCharts(){
+  lineChart('cPop',stats.pop,'#6fd8e8');
+  lineChart('cGini',stats.gini,'#ffd479',1);
+  lineChart('cPrice',stats.price,'#ff9a5c',3);
+  const alive=world.agents.filter(a=>a.alive).map(a=>a.sugar+a.spice);
+  document.getElementById('vPop').textContent=alive.length;
+  document.getElementById('vGini').textContent=(stats.gini.at(-1)||0).toFixed(3);
+  document.getElementById('vPrice').textContent=(stats.price.at(-1)||0).toFixed(2);
+  if(alive.length){const sorted=[...alive].sort((a,b)=>a-b);
+    document.getElementById('vRich').textContent=`前10%: ${(sorted.slice(-Math.max(1,sorted.length/10|0)).reduce((a,b)=>a+b,0)/alive.reduce((a,b)=>a+b,0)*100).toFixed(0)}%`;}
+  updateObsPanel();
+  if(document.getElementById('cohOverlay').style.display==='flex')renderCohort();   // 流动性面板开着=实时刷新
+  const hc=document.getElementById('cHist'),g=hc.getContext('2d');
+  g.clearRect(0,0,hc.width,hc.height);
+  const buckets=new Array(10).fill(0);
+  for(const w of alive)buckets[Math.min(9,Math.log2(1+w)|0)]++;
+  const mx=Math.max(1,...buckets);
+  g.fillStyle=TH.hist;
+  buckets.forEach((v,i)=>{const h=v/mx*(hc.height-6);
+    g.fillRect(i*13+2,hc.height-h,11,h);});
+}
+
+/* ================= 2D 渲染(Canvas) ================= */
+const CANVAS_THEMES={
+  dark:{bg:'#05070b', grid:'#1a2333', faceStroke:'#04060c', faceEye:'#fff', playerFace:'#f2f7ff',
+        tagSugar:'rgba(190,255,200,.62)', tagSpice:'rgba(255,215,175,.62)',
+        bornHi:'#ffe66d', bornTx:'#ffe66d', fog:'rgba(4,6,10,0.72)',
+        hist:'#7be383', target:'#ffffff', ring:'#ffffff',
+        gridLine:'rgba(255,255,255,0.055)'},
+  light:{bg:'#dfdac9', grid:'#c8c0aa', faceStroke:'#2a2a25', faceEye:'#fff', playerFace:'#ffffff',
+        tagSugar:'rgba(30,90,40,.75)', tagSpice:'rgba(150,80,20,.75)',
+        bornHi:'#b8860b', bornTx:'#8a6508', fog:'rgba(255,255,255,0.55)',
+        hist:'#3a9a4a', target:'#1a2333', ring:'#1a2333',
+        gridLine:'rgba(60,55,40,0.10)'}
+};
+let TH=CANVAS_THEMES.dark;
+try{if(localStorage.getItem('sugarscape-theme')==='light')setTheme(true);}catch(e){}  // 必须在 TH 声明后,否则恢复时踩 let 死区
+function cellColor(su,sp){                   // 格子颜色:暗=发光热力,亮=纸面着色;荒原(双0)融入背景
+  if(su===0&&sp===0)return TH.bg;
+  let r,g,b;
+  if(document.body.classList.contains('light')){
+    r=238-su*32.5-sp*2.5; g=234-su*11.5-sp*16; b=224-su*26-sp*29.5;
+  }else{
+    r=14+(sp/4)*225; g=18+(su/4)*195; b=28+(su/4)*100+(sp/4)*40;
+  }
+  return `rgb(${r|0},${g|0},${b|0})`;
+}
+
+const cv=document.getElementById('map'), ctx=cv.getContext('2d');
+let view='god', paused=true;
+function viewXform(){
+  const a=player.agent;
+  if(view!=='me'||!a||viewB)return[1,0,0];
+  const s=2, ox=clamp(cv.width/2-(a.x+0.5)*CELL*s, cv.width-N*CELL*s, 0),
+        oy=clamp(cv.height/2-(a.y+0.5)*CELL*s, cv.height-N*CELL*s, 0);
+  return[s,ox,oy];
+}
+function tagHue(a){let v=0;for(let i=0;i<8;i++)v=v*2+a.tag[i];return v/255*360;}
+const WEALTH_TIERS=[                    // 五档阶层色:相邻档拉开色相+明暗双重差,小脸也分得清
+  {min:70,color:'#c01038',name:'巨富'},   // 深红
+  {min:40,color:'#ff5a1f',name:'富裕'},   // 亮橙红
+  {min:20,color:'#c8781e',name:'小康'},   // 棕橙(暗)
+  {min:10,color:'#ffe33b',name:'温饱'},   // 亮柠檬黄
+  {min:0, color:'#9aa2ad',name:'赤贫'},   // 冷灰
+];
+function wealthClass(a){const w=a.sugar+a.spice;
+  for(const t of WEALTH_TIERS)if(w>=t.min)return t;
+  return WEALTH_TIERS[WEALTH_TIERS.length-1];
+}
+function drawFace(cx,cy,r,fill,isPlayer){
+  ctx.beginPath();ctx.arc(cx,cy,r,0,7);ctx.fillStyle=fill;ctx.fill();
+  ctx.strokeStyle=isPlayer?'#e8a020':TH.faceStroke;ctx.lineWidth=isPlayer?2.6:1.4;ctx.stroke();
+  if(r>=4.5){                             // 脸够大才画五官,俯视小图保持简脸
+    ctx.fillStyle=isPlayer?TH.bg:TH.faceEye;
+    ctx.beginPath();ctx.arc(cx-r*0.36,cy-r*0.2,r*0.15,0,7);ctx.fill();
+    ctx.beginPath();ctx.arc(cx+r*0.36,cy-r*0.2,r*0.15,0,7);ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy+r*0.18,r*0.32,0.15*Math.PI,0.85*Math.PI);
+    ctx.strokeStyle=isPlayer?TH.bg:TH.faceStroke;ctx.lineWidth=1.1;ctx.stroke();
+  }
+}
+function drawGlow(x,y,r,color){               // 向外辐射的光芒:径向渐隐光晕
+  const g=ctx.createRadialGradient(x,y,r*0.15,x,y,r);
+  g.addColorStop(0,color); g.addColorStop(1,color.replace(/,\s*[\d.]+\)$/,',0)'));
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();
+}
+let viewB=false;                              // 地图渲染切到对照实验的均等世界
+function draw(){
+  if(viewB&&exp){                             // 换上B世界画地图(糖域本身,不是曲线)
+    const s=world,f=fx; world=exp.worldB; fx=exp.fxB;
+    try{drawWorld();}finally{world=s;fx=f;}
+  }else drawWorld();
+}
+function drawWorld(){
+  const[s,ox,oy]=viewXform();
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.fillStyle=TH.bg; ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.setTransform(s,0,0,s,ox,oy);
+  const pa=viewB?null:player.agent;          // 看均等世界时:你的主角/标记都是另一世界的,不画
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+    const i=y*N+x, su=world.sugar[i], sp=world.spice[i];
+    ctx.fillStyle=cellColor(su,sp);
+    ctx.fillRect(x*CELL,y*CELL,CELL,CELL);   // 无缝填充,格子严格均等
+  }
+  // 均匀淡网格线:跨整图连续画,缩放时不会粗细不均
+  ctx.strokeStyle=TH.gridLine; ctx.lineWidth=1; ctx.beginPath();
+  for(let k=0;k<=N;k++){
+    ctx.moveTo(k*CELL,0); ctx.lineTo(k*CELL,N*CELL);
+    ctx.moveTo(0,k*CELL); ctx.lineTo(N*CELL,k*CELL);
+  }
+  ctx.stroke();
+  // 地形名直接标在山上(新人第一眼看懂颜色块);散布地形无山不标
+  if(P.terrain!=='scatter'){
+    ctx.font='12px "Microsoft YaHei",sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle=TH.tagSugar;
+    for(const[px,py]of SUGAR_PEAKS)ctx.fillText('糖山',(px+0.5)*CELL,(py+0.5)*CELL);
+    if(P.spice){
+      ctx.fillStyle=TH.tagSpice;
+      for(const[px,py]of SPICE_PEAKS)ctx.fillText('香料山',(px+0.5)*CELL,(py+0.5)*CELL);
+    }
+  }
+  if(!viewB&&selected&&selected.alive&&trace.length>1){   // 研究模式:被选中者的运动轨迹
+    ctx.strokeStyle='rgba(111,216,232,.5)'; ctx.lineWidth=Math.max(1.5,CELL*0.12);
+    ctx.beginPath();
+    let lx=trace[0][0], ly=trace[0][1], started=false;
+    for(const[tx,ty]of trace){
+      if(Math.abs(tx-lx)>N/2||Math.abs(ty-ly)>N/2){started=false;lx=tx;ly=ty;continue;}  // 环形世界跨界断线
+      if(!started){ctx.moveTo((tx+0.5)*CELL,(ty+0.5)*CELL);started=true;}
+      else ctx.lineTo((tx+0.5)*CELL,(ty+0.5)*CELL);
+      lx=tx;ly=ty;
+    }
+    ctx.stroke();
+  }
+  if(pa&&player.phase!=='dead')              // 主人公光晕画在脸的下层,不洗掉财富档色
+    drawGlow((pa.x+0.5)*CELL,(pa.y+0.5)*CELL,CELL*3+Math.sin(performance.now()/300)*CELL*0.4,
+             document.body.classList.contains('light')?'rgba(200,140,20,.6)':'rgba(255,230,109,.6)');
+  for(const a of world.agents){ if(!a.alive)continue;
+    if(view==='me'&&pa){
+      const dx=Math.min(Math.abs(a.x-pa.x),N-Math.abs(a.x-pa.x)),
+            dy=Math.min(Math.abs(a.y-pa.y),N-Math.abs(a.y-pa.y));
+      if(Math.max(dx,dy)>pa.vision+0.5)continue;
+    }
+    const cx=(a.x+0.5)*CELL, cy=(a.y+0.5)*CELL, r=a===pa?CELL*0.46:CELL*0.39;
+    drawFace(cx,cy,r, wealthClass(a).color, a===pa);   // 主人公也按财富档上色,身份靠金圈金光
+    if(a===selected){drawGlow(cx,cy,CELL*1.7+Math.sin(performance.now()/280)*CELL*0.2,'rgba(111,216,232,.35)');
+      ctx.strokeStyle='#6fd8e8';ctx.lineWidth=2;
+      ctx.beginPath();ctx.arc(cx,cy,r+CELL*0.18,0,7);ctx.stroke();}
+    if(cohort&&a.cohort){                   // 流动性队列:地图上描出身圈,亲眼看各队爬坡
+      ctx.strokeStyle={poor:'#6fd8e8',mid:'#ffd479',rich:'#ff5050'}[a.cohort];
+      ctx.lineWidth=1.6;
+      ctx.beginPath();ctx.arc(cx,cy,r+CELL*0.14,0,7);ctx.stroke();
+    }
+    const mi=player.marks.indexOf(a);
+    if(mi>=0&&a.alive){                     // 追踪对象:彩光+头顶号码牌(1~6)
+      const mc=['rgba(111,216,232,','rgba(255,176,40,','rgba(238,130,208,','rgba(160,110,240,','rgba(46,196,166,','rgba(74,123,240,'][mi];
+      drawGlow(cx,cy,CELL*2+Math.sin(performance.now()/300+mi*2)*CELL*0.2, mc+'.5)');
+      const col=['#1f9ebb','#d97a10','#c24fb0','#8b5cd6','#1f9e8a','#3f63c4'][mi];
+      const by=cy-r-CELL*0.55, br=Math.max(7,CELL*0.45);
+      ctx.beginPath();ctx.arc(cx,by,br,0,7);
+      ctx.fillStyle=col;ctx.fill();
+      ctx.strokeStyle=TH.faceStroke;ctx.lineWidth=1.5;ctx.stroke();
+      ctx.fillStyle='#fff';ctx.font=`bold ${(br*1.25)|0}px sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(String(mi+1),cx,by+0.5);
+      ctx.textBaseline='alphabetic';
+    }
+  }
+  if(!viewB)player.marks.forEach((m,i)=>{             // 死亡的追踪者:原图上最终地点画X+小号码牌
+    if(m.alive)return;
+    const col=['#1f9ebb','#d97a10','#c24fb0','#8b5cd6','#1f9e8a','#3f63c4'][i];
+    const cx=(m.x+0.5)*CELL, cy=(m.y+0.5)*CELL, s=CELL*0.34;
+    ctx.strokeStyle=col; ctx.lineWidth=Math.max(2,CELL*0.14); ctx.lineCap='round';
+    ctx.beginPath();
+    ctx.moveTo(cx-s,cy-s); ctx.lineTo(cx+s,cy+s);
+    ctx.moveTo(cx+s,cy-s); ctx.lineTo(cx-s,cy+s);
+    ctx.stroke(); ctx.lineCap='butt';
+    const by=cy-CELL*0.85, br=Math.max(6,CELL*0.36);
+    ctx.beginPath();ctx.arc(cx,by,br,0,7);
+    ctx.fillStyle=col;ctx.fill();
+    ctx.strokeStyle=TH.faceStroke;ctx.lineWidth=1.2;ctx.stroke();
+    ctx.fillStyle='#fff';ctx.font=`bold ${(br*1.2)|0}px sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(String(i+1),cx,by+0.5);ctx.textBaseline='alphabetic';
+  });
+  if(pa){
+    if(player.phase==='born'){              // 出生待开始:地图上高亮"你在这里"
+      const bx=pa.x, by=pa.y, pulse=3+Math.sin(performance.now()/250)*1.2;
+      ctx.strokeStyle=TH.bornHi; ctx.lineWidth=2.5;
+      ctx.beginPath();ctx.arc((bx+0.5)*CELL,(by+0.5)*CELL,CELL*0.7+pulse,0,7);ctx.stroke();
+      ctx.fillStyle=TH.bornTx;
+      ctx.font=`bold ${Math.max(13,CELL*0.9)|0}px "Microsoft YaHei",sans-serif`;
+      ctx.fillText('⬇ 你出生在这里',(bx+0.5)*CELL,(by+0.5)*CELL-CELL*1.7);
+    }
+    if(pa.target){ctx.strokeStyle=TH.target;ctx.lineWidth=1.5;
+      ctx.strokeRect(pa.target.x*CELL+CELL*0.2,pa.target.y*CELL+CELL*0.2,CELL*0.6,CELL*0.6);}
+    const pr=CELL*0.43+Math.sin(performance.now()/300)*CELL*0.11;
+    ctx.beginPath();ctx.arc((pa.x+0.5)*CELL,(pa.y+0.5)*CELL,pr,0,7);
+    ctx.strokeStyle=TH.bornHi;ctx.lineWidth=3;ctx.stroke();
+    if(view==='me'){                        // 迷雾:视野之外不可见(环形距离)
+      ctx.fillStyle=TH.fog;
+      for(let y=0;y<N;y++)for(let x=0;x<N;x++){
+        const dx=Math.min(Math.abs(x-pa.x),N-Math.abs(x-pa.x)),
+              dy=Math.min(Math.abs(y-pa.y),N-Math.abs(y-pa.y));
+        if(Math.max(dx,dy)>pa.vision+0.5)
+          ctx.fillRect(x*CELL,y*CELL,CELL,CELL);
+      }
+    }
+  }else if(!viewB&&player.phase==='dead'&&player.lastDead){   // 死后:原地留长眠标记,直到下次投胎
+    const d=player.lastDead, cx=(d.x+0.5)*CELL, cy=(d.y+0.5)*CELL;
+    drawGlow(cx,cy,CELL*2.8+Math.sin(performance.now()/300)*CELL*0.3,
+             document.body.classList.contains('light')?'rgba(200,140,20,.6)':'rgba(255,230,109,.6)');
+    ctx.beginPath();ctx.arc(cx,cy,CELL*0.5+Math.sin(performance.now()/300)*CELL*0.1,0,7);
+    ctx.strokeStyle=TH.bornHi;ctx.lineWidth=3;ctx.stroke();
+    ctx.fillStyle=TH.bornTx;
+    ctx.font=`bold ${Math.max(13,CELL*0.9)|0}px "Microsoft YaHei",sans-serif`;
+    ctx.fillText('🪦 主人公长眠于此',cx,cy-CELL*1.7);
+  }
+  ctx.setTransform(1,0,0,1,0,0);
+}
+cv.addEventListener('click',e=>{
+  const rect=cv.getBoundingClientRect();
+  const mx=(e.clientX-rect.left)*(cv.width/rect.width), my=(e.clientY-rect.top)*(cv.height/rect.height);
+  const[s,ox,oy]=viewXform();
+  const x=Math.floor((mx-ox)/(s*CELL)), y=Math.floor((my-oy)/(s*CELL));
+  if(x<0||y<0||x>=N||y>=N)return;
+  const grid=occupancy(), hit=grid[y*N+x];
+  if(player.phase==='born'&&player.choosing&&player.agent){   // 手动选地
+    if(hit){log('那里已有人居住,选个空格','');return;}
+    const a=player.agent;
+    a.x=x; a.y=y; a.bornX=x; a.bornY=y;
+    showBirthCard(a);                          // 右栏实时刷新出身报告
+    return;
+  }
+  if(view==='me'&&player.agent){
+    const a=player.agent;
+    if(Math.max(Math.abs(x-a.x),Math.abs(y-a.y))<=a.vision){
+      a.target={x,y}; player.firstMove=true; updateMeCard(); updateHint();
+    }
+  }else{
+    if(player.phase==='born'&&!player.choosing&&hit){    // 开局前:点居民=设定追踪标记(最多3)
+      toggleMark(hit);
+      log(`🎯 ${player.marks.includes(hit)?'标记':'取消'}追踪居民 #${hit.id}(${player.marks.length}/3,开局后锁定)`,'');
+    }
+    if(hit&&player.phase==='live'){                      // 开局后:点居民=补标记(至多6)+查看
+      const had=player.marks.includes(hit);
+      toggleMark(hit);
+      if(player.marks.includes(hit)!==had)log(`🎯 ${player.marks.includes(hit)?'标记':'取消'}追踪居民 #${hit.id}(当前${player.marks.length}个,上限6)`,'');
+    }
+    selected=hit||null; trace=[]; updateMeCard(); updateSelBar();
+    if(hit&&player.phase!=='born')log(`👀 居民 #${hit.id}: ${wealthClass(hit).name} 财富${(hit.sugar+hit.spice).toFixed(0)} 视野${hit.vision} 代谢${hit.sm}/${hit.pm} 岁${hit.age}`,'');
+  }
+});
+/* ---- 视角/速度按钮 ---- */
+function setViewBtns(){[...document.getElementById('viewBtns').children]
+  .forEach(b=>b.classList.toggle('on',b.dataset.v===view));}
+document.getElementById('viewBtns').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.v==='me'&&!player.agent){log('尚未附身,先「随机转世」下场','');return;}
+  view=b.dataset.v; setViewBtns(); updateHint();
+};
+/* ---- 演示(观察者)模式:自动运行+大事字幕 ---- */
+let demo=false, capT=null;
+function caption(msg){
+  const c=document.getElementById('caption');
+  c.textContent=msg; c.classList.add('show');
+  clearTimeout(capT); capT=setTimeout(()=>c.classList.remove('show'),6000);
+}
+document.getElementById('btnCohort').onclick=()=>{
+  if(!cohort)startCohort();                  // 没追踪就开始追踪
+  caption('🎯 地图上:青圈=穷出身 黄圈=中产出身 红圈=富出身——关掉面板,看他们谁能爬上山');
+  renderCohort();                            // 不暂停世界:面板随世界实时刷新(drawCharts 驱动)
+};
+document.getElementById('cohBtn').onclick=()=>{
+  startCohort();
+  renderCohort();
+};
+function setViewB(on){                        // 地图在「你的世界⇄均等世界」间切换
+  viewB=on&&!!exp;
+  const chip=document.getElementById('viewBChip');
+  if(chip)chip.style.display=viewB?'block':'none';
+  const b=document.getElementById('expViewB');
+  if(b)b.textContent=viewB?'🗺 地图切回你的世界':'👁 地图看均等世界';
+  if(viewB)caption('👁 现在看到的糖域=对照实验里的「均等世界」——看它的社会长成什么样');
+}
+document.getElementById('expViewB').onclick=()=>setViewB(!viewB);
+document.getElementById('viewBBack').onclick=()=>setViewB(false);
+document.getElementById('obsClose').onclick=()=>{document.getElementById('obsOverlay').style.display='none';};
+document.getElementById('btnObs').onclick=()=>{
+  const o=document.getElementById('obsOverlay');
+  o.style.display=o.style.display==='flex'?'none':'flex';
+  updateObsPanel();
+};
+document.getElementById('sumClose').onclick=()=>{document.getElementById('sumOverlay').style.display='none';};
+document.getElementById('cohClose').onclick=()=>{document.getElementById('cohOverlay').style.display='none';};
+document.getElementById('btnDemo').onclick=()=>{
+  demo=!demo;
+  document.getElementById('btnDemo').classList.toggle('on',demo);
+  if(demo){
+    if(player.phase==='born'){player.phase='live';setLifeAction('',null);}  // 跳过出生等待
+    if(!player.agent){rebirth();player.phase='live';setLifeAction('',null);}
+    setPaused(false);
+    const sl=document.getElementById('spdSlider');
+    sl.value=55; sl.dispatchEvent(new Event('input'));
+    caption('👁 演示模式:世界自动运行。灰白=赤贫 → 黄 → 橙 → 橙红 → 红=巨富;灾难与丰年会随时降临。');
+    log('👁 演示模式开启','ev-good');
+  }else{
+    setPaused(true);
+    log('👁 演示模式关闭','ev-good');
+  }
+  updateHint();
+};
+let stepIntervalMs=430;
+function setPaused(v){
+  paused=v;
+  if(v){world.runUntil=0; if(document.getElementById('btnRun'))updateRunBtn();}  // 手动暂停=中止定时观察
+  const b=document.querySelector('#spdBtns button');
+  b.textContent=paused?'▶ 继续':'⏸ 暂停';
+  b.style.minWidth='74px';
+  b.classList.toggle('on',paused);
+}
+document.getElementById('spdSlider').addEventListener('input',e=>{
+  stepIntervalMs=Math.round(2000*Math.pow(25/2000,e.target.value/100));
+  document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1).replace(/\.0$/,'')+'步/秒';
+});
+document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1)+'步/秒';
+document.getElementById('spdBtns').onclick=e=>{
+  const b=e.target.closest('button');if(!b||b.id==='btnRun')return;   // ⏱跑有自己的逻辑,不走暂停切换
+  if(demo){document.getElementById('btnDemo').click();return;}        // 演示中点⏸=退出演示(否则世界停着、演示灯还亮,像卡死)
+  setPaused(!paused);
+};
+document.getElementById('btnExp').onclick=()=>{
+  setPaused(true);
+  exp=null;                                  // 每次打开都重置
+  document.getElementById('expBtn').textContent='▶ 开始实验';
+  document.getElementById('expBtn').disabled=false;
+  renderExpOverlay();
+};
+document.getElementById('expBtn').onclick=()=>{
+  runExperiment();
+  document.getElementById('expBtn').disabled=true;
+  let n=0;
+  const step=()=>{                           // 分批驱动,让进度可见不卡死页面
+    const t0=performance.now();
+    while(n<300&&performance.now()-t0<25){
+      for(let i=0;i<5;i++){tick();stepExperiment();}
+      n+=5;
+    }
+    document.getElementById('expBtn').textContent='⏳ 实验 '+Math.min(n,300)+'/300 回合';
+    renderExpOverlay();
+    if(n<300&&!exp.done)setTimeout(step,60);   // 慢速放映:约5秒跑完,曲线生长可见
+    else{
+      document.getElementById('expBtn').textContent='▶ 再跑一次';
+      document.getElementById('expBtn').disabled=false;
+    }
+  };
+  step();
+};
+document.getElementById('expClose').onclick=closeExp;
+document.getElementById('btnRebirth').onclick=()=>{graduateNovice();rebirth();updateHint();};
+function updateRunBtn(){                      // 定时观察进度直接写在按钮上,一眼可见
+  document.getElementById('btnRun').textContent=
+    world.runUntil>world.tick?('⏹ 剩'+(world.runUntil-world.tick)):'⏱ 跑';
+}
+document.getElementById('popNum').addEventListener('change',e=>{   // 顶栏人口框与⚙滑块双向同源
+  const v=Math.max(10,Math.min(400,parseInt(e.target.value)||125));
+  e.target.value=v; P.initPop=v;
+  const r=document.getElementById('p_initPop');
+  if(r){r.value=v; r.nextElementSibling.textContent=v;}
+});
+document.getElementById('btnRun').onclick=()=>{         // 定时观察:连跑N回合,主人公死亡不打断
+  if(world.runUntil>world.tick){                        // 运行中再点=中止
+    setPaused(true); caption('⏹ 定时观察已中止'); return;
+  }
+  const n=Math.max(10,parseInt(document.getElementById('runTicks').value)||300);
+  world.runUntil=world.tick+n;
+  paused=false; setPaused(false); updateRunBtn();
+  caption(`⏱ 定时观察:连跑 ${n} 回合(主人公死了也继续),再点一次可中止`);
+};
+document.getElementById('btnRestart').onclick=()=>{
+  if(player.lives.length&&!confirm('重开世界会清空生命之书(历世记录),确定?'))return;
+  cohort=null; exp=null;
+  genWorld(); stats.pop=[];stats.gini=[];stats.price=[]; selected=null; trace=[]; updateSelBar();
+  player.life=0;player.best={age:0,peak:0};player.lives=[]; player.agent=null;
+  player.phase='none';
+  try{localStorage.removeItem(SKEY);}catch(e){}
+  view='god'; setViewBtns(); resetLog(); renderLivesBook();
+  log('🌍 新的世界诞生了,山脉与荒原重新随机','ev-good');
+  rebirth();                                 // 新世界直接发第一签,别让用户卡在空屏
+  updateHeader(); updateMeCard(); updateHint();
+};
+window.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();
+  if(demo){document.getElementById('btnDemo').click();}   // 演示中按空格=退出演示并暂停,不留"开着却不许"的死状态
+  else setPaused(!paused);}});
+function updateHint(){
+  const el=document.getElementById('hint');
+  if(player.phase==='born'){
+    el.textContent=player.choosing
+      ?'📍 点击地图空格放置出生地 · 右栏实时预览 · 点左下角✓确认'
+      :'📋 先看右栏出身报告,再点左下角「▶ 开始这一生」';
+    return;
+  }
+  if(view==='me'&&player.agent){
+    el.textContent=!player.firstMove
+      ?'👉 点击你旁边发亮的格子,走过去采集糖和香料'
+      :'点格子走位 · 空格暂停 · 顶部滑杆调速度';
+    return;}
+  el.textContent='上帝视角:点居民查看 · 空格暂停';
+}
+
+/* ================= 主循环 ================= */
+let lastT=performance.now(), acc=0, chartT=0;
+function frame(now){
+  if(!paused){acc+=Math.min(now-lastT,250);   // 钳制后台切走的时间,防止恢复后追帧风暴
+    while(acc>stepIntervalMs){acc-=stepIntervalMs;tick();}
+    if(world.runUntil&&world.tick>=world.runUntil){   // 定时观察到点:收摊
+      world.runUntil=0; paused=true; setPaused(true);
+      if(player.phase==='dead'&&player.pendingCard){player.pendingCard=false;showDeathCard(player.lastDead);}
+      else caption(`⏱ 定时观察结束(第 ${world.tick} 回合)`);
+    }
+  }else acc=0;
+  lastT=now;
+  document.body.classList.toggle('running',!paused);   // 跑起来才淡化角落按钮
+  draw();
+  if(now-chartT>500){chartT=now;drawCharts();}
+  requestAnimationFrame(frame);
+}
+
+/* ================= 自检 (?test=1) ================= */
+function selfTest(){
+  const A=[];const ok=(name,cond)=>A.push([name,!!cond]);
+  ok('基尼:完全均等=0', gini([1,1,1,1])===0);
+  ok('基尼:已知值0.75', Math.abs(gini([0,0,0,4])-0.75)<1e-9);
+  { // 交易必须双赢(以最短余命衡量);默认纯糖,测试期间临时开香料
+    const keepSpice=P.spice, keepTrade=P.trade; P.spice=true; P.trade=true;
+    const a={sugar:40,spice:4,sm:4,pm:2,tTick:-1},b={sugar:4,spice:40,sm:4,pm:2,tTick:-1};
+    const before=Math.min(survivalTime(a,0,0),survivalTime(b,0,0));
+    world.tick=1; const t=tryTrade(a,b);
+    const after=Math.min(survivalTime(a,0,0),survivalTime(b,0,0));
+    P.spice=keepSpice; P.trade=keepTrade;
+    ok('交易发生',t&&t.dS>0); ok('交易双赢',after>before);
+  }
+  { // 回归:负香料余额(浮点残留)的邻居交易必须被拒,不得产生NaN
+    const a={sugar:56,spice:28,sm:1,pm:1,tTick:-1},b={sugar:38,spice:-8.88e-16,sm:2,pm:1,tTick:-1};
+    const keepSpice2=P.spice; P.spice=true;
+    world.tick=2; const t=tryTrade(a,b);
+    P.spice=keepSpice2;
+    ok('负余额交易被拒且无NaN', t===null&&isFinite(a.sugar)&&isFinite(a.spice));
+    ok('NaN财富判死', metabolize({sugar:NaN,spice:10,sm:1,pm:1,age:1,maxAge:99})!==null);
+    ok('饥饿死亡判定', metabolize({sugar:0.5,spice:10,sm:2,pm:1,age:1,maxAge:99})==='饥饿(缺糖)');
+  }
+  { // 追踪标记:开局前上限3,开局后上限6,再点取消
+    const mk=player.marks, ph=player.phase; player.marks=[];
+    const xs=world.agents.filter(a=>a.alive&&!a.player);
+    player.phase='born'; xs.slice(0,5).forEach(toggleMark);
+    ok('开局前标记上限3', player.marks.length===3);
+    player.phase='live'; xs.slice(5,9).forEach(toggleMark);
+    ok('开局后可补到6', player.marks.length===6);
+    xs.slice(9,11).forEach(toggleMark);
+    ok('超上限拒绝', player.marks.length===6);
+    toggleMark(player.marks[0]);
+    ok('再点取消标记', player.marks.length===5);
+    player.marks=mk; player.phase=ph;
+  }
+  { // 阶层分化:生育继承+紧生态跑300回合,应有新生儿、人口不塌、贫富分化长出来
+    const keepCC=P.crowdCull; P.crowdCull=false;
+    genWorld(); world.births=0;
+    for(let i=0;i<300;i++)tick();
+    ok('生育继承:300回合内有新生儿', world.births>0);
+    ok('人口未塌:尚存百人以上', aliveCount()>60);
+    ok('贫富分化:基尼>0.12', (stats.gini.at(-1)||0)>0.12);
+    P.crowdCull=keepCC;
+    genWorld(); stats.pop=[];stats.gini=[];stats.price=[];
+  }
+  { // 拥挤天灾:把40个非玩家塞进7×7→触发歼30%+流民10%
+    const keep=P.crowdCull; P.crowdCull=true;
+    const alive0=world.agents.filter(a=>a.alive&&!a.player);
+    const n0=alive0.length;
+    alive0.slice(0,80).forEach((a,i)=>{a.x=3+(i%10);a.y=3+((i/10)|0);});
+    world._cullCd=0; world.tick++;
+    crowdCheck();
+    const n1=world.agents.filter(a=>a.alive).length;
+    ok('拥挤天灾:人口净降两成左右', n1>n0*0.7&&n1<n0*0.88);
+    ok('拥挤天灾:进入冷却', world._cullCd>world.tick);
+    P.crowdCull=keep;
+  }
+  { // 均等世界
+    P.equalWorld=true; genWorld();
+    ok('均等世界天赋一致', world.agents.every(a=>a.vision===a.bv&&a.sm===2&&(P.spice?a.pm===2:a.pm===0)));
+    P.equalWorld=false;
+  }
+  { // 成长视野:教育投资与阅历
+    const g0=P.grow,c0=P.eduCost; P.grow=true; P.eduCost=15;
+    const a={bv:2,vision:2,edu:0,xp:0,sugar:30,spice:5,age:24,alive:true,player:false};
+    ok('教育:财富不够不买', tryEducate(a)===false);
+    a.sugar=60;
+    ok('教育:够了就买且视野+1', tryEducate(a)===true&&a.edu===1&&a.vision===3&&a.sugar===45);
+    a.age=25;
+    gainXp(a);
+    ok('阅历:25回合视野+1', a.xp===1&&a.vision===4);
+    ok('视野与起点同源', (()=>{P.grow=true;genWorld();return world.agents.every(x=>x.vision===x.bv);})());
+    P.grow=g0; P.eduCost=c0;
+  }
+  { // 生态稳态:关灾害跑500回合,人口应存活(成长视野下开局一代死亡率高,下限放宽)
+    genWorld(); player.agent=null; view='god';
+    const D0=P.disasters; P.disasters=false;
+    let min=1e9,max=0;
+    for(let i=0;i<500;i++){tick();const n=aliveCount();if(n<min)min=n;if(n>max)max=n;}
+    P.disasters=D0;
+    ok(`生态稳态(500回合 ${min}~${max}人)`, min>=25&&max<=P.maxPop);
+  }
+  { // 纯糖世界:无香料、无交易,居民不吃香料也不会饿死
+    const s0=P.spice,t0=P.trade,r0=P.terrain; P.spice=false; P.trade=false; P.terrain='classic';
+    genWorld();
+    ok('纯糖:地形无香料', world.spiceCap.every(v=>v===0));
+    ok('纯糖:居民无香料代谢', world.agents.every(a=>a.pm===0&&a.spice===0));
+    let bad=null;
+    for(let i=0;i<200&&!bad;i++){tick();
+      for(const a of world.agents)if(a.alive&&(a.pm!==0||!isFinite(a.sugar))){bad=a.id;break;}}
+    ok('纯糖:200回合无香料异常', !bad);
+    // 两糖山连通性:cap≥1区域应连成一片(BFS)
+    const cap1=new Array(N*N).fill(false);
+    for(let i=0;i<N*N;i++)if(world.sugarCap[i]>=1)cap1[i]=true;
+    const seen2=new Array(N*N).fill(false);
+    const q=[SUGAR_PEAKS[0][1]*N+SUGAR_PEAKS[0][0]]; seen2[q[0]]=true; let reach=1;
+    while(q.length){const c=q.pop(),cx=c%N,cy=(c/N)|0;
+      for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){
+        const x=wrap(cx+dx),y=wrap(cy+dy),j=y*N+x;
+        if(cap1[j]&&!seen2[j]){seen2[j]=true;reach++;q.push(j);}}}
+    const totalCap1=cap1.filter(Boolean).length;
+    ok(`纯糖:两糖山相连(${reach}/${totalCap1})`, reach===totalCap1);
+    P.spice=s0; P.trade=t0; P.terrain=r0;
+  }
+  { // 地形三模式:random峰位重开重抽;scatter有资源且平滑;各模式可存活
+    const t0=P.terrain;
+    P.terrain='random'; genWorld();
+    const pk1=SUGAR_PEAKS.join('|');
+    genWorld();
+    ok('随机山:两次重开峰位不同', SUGAR_PEAKS.join('|')!==pk1);
+    ok('随机山:四峰间距达标', (()=>{const all=[...SUGAR_PEAKS,...SPICE_PEAKS];
+      for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){
+        const d=Math.max(Math.abs(all[i][0]-all[j][0]),Math.abs(all[i][1]-all[j][1]));
+        if(d<10)return false;}return true;})());
+    P.terrain='scatter'; genWorld();
+    ok('散布:糖资源存在', world.sugarCap.some(v=>v>=2));
+    let okRun=true;
+    for(let i=0;i<60;i++){tick();if(!world.agents.every(a=>isFinite(a.sugar))){okRun=false;break;}}
+    ok('散布:60回合无异常', okRun&&aliveCount()>0);
+    P.terrain=t0;
+  }
+  genWorld(); stats.pop=[];stats.gini=[];stats.price=[];
+  const fails=A.filter(x=>!x[1]);
+  const txt=`自检 ${A.length-fails.length}/${A.length} 通过`+(fails.length?'\n失败: '+fails.map(f=>f[0]).join('; '):' ✅');
+  console.log(txt);
+  const li=document.createElement('li');li.className=fails.length?'ev-bad':'ev-good';
+  li.textContent=txt;document.getElementById('log').prepend(li);
+}
+
+/* ================= 启动 ================= */
+genWorld();
+log('🌍 世界诞生:两座糖山(绿),两座香料山(橙)。资源在地理上分离,交易因此成为必需。','ev-good');
+log('提示:这里是 Epstein & Axtell 的糖域。所有居民按同一套笨规则求生,不平等自己长出来。','');
+if(new URLSearchParams(location.search).get('test'))selfTest();
+renderLivesBook();
+if(player.lives.length)log(`📚 生命之书已从存档恢复(${player.lives.length}世记录)`,'ev-good');
+// 新手态:没玩过的新人只见"三步主路",研究型控件首次死亡后才解锁(不吓跑)
+let seen=false; try{seen=!!localStorage.getItem('sugarscape-onboard-v2');}catch(e){}
+if(!seen||!player.lives.length){
+  document.body.classList.add('novice');
+  document.getElementById('welcome').style.display='flex';
+  document.getElementById('welBtn').onclick=()=>{
+    document.getElementById('welcome').style.display='none';
+    fitMap();                                   // 欢迎卡遮不住尺寸测量的问题不存在,但保险重测
+    try{localStorage.setItem('sugarscape-onboard-v2','1');}catch(e){}
+  };                                            // 关卡即见已抽好的第1世出生报告
+}
+function graduateNovice(){document.body.classList.remove('novice');fitMap();}
+rebirth();                                   // 第1世抽签,出生卡弹出,世界暂停等你
+updateHeader(); updateMeCard(); updateHint();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
