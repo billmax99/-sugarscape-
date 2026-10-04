@@ -11,7 +11,7 @@
 
 ![Game screenshot](docs/images/main.jpg)
 
-🎮 **Play now**: download `sugarscape.html` and open it with any modern browser.
+🎮 **Play now**: download `sugarscape.html` and open it with any modern browser. On a phone? Use `sugarscape-手机版.html`.
 
 **English** | [中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) · Manuals: [English](docs/manual/en.md) · [中文](docs/manual/zh.md) · [繁體中文](docs/manual/zhtw.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
@@ -58,14 +58,17 @@ The language dropdown (🌐) switches instantly; on first open it follows your b
 
 | File | What it is |
 |---|---|
-| `sugarscape.html` | The game (single file, zero dependencies) |
+| `sugarscape.html` | The game (single file, zero dependencies) — desktop & tablet |
+| `sugarscape-手机版.html` | Mobile edition: portrait "one life at a time" storytelling (Chinese UI), installable as a PWA |
+| `手机manifest.json` + `手机图标-*.png` | PWA manifest & icons for the mobile edition |
 | `docs/manual/` | Full experiment manual in 6 languages |
 | `docs/images/` | Screenshots |
 
 ## Self-check
 
-Open `sugarscape.html?test=1` to run 30 assertions (win-win trades, NaN defense, ecological stability, inheritance, terrain constraints…).
-The chronicle's first entry should read `30/30 passed ✅`.
+Open `sugarscape.html?test=1` to run 34 assertions (win-win trades, NaN defense, ecological stability, inheritance, terrain constraints, tier-rebirth in a pure-sugar world…);
+the chronicle's first entry should read `34/34 passed ✅`.
+The mobile edition runs its own 32 assertions via `sugarscape-手机版.html?test=1`.
 
 ## 📺 Video walkthrough
 

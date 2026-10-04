@@ -9,7 +9,7 @@
 
 ![游戏画面](docs/images/main.jpg)
 
-🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。
+🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。手机上请打开 `sugarscape-手机版.html`。
 
 [English](README.md) | **中文** | [繁體中文](README.zh-TW.md) · 手册:[中文](docs/manual/zh.md) · [繁體中文](docs/manual/zhtw.md) · [English](docs/manual/en.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
@@ -56,14 +56,17 @@
 
 | 文件 | 说明 |
 |---|---|
-| `sugarscape.html` | 游戏本体(单文件,零依赖) |
+| `sugarscape.html` | 游戏本体(单文件,零依赖),桌面/平板主力版 |
+| `sugarscape-手机版.html` | 手机竖屏版:「一条命」叙事体验(中文界面),可装成 PWA |
+| `手机manifest.json` + `手机图标-*.png` | 手机版 PWA 清单与图标 |
 | `docs/manual/` | 说明书七语言版(中文 / 繁體中文 / English / 日本語 / Français / Deutsch / Italiano) |
 | `docs/images/` | 游戏截图 |
 
 ## 自检
 
-打开 `sugarscape.html?test=1` 会自动跑 30 项断言(交易双赢、NaN 防御、生态稳态、生育继承、地形约束等),
-编年史第一条显示 `自检 30/30 通过 ✅` 即为健康。
+打开 `sugarscape.html?test=1` 会自动跑 34 项断言(交易双赢、NaN 防御、生态稳态、生育继承、地形约束、纯糖世界出身签等),
+编年史第一条显示 `自检 34/34 通过 ✅` 即为健康。
+手机版用 `sugarscape-手机版.html?test=1`,自检 32 项。
 
 ## 📺 视频解说
 
