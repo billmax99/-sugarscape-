@@ -11,7 +11,7 @@
 
 🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。
 
-[English](README.md) | **中文** · 手册:[中文](docs/manual/zh.md) · [English](docs/manual/en.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
+[English](README.md) | **中文** | [繁體中文](README.zh-TW.md) · 手册:[中文](docs/manual/zh.md) · [繁體中文](docs/manual/zhtw.md) · [English](docs/manual/en.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
 ---
 
@@ -44,7 +44,7 @@
 
 ## 🌐 Languages / 语言
 
-游戏界面内置 **中文 / English / 日本語 / Français / Deutsch / Italiano** 六种语言,**全部翻译完整**(出生报告、死亡总结、日志、面板均已覆盖):
+游戏界面内置 **中文 / 繁體中文 / English / 日本語 / Français / Deutsch / Italiano** 七种语言,**全部翻译完整**(出生报告、死亡总结、日志、面板均已覆盖):
 顶栏 🌐 下拉随时切换、即时生效,首次打开按浏览器语言自动选择,选择会记住。
 
 ## 运行环境
@@ -57,13 +57,20 @@
 | 文件 | 说明 |
 |---|---|
 | `sugarscape.html` | 游戏本体(单文件,零依赖) |
-| `docs/manual/` | 说明书六语言版(中文 / English / 日本語 / Français / Deutsch / Italiano) |
+| `docs/manual/` | 说明书七语言版(中文 / 繁體中文 / English / 日本語 / Français / Deutsch / Italiano) |
 | `docs/images/` | 游戏截图 |
 
 ## 自检
 
 打开 `sugarscape.html?test=1` 会自动跑 30 项断言(交易双赢、NaN 防御、生态稳态、生育继承、地形约束等),
 编年史第一条显示 `自检 30/30 通过 ✅` 即为健康。
+
+## 📺 视频解说
+
+实验跑起来到底是什么样?B 站有**全程实录解说版**(画面全部真实运行截图,数字来自当期实跑):
+
+- **B 站**:「一起聊聊天Ai」——[第一集：吃不了苦，活该受穷？](https://www.bilibili.com/video/BV1K6He68EFV)｜[第二集：把1996年的糖域实验从头跑一遍](https://www.bilibili.com/video/BV1oHHi6JELe)
+- **图文版**:公众号「一起聊聊天Ai」——从饭桌之争讲到 1996 实验,再到这个游戏的诞生
 
 ## 关于版权
 

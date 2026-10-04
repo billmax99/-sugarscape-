@@ -5,7 +5,7 @@
 > Press play: nobody manages this world — and the wealth gap grows all by itself.
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Language](https://img.shields.io/badge/UI-6%20languages-blue)](#-languages)
+[![Language](https://img.shields.io/badge/UI-7%20languages-blue)](#-languages)
 
 **A social experiment game in a single HTML file**: zero dependencies, no install, just open it in a browser.
 
@@ -13,7 +13,7 @@
 
 🎮 **Play now**: download `sugarscape.html` and open it with any modern browser.
 
-**English** | [中文](README.zh-CN.md) · Manuals: [English](docs/manual/en.md) · [中文](docs/manual/zh.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
+**English** | [中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) · Manuals: [English](docs/manual/en.md) · [中文](docs/manual/zh.md) · [繁體中文](docs/manual/zhtw.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
 ---
 
@@ -66,6 +66,12 @@ The language dropdown (🌐) switches instantly; on first open it follows your b
 
 Open `sugarscape.html?test=1` to run 30 assertions (win-win trades, NaN defense, ecological stability, inheritance, terrain constraints…).
 The chronicle's first entry should read `30/30 passed ✅`.
+
+## 📺 Video walkthrough
+
+What does the experiment actually look like while it runs? A narrated, screen-recorded walkthrough is on YouTube — every number in the video comes from a real run, not hand-waving:
+
+- **YouTube**: search "Sugarscape Life Restart" (direct link will be added here once published)
 
 ## Copyright
 
