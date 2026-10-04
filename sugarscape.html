@@ -9,6 +9,14 @@
 <html lang="zh">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="手机manifest.json">
+<link rel="icon" type="image/png" sizes="96x96" href="手机图标-96.png">
+<link rel="apple-touch-icon" href="手机图标-192.png">
+<meta name="theme-color" content="#0b0e14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="糖域">
 <meta http-equiv="Cache-Control" content="no-store">
 <title>糖域 · 人生重开 Sugarscape</title>
 <style>
@@ -141,6 +149,87 @@
   .actionbtn{font-size:17px; letter-spacing:6px; padding:12px 34px; border-radius:10px;
     box-shadow:0 4px 24px rgba(120,220,140,.25);}
   .me-tag{color:var(--cyan);}
+
+  /* ===== 手机端专属元素(默认全部隐藏,手机模式才亮) ===== */
+  #mobTop{display:none; align-items:center; gap:6px; padding:5px 10px; background:var(--bg);}
+  #mobTop .mlogo{font-size:13px; font-weight:600; letter-spacing:1px; color:var(--gold); white-space:nowrap;}
+  .mseg{display:flex; border:1px solid var(--btnBd); border-radius:8px; overflow:hidden; flex:none;}
+  .mseg button{background:var(--btn); color:var(--btnTx); border:none; padding:4px 9px; font-size:12px;
+    min-width:34px; min-height:30px;}
+  .mseg button.on{background:var(--btnOnBg); color:var(--btnOnTx);}
+  .mbtn{background:var(--btn); color:var(--btnTx); border:1px solid var(--btnBd); border-radius:8px;
+    padding:4px 10px; font-size:12.5px; min-height:30px; flex:none;}
+  #chapCap{position:absolute; top:22%; left:50%; transform:translateX(-50%); z-index:7; max-width:88%;
+    font-size:14.5px; letter-spacing:2px; color:var(--gold); text-shadow:0 1px 6px #000;
+    background:rgba(5,8,14,.55); border:1px solid rgba(255,212,121,.35); border-radius:18px;
+    padding:6px 16px; white-space:nowrap; opacity:0; transition:opacity .5s; pointer-events:none; display:none;}
+  #chapCap.show{opacity:1;}
+  #mobToast{position:absolute; top:44px; left:50%; transform:translateX(-50%); z-index:8; max-width:86%;
+    background:var(--ovBg); border:1px solid var(--btnBd); border-radius:16px; padding:5px 14px;
+    font-size:12.5px; white-space:nowrap; display:none;}
+  #mobSheet{display:none; flex:none; background:var(--panel); border-top:1px solid var(--line);}
+  #mobSheet .mtabs{display:flex; border-bottom:1px solid var(--line);}
+  #mobSheet .mtabs button{flex:1; background:none; border:none; color:var(--dim); font-size:13px;
+    padding:7px 0 6px; border-bottom:2px solid transparent; min-height:34px;}
+  #mobSheet .mtabs button.on{color:var(--cyan); border-bottom-color:var(--cyan);}
+  #mobTabBody{height:132px; overflow-y:auto; padding:7px 12px; font-size:13px;}
+  .mmeRow{display:flex; align-items:center; gap:8px; margin-bottom:5px;}
+  .mmeRow .bigW{font-size:22px; font-weight:700; color:var(--sugar); min-width:56px; font-variant-numeric:tabular-nums;}
+  .mmeRow .bigW small{font-size:11px; color:var(--dim); font-weight:400;}
+  .mtierchip{padding:2px 9px; border-radius:11px; font-size:11.5px; color:#0b0e14; font-weight:600;}
+  .mkv{display:flex; justify-content:space-between; font-size:12.5px; color:var(--dim); padding:2px 0;}
+  .mkv b{color:var(--tx); font-weight:400; font-variant-numeric:tabular-nums;}
+  .mlogline{color:var(--dim); font-size:12px; padding:2px 0; border-bottom:1px dashed var(--line);}
+  .mlifeline{display:flex; justify-content:space-between; align-items:center; padding:4px 0;
+    border-bottom:1px dashed var(--line); font-size:12.5px;}
+  .mempty{color:var(--dim); font-size:12px; text-align:center; padding-top:40px;}
+  .mov{position:absolute; inset:0; z-index:21; background:rgba(5,8,14,.55); display:none;
+    align-items:center; justify-content:center; padding:14px;}
+  .mov .mcard{background:var(--panel); border:1px solid var(--btnBd); border-radius:16px;
+    width:100%; max-width:300px; padding:14px 15px; max-height:84%; overflow-y:auto;
+    box-shadow:0 10px 50px rgba(0,0,0,.5);}
+  .mov .mcard h3{font-size:15px; color:var(--gold); letter-spacing:2px; margin-bottom:5px;}
+  .mcardfix{display:flex; flex-direction:column; padding-bottom:12px;}
+  .mcardfix .mscroll{overflow-y:auto; min-height:0;}   /* 长内容滚动,关键按钮固定卡底不藏 */
+  .mtitle{font-size:14.5px; text-align:center; color:var(--gold); letter-spacing:1.5px; padding:2px 0 6px; line-height:1.5;}
+  .mbtnrow{display:flex; gap:7px; margin-top:11px;}
+  .mbtnrow button{flex:1; padding:12px; font-size:14.5px; border-radius:10px; min-height:44px;
+    background:var(--btn); color:var(--btnTx); border:1px solid var(--btnBd);}
+  .mbtnrow button.primary{background:var(--btnOnBg); color:var(--btnOnTx); border-color:var(--btnOnBd); flex:2; letter-spacing:2px;}
+  .mchips{display:flex; gap:6px; margin-top:10px; justify-content:center; align-items:center; flex-wrap:wrap;}
+  .mchips span{font-size:11.5px; color:var(--dim);}
+  .mchips button{background:none; border:1px solid var(--btnBd); color:var(--dim); font-size:12.5px;
+    border-radius:13px; padding:5px 15px; min-height:30px;}
+  .msumline{font-size:12.5px; padding:2px 0; color:var(--tx); line-height:1.7;}
+  .msumline.epi{color:var(--gold); margin-top:5px; border-top:1px dashed var(--line); padding-top:6px;}
+  .mgood{color:var(--good);}
+  .mpop{animation:mpop .6s ease;}
+  @keyframes mpop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1)}}
+  .mthumb{margin-top:9px; text-align:center;}
+  .mthumb img{max-height:108px; max-width:100%; border-radius:9px; border:1px solid var(--btnBd);}
+  .mthumb small{display:block; color:var(--dim); font-size:10.5px; margin-top:2px;}
+  #ovTrailM img{width:100%; border-radius:10px; border:1px solid var(--btnBd); display:block;}
+
+  /* ===== 窄屏适配:桌面布局零改动;断点由 mobSync() 统一判定(≤760px 或 ?mob=1),CSS 只认 body.mobile ===== */
+  body.mobile{height:100dvh;}
+  body.mobile header{display:none !important;}   /* 顶栏换 mobTop(讨论稿样式):桌面头部整条退场 */
+  body.mobile #spdBtns,body.mobile #viewBtns,body.mobile #btnDemo,body.mobile #btnObs,
+  body.mobile #btnCohort,body.mobile #btnExp,
+  body.mobile header .btngrp[style*="gap:14px"],body.mobile #paramsBar,body.mobile #chartsBar,
+  body.mobile #lifeCol,body.mobile #mapLegend,body.mobile #hint,
+  body.mobile #lifeAction,body.mobile #selBar,body.mobile #viewBChip{display:none !important;}
+  body.mobile main{flex:1; min-height:0;}
+  body.mobile #mapwrap{overflow:hidden;}
+  body.mobile #caption{display:none !important;}   /* 手机弃用桌面大字幕,统一走章节胶囊 */
+  body.mobile #mobTop{display:flex;}
+  body.mobile #chapCap{display:block;}
+  body.mobile #mobSheet{display:block;}
+  body.mobile #welcome .wcard{padding:22px 20px;}
+  body.mobile #welcome h2{font-size:24px;}
+  body.mobile #welcome p{font-size:14.5px;}
+  body.mobile #welcome button{padding:12px; font-size:16px;}
+  body.mobile #manualOverlay>div,body.mobile #sumOverlay>div,
+  body.mobile #obsOverlay>div,body.mobile #cohOverlay>div,body.mobile #expOverlay>div{width:100%; max-width:96%;}
 </style>
 </head>
 <body>
@@ -181,6 +270,20 @@
   <button id="btnRestart" class="warn" data-i18n="↺ 重开世界">↺ 重开世界</button>
   </div>
 </header>
+<div id="mobTop">
+  <span class="mlogo">🍬 糖域</span>
+  <div class="mseg" id="mobViewSeg">
+    <button data-m="me" title="附身:只见你的视野,点格子走位">附身</button>
+    <button data-m="god" class="on" title="全图观赏">全图</button>
+  </div>
+  <div class="mseg" id="mobCamSeg">
+    <button data-s="0" title="镜头紧跟主人公,晃动最强">跟</button>
+    <button data-s="1" class="on" title="平稳:人在画面中部时镜头不动">稳</button>
+    <button data-s="2" title="固定:镜头不动,贴边才平移">固</button>
+  </div>
+  <button class="mbtn" id="mobPause">⏸</button>
+  <button class="mbtn" id="mobSpd">×1</button>
+</div>
 <div id="manualOverlay" style="display:none; position:absolute; inset:0; z-index:9; background:var(--ovBg);
   backdrop-filter:blur(2px); align-items:center; justify-content:center;">
   <div style="background:var(--panel); border:1px solid var(--btnBd); border-radius:12px; padding:24px 32px; width:720px; max-width:94%; max-height:92%; overflow-y:auto;">
@@ -248,6 +351,50 @@
   <span style="font-size:11px;color:#8a6d3b;margin-left:8px;" data-i18n="⚠=重开世界生效">⚠=重开世界生效</span>
   <div id="paramsPanel"></div>
 </div>
+<!-- 手机端覆盖层:出生签 / 传记总结 / 轨迹大图(桌面不显示) -->
+<div class="mov" id="ovBirthM">
+  <div class="mcard">
+    <h3>🎲 这一世的签</h3>
+    <div id="mobBirthBody"></div>
+    <div class="mbtnrow">
+      <button id="mobReroll">🎲 重抽</button>
+      <button class="primary" id="mobGo">▶ 开始这一生</button>
+    </div>
+    <div class="mchips"><span>换出身</span>
+      <button data-k="poor">穷</button><button data-k="mid">中</button><button data-k="rich">富</button><button data-k="random">随缘</button>
+    </div>
+    <div style="margin-top:9px;font-size:11px;color:var(--dim);text-align:center;line-height:1.7">出身定的是难度,不是结局 · 点「开始」后可点格子带路,<br>不点的话他自己找糖吃</div>
+  </div>
+</div>
+<div class="mov" id="ovDeathM">
+  <div class="mcard mcardfix">
+    <div class="mscroll">
+      <div class="mtitle" id="mobDeathTitle">🪦 此生总结</div>
+      <div id="mobDeathBody"></div>
+      <div class="mthumb" id="mobDeathThumb"></div>
+      <div id="mobDeathExtra"></div>
+    </div>
+    <div class="mbtnrow">
+      <button id="mobPeek">🌍 先看看世界</button>
+      <button class="primary" id="mobAgain">🎲 再抽一条命</button>
+    </div>
+    <div class="mchips"><span>指定出身</span>
+      <button data-k="poor">穷</button><button data-k="mid">中</button><button data-k="rich">富</button>
+    </div>
+  </div>
+</div>
+<div class="mov" id="ovTrailM">
+  <div class="mcard" style="max-width:340px">
+    <h3>🖼 第<span id="mobTrailNo"></span>世 · 一生轨迹</h3>
+    <img id="mobTrailImg" style="cursor:zoom-in;" alt="轨迹图">
+    <div class="mchips" style="margin-top:7px"><span id="mobTrailTag">全景世界</span></div>
+    <div class="mbtnrow">
+      <button id="mobTrailSave">💾 保存图片</button>
+      <button class="primary" id="mobTrailClose">✕ 关闭</button>
+    </div>
+    <div class="mchips"><span>点图或左滑看聚焦 · 右滑回全景 · 长按可另存</span></div>
+  </div>
+</div>
 <main id="mainRow">
   <div id="mapwrap">
     <canvas id="map" width="700" height="700"></canvas>
@@ -268,6 +415,8 @@
     </div>
     <div id="lifeAction"></div>
     <div id="selBar"></div>
+    <div id="chapCap"></div>
+    <div id="mobToast"></div>
     <div id="viewBChip" style="display:none; position:absolute; top:10px; right:10px; z-index:6;">
       <button id="viewBBack" data-i18n="🗺 正在看均等世界 · 点此切回你的世界">🗺 正在看均等世界 · 点此切回你的世界</button>
     </div>
@@ -288,6 +437,14 @@
   <div class="chartbox"><div class="ct"><span data-i18n="基尼系数 ⓘ" data-i18n-title="贫富差距,0=人人一样穷,1=一人占有一切。正常:从0爬到0.2~0.4后稳定。看什么:曲线持续爬升=不平等正自发长出来(实验核心发现);接近0=没有分化;超过0.5=差距极端">基尼系数 ⓘ</span><span id="vGini">-</span></div><canvas id="cGini" width="180" height="60"></canvas></div>
   <div class="chartbox"><div class="ct"><span data-i18n="糖价(香料/糖) ⓘ" data-i18n-title="1单位糖换多少香料(开香料山后才有)。正常:在1附近波动。看什么:价格不是谁定的,是居民讨价还价交易出来的——市场自发涌现的证据;剧烈波动=供需失衡">糖价(香料/糖) ⓘ</span><span id="vPrice">-</span></div><canvas id="cPrice" width="180" height="60"></canvas></div>
   <div class="chartbox"><div class="ct"><span data-i18n="财富分布 ⓘ" data-i18n-title="最富的10%人拥有全社会财富的百分比。正常:30%~60%。看什么:接近100%=极度集中(山被少数家族垄断);接近10%=绝对平均(世界还很年轻)">财富分布 ⓘ</span><span id="vRich">-</span></div><canvas id="cHist" width="180" height="60"></canvas></div>
+</div>
+<div id="mobSheet">
+  <div class="mtabs">
+    <button id="mtabMe" class="on">🧍 我的</button>
+    <button id="mtabLog">📜 日志</button>
+    <button id="mtabBook">📚 生命之书</button>
+  </div>
+  <div id="mobTabBody"></div>
 </div>
 <script>
 "use strict";
@@ -1853,6 +2010,7 @@ function applyLang(){
   if(player&&player.phase==='dead'&&player.lastDead)showDeathCard(player.lastDead);   // 死亡卡也跟随语言
   if(document.getElementById('expOverlay').style.display==='flex')renderExpOverlay();
   if(document.getElementById('cohOverlay').style.display==='flex')renderCohort();
+  if(window.__mobReady&&typeof mobSyncWel==='function')mobSyncWel();   // 语言切换后维持手机欢迎文案
 }
 function setLang(l){LANG=l;try{localStorage.setItem('sugarscape-lang',l);}catch(e){}applyLang();}
 (function initLang(){
@@ -2146,6 +2304,7 @@ function tick(){
   if(selected&&!selected.alive){selected=null;trace=[];updateSelBar();}   // 研究对象死了,轨迹收尾
   else if(selected)trace.push([selected.x,selected.y]),trace.length>90&&trace.shift();
   if(world._isB)updateHeader(); else {updateHeader(); updateMeCard();}
+  if(mobOn&&!world._isB)mobTick();                   // 手机:人生节拍/轨迹/之约(世界B不打扰)
 }
 function aliveCount(){return world.agents.reduce((s,a)=>s+a.alive,0);}
 function die(a,cause){
@@ -2162,7 +2321,8 @@ function die(a,cause){
     if(world.runUntil>world.tick&&!demo){      // 定时观察中:先不弹总结卡,世界继续跑(演示模式不挂起,靠死亡卡4秒推进循环)
       player.pendingCard=true;
       log(tf('💀 你的第{n}世结束了({c})——定时观察继续,跑完再总结',{n:player.life,c:tr(cause)}),'ev-bad');
-    }else showDeathCard(a);}
+    }else if(mobOn)mobDieCard(a);              // 手机:不暂停,镜头拉远,延迟出传记卡,世界照常运转
+    else showDeathCard(a);}
 }
 function renderLivesBook(){                  // 生命之书:逐世一行账
   const el=document.getElementById('livesBook');
@@ -2174,6 +2334,7 @@ function renderLivesBook(){                  // 生命之书:逐世一行账
       <b style="color:var(--tx)">${tf('第{n}世',{n:i+1})}</b> ${tr(l.born)}·${tr(l.talent)} · <b style="color:${cls}">${tf('{n}岁',{n:l.age})}</b> ${tr(l.cause)}${l.trades?` · 🤝${l.trades}`:''}</div>`;
   }).join('')+
   `<div style="margin-top:4px;color:var(--cyan)">${tf('共{n}世 · 平均{m}岁 · 点任一行重看总结',{n:L.length,m:(L.reduce((s,l)=>s+l.age,0)/L.length).toFixed(0)})}</div>`;
+  if(mobOn)mobUpdTabs();                    // 手机:生命之书页签同步
 }
 function regrow(){
   const g=fx.regrowUntil>world.tick?fx.regrowMult:1;
@@ -2555,7 +2716,8 @@ function setTheme(light){
 document.getElementById('btnTheme').onclick=()=>setTheme(!document.body.classList.contains('light'));
 const SKEY='sugarscape-lives-v1';
 function loadLives(){try{const v=JSON.parse(localStorage.getItem(SKEY)||'[]');return Array.isArray(v)?v:[];}catch(e){return [];}}
-function saveLives(){try{localStorage.setItem(SKEY,JSON.stringify(player.lives.slice(-60)));}catch(e){}}
+function saveLives(){try{localStorage.setItem(SKEY,JSON.stringify(player.lives.slice(-60).map(l=>({...l,img:undefined,imgZoom:undefined}))));}catch(e){}}
+                                          // 轨迹图dataURL只在内存,localStorage仅存path等元数据(约60KB/张会爆配额)
 const player={agent:null,life:0,best:{age:0,peak:0},lives:loadLives(),phase:'none',firstMove:false,marks:[]};
                                            // phase: none上帝 / born出生待开始 / live存活 / dead终局
                                            // marks: 开局前点选的追踪对象(最多3,编号1/2/3,开局后锁定)
@@ -2587,18 +2749,39 @@ function envReport(a){                       // 出生环境评估(环形世界�
   return {s3,p3,nb,ds,dp,tier,farTxt};
 }
 const TIER_WEALTH={poor:[5,13],mid:[22,34],rich:[45,65]};   // 出身阶层=起点财富签(巨富70+留给奋斗)
+/* ---- 出身地带落点:指定穷/中/富时,出生地也搬进对应地带(讨论稿语义:出身=地带) ---- */
+function findZoneCell(zone){
+  for(let t=0;t<400;t++){
+    const c=choice(freeCells()); if(c===undefined)return undefined;
+    const x=c%N, y=(c/N)|0;
+    let s=0,n=0;
+    for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){
+      const i=wrap(y+dy)*N+wrap(x+dx); s+=world.sugarCap[i]+world.spiceCap[i]; n++;
+    }
+    const avg=s/n;
+    if(zone==='rich'&&avg>=2)return c;
+    if(zone==='mid'&&avg>=0.9&&avg<2)return c;
+    if(zone==='poor'&&avg<0.9)return c;
+  }
+  return undefined;                                // ponytail: 400次没找到就随缘落点(极端地形兜底)
+}
 function rebirth(tier){
   world.runUntil=0; updateRunBtn();          // 转世打断定时观察,避免"暂停了却显示剩N"
   if(player.agent){player.agent.player=false;player.agent.target=null;}
-  const a=spawnAgent();
+  let spot;
+  if(tier&&TIER_WEALTH[tier])spot=findZoneCell(tier);   // 指定出身:落点搬进对应地带
+  const a=spot!==undefined?spawnAgent(spot%N,(spot/N)|0):spawnAgent();
   if(tier&&TIER_WEALTH[tier]){                 // 指定出身:财富按档位重签,天赋/出生地仍是命
     const[lo,hi]=TIER_WEALTH[tier], total=ri(lo,hi);
-    a.sugar=Math.max(1,Math.round(total/2)+ri(-2,2)); a.spice=Math.max(1,total-a.sugar);
+    if(P.spice){                               // 香料世界对半拆;纯糖世界香料无处花,签须全是糖(否则口粮腰斩,速死)
+      a.sugar=Math.max(1,Math.round(total/2)+ri(-2,2)); a.spice=Math.max(1,total-a.sugar);
+    }else{ a.sugar=total; a.spice=0; }
     a.peak=a.sugar+a.spice; a.w0=a.sugar+a.spice;
   }
   player.agent=a; a.player=true; player.life++;
   player.phase='born'; player.firstMove=false; paused=true;
-  view='god'; setViewBtns(); showBirthCard(player.agent);   // 出生待开始:先看世界全貌
+  if(mobOn){mobBornTier=tier||null;mobRebirthUI();}  // 手机:出身芯片出生卡(无寿命签),镜头先看全貌
+  else{view='god'; setViewBtns(); showBirthCard(player.agent);}   // 出生待开始:先看世界全貌
   player.marks=[];                                          // 新一世:追踪标记清空重选
 }
 function setLifeAction(html,onclick){
@@ -2929,6 +3112,7 @@ const lifeTitle=document.getElementById('lifeTitle'),
       lifeBody=document.getElementById('lifeBody');
 function log(msg,cls){
   if(world&&world._isB)return;               // 对照世界的事件不进编年史
+  if(mobOn)mobLogHook(msg,cls);              // 手机:收集日志页签素材+灾年统计
   if(cls==='me'){                            // 交易降噪:同类消息合并计数
     const first=document.querySelector('#log li');
     if(first&&first.dataset.me){const n=+first.dataset.n+1;
@@ -3108,6 +3292,7 @@ function cellColor(su,sp){                   // 格子颜色:暗=发光热力,�
 const cv=document.getElementById('map'), ctx=cv.getContext('2d');
 let view='god', paused=true;
 function viewXform(){
+  if(mobOn)return mobCamXform();                     // 手机:推拉相机+三档稳定
   const a=player.agent;
   if(view!=='me'||!a||viewB)return[1,0,0];
   const s=2, ox=clamp(cv.width/2-(a.x+0.5)*CELL*s, cv.width-N*CELL*s, 0),
@@ -3190,6 +3375,7 @@ function drawWorld(){
     }
     ctx.stroke();
   }
+  if(!viewB&&mobOn)mobDrawTrail(s);                  // 手机:一生足迹金线画在居民层下
   if(pa&&player.phase!=='dead')              // 主人公光晕画在脸的下层,不洗掉财富档色
     drawGlow((pa.x+0.5)*CELL,(pa.y+0.5)*CELL,CELL*3+Math.sin(performance.now()/300)*CELL*0.4,
              document.body.classList.contains('light')?'rgba(200,140,20,.6)':'rgba(255,230,109,.6)');
@@ -3248,14 +3434,14 @@ function drawWorld(){
       ctx.beginPath();ctx.arc((bx+0.5)*CELL,(by+0.5)*CELL,CELL*0.7+pulse,0,7);ctx.stroke();
       ctx.fillStyle=TH.bornTx;
       ctx.font=`bold ${Math.max(13,CELL*0.9)|0}px "Microsoft YaHei",sans-serif`;
-      ctx.fillText(tr('⬇ 你出生在这里'),(bx+0.5)*CELL,(by+0.5)*CELL-CELL*1.7);
+      if(!mobOn)ctx.fillText(tr('⬇ 你出生在这里'),(bx+0.5)*CELL,(by+0.5)*CELL-CELL*1.7);   // 手机版大标签由 mobDrawOver 画
     }
     if(pa.target){ctx.strokeStyle=TH.target;ctx.lineWidth=1.5;
       ctx.strokeRect(pa.target.x*CELL+CELL*0.2,pa.target.y*CELL+CELL*0.2,CELL*0.6,CELL*0.6);}
     const pr=CELL*0.43+Math.sin(performance.now()/300)*CELL*0.11;
     ctx.beginPath();ctx.arc((pa.x+0.5)*CELL,(pa.y+0.5)*CELL,pr,0,7);
     ctx.strokeStyle=TH.bornHi;ctx.lineWidth=3;ctx.stroke();
-    if(view==='me'){                        // 迷雾:视野之外不可见(环形距离)
+    if(view==='me'&&!mobOn){                // 迷雾:视野之外不可见(环形距离);手机版渐变迷雾由 mobDrawOver 画
       ctx.fillStyle=TH.fog;
       for(let y=0;y<N;y++)for(let x=0;x<N;x++){
         const dx=Math.min(Math.abs(x-pa.x),N-Math.abs(x-pa.x)),
@@ -3272,11 +3458,13 @@ function drawWorld(){
     ctx.strokeStyle=TH.bornHi;ctx.lineWidth=3;ctx.stroke();
     ctx.fillStyle=TH.bornTx;
     ctx.font=`bold ${Math.max(13,CELL*0.9)|0}px "Microsoft YaHei",sans-serif`;
-    ctx.fillText(tr('🪦 主人公长眠于此'),cx,cy-CELL*1.7);
+    if(!mobOn)ctx.fillText(tr('🪦 主人公长眠于此'),cx,cy-CELL*1.7);   // 手机版大标签由 mobDrawOver 画
   }
   ctx.setTransform(1,0,0,1,0,0);
+  if(!viewB&&mobOn)mobDrawOver(performance.now());    // 手机:出生标签/渐变迷雾/临终暗角/长眠金字/粒子
 }
 cv.addEventListener('click',e=>{
+  if(mobOn){mobMapClick(e);return;}                  // 手机:附身带路+决策审计 / 全图点居民查看
   const rect=cv.getBoundingClientRect();
   const mx=(e.clientX-rect.left)*(cv.width/rect.width), my=(e.clientY-rect.top)*(cv.height/rect.height);
   const[s,ox,oy]=viewXform();
@@ -3320,6 +3508,7 @@ document.getElementById('viewBtns').onclick=e=>{
 /* ---- 演示(观察者)模式:自动运行+大事字幕 ---- */
 let demo=false, capT=null;
 function caption(msg){
+  if(mobOn){mobChapter(String(msg),false);return;}   // 手机:大事进人生章节字幕队列
   const c=document.getElementById('caption');
   c.textContent=msg; c.classList.add('show');
   clearTimeout(capT); capT=setTimeout(()=>c.classList.remove('show'),6000);
@@ -3376,6 +3565,7 @@ function setPaused(v){
   b.textContent=paused?tr('▶ 继续'):tr('⏸ 暂停');
   b.style.minWidth='74px';
   b.classList.toggle('on',paused);
+  if(mobOn)mobSyncPause();
 }
 document.getElementById('spdSlider').addEventListener('input',e=>{
   stepIntervalMs=Math.round(2000*Math.pow(25/2000,e.target.value/100));
@@ -3469,8 +3659,10 @@ function updateHint(){
 /* ================= 主循环 ================= */
 let lastT=performance.now(), acc=0, chartT=0;
 function frame(now){
+  if(mobOn)mobCamFrame(now);                        // 手机:相机推拉/三档跟随(帧驱动)
   if(!paused){acc+=Math.min(now-lastT,250);   // 钳制后台切走的时间,防止恢复后追帧风暴
-    while(acc>stepIntervalMs){acc-=stepIntervalMs;tick();}
+    const mIv=stepIntervalMs*mobSpeedFactor();      // 手机:临终慢镜×3 / 身后世界慢速
+    while(acc>mIv){acc-=mIv;tick();}
     if(world.runUntil&&world.tick>=world.runUntil){   // 定时观察到点:收摊
       world.runUntil=0; paused=true; setPaused(true);
       if(player.phase==='dead'&&player.pendingCard){player.pendingCard=false;showDeathCard(player.lastDead);}
@@ -3482,6 +3674,689 @@ function frame(now){
   draw();
   if(now-chartT>500){chartT=now;drawCharts();}
   requestAnimationFrame(frame);
+}
+
+/* ================= 手机端(≤760px):一条命模式 =================
+   桌面版零改动:本段逻辑全部经 mobOn 分支接入;机制参考 手机UI演示.html(已真机验证)。
+   镜头叙事/章节字幕/临终慢镜/身后世界照常运转/传记复盘/轨迹图/之约勋章 均出于该讨论稿。 */
+const mobMq=matchMedia('(max-width:760px)');
+const mobForce=new URLSearchParams(location.search).has('mob');   // ?mob=1 强制手机模式(平板/宽窗体验"一条命")
+const MOB=()=>mobMq.matches||mobForce;
+let mobOn=false, mobCam={cx:N/2,cy:N/2,z:1,mode:'god'}, mobCamAnim=null, mobSteady=1;
+let mobStats=null, mobTrail=[], mobLastTrail=null, mobDieSpot=null, mobSparks=[];
+let mobSlow=false, mobTab='me', mobLogArr=[], mobBornTier=null, mobSpdIdx=0;
+let mobPact=null, mobMedals=[];
+const MOB_KEY='sugarscape-mob-v1';
+const mLerp=(a,b,t)=>a+(b-a)*t;
+const mEase=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const mSleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---- 相机:开局全貌→推进个人(z=3)→终局拉远;三档稳定(跟/稳/固) ---- */
+function mClampCam(v,span){const half=span/2; if(half*2>=N)return N/2; return clamp(v,half,N-half);}
+function mobCamTo(mode,dur=1500){
+  const a=player.agent;
+  if(mode!=='god'&&a&&(a.alive||player.phase==='dead')){
+    const hw=cv.width/(2*CELL*3);
+    mobCamAnim={from:{...mobCam},to:{cx:mClampCam(a.x+.5,hw*2),cy:mClampCam(a.y+.5,hw*2),z:3},
+      t0:performance.now(),dur};
+    mobCam.mode='me'; view='me';
+  }else{
+    mobCamAnim={from:{...mobCam},to:{cx:N/2,cy:N/2,z:1},t0:performance.now(),dur};
+    mobCam.mode='god'; view='god';
+  }
+  setViewBtns(); mobSyncViewSeg();
+}
+function mobCamFrame(now){
+  if(mobCamAnim){
+    const t=Math.min(1,(now-mobCamAnim.t0)/mobCamAnim.dur), e=mEase(t);
+    mobCam.cx=mLerp(mobCamAnim.from.cx,mobCamAnim.to.cx,e);
+    mobCam.cy=mLerp(mobCamAnim.from.cy,mobCamAnim.to.cy,e);
+    mobCam.z=mLerp(mobCamAnim.from.z,mobCamAnim.to.z,e);
+    if(t>=1)mobCamAnim=null;
+  }else if(mobCam.mode==='me'&&player.agent&&player.phase==='live'){
+    const a=player.agent, cell=CELL*mobCam.z;
+    const hw=cv.width/(2*cell), hh=cv.height/(2*cell);
+    const tx=a.x+.5, ty=a.y+.5;
+    if(mobSteady===0){                              // 跟紧:始终追人
+      mobCam.cx=mLerp(mobCam.cx,mClampCam(tx,hw*2),.15);
+      mobCam.cy=mLerp(mobCam.cy,mClampCam(ty,hh*2),.15);
+    }else{                                          // 稳:小死区慢跟 / 固:贴边才推
+      const dz=Math.max(1,mobSteady===1?Math.min(hw,hh)*.34:Math.min(hw,hh)-1.5);
+      let gx=mobCam.cx, gy=mobCam.cy;
+      if(tx<mobCam.cx-dz)gx=tx+dz; else if(tx>mobCam.cx+dz)gx=tx-dz;
+      if(ty<mobCam.cy-dz)gy=ty+dz; else if(ty>mobCam.cy+dz)gy=ty-dz;
+      const k=mobSteady===1?.08:.12;
+      mobCam.cx=mLerp(mobCam.cx,mClampCam(gx,hw*2),k);
+      mobCam.cy=mLerp(mobCam.cy,mClampCam(gy,hh*2),k);
+    }
+  }
+}
+function mobCamXform(){
+  const cell=CELL*mobCam.z, hw=cv.width/(2*cell), hh=cv.height/(2*cell);
+  const cx=mClampCam(mobCam.cx,hw*2), cy=mClampCam(mobCam.cy,hh*2);
+  return [mobCam.z, cv.width/2-cx*cell, cv.height/2-cy*cell];
+}
+function mobSyncViewSeg(){
+  document.querySelectorAll('#mobViewSeg button').forEach(b=>
+    b.classList.toggle('on',b.dataset.m===mobCam.mode));
+}
+
+/* ---- 章节字幕:人生节拍,队列上限3,大事(之约兑现)可插队 ---- */
+const mobChapQ=[]; let mobChapBusy=false;
+function mobChapter(s,front){
+  if(typeof s!=='string'||!s)return;
+  if(s.length>26)s=s.slice(0,25)+'…';               // 事件文案过长时截断,胶囊不爆宽
+  if(mobChapQ.includes(s))return;
+  if(front)mobChapQ.unshift(s);
+  else{if(mobChapQ.length>3)return; mobChapQ.push(s);}
+  mobPumpChap();
+}
+async function mobPumpChap(){
+  if(mobChapBusy)return; mobChapBusy=true;
+  const el=document.getElementById('chapCap');
+  while(mobChapQ.length){
+    const s=mobChapQ.shift();
+    el.textContent=s; el.classList.add('show');
+    await mSleep(2300);
+    el.classList.remove('show'); await mSleep(550);
+  }
+  mobChapBusy=false;
+}
+let mobToastT=null;
+function mobToast(s){const t=document.getElementById('mobToast');
+  t.textContent=s; t.style.display='block';
+  clearTimeout(mobToastT); mobToastT=setTimeout(()=>t.style.display='none',2200);}
+function mobShowOv(id){['ovBirthM','ovDeathM','ovTrailM'].forEach(o=>
+  document.getElementById(o).style.display=o===id?'flex':'none');}
+function mobHideOv(){mobShowOv(null);}
+function mobSyncPause(){const b=document.getElementById('mobPause');if(b)b.textContent=paused?'▶':'⏸';}
+function mobSpeedFactor(){                          // 死后世界慢速运转,临终慢镜×3
+  if(!mobOn)return 1;
+  if(player.phase==='dead')return Math.max(1,700/stepIntervalMs);
+  if(mobSlow)return 3;
+  return 1;
+}
+
+/* ---- 跨世:之约(死因驱动,可序列化重建) + 8勋章 ---- */
+function mobLoad(){try{const v=JSON.parse(localStorage.getItem(MOB_KEY)||'{}');
+  mobMedals=Array.isArray(v.medals)?v.medals:[];
+  mobPact=(v.pact&&v.pact.k)?v.pact:null;}catch(e){}}
+function mobSave(){try{localStorage.setItem(MOB_KEY,
+  JSON.stringify({medals:mobMedals,pact:mobPact}));}catch(e){}}
+const MOB_PACTS={
+  surplus:{text:'手里留够 3 天口粮,贴着糖山住——紧张的日子别超过 3 回合',check:(s,p)=>s.hungry<=3},
+  longer:{mk:arg=>({text:`活得比上世的 ${arg} 岁一倍还长`,check:(s,p)=>p.age>arg*2})},
+  steer3:{text:'亲手带路至少 3 次,别让他自己乱撞',check:(s,p)=>s.decN>=3},
+  steer5:{mk:arg=>({text:`带上路走:至少指 5 次方向,活得比 ${arg} 岁久`,check:(s,p)=>s.decN>=5&&p.age>arg})},
+  poorRich:{text:'换个命试试:投「穷」档出身,一样攒到 25 财富',check:(s,p)=>s.bornTier==='poor'&&s.peak>=25},
+  wider:{text:'把日子过宽一点——巅峰攒到 40 财富,摸到「富裕」',check:(s,p)=>s.peak>=40},
+};
+function mobPactObj(k,arg){                          // 从存储的 kind+arg 重建 check 函数
+  const d=MOB_PACTS[k]; if(!d)return null;
+  const o=d.mk?d.mk(arg):d;
+  return {text:o.text,check:o.check};
+}
+function makeMobPact(a,aiExp){
+  const c=a.cause||'';
+  if(c.startsWith('饥饿'))return{k:'surplus',arg:null};
+  if(a.age<15)return{k:'longer',arg:a.age};
+  if(mobStats.decN===0)return{k:'steer3',arg:null};
+  if(aiExp!==null&&a.age-aiExp<=-10)return{k:'steer5',arg:a.age};
+  if(a.age>=70&&c==='衰老')return{k:'poorRich',arg:null};
+  return{k:'wider',arg:null};
+}
+const MEDALS_MOB=[
+  {id:'walk', icon:'🌈', name:'行万里路', test:a=>a.far>=15},
+  {id:'grain',icon:'🌾', name:'粮山满仓', test:a=>(a.gS+a.gP)>=150},
+  {id:'old',  icon:'🐢', name:'高寿',     test:a=>a.age>=85},
+  {id:'rich', icon:'💰', name:'点石成金', test:a=>a.peak>=70},
+  {id:'storm',icon:'🌋', name:'大灾不死', test:(a,s)=>s.famineN>0&&!String(a.cause).startsWith('饥饿')},
+  {id:'champ',icon:'🏆', name:'穷乡冠军', test:a=>birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘'&&a.peak>=25},
+  {id:'ghost',icon:'🧭', name:'人定胜签', test:(a,s)=>s.aiExp!==null&&a.age-s.aiExp>=15&&s.decN>=2},
+  {id:'steer',icon:'🎖', name:'带路人',   test:(a,s)=>s.decN>=5},
+];
+
+/* ---- 每回合人生节拍(tick 末尾钩子) ---- */
+function mobNewStats(bornTier){
+  return {peak:0,steps:0,collected:0,hungry:0,famineN:0,survivedFamine:false,
+    decisions:[],decN:0,hungryRun:0,firstFlush:false,tiersSeen:{},
+    eduOkAge:null,eduMissN:0,famineStock:[],famineAt:0,minSurplus:1e9,
+    bornTier,aiExp:null,lastGS:0,lastGP:0};
+}
+function mobTick(){
+  const a=player.agent;
+  if(!a||!a.alive){if(mobTab==='me')mobUpdTabs();return;}   // 身后世界照常运转,页签轻刷
+  if(player.phase!=='live')return;
+  const s=mobStats;
+  const last=mobTrail[mobTrail.length-1];
+  if(!last||last.x!==a.x||last.y!==a.y){mobTrail.push({x:a.x,y:a.y});s.steps=mobTrail.length-1;}
+  const gain=(a.gS-s.lastGS)+(a.gP-s.lastGP); s.lastGS=a.gS; s.lastGP=a.gP;
+  s.collected+=gain;
+  const ts=a.sugar/a.sm, tp=a.pm>0?a.spice/a.pm:1e9, sur=Math.min(ts,tp);
+  if(sur<s.minSurplus)s.minSurplus=sur;
+  if(sur<3)s.hungry++;
+  const w=a.sugar+a.spice; if(w>s.peak)s.peak=w;
+  if(!s.firstFlush&&gain>=3){s.firstFlush=true;mobChapter('🌾 第一次丰收,攒下了余粮');}
+  const tn=wealthClass(a).name;
+  if((tn==='小康'||tn==='富裕'||tn==='巨富')&&!s.tiersSeen[tn]){s.tiersSeen[tn]=1;
+    mobChapter(`✨ 日子头一回过到了「${tr(tn)}」`);}
+  if(a.age===30)mobChapter('🎂 三十岁了');
+  if(a.age===60)mobChapter('🎂 六十岁了');
+  if(sur<2.5){s.hungryRun++; if(s.hungryRun===3)mobChapter('⚠️ 粮快见底了,快向糖山走');}
+  else s.hungryRun=0;
+  if(s.famineAt&&world.tick-s.famineAt>40){s.survivedFamine=true;s.famineAt=0;}
+  if(P.grow&&a.edu<3&&w>=50+P.eduCost){              // 读书时机归因:攒够了却没读的回合
+    s.eduMissN++; if(s.eduOkAge===null)s.eduOkAge=a.age;}
+  if(!mobSlow&&a.age+3>=a.maxAge){mobSlow=true;      // 临终慢镜:死前3回合×3
+    mobChapter('🕯 油尽灯枯,时日无多…');}
+  if(mobPact&&!mobPact.done){
+    const o=mobPactObj(mobPact.k,mobPact.arg);
+    if(o&&o.check(s,a)){mobPact.done=true;mobSave();
+      mobChapter('✓ 了却上世之约',true);}            // 高光:字幕插队
+  }
+  if(mobTab==='me')mobUpdTabs();                     // 每 tick 只刷"我的"页签,日志/书页不重建(保滚动位置)
+}
+function mobLogHook(msg,cls){
+  if(cls==='ev-bad'||cls==='ev-good'){
+    if(/大旱|枯萎|瘟疫|陨石|拥挤天灾/.test(msg)&&mobStats){
+      mobStats.famineN++; mobStats.famineAt=world.tick;
+      if(player.phase==='live'&&player.agent)
+        mobStats.famineStock.push(player.agent.sugar+player.agent.spice);
+    }
+  }
+  if(cls!=='me'||!msg.startsWith('🤝')){             // 逐笔交易不上手机日志,复盘有总数
+    mobLogArr.push({t:world.tick,s:String(msg).replace(/<[^>]*>/g,'')});
+    if(mobLogArr.length>60)mobLogArr.shift();
+  }
+}
+
+/* ---- 出生:出身芯片,寿命签与天赋不泄露 ---- */
+function mobRebirthUI(){
+  const a=player.agent;
+  const wel=document.getElementById('welcome');
+  if(wel&&wel.style.display!=='none'){               // 欢迎卡还开着:先正式关掉(存标记),别叠在出生卡下面
+    const w0=document.getElementById('welBtn');
+    if(w0)w0.click();
+  }
+  mobSlow=false; mobSparks.length=0; mobChapQ.length=0;
+  mobTrail=[{x:a.x,y:a.y}];
+  mobStats=mobNewStats(mobBornTier);
+  mobStats.lastGS=a.gS; mobStats.lastGP=a.gP;
+  mobStats.peak=a.sugar+a.spice;
+  mobCam={cx:N/2,cy:N/2,z:1,mode:'god'}; mobCamAnim=null;
+  view='god'; setViewBtns(); mobSyncViewSeg();
+  const env=envReport(a);
+  document.getElementById('mobBirthBody').innerHTML=
+   `<div class="brow"><span>${tr('🗺 出生地')}</span><b>${tr(birthPlaceDesc(a,a.x,a.y))} · ${tr(env.tier)}</b></div>
+    <div class="brow"><span>${tr('💰 随身干粮')}</span><b>${(a.sugar+a.spice).toFixed(0)}</b></div>
+    <div class="brow"><span>${tr('🌱 家门口(3格)产能')}</span><b>${tr('糖')} ${env.s3}${P.spice?' · '+tr('香料')+' '+env.p3:''}</b></div>
+    ${birthHistory(a)}
+    <div class="brow"><span>${tr('🎲 你的牌面')}</span><b>${tr('未揭晓(死后翻开)')}</b></div>`;
+  mobShowOv('ovBirthM');
+  mobUpdTabs();
+}
+function mobStartLife(){
+  if(player.phase!=='born'||!player.agent)return;    // 防连点/重复触发
+  mobHideOv();
+  player.phase='live'; paused=false; setPaused(false);
+  mobCamTo('me',1600);                               // 全貌 → 平滑推进到个人
+  mobChapter(`🎂 第${player.lives.length}世 · 降生于${tr(birthPlaceDesc(player.agent,player.agent.bornX,player.agent.bornY))}`);
+  mobUpdTabs();
+}
+
+/* ---- 死亡:镜头拉远→传记卡;世界不为你停 ---- */
+function mobDieCard(a){
+  mobDieSpot={x:a.x,y:a.y};
+  mobLastTrail=mobTrail;
+  const s=mobStats;
+  let aiExp=null; try{aiExp=aiBaseline(a);}catch(e){}
+  s.aiExp=aiExp; s.decN=s.decisions.length;
+  mobChapter('🪦 这一生,到这里');                    // 排队尾:临终字幕先播,落幕收尾
+  const peakTier=wealthClass({sugar:a.peak,spice:0});
+  const hungry=String(a.cause).startsWith('饥饿');
+  let title='🍃 平凡的一生';
+  if(a.age<15)title='🕯 天不假年——来不及施展的一生';
+  else if(hungry&&s.famineN>0)title='🌵 时代的一粒灰——灾年没熬过去';
+  else if(hungry)title='🕯 糖尽人亡——跑不过降生时的代谢';
+  else if(birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘'&&a.peak>=25)title='🏆 穷乡冠军——荒原出身,巅峰财富无人小看';
+  else if(a.age>=90)title='🐢 长寿星——活过了 90 岁';
+  else if(aiExp!==null&&s.decN>=2&&a.age-aiExp>=15)title=`🧭 人定胜签——同一副签,比本能多活 ${a.age-aiExp} 回合`;
+  else if(peakTier.name==='富裕'||peakTier.name==='巨富')title=`✨ 阶层跃迁——摸到过「${tr(peakTier.name)}」`;
+  const meta={no:player.lives.length,bornX:a.bornX,bornY:a.bornY,x:a.x,y:a.y,age:a.age,steps:s.steps};
+  const full=mobTrailImage(meta,mobLastTrail,false), foc=mobTrailImage(meta,mobLastTrail,true);
+  const L=player.lives.at(-1);
+  if(L&&L.age===a.age){
+    L.mob={title,path:mobTrail.map(p=>[p.x,p.y]),steps:s.steps};
+    L.img=full.url; L.imgZoom=foc.url; L.zoomSpan=foc.span;
+    L.sum={cause:a.cause,hl:[title],lim:[],world:worldSummaryText(a),reveal:''};  // 桌面生命之书回放兼容
+  }
+  document.getElementById('mobDeathTitle').textContent='🪦 '+title;
+  document.getElementById('mobDeathBody').innerHTML=mobEpitaph(a,aiExp,peakTier);
+  const th=document.getElementById('mobDeathThumb');
+  th.innerHTML=`<img src="${full.url}" alt="轨迹图"><small>${tr('点开大图 · 可保存')}</small>`;
+  th.querySelector('img').onclick=()=>mobOpenTrail(player.lives.indexOf(L));
+  const pactWas=mobPact;
+  const newM=MEDALS_MOB.filter(m=>!mobMedals.includes(m.id)&&m.test(a,s));
+  newM.forEach(m=>mobMedals.push(m.id));
+  const pk=makeMobPact(a,aiExp);
+  const pobj=mobPactObj(pk.k,pk.arg);
+  mobPact={k:pk.k,arg:pk.arg,done:false,text:pobj?pobj.text:''};
+  document.getElementById('mobDeathExtra').innerHTML=
+    (pactWas?`<div class="msumline">${tr('上世之约')}「${pactWas.text}」——${pactWas.done?'<span class="mgood">✓ '+tr('了却')+'</span>':'✗ '+tr('没成,带着走')}</div>`:'')+
+    (newM.length?`<div class="msumline mpop" style="margin-top:4px">🥇 ${tr('新勋章')}:${newM.map(m=>m.icon+tr(m.name)).join(' · ')}(${tr('共')}${mobMedals.length}/${MEDALS_MOB.length})</div>`:'')+
+    `<div class="msumline epi">【${tr('下一世之约')}】${mobPact.text}</div>`;
+  mobSave();
+  if(/冠军|胜签|长寿|跃迁/.test(title))mobBoom(a.x,a.y);   // 高光撒花,悲情结局肃穆
+  mobCamTo('god',2600);                              // 拉远回望全貌与长眠之地
+  setTimeout(()=>{if(player.phase==='dead')mobShowOv('ovDeathM');},2750);
+  mobUpdTabs();
+}
+
+/* ---- 传记式总结:降生→行路→浮沉→归眠→复盘→结语(复盘必在归眠后) ---- */
+function mobEpitaph(a,aiExp,peakTier){
+  const s=mobStats, hungry=String(a.cause).startsWith('饥饿'), L=[];
+  L.push(`【${tr('降生')}】${tr('你降生在')}${tr(birthPlaceDesc(a,a.bornX,a.bornY))}——${tr(envReport(a).tier)}。${tr('行囊里有')} ${a.w0} ${tr('财富')},${tr('天赋与寿数都盖着牌,归眠时才翻开')}。`);
+  const wander=a.far>=15?tr('一生走了很远,横跨过大半个世界'):a.far>=6?tr('脚步没有停过'):tr('安土重迁,少有远行');
+  const richTxt=a.peak>=40?`${tr('最风光的时候账下有')} ${a.peak.toFixed(0)} ${tr('财富')},${tr('够得着')}「${tr(peakTier.name)}」${tr('的名分')}。`
+    :a.peak>=20?`${tr('日子最宽裕时手里有过')} ${a.peak.toFixed(0)} ${tr('财富')},${tr('算得上')}「${tr(peakTier.name)}」。`
+    :`${tr('终其一生,手头最宽裕时也不过')} ${a.peak.toFixed(0)} ${tr('财富')}。`;
+  const eduTxt=a.edu>0?`${tr('读过')} ${a.edu} ${tr('年书,眼睛从')} ${a.bv} ${tr('格远长到')} ${a.vision} ${tr('格')}。`:'';
+  const trdTxt=a.trades>=5?`${tr('和邻居讨价还价成过')} ${a.trades} ${tr('笔生意,是集市的熟面孔')}。`:a.trades>0?`${tr('做成过')} ${a.trades} ${tr('笔小买卖')}。`:'';
+  L.push(`【${tr('行路')}】${tr('这一世你走了')} ${s.steps} ${tr('步')},${tr('亲手采下')} ${(a.gS+a.gP).toFixed(0)} ${tr('单粮食')},${wander}。${eduTxt}${trdTxt}${richTxt}`);
+  const fl=[];
+  if(s.famineN)fl.push(`${tr('年间赶上')} ${s.famineN} ${tr('回灾年')}`);
+  if(s.hungry>12)fl.push(`${tr('有')} ${s.hungry} ${tr('个回合在断粮线附近挣扎')}`);
+  const worldTxt=worldSummaryText(a).replace(/<br>/g,' · ');
+  L.push(`【${tr('浮沉')}】${fl.length?fl.join('，')+'——'+tr('都扛了过来')+'。':tr('年间风调雨顺,没有大灾大难,平凡也是福。')}${worldTxt}`);
+  let end;
+  if(a.cause==='衰老')end=`${tr('第')} ${a.age} ${tr('岁')},${tr('油尽灯枯,你安然合上了眼。寿命签上写的')} ${a.maxAge} ${tr('岁')},${tr('天机至此揭晓:不多不少,正是此数')}。`;
+  else if(hungry)end=`${tr('第')} ${a.age} ${tr('岁')},${tr('粮尽了。天赋的签此时翻开:眼睛望得见')} ${a.vision} ${tr('格')},${tr('身子每回合要吃')} ${a.sm}${P.spice?'+'+a.pm:''} ${tr('口——这一场,跑不过代谢')}。`;
+  else if(a.age<15)end=`${tr('第')} ${a.age} ${tr('岁')},${tr(a.cause)}${tr('降临,你没躲过去。寿命签上还留着日子,却一步也没能再走')}。`;
+  else end=`${tr('第')} ${a.age} ${tr('岁')},${tr(a.cause)}${tr('降临,你没躲过去。天灾人祸不由人——这不怪你')}。`;
+  L.push(`【${tr('归眠')}】${end}`);
+  const d=s.decisions, manual=d.length;
+  let F;
+  if(!manual){
+    F=tr('这一世你一次都没点过地图,他自己找糖自己走,活成什么样全凭这副签和运气。其实你可以替他做主:点视野里的格子,他就往那儿走。下一世试着带带他,看看同一副签能活出多不一样的一生。');
+  }else{
+    const bad=d.filter(x=>x.pick<x.best);
+    const lost=bad.reduce((sum,x)=>sum+(x.best-x.pick),0);
+    const parts=[];
+    parts.push(!bad.length
+      ?`${tr('你亲手点的')} ${manual} ${tr('次路,每次都选中了当时看得见的最优落点,眼光很准')}`
+      :`${tr('你亲手点的')} ${manual} ${tr('次路里有')} ${bad.length} ${tr('次不是当时最优——当时视野里有更稳的落点,合计少续约')} ${lost.toFixed(0)} ${tr('回合的余裕')}`);
+    if(aiExp!==null){
+      const diff=a.age-aiExp;
+      if(diff>=8)parts.push(`${tr('我们又让这副签完全不听指挥、自己觅食重活了一遍:只能活到第')} ${aiExp} ${tr('回合(比你少')} ${diff}${tr(')——多出来的日子,是你亲手带出来的')}`);
+      else if(diff<=-8)parts.push(`${tr('这副签交给本能自己走,反而能活到第')} ${aiExp} ${tr('回合(比你多')} ${-diff}${tr(')——这一世的差距不在命,在你替他指的路')}`);
+      else parts.push(`${tr('这副签交给本能自己走,能活')} ${aiExp} ${tr('回合,和你带的')} ${a.age} ${tr('差不多——这副签的潜力,你基本走满了')}`);
+    }
+    if(P.grow&&a.edu===0&&s.eduOkAge!==null&&s.eduMissN>15)
+      parts.push(`${tr('第')} ${s.eduOkAge} ${tr('岁起学费就攒够了(')}${50+P.eduCost}${tr('财富),却始终没走进学堂——视野停在')} ${a.vision} ${tr('格。下一世攒够就读:看得越远,活得越稳')}`);
+    if(hungry&&s.famineStock.length){
+      const had=s.famineStock[s.famineStock.length-1];
+      parts.push(had>=25
+        ?`${tr('灾年来时身上还有')} ${had.toFixed(0)} ${tr('财富——存粮不算薄,只是这场灾更长,不全是你的错')}`
+        :`${tr('灾年来时身上只有')} ${had.toFixed(0)} ${tr('财富——丰年多存两口,这道坎本可以迈过去')}`);
+    }
+    F=parts.join('；')+'。';
+  }
+  L.push(`【${tr('复盘')}】${F}`);
+  const selfFed=(a.gS+a.gP)>=a.sm*Math.max(1,a.age)*.5;
+  let epi;
+  if(hungry&&s.famineN>0)epi=tr('你输给了年成,没有输给自己。倘若生在丰年,这双手本可以攒下更多。');
+  else if(a.age<15)epi=tr('出身给了个难的开局,时运又没站在你这边。若再借几十年,谁说荒原出不了人物。');
+  else if(selfFed)epi=tr('回望这一生:没有人替你采过一粒粮。靠着自己的脚步和眼光,把日子一寸一寸过了下来——出身给的是起点,路是自己走出来的。');
+  else epi=tr('这一世走得吃力,但每一步都是自己迈的。糖域不欠任何人一个结局,下一世的签已经备好。');
+  return L.map(x=>`<div class="msumline">${x}</div>`).join('')+`<div class="msumline epi">${epi}</div>`;
+}
+
+/* ---- 轨迹图:480px PNG,全景/聚焦两张;底图用死亡现场地形 ---- */
+function mobTrailImage(meta,trail,zoom){
+  let x0=0,y0=0,span=N;
+  if(zoom&&trail&&trail.length>1){
+    let minx=N,maxx=0,miny=N,maxy=0;
+    trail.forEach(p=>{minx=Math.min(minx,p.x);maxx=Math.max(maxx,p.x);
+                      miny=Math.min(miny,p.y);maxy=Math.max(maxy,p.y);});
+    const m=3;
+    minx=Math.max(0,minx-m); miny=Math.max(0,miny-m);
+    maxx=Math.min(N-1,maxx+m); maxy=Math.min(N-1,maxy+m);
+    span=Math.max(maxx-minx+1,maxy-miny+1);
+    x0=clamp((minx+maxx+1)/2-span/2,0,N-span);
+    y0=clamp((miny+maxy+1)/2-span/2,0,N-span);
+  }
+  const S=480,k=S/span;
+  const oc=document.createElement('canvas'); oc.width=oc.height=S;
+  const g=oc.getContext('2d');
+  g.fillStyle=TH.bg; g.fillRect(0,0,S,S);
+  for(let y=y0;y<y0+span;y++)for(let x=x0;x<x0+span;x++){
+    const i=y*N+x;
+    g.fillStyle=cellColor(world.sugar[i],world.spice[i]);
+    g.fillRect((x-x0)*k,(y-y0)*k,k,k);
+  }
+  const X=p=>(p.x-x0+.5)*k, Y=p=>(p.y-y0+.5)*k;
+  if(trail&&trail.length>1){
+    g.lineWidth=Math.max(2,k*.09); g.lineCap='round';
+    for(let i=1;i<trail.length;i++){
+      if(Math.abs(trail[i].x-trail[i-1].x)>N/2||Math.abs(trail[i].y-trail[i-1].y)>N/2)continue;
+      g.strokeStyle=`rgba(255,212,121,${(i/trail.length)*.7+.2})`;
+      g.beginPath(); g.moveTo(X(trail[i-1]),Y(trail[i-1])); g.lineTo(X(trail[i]),Y(trail[i])); g.stroke();
+    }
+    g.textAlign='center'; g.textBaseline='middle';
+    g.font=`bold ${Math.min(15,Math.max(9,k*.5))|0}px "Microsoft YaHei",sans-serif`;
+    const lastVisit=new Map();
+    trail.forEach((p,i)=>lastVisit.set(p.x*100+p.y,i+1));
+    lastVisit.forEach((stp,key)=>{                     // 每10步一个数字锚,全标会糊
+      if(stp%10&&stp!==1)return;
+      const x=Math.floor(key/100), y=key%100;
+      g.fillStyle='rgba(5,8,14,.62)';
+      g.beginPath(); g.arc(X({x}),Y({y}),Math.max(6,k*.3),0,Math.PI*2); g.fill();
+      g.fillStyle='rgba(255,212,121,.95)';
+      g.fillText(stp,X({x}),Y({y})+.5);
+    });
+    g.textBaseline='alphabetic';
+  }
+  g.font=`${Math.max(15,k*.9)|0}px "Microsoft YaHei"`; g.textAlign='center';
+  g.fillText('🎂',X({x:meta.bornX}),Y({y:meta.bornY})+k*.3);
+  g.fillText('🪦',X({x:meta.x}),Y({y:meta.y})+k*.3);
+  g.fillStyle='rgba(5,8,14,.72)'; g.fillRect(0,S-22,S,22);
+  g.fillStyle='rgba(255,212,121,.92)'; g.font='bold 11.5px "Microsoft YaHei"';
+  g.fillText(`第${meta.no}世 · ${meta.age}岁 · ${meta.steps}步 · 🎂${tr('起点')} 🪦${tr('长眠')}`,S/2,S-7);
+  return {url:oc.toDataURL('image/png'),span};
+}
+let mobTrailLife=null, mobTrailView='full', mobTrailBack=null;
+function mobOpenTrail(i){
+  const L=player.lives[i]; if(!L)return;
+  if(!L.img){
+    const path=(L.mob&&L.mob.path||[]).map(p=>({x:p[0],y:p[1]}));
+    if(path.length<2){mobToast(tr('这一世没有留下足迹'));return;}
+    // ponytail: 存档恢复的旧世无死亡现场,底图用当前世界地形近似,足迹与数字仍准
+    const meta={no:i+1,bornX:path[0].x,bornY:path[0].y,
+      x:path[path.length-1].x,y:path[path.length-1].y,age:L.age,steps:L.mob.steps||path.length-1};
+    const f=mobTrailImage(meta,path,false), z=mobTrailImage(meta,path,true);
+    L.img=f.url; L.imgZoom=z.url; L.zoomSpan=z.span;
+  }
+  mobTrailBack=['ovBirthM','ovDeathM'].find(o=>document.getElementById(o).style.display==='flex')||null;
+  mobTrailLife=L; mobTrailView='full'; mobSetTrailImg();
+  document.getElementById('mobTrailNo').textContent=i+1;
+  mobShowOv('ovTrailM');
+}
+function mobSetTrailImg(){
+  const L=mobTrailLife; if(!L)return;
+  const zoomed=mobTrailView==='zoom'&&L.imgZoom;
+  document.getElementById('mobTrailImg').src=zoomed?L.imgZoom:L.img;
+  document.getElementById('mobTrailTag').textContent=zoomed
+    ?`${tr('聚焦轨迹区')} · ${tr('约放大')} ${(N/Math.max(1,L.zoomSpan||N)).toFixed(1)}×`
+    :`${tr('全景世界')} · ${tr('点图或左滑看聚焦')}`;
+}
+
+/* ---- 庆祝粒子:世界坐标,随镜头缩放;高光死亡才撒花 ---- */
+function mobBoom(x,y){
+  for(let i=0;i<30;i++)mobSparks.push({wx:x+.5,wy:y+.5,
+    vx:(Math.random()-.5)*.16, vy:-.06-Math.random()*.1, life:1,
+    c:Math.random()<.7?'#ffd479':'#7be383'});
+}
+function mobDrawSparks(){
+  const[s,ox,oy]=mobCamXform(), cell=CELL*s;
+  for(let i=mobSparks.length-1;i>=0;i--){const p=mobSparks[i];
+    p.wx+=p.vx; p.wy+=p.vy; p.vy+=.006; p.life-=.016;
+    if(p.life<=0){mobSparks.splice(i,1);continue;}
+    ctx.globalAlpha=Math.max(0,p.life); ctx.fillStyle=p.c;
+    ctx.beginPath(); ctx.arc(ox+p.wx*cell,oy+p.wy*cell,Math.max(1.5,cell*.11*p.life+.5),0,Math.PI*2); ctx.fill();}
+  ctx.globalAlpha=1;
+}
+
+/* ---- 渲染钩子:轨迹金线(世界层) + HUD(屏幕层) ---- */
+function mobGold(a){return document.body.classList.contains('light')?`rgba(184,134,11,${a})`:`rgba(255,212,121,${a})`;}
+function mobDrawTrail(s){
+  const trail=player.phase==='dead'?mobLastTrail:(player.agent?mobTrail:null);
+  if(!trail||trail.length<2)return;
+  const cell=CELL*s;
+  ctx.lineWidth=Math.max(2.5,cell*.09); ctx.lineCap='round';
+  for(let i=1;i<trail.length;i++){
+    if(Math.abs(trail[i].x-trail[i-1].x)>N/2||Math.abs(trail[i].y-trail[i-1].y)>N/2)continue;
+    ctx.strokeStyle=mobGold((i/trail.length)*.65+.25);
+    ctx.beginPath();
+    ctx.moveTo((trail[i-1].x+.5)*cell,(trail[i-1].y+.5)*cell);
+    ctx.lineTo((trail[i].x+.5)*cell,(trail[i].y+.5)*cell); ctx.stroke();
+  }
+  for(let i=0;i<trail.length;i+=3){
+    ctx.fillStyle=mobGold((i/trail.length)*.5+.3);
+    ctx.beginPath(); ctx.arc((trail[i].x+.5)*cell,(trail[i].y+.5)*cell,Math.max(1.8,cell*.08),0,7); ctx.fill();
+  }
+  if(cell>=22){                                      // 附身放大时标步数;同格多次经过只留最末次
+    ctx.font=`bold ${Math.max(8,cell*.24)|0}px "Microsoft YaHei"`;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    const lastVisit=new Map();
+    trail.forEach((p,i)=>lastVisit.set(p.x*100+p.y,i+1));
+    lastVisit.forEach((stp,key)=>{
+      const x=Math.floor(key/100), y=key%100;
+      if(player.agent&&player.phase==='live'&&x===player.agent.x&&y===player.agent.y)return;
+      ctx.fillStyle='rgba(5,8,14,.55)';
+      ctx.beginPath(); ctx.arc((x+.5)*cell,(y+.5)*cell,Math.max(5.5,cell*.19),0,7); ctx.fill();
+      ctx.fillStyle=mobGold(.95);
+      ctx.fillText(stp,(x+.5)*cell,(y+.5)*cell+.5);
+    });
+    ctx.textBaseline='alphabetic';
+  }
+  if(player.phase==='live'&&player.agent&&mobStats&&mobStats.steps>0){   // 小人身上的步数牌
+    const a=player.agent, px=(a.x+.5)*cell, py=(a.y+.5)*cell, rr=cell*.4;
+    const lbl=String(mobStats.steps), fs=Math.max(9,cell*.28);
+    ctx.font=`bold ${fs|0}px "Microsoft YaHei"`; ctx.textAlign='center';
+    const tw=ctx.measureText(lbl).width;
+    ctx.fillStyle='rgba(5,8,14,.62)';
+    ctx.beginPath(); ctx.roundRect(px-tw/2-3,py+rr*.5,tw+6,fs+2,(fs+2)/2); ctx.fill();
+    ctx.strokeStyle=mobGold(.5); ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle=mobGold(1); ctx.textBaseline='middle';
+    ctx.fillText(lbl,px,py+rr*.5+(fs+2)/2); ctx.textBaseline='alphabetic';
+  }
+}
+function mobDrawOver(now){
+  const[s,ox,oy]=mobCamXform(), cell=CELL*s, W=cv.width, H=cv.height;
+  const a=player.agent;
+  if(a&&player.phase==='born'){                      // 出生标签(屏幕坐标,字号不随镜头缩)
+    const px=ox+(a.x+.5)*cell, py=oy+(a.y+.5)*cell, label=tr('⬇ 你出生在这里'), fs=13;
+    ctx.font=`bold ${fs}px "Microsoft YaHei"`; ctx.textAlign='center';
+    const tw=ctx.measureText(label).width;
+    ctx.fillStyle='rgba(5,8,14,.75)';
+    ctx.beginPath(); ctx.roundRect(px-tw/2-6,py-cell*1.9-8,tw+12,fs+8,6); ctx.fill();
+    ctx.strokeStyle='rgba(255,212,121,.55)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle='#ffe66d';
+    ctx.fillText(label,px,py-cell*1.9-8+fs/2+3);
+  }
+  if(a&&player.phase==='live'&&mobCam.mode==='me'){  // 迷雾:推进浓,拉远淡出
+    const alpha=clamp((mobCam.z-1.5)/1.5,0,1);
+    if(alpha>0){
+      const px=ox+(a.x+.5)*cell, py=oy+(a.y+.5)*cell, R=(a.vision+.6)*cell;
+      // 视野圈内补极淡网格纹理:荒原(纯背景色)不再比雾外格子更黑(讨论稿观感)
+      ctx.strokeStyle='rgba(123,227,131,.09)'; ctx.lineWidth=1;
+      ctx.beginPath();
+      const gx0=Math.floor(a.x-a.vision), gx1=Math.ceil(a.x+a.vision);
+      const gy0=Math.floor(a.y-a.vision), gy1=Math.ceil(a.y+a.vision);
+      for(let gx=gx0;gx<=gx1;gx++){const sx=ox+gx*cell; ctx.moveTo(sx,py-R); ctx.lineTo(sx,py+R);}
+      for(let gy=gy0;gy<=gy1;gy++){const sy=oy+gy*cell; ctx.moveTo(px-R,sy); ctx.lineTo(px+R,sy);}
+      ctx.stroke();
+      ctx.fillStyle=`rgba(4,6,10,${.95*alpha})`;       // 雾加浓:雾外不透光,黑=未知的语义成立
+      ctx.beginPath(); ctx.rect(0,0,W,H); ctx.arc(px,py,R,0,Math.PI*2); ctx.fill('evenodd');
+      const g=ctx.createRadialGradient(px,py,R*.55,px,py,R);
+      g.addColorStop(0,'rgba(4,6,10,0)'); g.addColorStop(1,`rgba(4,6,10,${.7*alpha})`);
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(px,py,R,0,7); ctx.fill();
+    }
+  }
+  if(a&&player.phase==='live'&&mobSlow){             // 临终慢镜:暗角收拢
+    const va=.18+.08*Math.sin(now/500);
+    const g=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*.32,W/2,H/2,Math.max(W,H)*.7);
+    g.addColorStop(0,'rgba(0,0,0,0)'); g.addColorStop(1,`rgba(0,0,0,${va})`);
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  }
+  mobDrawSparks();
+  ctx.textAlign='center';
+  if(player.phase==='dead'&&mobDieSpot){             // 长眠标记:屏幕层大样式,浅深主题都醒目
+    const px=ox+(mobDieSpot.x+.5)*cell, py=oy+(mobDieSpot.y+.5)*cell;
+    ctx.setLineDash([5,3]);
+    ctx.beginPath(); ctx.arc(px,py,cell*.85+Math.sin(now/400)*2,0,Math.PI*2);
+    ctx.strokeStyle='rgba(255,212,121,.95)'; ctx.lineWidth=2.5; ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font=`${Math.max(15,cell*1.05)|0}px "Microsoft YaHei"`;
+    ctx.fillText('🪦',px,py+cell*.38);
+    const label=`第${player.lives.length}世 长眠于此`, fs=Math.max(12,cell*.5)|0;
+    ctx.font=`bold ${fs}px "Microsoft YaHei"`;
+    const tw=ctx.measureText(label).width;
+    ctx.fillStyle='rgba(5,8,14,.78)';
+    ctx.beginPath(); ctx.roundRect(px-tw/2-6,py+cell*.95,tw+12,fs+8,6); ctx.fill();
+    ctx.strokeStyle='rgba(255,212,121,.6)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle='#ffd479';
+    ctx.fillText(label,px,py+cell*.95+fs+1);
+  }
+  if(player.phase==='dead'){
+    const label='你长眠了,世界照常运转 · 金线是你走过的路';
+    ctx.font='12px "Microsoft YaHei"';
+    const tw=ctx.measureText(label).width;
+    ctx.fillStyle='rgba(5,8,14,.66)';                 // 背板:浅色主题下金字也读得清
+    ctx.beginPath(); ctx.roundRect(W/2-tw/2-8,H-22,tw+16,18,9); ctx.fill();
+    ctx.fillStyle='rgba(255,212,121,.92)'; ctx.fillText(label,W/2,H-9);
+  }else if(mobCam.mode==='god'&&player.phase==='live'){
+    const label='全图观赏 · 点居民可查看 · 带他走路请切「附身」';
+    ctx.font='11px "Microsoft YaHei"';
+    const tw=ctx.measureText(label).width;
+    ctx.fillStyle='rgba(5,8,14,.6)';
+    ctx.beginPath(); ctx.roundRect(W/2-tw/2-8,H-21,tw+16,17,8); ctx.fill();
+    ctx.fillStyle='rgba(201,214,232,.85)'; ctx.fillText(label,W/2,H-8);
+  }
+}
+
+/* ---- 地图点按:附身=带路+决策审计;全图=点居民查看 ---- */
+function mobBestVisible(a){
+  const grid=occupancy(); let bs=-Infinity;          // 审计口径与引擎 pickMove 一致:续命回合数(免随机噪声)
+  for(const c of raysCells(a,grid)){
+    const i=c.y*N+c.x;
+    const v=survivalTime(a,world.sugar[i],world.spice[i]);
+    if(v>bs)bs=v;
+  }
+  return bs;
+}
+function mobMapClick(e){
+  const rect=cv.getBoundingClientRect();
+  const mx=(e.clientX-rect.left)*(cv.width/rect.width), my=(e.clientY-rect.top)*(cv.height/rect.height);
+  const[s,ox,oy]=viewXform();
+  const x=Math.floor((mx-ox)/(s*CELL)), y=Math.floor((my-oy)/(s*CELL));
+  if(x<0||y<0||x>=N||y>=N)return;
+  const a=player.agent;
+  if(mobCam.mode==='god'||!a||player.phase!=='live'){
+    const hit=occupancy()[y*N+x];
+    if(hit)mobToast(`👀 ${tr('居民')} #${hit.id}:${tr(wealthClass(hit).name)} · ${tr('财')}${(hit.sugar+hit.spice).toFixed(0)} · ${tr('视')}${hit.vision} · ${hit.age}${tr('岁')}`);
+    return;
+  }
+  const dx=Math.min(Math.abs(x-a.x),N-Math.abs(x-a.x)), dy=Math.min(Math.abs(y-a.y),N-Math.abs(y-a.y));
+  if(Math.max(dx,dy)>a.vision){mobToast(tr('太远了,超出你的视野'));return;}
+  a.target={x,y}; player.firstMove=true;
+  const i=y*N+x;
+  mobStats.decisions.push({t:world.tick,pick:survivalTime(a,world.sugar[i],world.spice[i]),best:mobBestVisible(a)});
+  mobToast(tr('🎯 他会往你点的格子走 · 不点的话自己找糖'));
+}
+
+/* ---- 底部页签:我的 / 日志 / 生命之书+勋章 ---- */
+function mobUpdTabs(){
+  if(!mobOn)return;
+  const b=document.getElementById('mobTabBody'); if(!b)return;
+  if(mobTab==='me'){
+    const a=player.agent;
+    if(!a||!a.alive){
+      // 无附身对象:按钮并排一行(132px 页签内不溢出),保证 peek 关卡后仍有重看/再投入口
+      let btns='';
+      if(player.phase==='dead')btns+=`<div style="display:flex;gap:6px;margin-top:6px">
+        <button class="mbtn" id="mobSeeDeath" style="flex:1;min-height:36px">🪦 ${tr('重看总结')}</button>
+        <button class="mbtn" id="mobReb3" style="flex:1;min-height:36px">🎲 ${tr('再投')}</button></div>`;
+      else if(player.phase==='none')btns+=`<button class="mbtn" id="mobReb3" style="min-height:36px;width:100%;margin-top:6px">🎲 ${tr('开始投胎')}</button>`;
+      const hint=player.phase==='dead'?tr('总结卡关了?从这里重开')
+                :player.phase==='born'?tr('出生签开着:换出身或点「开始这一生」')
+                :tr('还没投胎');
+      b.innerHTML=`<div class="mempty">${hint}</div>${btns}`;
+      const sd=document.getElementById('mobSeeDeath');
+      if(sd)sd.onclick=()=>mobShowOv('ovDeathM');
+      const r3=document.getElementById('mobReb3');
+      if(r3)r3.onclick=()=>{graduateNovice();rebirth();};
+      return;
+    }
+    const w=a.sugar+a.spice, t=wealthClass(a);
+    b.innerHTML=`
+      <div class="mmeRow"><div class="bigW">${w.toFixed(0)}<small> ${tr('财富')}</small></div>
+        <span class="mtierchip" style="background:${t.color}">${tr(t.name)}</span>
+        <span style="font-size:11px;color:var(--dim);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${tr(birthPlaceDesc(a,a.bornX,a.bornY))}</span></div>
+      <div class="mkv"><span>${tr('视野')} / ${tr('代谢')}</span><b>${P.blind?'🎴?':a.vision+' '+tr('格')} / ${a.sm}${P.spice?'+'+a.pm:''}</b></div>
+      <div class="mkv"><span>${tr('年龄')} / ${tr('走过')}</span><b>${a.age} ${tr('岁')} / ${mobStats?mobStats.steps:0} ${tr('步')}</b></div>
+      <div class="mkv"><span>${tr('巅峰财富')}</span><b>${mobStats?mobStats.peak.toFixed(0):'—'}</b></div>
+      <div class="mkv"><span>${tr('当前状态')}</span><b>${a.target?tr('🎯 亲自走位中'):tr('自己找糖中')}</b></div>
+      ${mobPact?`<div class="mkv"><span>${tr('上世之约')}</span><b>${mobPact.done?'✓ '+tr('已了却'):'⏳ '+tr('进行中')}</b></div>
+      <div style="font-size:11.5px;color:var(--gold);padding:1px 0 3px">${mobPact.text}</div>`:''}
+      ${player.phase==='live'?`<div style="display:flex;gap:6px;margin-top:6px">
+        ${P.grow&&a.edu<3?`<button class="mbtn" id="mobEdu" style="flex:1;min-height:36px"${w>=50+P.eduCost?'':' disabled style="flex:1;min-height:36px;opacity:.45"'}>${tf('🎓 读书(花{n},视野+1)',{n:P.eduCost})}</button>`:''}
+        <button class="mbtn" id="mobReb2" style="flex:1;min-height:36px">🎲 ${tr('转世重开')}</button>
+      </div>`:''}`;
+    const eb=document.getElementById('mobEdu');
+    if(eb)eb.onclick=()=>{if(tryEducate(a)){mobUpdTabs();updateHeader();}};
+    const rb=document.getElementById('mobReb2');
+    if(rb)rb.onclick=()=>{graduateNovice();mobHideOv();rebirth();};
+  }else if(mobTab==='log'){
+    const arr=[...mobLogArr].reverse().slice(0,18);
+    b.innerHTML=arr.length?arr.map(e=>`<div class="mlogline">${tr('第')}${e.t}${tr('回合')} · ${e.s}</div>`).join(''):`<div class="mempty">${tr('暂无大事')}</div>`;
+  }else{
+    const Ls=player.lives;
+    if(!Ls.length){b.innerHTML=`<div class="mempty">${tr('生命之书还是空的')}</div>`;return;}
+    b.innerHTML=Ls.map((l,i)=>({l,i})).reverse().map(({l,i})=>
+      `<div class="mlifeline"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${tr('第')}${i+1}${tr('世')} · ${l.age}${tr('岁')} · ${tr('峰值')}${(l.peak??0).toFixed(0)}${l.mob?' · '+l.mob.title.split('——')[0]:''}</span>${l.mob&&l.mob.path?`<button class="mbtn" style="padding:2px 8px;min-height:26px;font-size:11px" data-i="${i}">🖼</button>`:''}</div>`).join('')+
+      (Ls.length>=2?`<div style="margin-top:6px;font-size:11.5px;color:var(--dim);border-top:1px dashed var(--line);padding-top:5px">${tr('已历')} ${Ls.length} ${tr('世')} · ${tr('最长寿')} ${Math.max(...Ls.map(l=>l.age))} ${tr('岁')}</div>`:'')+
+      `<div style="margin-top:4px;font-size:11.5px;color:var(--gold);line-height:1.7">🏅 ${tr('勋章')} ${mobMedals.length}/${MEDALS_MOB.length}${mobMedals.length?' · '+mobMedals.map(id=>{const m=MEDALS_MOB.find(x=>x.id===id);return m?m.icon+tr(m.name):'';}).join(' '):''}</div>`;
+    b.querySelectorAll('button[data-i]').forEach(bt=>bt.onclick=()=>mobOpenTrail(+bt.dataset.i));
+  }
+}
+
+/* ---- 视口切换(桌面调试拖窄窗口即手机模式) ---- */
+let mobSavedLang=null;
+function mobSyncWel(){                              // 欢迎卡:手机用讨论稿短文案,桌面还原
+  const w=document.getElementById('welcome'); if(!w)return;
+  const ps=w.querySelectorAll('p');
+  const span=document.querySelector('#welcome .wdim span');
+  if(mobOn){
+    if(ps[0])ps[0].textContent=tr('投一次胎,活一辈子。');
+    if(ps[1])ps[1].textContent=tr('出身决定的是难度,不是结局。');
+    if(span)span.textContent=tr('点「🎲 开始投胎」抽一签,开始这一世。');
+  }else{
+    ps.forEach(p=>{if(p.dataset.i18n)p.textContent=tr(p.dataset.i18n);});
+    if(span&&span.dataset.i18n)span.textContent=tr(span.dataset.i18n);
+  }
+}
+function mobSync(){
+  const on=MOB();
+  document.body.classList.toggle('mobile',on);
+  if(on===mobOn)return;
+  mobOn=on;
+  fitMap();                                         // header⇄mobTop 切换改变地图可用空间,CELL 须重测
+  if(on){
+    if(LANG!=='zh'){mobSavedLang=LANG;LANG='zh';applyLang();}   // 手机文案先锁简体(翻译表后补),不写存储,切回即恢复
+    mobSpdIdx=0; stepIntervalMs=500;                // 手机速度档归 ×1,显示与实际一致
+    document.getElementById('mobSpd').textContent='×1';
+    if(player.phase==='live'&&player.agent)mobCamTo('me',600);
+    else mobCam={cx:N/2,cy:N/2,z:1,mode:player.phase==='live'?'me':'god'};
+    if(player.phase==='born'&&player.agent)mobRebirthUI();
+    else if(player.phase==='dead'&&player.lastDead)mobShowOv('ovDeathM');
+    mobUpdTabs(); mobSyncPause(); mobSyncViewSeg();
+  }else{
+    if(mobSavedLang){LANG=mobSavedLang;mobSavedLang=null;applyLang();}
+    mobHideOv();
+    const cc=document.getElementById('chapCap');
+    if(cc)cc.classList.remove('show');
+    mobChapQ.length=0;
+    mobSpdIdx=0; stepIntervalMs=430;               // 速度档归还桌面默认,滑杆显示与实际一致
+    const sl=document.getElementById('spdSlider');
+    if(sl){sl.value=35;document.getElementById('spdVal').textContent=(1000/stepIntervalMs).toFixed(1).replace(/\.0$/,'')+tr('步/秒');}
+    // 桌面右栏接管当前局面(否则 born/dead 卡在手机覆盖层里,桌面无按钮可点)
+    if(player.phase==='born'&&player.agent)showBirthCard(player.agent);
+    else if(player.phase==='dead'&&player.lastDead)showDeathCard(player.lastDead);
+    else if(player.phase==='live'&&player.agent){view=mobCam.mode==='me'?'me':'god';setViewBtns();updateMeCard();}
+    else updateMeCard();
+  }
+  mobSyncWel();
 }
 
 /* ================= 自检 (?test=1) ================= */
@@ -3572,6 +4447,15 @@ function selfTest(){                            // ponytail: 自检是开发诊�
     genWorld();
     ok('纯糖:地形无香料', world.spiceCap.every(v=>v===0));
     ok('纯糖:居民无香料代谢', world.agents.every(a=>a.pm===0&&a.spice===0));
+    { // 指定出身(纯糖):签须全是糖——修前对半拆,香料无处花,口粮腰斩致速死
+      const keepLife=player.life, keepLen=world.agents.length;
+      rebirth('rich');
+      ok('纯糖:富翁签全是糖', player.agent.spice===0&&player.agent.sugar>=TIER_WEALTH.rich[0]&&player.agent.sugar<=TIER_WEALTH.rich[1]);
+      rebirth('poor');
+      ok('纯糖:穷签全是糖', player.agent.spice===0&&player.agent.sugar>=TIER_WEALTH.poor[0]&&player.agent.sugar<=TIER_WEALTH.poor[1]);
+      world.agents.length=keepLen;                 // 参照生态稳态段先例:测后清玩家,别让它在后续回合里死给localStorage看
+      player.agent=null; player.phase='none'; player.life=keepLife;
+    }
     let bad=null;
     for(let i=0;i<200&&!bad;i++){tick();
       for(const a of world.agents)if(a.alive&&(a.pm!==0||!isFinite(a.sugar))){bad=a.id;break;}}
@@ -3606,6 +4490,13 @@ function selfTest(){                            // ponytail: 自检是开发诊�
     ok('散布:60回合无异常', okRun&&aliveCount()>0);
     P.terrain=t0;
   }
+  { // 手机端纯函数:轨迹图生成与聚焦裁剪(机制出自 手机UI演示.html,交接稿)
+    const path=[{x:5,y:5},{x:6,y:5},{x:7,y:6},{x:8,y:8}];
+    const meta={no:1,bornX:5,bornY:5,x:8,y:8,age:30,steps:3};
+    const full=mobTrailImage(meta,path,false), foc=mobTrailImage(meta,path,true);
+    ok('手机:轨迹图可生成', full.url.startsWith('data:image/png')&&full.span===N);
+    ok('手机:聚焦图裁剪生效', foc.url.startsWith('data:image/png')&&foc.span<N);
+  }
   genWorld(); stats.pop=[];stats.gini=[];stats.price=[];
   const fails=A.filter(x=>!x[1]);
   const txt=`自检 ${A.length-fails.length}/${A.length} 通过`+(fails.length?'\n失败: '+fails.map(f=>f[0]).join('; '):' ✅');
@@ -3636,6 +4527,60 @@ function graduateNovice(){document.body.classList.remove('novice');fitMap();}
 rebirth();                                   // 第1世抽签,出生卡弹出,世界暂停等你
 updateHeader(); updateMeCard(); updateHint();
 requestAnimationFrame(frame);
+/* ===== 手机端初始化(须在启动序列之后:welBtn 已注册) ===== */
+mobLoad();
+(function(){
+  const wb=document.getElementById('welBtn');
+  if(wb){const old=wb.onclick;
+    wb.onclick=function(){old&&old.call(this);
+      if(mobOn&&player.phase==='born')mobShowOv('ovBirthM');};}   // 欢迎卡盖着时不出出生卡,关闭欢迎再出
+})();
+[['mtabMe','me'],['mtabLog','log'],['mtabBook','book']].forEach(([id,v])=>
+  document.getElementById(id).onclick=()=>{mobTab=v;
+    document.querySelectorAll('#mobSheet .mtabs button').forEach(x=>x.classList.remove('on'));
+    document.getElementById(id).classList.add('on'); mobUpdTabs();});
+document.getElementById('mobGo').onclick=()=>mobStartLife();
+document.getElementById('mobPeek').onclick=()=>mobHideOv();   // 死亡卡暂关,页签里可重看/再投
+document.getElementById('mobReroll').onclick=()=>{mobHideOv();rebirth();};
+document.getElementById('mobAgain').onclick=()=>{mobHideOv();rebirth();};
+document.querySelectorAll('#ovBirthM .mchips button').forEach(b=>
+  b.onclick=()=>{mobHideOv();rebirth(b.dataset.k==='random'?undefined:b.dataset.k);});
+document.querySelectorAll('#ovDeathM .mchips button').forEach(b=>
+  b.onclick=()=>{mobHideOv();rebirth(b.dataset.k);});
+document.querySelectorAll('#mobViewSeg button').forEach(b=>b.onclick=()=>{
+  if(b.dataset.m==='me'&&(!player.agent||player.phase!=='live')){mobToast(tr('先投胎,才有附身'));return;}
+  mobCamTo(b.dataset.m,1200);});
+document.querySelectorAll('#mobCamSeg button').forEach(b=>b.onclick=()=>{
+  mobSteady=+b.dataset.s;
+  document.querySelectorAll('#mobCamSeg button').forEach(x=>x.classList.toggle('on',x===b));
+  mobToast([tr('镜头:跟紧(晃动感最强)'),tr('镜头:平稳——人在画中,镜头不动'),tr('镜头:固定——贴边才平移')][mobSteady]);});
+document.getElementById('mobPause').onclick=()=>{
+  if(player.phase==='born'){mobToast(tr('看完签,先点「开始这一生」'));return;}
+  setPaused(!paused);};
+document.getElementById('mobSpd').onclick=()=>{
+  mobSpdIdx=(mobSpdIdx+1)%4; stepIntervalMs=[500,250,125,62][mobSpdIdx];
+  document.getElementById('mobSpd').textContent='×'+[1,2,4,8][mobSpdIdx];
+  // ponytail: 手机速度直写 stepIntervalMs,切回桌面以滑杆为准(拖动即覆盖)
+};
+document.getElementById('mobTrailClose').onclick=()=>{mobShowOv(mobTrailBack);mobTrailBack=null;};
+const mobTrailImgEl=document.getElementById('mobTrailImg');
+mobTrailImgEl.onclick=()=>{mobTrailView=mobTrailView==='full'?'zoom':'full';mobSetTrailImg();};
+let mobSwX=null;                                     // 左滑→聚焦,右滑→全景
+mobTrailImgEl.addEventListener('pointerdown',e=>mobSwX=e.clientX);
+mobTrailImgEl.addEventListener('pointerup',e=>{
+  if(mobSwX==null)return;
+  const dx=e.clientX-mobSwX; mobSwX=null;
+  if(dx<-30)mobTrailView='zoom'; else if(dx>30)mobTrailView='full'; else return;
+  mobSetTrailImg();});
+document.getElementById('mobTrailSave').onclick=()=>{
+  const a=document.createElement('a');
+  a.href=mobTrailImgEl.src;
+  a.download=`糖域-第${document.getElementById('mobTrailNo').textContent}世-轨迹.png`;
+  document.body.appendChild(a); a.click(); a.remove();};
+if(mobMq.addEventListener)mobMq.addEventListener('change',mobSync);   // 拖窄窗口即手机模式,方便调试
+setInterval(()=>{if(mobOn)frame(performance.now());},80);   // IAB 会完全节流 rAF(实测1秒0帧),双驱动兜底
+window.__mobReady=true;
+mobSync();
 </script>
 </body>
 </html>
