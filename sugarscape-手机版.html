@@ -2251,7 +2251,7 @@ function die(a,cause){
   a.alive=false; a.cause=cause;
   noteDeath(a);
   if(cohort&&a.cohort)cohort.dead.push(a);   // 流动性追踪:记录队列成员死亡(死时财富=终态)
-  if(a.player){player.lives.push({age:a.age,peak:a.peak,cause,
+  if(a.player){player.lives.push({age:a.age,peak:a.peak,cause,name:a.mobName||'',
     vision:a.vision,sm:a.sm,pm:a.pm,maxAge:a.maxAge,
     born:birthPlaceDesc(a,a.bornX,a.bornY),talent:talentDesc(a),trades:a.trades,far:a.far});
     saveLives(); renderLivesBook();
@@ -2277,7 +2277,7 @@ function renderLivesBook(){                  // 生命之书:逐世一行账
   el.innerHTML=L.map((l,i)=>{
     const cls=l.age>=60?'var(--good)':l.age<20?'var(--bad)':'var(--tx)';
     return `<div style="border-bottom:1px dashed var(--line);padding:2px 0;cursor:pointer" title="${tr('点开重看这一世的总结')}" onclick="showLifeSummary(${i})">
-      <b style="color:var(--tx)">${tf('第{n}世',{n:i+1})}</b> ${tr(l.born)}·${tr(l.talent)} · <b style="color:${cls}">${tf('{n}岁',{n:l.age})}</b> ${tr(l.cause)}${l.trades?` · 🤝${l.trades}`:''}</div>`;
+      <b style="color:var(--tx)">${l.name||tf('第{n}世',{n:i+1})}</b> ${tr(l.born)}·${tr(l.talent)} · <b style="color:${cls}">${tf('{n}岁',{n:l.age})}</b> ${tr(l.cause)}${l.trades?` · 🤝${l.trades}`:''}</div>`;
   }).join('')+
   `<div style="margin-top:4px;color:var(--cyan)">${tf('共{n}世 · 平均{m}岁 · 点任一行重看总结',{n:L.length,m:(L.reduce((s,l)=>s+l.age,0)/L.length).toFixed(0)})}</div>`;
 }
@@ -2980,7 +2980,7 @@ function showDeathCard(a){
     <div class="brow"><span>${tr('巅峰财富')}</span><b>${a.peak.toFixed(0)}</b></div>
     ${revealTxt?`<div class="brow"><span>${tr('🎴 牌底揭晓')}</span><b>${revealTxt}</b></div>`:''}
     <div class="rpt"><h4>🪦 ${tr('🪦 此生总结').replace('🪦 ','')}</h4>
-      ${tf('{b},{t}:活了 {n} 天,最多攒下 {p} 颗糖{d}。',{b:tr(birthPlaceDesc(a,a.bornX,a.bornY)),t:tr(talentDesc(a)),n:a.age,p:a.peak.toFixed(0),d:a.trades?tf(',做成 {m} 笔买卖',{m:a.trades}):''})}<br>
+      ${(a.mobName?tf('{name} · ',{name:a.mobName}):'')}${tf('{b},{t}:活了 {n} 天,最多攒下 {p} 颗糖{d}。',{b:tr(birthPlaceDesc(a,a.bornX,a.bornY)),t:tr(talentDesc(a)),n:a.age,p:a.peak.toFixed(0),d:a.trades?tf(',做成 {m} 笔买卖',{m:a.trades}):''})}<br>
       <span style="color:var(--good)">${tr('✨ 高光 — ')}${hl.join(';')}</span><br>
       <span style="color:var(--bad)">${tr('⚠️ 局限 — ')}${lim.join(';')}</span></div>
     ${marksReport()}
@@ -3847,10 +3847,38 @@ caption=function(msg){chapter(String(msg).replace(/^[\s\u{1F300}-\u{1FAFF}\u{260
 let lastPos=null,prevPhase=null,deathbedFired=false;
 const seen={};
 const _rebirth=rebirth;
+/* ---------- 名字 + 命运签:给每一世一个身份和一个悬念 ---------- */
+const NAME_XING='王李张刘陈杨赵黄周吴徐孙马朱胡郭何高林罗郑梁谢宋唐许韩冯邓曹彭曾田董袁潘蒋蔡余杜叶程苏魏吕丁任沈姚卢姜崔钟谭陆汪范金石廖贾夏韦方白邹孟秦邱江尹薛段雷侯龙陶贺顾毛郝龚邵万钱严武戴孔汤';
+const NAME_MING=['小满','有田','春生','来福','桂花','秀兰','铁柱','翠花','富贵','长顺','满仓','杏花','大山','石头','栓柱','红霞','建军','招娣','盼弟','跃进','广志','淑芬','大强','丽萍','建国','爱华','志强','秀英','春梅','天佑','秋菊','得胜','小满','麦收','谷雨','立秋','念安','知秋','望舒','承欢'];
+function genName(){return NAME_XING[ri(0,NAME_XING.length-1)]+NAME_MING[ri(0,NAME_MING.length-1)];}
+function genFortune(a){                         // 签文=这一世的隐藏任务,死后判定应验
+  const zone=birthPlaceDesc(a,a.x,a.y), w0=a.sugar+a.spice, v=a.vision*2-a.sm-(a.pm||0);
+  if(zone==='糖山之心')return {t:'含着糖汤匙出生,这日子稳了',test:a=>a.cause==='衰老'};
+  if(zone==='荒原边缘')return {t:'生在荒地,攒下40颗糖就算翻身',test:a=>a.peak>=40};
+  if(w0>=40)return {t:'家底厚实,别把日子过回去了',test:a=>a.peak>=w0};
+  if(w0<=13)return {t:'白手起家,攒够50颗糖',test:a=>a.peak>=50};
+  if(v>=6)return {t:'眼尖的人,走到哪都饿不死',test:a=>String(a.cause).indexOf('饿')<0};
+  if(v<=-3)return {t:'手里的牌很差,活过25天就是赢',test:a=>a.age>=25};
+  return {t:'这一世,走到离家8格以外看看',test:a=>a.far>=8};
+}
+let fortune=null;
+function eulogy(a){                             // 一句墓志铭(成就卡/死亡卡用)
+  if(a.age<15)return '还没来得及长大';
+  if(a.peak>=70)return '从一无所有到全城少有的富人';
+  if(birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘'&&a.peak>=25)return '生在荒地,却活出了模样';
+  if(a.age>=a.maxAge-3&&a.peak>=40)return '把日子过满了,家底也厚了';
+  if(a.age>=a.maxAge-3)return '安稳活满了一辈子';
+  if(String(a.cause).indexOf('饿')>=0)return '最后一颗糖没接上';
+  return '认认真真活过这一生';
+}
 rebirth=function(tier){
   for(const k in seen)delete seen[k];
   deathbedFired=false;player.taps=0;player.path=[];lastPos=null;
   _rebirth(tier);
+  if(player.agent){
+    player.agent.mobName=genName();
+    fortune=genFortune(player.agent);           // 出生即定签,死后见分晓
+  }
 };
 function mobMilestones(a){
   const t=wealthClass(a).name;
@@ -3958,7 +3986,7 @@ setInterval(()=>{
   if(player.phase==='born'||player.phase==='dead')mobTab(0);
   if(prevPhase!==player.phase){
     if(player.phase==='live'&&prevPhase==='born'&&player.agent)
-      chapter('🎂 降生于'+birthPlaceDesc(player.agent,player.agent.x,player.agent.y));
+      chapter('🎂 '+(player.agent.mobName||'')+'降生于'+birthPlaceDesc(player.agent,player.agent.x,player.agent.y));
     prevPhase=player.phase;}
   drawOverlay();
 },80);
@@ -4007,9 +4035,49 @@ function trailImage(a,path,zoom){
   return{url:oc.toDataURL('image/png'),span};
 }
 let trailLifeA=null,fullUrl=null,zoomUrl=null,trailZoom=false;
-let shareBlob=null;                            // 打开查看器就预取图片,点分享时手势内可用
+let shareBlob=null,cardBlob=null;              // 打开查看器就预取图片,点分享时手势内可用
+function makeAchieveCard(a,done){               // 人生答卷:名字+成绩+一句话+轨迹小图
+  const W=480,H=700,oc=document.createElement('canvas');oc.width=W;oc.height=H;
+  const g=oc.getContext('2d');
+  const gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#0a0e18');gr.addColorStop(1,'#182238');
+  g.fillStyle=gr;g.fillRect(0,0,W,H);
+  g.strokeStyle='rgba(255,212,121,.45)';g.lineWidth=2;g.strokeRect(14,14,W-28,H-28);
+  g.textAlign='center';
+  g.fillStyle='rgba(255,212,121,.85)';g.font='16px "Microsoft YaHei"';
+  g.fillText('糖 域 · 人 生 答 卷',W/2,58);
+  g.fillStyle='#fff';g.font='bold 40px "Microsoft YaHei"';
+  g.fillText(a.mobName||'无名者',W/2,118);
+  const rows=[['出生地',birthPlaceDesc(a,a.bornX,a.bornY)],
+    ['天赋',talentDesc(a)],
+    ['活了',a.age+' 天'],
+    ['最多攒下',a.peak.toFixed(0)+' 颗糖'],
+    ['离家最远',a.far+' 格']];
+  g.font='17px "Microsoft YaHei"';
+  rows.forEach((r,i)=>{
+    const y=178+i*44;
+    g.fillStyle='rgba(255,255,255,.45)';g.textAlign='left';g.fillText(r[0],70,y);
+    g.fillStyle='#f0e6d2';g.textAlign='right';g.fillText(r[1],W-70,y);
+    g.strokeStyle='rgba(255,212,121,.18)';g.lineWidth=1;
+    g.beginPath();g.moveTo(70,y+10);g.lineTo(W-70,y+10);g.stroke();});
+  g.textAlign='center';g.fillStyle='#ffd479';g.font='bold 21px "Microsoft YaHei"';
+  g.fillText('「'+eulogy(a)+'」',W/2,436);
+  const img=new Image();
+  img.onload=()=>{                              // 轨迹小图嵌入
+    g.save();
+    const s=200,x=(W-s)/2,y=460,r=10;
+    g.beginPath();g.moveTo(x+r,y);g.arcTo(x+s,y,x+s,y+s,r);g.arcTo(x+s,y+s,x,y+s,r);
+    g.arcTo(x,y+s,x,y,r);g.arcTo(x,y,x+s,y,r);g.closePath();g.clip();
+    g.drawImage(img,x,y,s,s);
+    g.restore();
+    g.strokeStyle='rgba(255,212,121,.5)';g.strokeRect(x,y,s,s);
+    g.fillStyle='rgba(255,255,255,.35)';g.font='13px "Microsoft YaHei"';
+    g.fillText('糖域 · 人生重开(手机版)',W/2,H-22);
+    done(oc.toDataURL('image/png'));};
+  img.src=fullUrl;
+}
+let trailMode=0,cardUrl=null;                   // 查看器三态:0答卷 1全景 2聚焦
 function openTrailViewer(a){
-  trailLifeA=a;trailZoom=false;shareBlob=null;
+  trailLifeA=a;trailZoom=false;shareBlob=null;cardBlob=null;cardUrl=null;trailMode=0;
   let v=document.getElementById('mobTrailOv');
   if(!v){v=document.createElement('div');v.id='mobTrailOv';
     v.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(5,8,14,.82);display:none;align-items:center;justify-content:center;padding:16px;';
@@ -4021,26 +4089,38 @@ function openTrailViewer(a){
     document.body.appendChild(v);
     v.querySelector('#mTClose').onclick=()=>v.style.display='none';
     v.querySelector('#mTSave').onclick=()=>{const x=document.createElement('a');
-      x.href=v.querySelector('#mTImg').src;x.download='糖域-一生轨迹.png';document.body.appendChild(x);x.click();x.remove();};
+      x.href=v.querySelector('#mTImg').src;x.download=trailMode===0?'糖域-人生答卷.png':'糖域-一生轨迹.png';
+      document.body.appendChild(x);x.click();x.remove();};
     v.querySelector('#mTShare').onclick=async()=>{           // 分享:系统分享面板带图;不支持则存下载并提示
       const fallback=()=>{
-        const x=document.createElement('a');x.href=fullUrl;x.download='糖域-一生轨迹.png';
+        const url=v.querySelector('#mTImg').src;
+        const x=document.createElement('a');x.href=url;
+        x.download=trailMode===0?'糖域-人生答卷.png':'糖域-一生轨迹.png';
         document.body.appendChild(x);x.click();x.remove();
         caption(tr('📤 这个浏览器不支持直接分享,图片已保存,可以从相册发给朋友'));};
       try{
-        if(!shareBlob)shareBlob=await (await fetch(fullUrl)).blob();
-        const file=new File([shareBlob],'糖域-一生轨迹.png',{type:'image/png'});
+        let blob=trailMode===0?cardBlob:shareBlob;
+        if(!blob)blob=await (await fetch(v.querySelector('#mTImg').src)).blob();
+        const file=new File([blob],trailMode===0?'糖域-人生答卷.png':'糖域-一生轨迹.png',{type:'image/png'});
         if(navigator.canShare&&navigator.canShare({files:[file]})){
           await navigator.share({files:[file],title:'糖域 · 一生轨迹'});return;}
         fallback();
       }catch(e){ if(!e||e.name!=='AbortError')fallback(); }};
     const im=v.querySelector('#mTImg');
-    im.onclick=()=>{trailZoom=!trailZoom;setTImg();};}
+    im.onclick=()=>{trailMode=(trailMode+1)%3;setTImg();};}
   setTImg();v.style.display='flex';
   fetch(fullUrl).then(r=>r.blob()).then(b=>{shareBlob=b;}).catch(()=>{});
+  makeAchieveCard(a,u=>{cardUrl=u;
+    fetch(u).then(r=>r.blob()).then(b=>{cardBlob=b;}).catch(()=>{});
+    if(trailMode===0&&v.style.display==='flex')setTImg();});
   function setTImg(){const img=v.querySelector('#mTImg');
-    img.src=trailZoom&&zoomUrl?zoomUrl:fullUrl;
-    v.querySelector('#mTTag').textContent=trailZoom&&zoomUrl?'聚焦轨迹区 · 点图切回全景':'全景世界 · 点图看聚焦';}
+    if(trailMode===0){img.src=cardUrl||fullUrl;
+      v.querySelector('#mTTag').textContent=cardUrl?'人生答卷 · 点图看世界轨迹':'生成答卷中… · 点图看世界轨迹';}
+    else if(trailMode===1){img.src=fullUrl;
+      v.querySelector('#mTTag').textContent='全景世界 · 点图看聚焦';}
+    else{img.src=(trailZoom&&zoomUrl)||fullUrl;
+      v.querySelector('#mTTag').textContent='聚焦轨迹区 · 点图回到答卷';}}
+  const _setTImg=setTImg;
 }
 
 /* ---------- 之约 + 勋章 + 死亡卡增补 ---------- */
@@ -4063,9 +4143,14 @@ showDeathCard=function(a){
     pact=makePact(a,baseline);
     const full=trailImage(a,player.path||[],false),foc=trailImage(a,player.path||[],true);
     fullUrl=full.url;zoomUrl=foc.url;
+    const ful=fortune?!!fortune.test(a):null;
+    lifeBody.insertAdjacentHTML('afterbegin',   // 名字+签文+一句话=终局开篇
+      (a.mobName?`<div class="brow"><span>🕯 这一辈子</span><b>${a.mobName}</b></div>`:'')+
+      (fortune?`<div class="brow"><span>🔮 这一世的签「${fortune.t}」</span><b>${ful?'<span style="color:var(--good)">✓ 应验了</span>':'<span style="color:var(--dim)">✗ 没应验</span>'}</b></div>`:'')+
+      `<div class="brow" style="color:var(--gold)"><span>📜 一句话</span><b>${eulogy(a)}</b></div>`);
     const d=document.createElement('div');
     d.innerHTML=
-      `<div class="brow"><span>👣 行路</span><b>${player.path.length} 步 · 离乡最远 ${a.far} 格${a.trades?` · 成交 ${a.trades} 笔`:''}</b></div>`+
+      `<div class="brow"><span>👣 行路</span><b>${(player.path||[]).length} 步 · 离乡最远 ${a.far} 格${a.trades?` · 成交 ${a.trades} 笔`:''}</b></div>`+
       (pactWas?`<div class="brow"><span>上世之约「${pactWas.text}」</span><b>${pactWas.ful?'<span style="color:var(--good)">✓ 了却</span>':'✗ 带着走'}</b></div>`:'')+
       `<div style="margin:6px 0 2px;text-align:center"><img id="mobThumb" src="${full.url}" style="max-width:62%;border:1px solid var(--btnBd);border-radius:8px;cursor:zoom-in"><div style="font-size:10.5px;color:var(--dim)">点开大图 · 可保存</div></div>`+
       `<div class="poem" style="color:var(--gold)">【下一世之约】${pact.text}</div>`;
@@ -4074,6 +4159,15 @@ showDeathCard=function(a){
     if(a.peak>=70||a.age>=80||(birthPlaceDesc(a,a.bornX,a.bornY)==='荒原边缘'&&a.peak>=25)||(baseline&&a.age-baseline>=10))boom(a.x,a.y);
   }catch(e){console.error('mobDeathExtra',e);}
 };
+/* ---------- 出生卡顶部:名字 + 这一世的签 ---------- */
+const _sbcName=showBirthCard;
+showBirthCard=function(a){_sbcName(a);
+  if(player.phase!=='born'||!a)return;
+  lifeBody.insertAdjacentHTML('afterbegin',
+    `<div class="brow"><span>👤 这是你</span><b>${a.mobName||''}</b></div>`+
+    (fortune?`<div class="brow" style="color:var(--gold)"><span>🔮 这一世的签</span><b>「${fortune.t}」</b></div>`:''));
+};
+
 /* ---------- 指定出身:选定态/再点取消/仅留最新,干粮严格随档 ---------- */
 let tierSel=null;
 const _sbcT=showBirthCard;
@@ -4126,7 +4220,10 @@ const _umc=updateMeCard;
 updateMeCard=function(){_umc();
   const r=document.querySelector('#lifeBody .row');
   if(r&&/第\s*\d+\s*世/.test(r.textContent))r.remove();};
-if(player.phase==='born')showBirthCard(player.agent);   // 首签在 wrap 前已弹出,补跑整链(标题+出身按钮toggle)
+if(player.phase==='born'&&player.agent){                // 首签在 wrap 前已弹出:补挂名字+签文再补跑整链
+  if(!player.agent.mobName){player.agent.mobName=genName();fortune=genFortune(player.agent);}
+  player.path=player.path||[];
+  showBirthCard(player.agent);}
 
 /* ---------- 结束按钮 + 暂停键纯化 ---------- */
 const btnEnd=document.createElement('button');  // 结束按钮:接管"停止/重新来";暂停键只管暂停/继续
