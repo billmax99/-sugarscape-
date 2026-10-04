@@ -9,7 +9,7 @@
 
 ![游戏画面](docs/images/main.jpg)
 
-🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。手机上请打开 `sugarscape-手机版.html`。
+🎮 **立即体验**:下载 `sugarscape.html`,用任意现代浏览器打开即可。手机用户推荐直接下载 `sugarscape-手机版.html` 打开(详见「手机版怎么玩」)。
 
 [English](README.md) | **中文** | [繁體中文](README.zh-TW.md) · 手册:[中文](docs/manual/zh.md) · [繁體中文](docs/manual/zhtw.md) · [English](docs/manual/en.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
@@ -57,10 +57,21 @@
 | 文件 | 说明 |
 |---|---|
 | `sugarscape.html` | 游戏本体(单文件,零依赖),桌面/平板主力版 |
-| `sugarscape-手机版.html` | 手机竖屏版:「一条命」叙事体验(中文界面),可装成 PWA |
-| `手机manifest.json` + `手机图标-*.png` | 手机版 PWA 清单与图标 |
+| `sugarscape-手机版.html` | 手机竖屏版:「一条命」叙事体验(中文界面,见下方「手机版怎么玩」) |
+| `手机manifest.json` + `手机图标-*.png` | 手机版 PWA 清单与图标(仅自搭托管时需要) |
 | `docs/manual/` | 说明书七语言版(中文 / 繁體中文 / English / 日本語 / Français / Deutsch / Italiano) |
 | `docs/images/` | 游戏截图 |
+
+### 手机版怎么玩
+
+**推荐:直接下载开玩。** 下载 `sugarscape-手机版.html` 这一个文件,用手机浏览器打开即可——单文件零依赖,本地打开游戏功能完整(仅"装成主屏 App"不可用,不影响玩)。
+
+**进阶:想装成手机主屏上的 App(PWA)?** 需要让手机通过 http/https 访问到它,并把 `手机manifest.json` 与 `手机图标-*.png` 放在同一目录。任选一种自搭方式:
+
+- 局域网临时玩:电脑上在该目录执行 `python -m http.server 8000`,手机连同一 Wi-Fi 访问 `http://电脑IP:8000/sugarscape-手机版.html`
+- 长期托管:把整个目录上传到任意静态托管(如 GitHub Pages),手机访问在线地址
+
+之后在浏览器菜单里选「添加到主屏幕」,即可获得独立窗口与图标。
 
 ## 自检
 

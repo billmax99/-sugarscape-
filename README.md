@@ -11,7 +11,7 @@
 
 ![Game screenshot](docs/images/main.jpg)
 
-🎮 **Play now**: download `sugarscape.html` and open it with any modern browser. On a phone? Use `sugarscape-手机版.html`.
+🎮 **Play now**: download `sugarscape.html` and open it with any modern browser. On a phone, download `sugarscape-手机版.html` (see "Mobile edition" below).
 
 **English** | [中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) · Manuals: [English](docs/manual/en.md) · [中文](docs/manual/zh.md) · [繁體中文](docs/manual/zhtw.md) · [日本語](docs/manual/ja.md) · [Français](docs/manual/fr.md) · [Deutsch](docs/manual/de.md) · [Italiano](docs/manual/it.md)
 
@@ -59,10 +59,21 @@ The language dropdown (🌐) switches instantly; on first open it follows your b
 | File | What it is |
 |---|---|
 | `sugarscape.html` | The game (single file, zero dependencies) — desktop & tablet |
-| `sugarscape-手机版.html` | Mobile edition: portrait "one life at a time" storytelling (Chinese UI), installable as a PWA |
-| `手机manifest.json` + `手机图标-*.png` | PWA manifest & icons for the mobile edition |
+| `sugarscape-手机版.html` | Mobile edition: portrait "one life at a time" storytelling (Chinese UI) — see "Mobile edition" below |
+| `手机manifest.json` + `手机图标-*.png` | PWA manifest & icons (only needed for self-hosting) |
 | `docs/manual/` | Full experiment manual in 6 languages |
 | `docs/images/` | Screenshots |
+
+### Mobile edition
+
+**Recommended: just download and open.** Download the single file `sugarscape-手机版.html` and open it in your phone's browser — zero dependencies, the game is fully playable from local storage (only the "install as home-screen app" feature is unavailable this way).
+
+**Optional: install it as an app (PWA)?** Serve it to your phone over http/https with `手机manifest.json` and `手机图标-*.png` in the same directory, e.g.:
+
+- Quick local try: run `python -m http.server 8000` in this directory on a PC, then visit `http://<pc-ip>:8000/sugarscape-手机版.html` from your phone on the same Wi-Fi
+- Long-term: upload the whole directory to any static host (GitHub Pages etc.) and open the online URL
+
+Then pick "Add to Home Screen" in the browser menu to get a standalone window with its own icon.
 
 ## Self-check
 
